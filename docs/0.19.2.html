@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Roguefort patch notes</title>
-<meta name="description" content="Every Roguefort patch note. Latest: 0.19.2, Suitably Wilder. - 16 changes across 5 sections.">
+<title>Roguefort 0.19.2 — Patch Notes</title>
+<meta name="description" content="Roguefort 0.19.2 patch notes. 16 changes across 5 sections.">
 <meta name="theme-color" content="#111D35">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&family=DM+Mono:wght@400;500&family=Grenze+Gotisch:wght@500;700&display=swap" rel="stylesheet">
 <style>
+
 /* ------------------------------------------------------------------
    Palette sampled from the Steam capsules. Strict PICO-8 index:
    the whole capsule is 26-47 unique colours, so nothing here is
@@ -433,7 +434,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
 </head>
 <body>
 
-<a class="skip" href="#releases">Skip to all releases</a>
+<a class="skip" href="#doc">Skip to the changes</a>
 
 <header class="mast">
   <svg class="marks" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
@@ -466,13 +467,13 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
     <p class="plaque">
       <span class="plaque-k">Patch notes</span><span class="plaque-v">0.19.2</span><span class="plaque-t">Playtest</span>
     </p>
-    <h1 class="card"><span class="vh">Roguefort patch notes. Latest release: </span>Suitably Wilder.</h1>
+    <h1 class="card"><span class="vh">Roguefort 0.19.2 patch notes: </span>Suitably Wilder.</h1>
     <p class="mast-meta">
       <span>27 August 2026</span>
       <span><b>16</b> changes</span>
       <span><b>5</b> sections</span>
+      <span>press <kbd>/</kbd> to filter</span>
     </p>
-    <p class="cta"><a href="0.19.2.html">Read the 0.19.2 notes &rarr;</a></p>
   </div>
   <div class="ramp" aria-hidden="true">
     <b class="r1"></b><b class="r2 k"></b><b class="r3"></b><b class="r4 k"></b><b class="r5"></b><b class="r6 k"></b><b class="r7 k"></b><b class="r8"></b>
@@ -486,23 +487,145 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   </svg>
 </header>
 
-<main>
+<div class="bar">
+  <div class="rail" id="rail"></div>
+  <div class="bar-in">
+    <a class="bar-mark" href="#top">Roguefort</a>
+    <span class="bar-here" id="here" aria-live="off"></span>
+    <nav class="vers" aria-label="Versions"><a class="ver on" href="0.19.2.html" aria-current="page">0.19.2</a><a class="ver" href="0.19.0.html">0.19.0</a><a class="ver ver-all" href="index.html">All</a></nav>
+    <div class="find">
+      <input id="q" type="search" placeholder="/ filter changes" aria-label="Filter changes" autocomplete="off">
+    </div>
+  </div>
+</div>
+
+<main id="top">
   <div class="plate">
-    <section class="toc" id="releases">
+    <nav class="toc" aria-label="Sections">
       <div class="toc-h">
-        <h2>All releases</h2>
-        <span><b>2</b> releases</span>
+        <h2>Contents</h2>
+        <span><b id="live-total">16</b> changes in <b id="live-secs">5</b> sections</span>
       </div>
-      <ol class="reg"><li><a href="0.19.2.html"><span class="reg-name">Suitably Wilder.</span><span class="reg-dots" aria-hidden="true"></span><span class="reg-meta"><b>0.19.2</b> &middot; 27 August 2026 &middot; 16 changes<span class="reg-new">latest</span></span></a></li>
-<li><a href="0.19.0.html"><span class="reg-name">Hamsters!</span><span class="reg-dots" aria-hidden="true"></span><span class="reg-meta"><b>0.19.0</b> &middot; 27 August 2026 &middot; 407 changes</span></a></li></ol>
+      <ul><li><a class="idx" href="#combat" data-idx="combat"><span class="idx-name">Combat</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="combat">3</span></a></li>
+<li><a class="idx" href="#the-safe-homeland-and-world-pacing" data-idx="the-safe-homeland-and-world-pacing"><span class="idx-name">The Safe Homeland and world pacing</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-safe-homeland-and-world-pacing">7</span></a></li>
+<li><a class="idx" href="#quests" data-idx="quests"><span class="idx-name">Quests</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="quests">3</span></a></li>
+<li><a class="idx" href="#settlements-and-townspeople" data-idx="settlements-and-townspeople"><span class="idx-name">Settlements and townspeople</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="settlements-and-townspeople">2</span></a></li>
+<li><a class="idx" href="#ui" data-idx="ui"><span class="idx-name">UI</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="ui">1</span></a></li></ul>
       <div class="toc-end"></div>
-    </section>
+    </nav>
+    <div id="doc">
+      <section class="sec" id="combat" data-sec="combat"><h2>Combat<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Wild creatures can hurt you again. An internal safety check was silently swallowing the attacks of nearly every wild creature — boars, wolves, ghosts, toads, 36 of the 39 kinds that roam the overworld — from the moment they spawned. Dungeon monsters and town guards were unaffected, and reloading a save cleared it for a while, which is why the bug seemed to come and go between players.<span class="credits"><span class="who">sksniperks</span><span class="who">rubberychicken</span></span></li>
+<li class="change">Separately, a creature you had already wounded stopped being able to hurt you for the rest of the fight. Thorns damage was the one exception, and a trap or a guard wounding a creature could set it off without you attacking at all.<span class="credits"><span class="who">sksniperks</span><span class="who">rubberychicken</span></span></li>
+<li class="change">Bug report files now record far more detail whenever combat damage goes missing, so if anything like this ever comes back it can be tracked down from a single report.</li></ul></section>
+<section class="sec" id="the-safe-homeland-and-world-pacing" data-sec="the-safe-homeland-and-world-pacing"><h2>The Safe Homeland and world pacing<span class="sec-n">7</span></h2><ul class="changes"><li class="change">The calm zone around your starting area shrank from 150 to 80 tiles — the wild was starting an unreasonably long walk away.<span class="credits"><span class="who">Iso</span><span class="who">samv123</span></span></li>
+<li class="change">Walking out of the starter valley finds trouble quickly now, but between 80 and 150 tiles from the start, pack species arrive as a single scout rather than a full pack. You will meet a lone wolf before you meet its family. Past 150, the packs are at full strength.</li>
+<li class="change">Your homestead is a sanctuary, not a force field. Setting a home in the wild no longer projects starter-valley safety around it: packs still will not spawn within 150 tiles of your base, but lone predators of the local danger tier will come calling, and mythic beasts no longer avoid the area. Planting a campfire in dangerous country to farm it in perfect safety was an exploit, and it is closed.</li>
+<li class="change">Grazing wildlife no longer crowds out predators. Peaceful animals and hostile creatures now draw from separate spawn budgets, where previously five deer at your camp meant no threat could even roll the dice.</li>
+<li class="change">The countryside around settlements has wildlife and threats again. Townsfolk were being counted against the wildlife limit, so the land around every village and town had spawned nothing at all — ever.</li>
+<li class="change">Daytime spawn rates rose slightly outside the starter valley. Nights were already lively and are untouched.</li>
+<li class="change">The Shadow Wolf exists. A quirk of the old safe-zone rules made it the one creature no player could ever meet — it has never once appeared in the full game. Look for it at night, alone, just beyond the starter valley. All 57 wild creatures can now be found in the world.</li></ul></section>
+<section class="sec" id="quests" data-sec="quests"><h2>Quests<span class="sec-n">3</span></h2><ul class="changes"><li class="change">&quot;Clear hostile creatures near the village&quot; contracts can be completed without dragging enemies toward town. Kills now count across the village&#x27;s real hunting grounds, past the quiet ring that keeps wolves away from the town gates — within 120 tiles of the giver for a village, 150 for a town. Quests already in your journal keep their old range.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Villages inside the starter valley no longer post clear notices at all — there is nothing there to clear, so the giver offers different work instead.</li>
+<li class="change">Fixed a quest marker in the starting town pointing at an NPC who then had no quest to give. The marker and the conversation now agree.<span class="credits"><span class="who">samv123</span></span></li></ul></section>
+<section class="sec" id="settlements-and-townspeople" data-sec="settlements-and-townspeople"><h2>Settlements and townspeople<span class="sec-n">2</span></h2><ul class="changes"><li class="change">Faction leaders no longer scream &quot;This is my house!&quot; at you in the middle of the covered market. A household had been moved into the market hall in all five capitals; the leaders have been properly rehoused.<span class="credits"><span class="who">arkhaven</span><span class="who">trespiratesque</span></span></li>
+<li class="change">Signposts step to the road&#x27;s shoulder instead of planting themselves in the middle of the carriageway — some were blocking town roads and, in the worst cases, villagers&#x27; front doors.<span class="credits"><span class="who">soeshii</span></span></li></ul></section>
+<section class="sec" id="ui" data-sec="ui"><h2>UI<span class="sec-n">1</span></h2><ul class="changes"><li class="change">Character sheet tag tooltips count the perks you actually hold instead of always claiming &quot;you carry no perks with this tag yet&quot;.<span class="credits"><span class="who">nalathnidragon</span></span></li></ul></section>
+      <div class="empty hidden" id="empty"></div>
+    </div>
   </div>
 </main>
 
+<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.19.0.html"><span class="pg-k">Previous release</span><span class="pg-v">Hamsters!</span><span class="pg-n">0.19.0</span></a><a class="pg pg-all" href="index.html">All releases</a></nav>
+
 <footer class="foot">
-  <span>Roguefort patch notes</span>
+  <span>Roguefort 0.19.2 &middot; 27 August 2026</span>
   <span>Community reporters are credited against each change.</span>
 </footer>
+
+<script>
+(function () {
+  var q = document.getElementById('q');
+  var empty = document.getElementById('empty');
+  var rail = document.getElementById('rail');
+  var here = document.getElementById('here');
+  var liveTotal = document.getElementById('live-total');
+  var liveSecs = document.getElementById('live-secs');
+  var secs = [].slice.call(document.querySelectorAll('.sec'));
+  var idx = [].slice.call(document.querySelectorAll('.idx'));
+
+  var items = [];
+  secs.forEach(function (s) {
+    [].slice.call(s.querySelectorAll('.change')).forEach(function (li) {
+      items.push({ el: li, sec: s, text: li.textContent.toLowerCase() });
+    });
+  });
+
+  function countEl(id) { return document.querySelector('[data-count="' + id + '"]'); }
+
+  function filter() {
+    var term = q.value.trim().toLowerCase();
+    var shown = 0;
+    secs.forEach(function (s) { s._n = 0; });
+    items.forEach(function (it) {
+      var hit = !term || it.text.indexOf(term) !== -1;
+      it.el.classList.toggle('hidden', !hit);
+      if (hit) { it.sec._n++; shown++; }
+    });
+    secs.forEach(function (s) {
+      s.classList.toggle('hidden', s._n === 0);
+      var id = s.dataset.sec;
+      countEl(id).textContent = s._n;
+      document.querySelector('[data-idx="' + id + '"]').parentElement
+        .classList.toggle('hidden', s._n === 0);
+      s.querySelector('.sec-n').textContent = s._n;
+    });
+    liveTotal.textContent = shown;
+    liveSecs.textContent = secs.filter(function (s) { return s._n > 0; }).length;
+    if (shown === 0) {
+      empty.textContent = '';
+      empty.appendChild(document.createTextNode('Nothing matches '));
+      var b = document.createElement('b');
+      b.textContent = q.value;
+      empty.appendChild(b);
+      empty.appendChild(document.createTextNode('. Try a shorter word, like mount, save or road.'));
+      empty.classList.remove('hidden');
+    } else {
+      empty.classList.add('hidden');
+    }
+    onScroll();
+  }
+
+  q.addEventListener('input', filter);
+  q.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { q.value = ''; filter(); q.blur(); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+  });
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      rail.style.width = (h > 0 ? Math.min(1, window.scrollY / h) * 100 : 0) + '%';
+      var top = window.scrollY + 120, cur = null, curName = '';
+      secs.forEach(function (s) {
+        if (!s.classList.contains('hidden') && s.offsetTop <= top) {
+          cur = s.dataset.sec;
+          curName = s.querySelector('h2').firstChild.textContent;
+        }
+      });
+      idx.forEach(function (a) { a.classList.toggle('on', a.dataset.idx === cur); });
+      here.textContent = curName;
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
 </body>
 </html>
