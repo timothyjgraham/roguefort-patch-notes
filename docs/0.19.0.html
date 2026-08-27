@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&family=DM+Mono:wght@400;500&family=Grenze+Gotisch:wght@500;700&display=swap" rel="stylesheet">
 <style>
+
 /* ------------------------------------------------------------------
    Palette sampled from the Steam capsules. Strict PICO-8 index:
    the whole capsule is 26-47 unique colours, so nothing here is
@@ -186,7 +187,7 @@ body {
 }
 .bar-here::before { content: "\25B8"; color: var(--rind); margin-right: 8px; }
 .bar-here:empty::before { content: none; }
-.vers { display: flex; gap: 5px; flex: none; }
+.vers { display: flex; flex-wrap: wrap; gap: 5px; flex: 0 1 auto; min-width: 0; }
 .ver {
   font-family: var(--mono); font-size: 12px; line-height: 1;
   padding: 6px 8px; text-decoration: none;
@@ -307,7 +308,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   background-size: 2px 2px;
   color: var(--cream);
   margin: 64px calc(var(--pad) * -1) -60px;
-  padding: 38px var(--pad) 100px;
+  padding: 38px var(--pad) 60px;
   border-top: 2px solid var(--ink);
 }
 .caveat h2 { color: var(--cream); border-bottom-color: var(--rind); }
@@ -329,6 +330,56 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   padding: 30px; margin: 30px 0 10px; font-size: 15.5px; max-width: 68ch;
 }
 .empty b { font-family: var(--mono); font-weight: 500; }
+
+/* ---- index: featured release + the register ---- */
+.cta { margin: 26px 0 0; }
+.cta a {
+  display: inline-block; font-family: var(--mono); font-size: 15px; line-height: 1;
+  background: var(--cream); color: var(--night); text-decoration: none;
+  padding: 14px 18px; border: 2px solid var(--cream); box-shadow: 5px 5px 0 var(--rind);
+}
+.cta a:hover { box-shadow: 5px 5px 0 var(--ember); }
+
+.reg { list-style: none; margin: 14px 0 0; padding: 0; }
+.reg li { border-bottom: 1px solid rgba(73,51,59,.22); }
+.reg li:last-child { border-bottom: 0; }
+.reg a {
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 15px 6px; text-decoration: none; color: var(--night);
+}
+.reg a:hover { background: var(--night); color: var(--cream); }
+.reg-name { font-family: var(--disp); font-weight: 500; font-size: 23px; line-height: 1.15; flex: 0 1 auto; }
+.reg-dots {
+  flex: 1 1 auto; min-width: 12px; height: 1px; align-self: center;
+  color: var(--cellar); opacity: .5;
+  background-image: conic-gradient(currentColor 25%, #0000 0); background-size: 2px 2px;
+}
+.reg-meta { font-family: var(--mono); font-size: 12.5px; color: var(--cellar); flex: none; }
+.reg-meta b { color: var(--night); font-weight: 500; }
+.reg-new {
+  font-family: var(--mono); font-size: 11px; color: var(--night);
+  background: var(--rind); padding: 2px 7px; margin-left: 10px;
+}
+.reg a:hover .reg-meta { color: var(--sky); }
+.reg a:hover .reg-meta b { color: var(--cream); }
+.reg a:hover .reg-dots { color: var(--sky); opacity: .8; }
+
+/* ---- release page: prev / next ---- */
+.pager {
+  max-width: var(--wrap); margin: 0 auto; padding: 34px var(--pad) 0;
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: stretch;
+}
+.pg {
+  flex: 1 1 220px; text-decoration: none; padding: 14px 16px;
+  background: var(--cream); color: var(--night);
+  border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--deep);
+}
+.pg:hover { box-shadow: 4px 4px 0 var(--rind); }
+.pg-k { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--cellar); margin-bottom: 5px; }
+.pg-v { display: block; font-family: var(--disp); font-weight: 500; font-size: 21px; line-height: 1.1; }
+.pg-n { display: block; font-family: var(--mono); font-size: 12px; color: var(--cellar); margin-top: 3px; }
+.pg-next { text-align: right; }
+.pg-all { flex: 0 1 auto; display: flex; align-items: center; font-family: var(--mono); font-size: 13px; }
 
 .foot {
   max-width: var(--wrap); margin: 0 auto; padding: 26px var(--pad) 70px;
@@ -354,6 +405,10 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
 }
 @media (max-width: 460px) {
   :root { --pad: 16px; }
+  .reg a { flex-wrap: wrap; gap: 4px 10px; }
+  .reg-dots { display: none; }
+  .reg-name { flex: 1 1 100%; font-size: 21px; }
+  .pg-next { text-align: left; }
   body { font-size: 16px; }
   .toc ul { columns: 1; }
   .wordmark { max-width: 250px; }
@@ -437,7 +492,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   <div class="bar-in">
     <a class="bar-mark" href="#top">Roguefort</a>
     <span class="bar-here" id="here" aria-live="off"></span>
-    <nav class="vers" aria-label="Versions"><a class="ver on" href="0.19.0.html" aria-current="page">0.19.0</a></nav>
+    <nav class="vers" aria-label="Versions"><a class="ver on" href="0.19.0.html" aria-current="page">0.19.0</a><a class="ver ver-all" href="index.html">All</a></nav>
     <div class="find">
       <input id="q" type="search" placeholder="/ filter changes" aria-label="Filter changes" autocomplete="off">
     </div>
@@ -890,6 +945,8 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
     </div>
   </div>
 </main>
+
+<nav class="pager" aria-label="Other releases"><a class="pg pg-all" href="index.html">All releases</a></nav>
 
 <footer class="foot">
   <span>Roguefort 0.19.0 &middot; 27 August 2026</span>

@@ -103,7 +103,49 @@ def fill(tpl: str, mapping: dict) -> str:
     return re.sub(r"\{\{(\w+)\}\}", lambda m: str(mapping[m.group(1)]), tpl)
 
 
-def render(note, all_versions):
+MAX_CHIPS = 4
+
+
+def build_switcher(current, all_versions):
+    """Newest few versions as chips, plus a link to the full register.
+
+    A chip per release overflows the bar once there are a dozen or so;
+    the register page is the thing that scales.
+    """
+    shown = all_versions[:MAX_CHIPS]
+    if current not in shown:
+        shown = all_versions[: MAX_CHIPS - 1] + [current]
+    chips = "".join(
+        '<a class="ver{on}" href="{v}.html"{cur}>{v}</a>'.format(
+            v=html.escape(v),
+            on=" on" if v == current else "",
+            cur=' aria-current="page"' if v == current else "",
+        )
+        for v in shown
+    )
+    more = f" ({len(all_versions)})" if len(all_versions) > len(shown) else ""
+    return chips + f'<a class="ver ver-all" href="index.html">All{more}</a>'
+
+
+def build_pager(older, newer):
+    def cell(note, kind, label):
+        if not note:
+            return ""
+        name = note["lede"] or note["version"]
+        return (
+            f'<a class="pg pg-{kind}" href="{html.escape(note["version"])}.html">'
+            f'<span class="pg-k">{label}</span>'
+            f'<span class="pg-v">{html.escape(name)}</span>'
+            f'<span class="pg-n">{html.escape(note["version"])}</span></a>'
+        )
+    return (
+        cell(older, "prev", "Previous release")
+        + '<a class="pg pg-all" href="index.html">All releases</a>'
+        + cell(newer, "next", "Next release")
+    )
+
+
+def render(note, all_versions, older=None, newer=None):
     sections = note["sections"]
     total = sum(len(s["bullets"]) for s in sections)
 
@@ -128,11 +170,8 @@ def render(note, all_versions):
             f'</section>'
         )
 
-    switcher = "".join(
-        f'<a class="ver{" on" if v == note["version"] else ""}" href="{v}.html"'
-        f'{" aria-current=\"page\"" if v == note["version"] else ""}>{v}</a>'
-        for v in all_versions
-    )
+    switcher = build_switcher(note["version"], all_versions)
+    pager = build_pager(older, newer)
 
     return fill(TEMPLATE, {
         "version": html.escape(note["version"]),
@@ -145,21 +184,12 @@ def render(note, all_versions):
         "index_rows": "\n".join(index_rows),
         "body_rows": "\n".join(body_rows),
         "switcher": switcher,
+        "pager": pager,
+        "css": CSS,
     })
 
 
-TEMPLATE = """<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{title}}</title>
-<meta name="description" content="Roguefort {{version}} patch notes. {{total}} changes across {{n_sections}} sections.">
-<meta name="theme-color" content="#111D35">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&family=DM+Mono:wght@400;500&family=Grenze+Gotisch:wght@500;700&display=swap" rel="stylesheet">
-<style>
+CSS = """
 /* ------------------------------------------------------------------
    Palette sampled from the Steam capsules. Strict PICO-8 index:
    the whole capsule is 26-47 unique colours, so nothing here is
@@ -336,7 +366,7 @@ body {
 }
 .bar-here::before { content: "\\25B8"; color: var(--rind); margin-right: 8px; }
 .bar-here:empty::before { content: none; }
-.vers { display: flex; gap: 5px; flex: none; }
+.vers { display: flex; flex-wrap: wrap; gap: 5px; flex: 0 1 auto; min-width: 0; }
 .ver {
   font-family: var(--mono); font-size: 12px; line-height: 1;
   padding: 6px 8px; text-decoration: none;
@@ -457,7 +487,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   background-size: 2px 2px;
   color: var(--cream);
   margin: 64px calc(var(--pad) * -1) -60px;
-  padding: 38px var(--pad) 100px;
+  padding: 38px var(--pad) 60px;
   border-top: 2px solid var(--ink);
 }
 .caveat h2 { color: var(--cream); border-bottom-color: var(--rind); }
@@ -479,6 +509,56 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   padding: 30px; margin: 30px 0 10px; font-size: 15.5px; max-width: 68ch;
 }
 .empty b { font-family: var(--mono); font-weight: 500; }
+
+/* ---- index: featured release + the register ---- */
+.cta { margin: 26px 0 0; }
+.cta a {
+  display: inline-block; font-family: var(--mono); font-size: 15px; line-height: 1;
+  background: var(--cream); color: var(--night); text-decoration: none;
+  padding: 14px 18px; border: 2px solid var(--cream); box-shadow: 5px 5px 0 var(--rind);
+}
+.cta a:hover { box-shadow: 5px 5px 0 var(--ember); }
+
+.reg { list-style: none; margin: 14px 0 0; padding: 0; }
+.reg li { border-bottom: 1px solid rgba(73,51,59,.22); }
+.reg li:last-child { border-bottom: 0; }
+.reg a {
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 15px 6px; text-decoration: none; color: var(--night);
+}
+.reg a:hover { background: var(--night); color: var(--cream); }
+.reg-name { font-family: var(--disp); font-weight: 500; font-size: 23px; line-height: 1.15; flex: 0 1 auto; }
+.reg-dots {
+  flex: 1 1 auto; min-width: 12px; height: 1px; align-self: center;
+  color: var(--cellar); opacity: .5;
+  background-image: conic-gradient(currentColor 25%, #0000 0); background-size: 2px 2px;
+}
+.reg-meta { font-family: var(--mono); font-size: 12.5px; color: var(--cellar); flex: none; }
+.reg-meta b { color: var(--night); font-weight: 500; }
+.reg-new {
+  font-family: var(--mono); font-size: 11px; color: var(--night);
+  background: var(--rind); padding: 2px 7px; margin-left: 10px;
+}
+.reg a:hover .reg-meta { color: var(--sky); }
+.reg a:hover .reg-meta b { color: var(--cream); }
+.reg a:hover .reg-dots { color: var(--sky); opacity: .8; }
+
+/* ---- release page: prev / next ---- */
+.pager {
+  max-width: var(--wrap); margin: 0 auto; padding: 34px var(--pad) 0;
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: stretch;
+}
+.pg {
+  flex: 1 1 220px; text-decoration: none; padding: 14px 16px;
+  background: var(--cream); color: var(--night);
+  border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--deep);
+}
+.pg:hover { box-shadow: 4px 4px 0 var(--rind); }
+.pg-k { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--cellar); margin-bottom: 5px; }
+.pg-v { display: block; font-family: var(--disp); font-weight: 500; font-size: 21px; line-height: 1.1; }
+.pg-n { display: block; font-family: var(--mono); font-size: 12px; color: var(--cellar); margin-top: 3px; }
+.pg-next { text-align: right; }
+.pg-all { flex: 0 1 auto; display: flex; align-items: center; font-family: var(--mono); font-size: 13px; }
 
 .foot {
   max-width: var(--wrap); margin: 0 auto; padding: 26px var(--pad) 70px;
@@ -504,6 +584,10 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
 }
 @media (max-width: 460px) {
   :root { --pad: 16px; }
+  .reg a { flex-wrap: wrap; gap: 4px 10px; }
+  .reg-dots { display: none; }
+  .reg-name { flex: 1 1 100%; font-size: 21px; }
+  .pg-next { text-align: left; }
   body { font-size: 16px; }
   .toc ul { columns: 1; }
   .wordmark { max-width: 250px; }
@@ -525,7 +609,22 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   outline-offset: 2px;
 }
 .bar :focus-visible, .mast :focus-visible { outline-color: var(--rind); }
-</style>
+"""
+
+
+TEMPLATE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<meta name="description" content="Roguefort {{version}} patch notes. {{total}} changes across {{n_sections}} sections.">
+<meta name="theme-color" content="#111D35">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&family=DM+Mono:wght@400;500&family=Grenze+Gotisch:wght@500;700&display=swap" rel="stylesheet">
+<style>
+{{css}}</style>
 </head>
 <body>
 
@@ -610,6 +709,8 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
     </div>
   </div>
 </main>
+
+<nav class="pager" aria-label="Other releases">{{pager}}</nav>
 
 <footer class="foot">
   <span>Roguefort {{version}} &middot; {{date}}</span>
@@ -706,6 +807,125 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
 """
 
 
+INDEX_TEMPLATE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roguefort patch notes</title>
+<meta name="description" content="Every Roguefort patch note. Latest: {{version}}, {{lede}} - {{total}} changes across {{n_sections}} sections.">
+<meta name="theme-color" content="#111D35">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&family=DM+Mono:wght@400;500&family=Grenze+Gotisch:wght@500;700&display=swap" rel="stylesheet">
+<style>{{css}}</style>
+</head>
+<body>
+
+<a class="skip" href="#releases">Skip to all releases</a>
+
+<header class="mast">
+  <svg class="marks" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
+    <defs>
+      <path id="spk" d="M0,-11 L2.5,-2.5 L11,0 L2.5,2.5 L0,11 L-2.5,2.5 L-11,0 L-2.5,-2.5 Z"/>
+    </defs>
+    <g stroke="#FFF1E8" stroke-opacity=".13" stroke-width="1" fill="none" shape-rendering="crispEdges">
+      <path d="M150 0 V70 M150 104 V190"/>
+      <path d="M470 0 V44 M470 82 V150 M470 186 V240"/>
+      <path d="M860 0 V96 M860 130 V210"/>
+      <path d="M1060 0 V58 M1060 92 V164"/>
+      <path d="M40 118 H96 M132 118 H286 M508 118 H642 M900 118 H1030"/>
+      <path d="M60 300 H210 M250 300 H430 M745 300 H902"/>
+      <path d="M140 58 H160 M150 48 V68"/>
+      <path d="M850 176 H870 M860 166 V186"/>
+      <path d="M60 40 H92 M60 40 V72"/>
+      <path d="M1140 216 H1108 M1140 216 V184"/>
+    </g>
+    <g fill="#FFF1E8" fill-opacity=".34" shape-rendering="crispEdges">
+      <use href="#spk" transform="translate(330,86)"/>
+      <use href="#spk" transform="translate(712,52) scale(.7)"/>
+      <use href="#spk" transform="translate(988,150)"/>
+      <use href="#spk" transform="translate(232,214) scale(.6)"/>
+    </g>
+  </svg>
+  <div class="mast-in">
+    <img class="wordmark" src="assets/roguefort-wordmark.png"
+         srcset="assets/roguefort-wordmark.png 1x, assets/roguefort-wordmark@2x.png 2x"
+         width="526" height="166" alt="Roguefort">
+    <p class="plaque">
+      <span class="plaque-k">Patch notes</span><span class="plaque-v">{{version}}</span><span class="plaque-t">{{tag}}</span>
+    </p>
+    <h1 class="card"><span class="vh">Roguefort patch notes. Latest release: </span>{{lede}}</h1>
+    <p class="mast-meta">
+      <span>{{date}}</span>
+      <span><b>{{total}}</b> changes</span>
+      <span><b>{{n_sections}}</b> sections</span>
+    </p>
+    <p class="cta"><a href="{{version}}.html">Read the {{version}} notes &rarr;</a></p>
+  </div>
+  <div class="ramp" aria-hidden="true">
+    <b class="r1"></b><b class="r2 k"></b><b class="r3"></b><b class="r4 k"></b><b class="r5"></b><b class="r6 k"></b><b class="r7 k"></b><b class="r8"></b>
+  </div>
+  <svg class="ridge" viewBox="0 0 1200 54" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path fill="#49333B" d="M0,54 V22 H74 V10 H158 V30 H242 V16 H340 V34 H424 V20 H524 V38 H604 V24 H704 V12 H792 V32 H880 V18 H978 V36 H1068 V22 H1142 V32 H1200 V54 Z"/>
+    <path fill="none" stroke="#FFA300" stroke-width="3" vector-effect="non-scaling-stroke"
+          d="M0,25 H74 V13 H158 V33 H242 V19 H340 V37 H424 V23 H524 V41 H604 V27 H704 V15 H792 V35 H880 V21 H978 V39 H1068 V25 H1142 V35 H1200"/>
+    <path fill="none" stroke="#271F1B" stroke-width="3" vector-effect="non-scaling-stroke"
+          d="M0,22 H74 V10 H158 V30 H242 V16 H340 V34 H424 V20 H524 V38 H604 V24 H704 V12 H792 V32 H880 V18 H978 V36 H1068 V22 H1142 V32 H1200"/>
+  </svg>
+</header>
+
+<main>
+  <div class="plate">
+    <section class="toc" id="releases">
+      <div class="toc-h">
+        <h2>All releases</h2>
+        <span><b>{{n_versions}}</b> {{release_word}}</span>
+      </div>
+      <ol class="reg">{{rows}}</ol>
+      <div class="toc-end"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <span>Roguefort patch notes</span>
+  <span>Community reporters are credited against each change.</span>
+</footer>
+</body>
+</html>
+"""
+
+
+def render_index(notes, all_versions):
+    newest = notes[0]
+    rows = []
+    for n in notes:
+        name = n["lede"] or n["version"]
+        total = sum(len(sec["bullets"]) for sec in n["sections"])
+        newest_tag = '<span class="reg-new">latest</span>' if n is newest else ""
+        date = f' &middot; {html.escape(n["date"])}' if n["date"] else ""
+        rows.append(
+            f'<li><a href="{html.escape(n["version"])}.html">'
+            f'<span class="reg-name">{html.escape(name)}</span>'
+            f'<span class="reg-dots" aria-hidden="true"></span>'
+            f'<span class="reg-meta"><b>{html.escape(n["version"])}</b>{date}'
+            f' &middot; {total} changes{newest_tag}</span></a></li>'
+        )
+    return fill(INDEX_TEMPLATE, {
+        "css": CSS,
+        "version": html.escape(newest["version"]),
+        "lede": html.escape(newest["lede"] or newest["version"]),
+        "date": html.escape(newest["date"]),
+        "tag": html.escape(newest["tag"] or "Build"),
+        "total": sum(len(s["bullets"]) for s in newest["sections"]),
+        "n_sections": len(newest["sections"]),
+        "n_versions": len(all_versions),
+        "release_word": "release" if len(all_versions) == 1 else "releases",
+        "rows": "\n".join(rows),
+    })
+
+
 def main():
     DOCS.mkdir(exist_ok=True)
     files = sorted(NOTES.glob("*.md"), key=lambda p: version_key(p.stem), reverse=True)
@@ -715,15 +935,28 @@ def main():
     if ASSETS.is_dir():
         shutil.copytree(ASSETS, DOCS / "assets", dirs_exist_ok=True)
 
-    versions = [f.stem for f in files]
-    for f in files:
-        note = parse(f)
-        (DOCS / f"{f.stem}.html").write_text(render(note, versions), encoding="utf-8")
-        print(f"built docs/{f.stem}.html  ({sum(len(s['bullets']) for s in note['sections'])} changes)")
+    notes = [parse(f) for f in files]
+    versions = [n["version"] for n in notes]
 
-    shutil.copy(DOCS / f"{versions[0]}.html", DOCS / "index.html")
+    for i, note in enumerate(notes):
+        older = notes[i + 1] if i + 1 < len(notes) else None
+        newer = notes[i - 1] if i > 0 else None
+        html_out = render(note, versions, older, newer)
+        (DOCS / f"{note['version']}.html").write_text(html_out, encoding="utf-8")
+        print(f"built docs/{note['version']}.html  ({sum(len(s['bullets']) for s in note['sections'])} changes)")
+
+    (DOCS / "index.html").write_text(render_index(notes, versions), encoding="utf-8")
+    word = "release" if len(versions) == 1 else "releases"
+    print(f"built docs/index.html  ({len(versions)} {word}, newest {versions[0]})")
+
+    # Drop pages whose notes file has gone, so docs/ cannot drift out of sync.
+    keep = {f"{v}.html" for v in versions} | {"index.html"}
+    for stale in sorted(DOCS.glob("*.html")):
+        if stale.name not in keep:
+            stale.unlink()
+            print(f"removed stale docs/{stale.name}")
+
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
-    print(f"index.html -> {versions[0]}")
 
 
 if __name__ == "__main__":
