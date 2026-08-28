@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Roguefort 0.19.2 — Patch Notes</title>
-<meta name="description" content="Roguefort 0.19.2 patch notes. 16 changes across 5 sections.">
+<title>Roguefort 0.19.3 — Patch Notes</title>
+<meta name="description" content="Roguefort 0.19.3 patch notes. 30 changes across 7 sections.">
 <meta name="theme-color" content="#111D35">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -465,13 +465,13 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
          srcset="assets/roguefort-wordmark.png 1x, assets/roguefort-wordmark@2x.png 2x"
          width="526" height="166" alt="Roguefort">
     <p class="plaque">
-      <span class="plaque-k">Patch notes</span><span class="plaque-v">0.19.2</span><span class="plaque-t">Playtest</span>
+      <span class="plaque-k">Patch notes</span><span class="plaque-v">0.19.3</span><span class="plaque-t">Playtest</span>
     </p>
-    <h1 class="card"><span class="vh">Roguefort 0.19.2 patch notes: </span>Suitably Wilder.</h1>
+    <h1 class="card"><span class="vh">Roguefort 0.19.3 patch notes: </span>Non Travolta.</h1>
     <p class="mast-meta">
-      <span>27 August 2026</span>
-      <span><b>16</b> changes</span>
-      <span><b>5</b> sections</span>
+      <span>28 August 2026</span>
+      <span><b>30</b> changes</span>
+      <span><b>7</b> sections</span>
       <span>press <kbd>/</kbd> to filter</span>
     </p>
   </div>
@@ -492,7 +492,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   <div class="bar-in">
     <a class="bar-mark" href="#top">Roguefort</a>
     <span class="bar-here" id="here" aria-live="off"></span>
-    <nav class="vers" aria-label="Versions"><a class="ver" href="0.19.3.html">0.19.3</a><a class="ver on" href="0.19.2.html" aria-current="page">0.19.2</a><a class="ver" href="0.19.0.html">0.19.0</a><a class="ver ver-all" href="index.html">All</a></nav>
+    <nav class="vers" aria-label="Versions"><a class="ver on" href="0.19.3.html" aria-current="page">0.19.3</a><a class="ver" href="0.19.2.html">0.19.2</a><a class="ver" href="0.19.0.html">0.19.0</a><a class="ver ver-all" href="index.html">All</a></nav>
     <div class="find">
       <input id="q" type="search" placeholder="/ filter changes" aria-label="Filter changes" autocomplete="off">
     </div>
@@ -504,41 +504,57 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
     <nav class="toc" aria-label="Sections">
       <div class="toc-h">
         <h2>Contents</h2>
-        <span><b id="live-total">16</b> changes in <b id="live-secs">5</b> sections</span>
+        <span><b id="live-total">30</b> changes in <b id="live-secs">7</b> sections</span>
       </div>
-      <ul><li><a class="idx" href="#combat" data-idx="combat"><span class="idx-name">Combat</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="combat">3</span></a></li>
-<li><a class="idx" href="#the-safe-homeland-and-world-pacing" data-idx="the-safe-homeland-and-world-pacing"><span class="idx-name">The Safe Homeland and world pacing</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-safe-homeland-and-world-pacing">7</span></a></li>
-<li><a class="idx" href="#quests" data-idx="quests"><span class="idx-name">Quests</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="quests">3</span></a></li>
-<li><a class="idx" href="#settlements-and-townspeople" data-idx="settlements-and-townspeople"><span class="idx-name">Settlements and townspeople</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="settlements-and-townspeople">2</span></a></li>
-<li><a class="idx" href="#ui" data-idx="ui"><span class="idx-name">UI</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="ui">1</span></a></li></ul>
+      <ul><li><a class="idx" href="#the-world-stopped-being-empty" data-idx="the-world-stopped-being-empty"><span class="idx-name">The world stopped being empty</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-world-stopped-being-empty">5</span></a></li>
+<li><a class="idx" href="#the-map-and-the-land" data-idx="the-map-and-the-land"><span class="idx-name">The map and the land</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-map-and-the-land">4</span></a></li>
+<li><a class="idx" href="#interface" data-idx="interface"><span class="idx-name">Interface</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="interface">6</span></a></li>
+<li><a class="idx" href="#items-and-crafting" data-idx="items-and-crafting"><span class="idx-name">Items and crafting</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="items-and-crafting">8</span></a></li>
+<li><a class="idx" href="#stability-and-performance" data-idx="stability-and-performance"><span class="idx-name">Stability and performance</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="stability-and-performance">5</span></a></li>
+<li><a class="idx" href="#credits" data-idx="credits"><span class="idx-name">Credits</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="credits">1</span></a></li>
+<li><a class="idx idx-caveat" href="#known-issues" data-idx="known-issues"><span class="idx-name">Known issues</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="known-issues">1</span></a></li></ul>
       <div class="toc-end"></div>
     </nav>
     <div id="doc">
-      <section class="sec" id="combat" data-sec="combat"><h2>Combat<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Wild creatures can hurt you again. An internal safety check was silently swallowing the attacks of nearly every wild creature — boars, wolves, ghosts, toads, 36 of the 39 kinds that roam the overworld — from the moment they spawned. Dungeon monsters and town guards were unaffected, and reloading a save cleared it for a while, which is why the bug seemed to come and go between players.<span class="credits"><span class="who">sksniperks</span><span class="who">rubberychicken</span></span></li>
-<li class="change">Separately, a creature you had already wounded stopped being able to hurt you for the rest of the fight. Thorns damage was the one exception, and a trap or a guard wounding a creature could set it off without you attacking at all.<span class="credits"><span class="who">sksniperks</span><span class="who">rubberychicken</span></span></li>
-<li class="change">Bug report files now record far more detail whenever combat damage goes missing, so if anything like this ever comes back it can be tracked down from a single report.</li></ul></section>
-<section class="sec" id="the-safe-homeland-and-world-pacing" data-sec="the-safe-homeland-and-world-pacing"><h2>The Safe Homeland and world pacing<span class="sec-n">7</span></h2><ul class="changes"><li class="change">The calm zone around your starting area shrank from 150 to 80 tiles — the wild was starting an unreasonably long walk away.<span class="credits"><span class="who">Iso</span><span class="who">samv123</span></span></li>
-<li class="change">Walking out of the starter valley finds trouble quickly now, but between 80 and 150 tiles from the start, pack species arrive as a single scout rather than a full pack. You will meet a lone wolf before you meet its family. Past 150, the packs are at full strength.</li>
-<li class="change">Your homestead is a sanctuary, not a force field. Setting a home in the wild no longer projects starter-valley safety around it: packs still will not spawn within 150 tiles of your base, but lone predators of the local danger tier will come calling, and mythic beasts no longer avoid the area. Planting a campfire in dangerous country to farm it in perfect safety was an exploit, and it is closed.</li>
-<li class="change">Grazing wildlife no longer crowds out predators. Peaceful animals and hostile creatures now draw from separate spawn budgets, where previously five deer at your camp meant no threat could even roll the dice.</li>
-<li class="change">The countryside around settlements has wildlife and threats again. Townsfolk were being counted against the wildlife limit, so the land around every village and town had spawned nothing at all — ever.</li>
-<li class="change">Daytime spawn rates rose slightly outside the starter valley. Nights were already lively and are untouched.</li>
-<li class="change">The Shadow Wolf exists. A quirk of the old safe-zone rules made it the one creature no player could ever meet — it has never once appeared in the full game. Look for it at night, alone, just beyond the starter valley. All 57 wild creatures can now be found in the world.</li></ul></section>
-<section class="sec" id="quests" data-sec="quests"><h2>Quests<span class="sec-n">3</span></h2><ul class="changes"><li class="change">&quot;Clear hostile creatures near the village&quot; contracts can be completed without dragging enemies toward town. Kills now count across the village&#x27;s real hunting grounds, past the quiet ring that keeps wolves away from the town gates — within 120 tiles of the giver for a village, 150 for a town. Quests already in your journal keep their old range.<span class="credits"><span class="who">samv123</span></span></li>
-<li class="change">Villages inside the starter valley no longer post clear notices at all — there is nothing there to clear, so the giver offers different work instead.</li>
-<li class="change">Fixed a quest marker in the starting town pointing at an NPC who then had no quest to give. The marker and the conversation now agree.<span class="credits"><span class="who">samv123</span></span></li></ul></section>
-<section class="sec" id="settlements-and-townspeople" data-sec="settlements-and-townspeople"><h2>Settlements and townspeople<span class="sec-n">2</span></h2><ul class="changes"><li class="change">Faction leaders no longer scream &quot;This is my house!&quot; at you in the middle of the covered market. A household had been moved into the market hall in all five capitals; the leaders have been properly rehoused.<span class="credits"><span class="who">arkhaven</span><span class="who">trespiratesque</span></span></li>
-<li class="change">Signposts step to the road&#x27;s shoulder instead of planting themselves in the middle of the carriageway — some were blocking town roads and, in the worst cases, villagers&#x27; front doors.<span class="credits"><span class="who">soeshii</span></span></li></ul></section>
-<section class="sec" id="ui" data-sec="ui"><h2>UI<span class="sec-n">1</span></h2><ul class="changes"><li class="change">Character sheet tag tooltips count the perks you actually hold instead of always claiming &quot;you carry no perks with this tag yet&quot;.<span class="credits"><span class="who">nalathnidragon</span></span></li></ul></section>
+      <section class="sec" id="the-world-stopped-being-empty" data-sec="the-world-stopped-being-empty"><h2>The world stopped being empty<span class="sec-n">5</span></h2><ul class="changes"><li class="change">Wearing a lot of vision gear no longer empties the overworld. Creatures are placed in a ring just outside your sight so nothing ever appears in front of you — but that ring was a fixed distance while your sight was not, so once you stacked enough vision the ring fell inside it and every placement was refused. Past roughly seven points of bonus vision, daytime spawned nothing at all: no wildlife, no hostiles, nothing, for as long as you wore the gear. The ring now moves out to stay ahead of your eyes.</li>
+<li class="change">Mythic beasts stop teasing and start appearing. The rare atmospheric omens that build toward a legendary creature — the ravens before the Ravenkin Matriarch, and the rest — went silent forever the moment that beast first spawned somewhere off in the world, which was usually before you had laid eyes on it. The omens now run until you actually see the creature.<span class="credits"><span class="who">unclejiggy</span></span></li>
+<li class="change">The Legends journal no longer claims sightings you never had. A mythic that had merely spawned somewhere unseen was recorded as met, complete with a date. It now fills in when you genuinely see one.<span class="credits"><span class="who">unclejiggy</span></span></li>
+<li class="change">Monsters can fight back against soldiers. There has never been a way for wildlife to hurt a patrol, so a squad could stand next to a wolf trading blows it could not return. Field units can now be hurt and killed by the creatures they attack. Settlement guards are deliberately left out — a town&#x27;s garrison is not a hunting party.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Livestock can no longer be killed through a wall. A heavy sweeping attack reached through solid terrain in a way ordinary attacks never could.<span class="credits"><span class="who">datsheeptho</span></span></li></ul></section>
+<section class="sec" id="the-map-and-the-land" data-sec="the-map-and-the-land"><h2>The map and the land<span class="sec-n">4</span></h2><ul class="changes"><li class="change">Lakes are on the world map again. The map sampled water once per hundred tiles, and most lakes are narrower than that, so they simply fell through the gaps.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Villages no longer strand themselves in the middle of a lake. Settlement placement checked the shape of the land but not where the water was.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Island coastlines wander instead of following the rectangle they were stamped from.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Signposted villages no longer carpet the continent map. Every other kind of marker thinned out as you zoomed away; this one family never did, so the further out you looked the more cluttered it got.<span class="credits"><span class="who">rubberychicken</span></span></li></ul></section>
+<section class="sec" id="interface" data-sec="interface"><h2>Interface<span class="sec-n">6</span></h2><ul class="changes"><li class="change">**New players now start on the Readable font.** The old pixel font is hard going over a long session, which is why the font choice exists at all. If you are already playing, nothing changes — you keep whatever you have, and Classic is still there in Settings → Display → Font.</li>
+<li class="change">You are a different colour to everyone else on the minimap. Your dot was identical to every townsfolk dot.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">The sun icon and the time-of-day text agree. The icon switched to night halfway through the cycle; night actually starts later than that.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Spell belt costs and mastery badges line up again, whatever the spell&#x27;s art.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">The sleeping ZzZzZ no longer prints on top of itself at larger font sizes.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">No more health bar floating over an undamaged campfire built on a tree&#x27;s stump.<span class="credits"><span class="who">rubberychicken</span></span></li></ul></section>
+<section class="sec" id="items-and-crafting" data-sec="items-and-crafting"><h2>Items and crafting<span class="sec-n">8</span></h2><ul class="changes"><li class="change">Tent Kits can be pitched straight from the pack. A kit whose entire cost is the kit itself now carries its own action instead of only existing inside the build menu. Painted eggs had the same gap and got the same fix.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Woad pots can be used. The dyeing action lived only on the garment, never on the pot you were looking at.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Destroying species wood returns plain planks instead of deleting it, one per log. Pine, oak and the rest were the only materials where reclaiming the backpack space meant throwing the wood away.<span class="credits"><span class="who">nalathnidragon</span></span></li>
+<li class="change">Berries reach the quick bar reliably. Two checks still described food as a fixed list, and a named berry did not appear on it.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Wells keep &quot;Fill all containers&quot;. The option was hidden whenever your belt was full, however empty the containers in your pack were.<span class="credits"><span class="who">datsheeptho</span></span></li>
+<li class="change">The Sailor&#x27;s Hatchet is now the Sailor&#x27;s Axe. It always swung as a two-handed axe; only the name said otherwise.<span class="credits"><span class="who">unknownuluguru_</span></span></li>
+<li class="change">Cold resistance is now cold weather resistance. It protects against cold conditions and never reduced cold damage — it was the one entry in that row that did not work the way the others do.<span class="credits"><span class="who">nalathnidragon</span></span></li>
+<li class="change">A crafted sealing wheel now points you at the Undermaw. Buying the wheel at a forge left you holding an endgame key with nothing on the map to use it on.<span class="credits"><span class="who">thesquirrel_74982</span></span></li></ul></section>
+<section class="sec" id="stability-and-performance" data-sec="stability-and-performance"><h2>Stability and performance<span class="sec-n">5</span></h2><ul class="changes"><li class="change">Standing still costs far less. Ambient water kept the game rendering at full speed even when nothing was happening.<span class="credits"><span class="who">datsheeptho</span></span></li>
+<li class="change">Save &amp; Quit closes the game. The process could survive it and keep running in the background.<span class="credits"><span class="who">sksniperks</span></span></li>
+<li class="change">Time no longer freezes when you go to sleep while mounted.<span class="credits"><span class="who">bossman62</span><span class="who">rubberychicken</span></span></li>
+<li class="change">You can no longer get permanently stuck inside a ship&#x27;s bulwark. Ships were the one place whose own shape could trap you and which had no rescue.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">The spore-weather colour cast stays outside the Old Mouth instead of following you in.<span class="credits"><span class="who">rubberychicken</span></span></li></ul></section>
+<section class="sec" id="credits" data-sec="credits"><h2>Credits<span class="sec-n">1</span></h2><ul class="changes"><li class="change">The title screen art and the Roguefort wordmark are by Bladimir. I&#x27;ve been meaning to get him into the credits properly for a while now, so this is well overdue.</li></ul></section>
+<section class="sec caveat" id="known-issues" data-sec="known-issues"><h2>Known issues<span class="sec-n">1</span></h2><ul class="changes"><li class="change">With a very large vision bonus — beyond about ten points, which takes deliberate stacking — daytime spawns can still thin out. Going further would mean creatures appearing within sight, and that trade is not worth it.</li></ul></section>
       <div class="empty hidden" id="empty"></div>
     </div>
   </div>
 </main>
 
-<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.19.0.html"><span class="pg-k">Previous release</span><span class="pg-v">Hamsters!</span><span class="pg-n">0.19.0</span></a><a class="pg pg-all" href="index.html">All releases</a><a class="pg pg-next" href="0.19.3.html"><span class="pg-k">Next release</span><span class="pg-v">Non Travolta.</span><span class="pg-n">0.19.3</span></a></nav>
+<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.19.2.html"><span class="pg-k">Previous release</span><span class="pg-v">Suitably Wilder.</span><span class="pg-n">0.19.2</span></a><a class="pg pg-all" href="index.html">All releases</a></nav>
 
 <footer class="foot">
-  <span>Roguefort 0.19.2 &middot; 27 August 2026</span>
+  <span>Roguefort 0.19.3 &middot; 28 August 2026</span>
   <span>Community reporters are credited against each change.</span>
 </footer>
 
