@@ -274,6 +274,14 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
 .sec-n::before { content: "\27E6"; }
 .sec-n::after  { content: "\27E7"; }
 
+/* Prose above a section's bullets: the lore opening, the release summary. */
+.lead {
+  max-width: 68ch; margin: 0 0 22px;
+  font-size: clamp(16px, 1.5vw, 18px); line-height: 1.62;
+}
+.lead:last-child { margin-bottom: 0; }
+.sec-intro { margin-bottom: 44px; }
+
 .changes { list-style: none; margin: 0; padding: 0; max-width: 68ch; }
 .change {
   position: relative; padding: 0 0 14px 26px; margin: 0 0 14px;
@@ -492,7 +500,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   <div class="bar-in">
     <a class="bar-mark" href="#top">Roguefort</a>
     <span class="bar-here" id="here" aria-live="off"></span>
-    <nav class="vers" aria-label="Versions"><a class="ver" href="0.19.3.html">0.19.3</a><a class="ver on" href="0.19.2.html" aria-current="page">0.19.2</a><a class="ver" href="0.19.0.html">0.19.0</a><a class="ver ver-all" href="index.html">All</a></nav>
+    <nav class="vers" aria-label="Versions"><a class="ver" href="0.19.4.html">0.19.4</a><a class="ver" href="0.19.3.html">0.19.3</a><a class="ver on" href="0.19.2.html" aria-current="page">0.19.2</a><a class="ver" href="0.19.0.html">0.19.0</a><a class="ver ver-all" href="index.html">All</a></nav>
     <div class="find">
       <input id="q" type="search" placeholder="/ filter changes" aria-label="Filter changes" autocomplete="off">
     </div>
@@ -514,7 +522,8 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
       <div class="toc-end"></div>
     </nav>
     <div id="doc">
-      <section class="sec" id="combat" data-sec="combat"><h2>Combat<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Wild creatures can hurt you again. An internal safety check was silently swallowing the attacks of nearly every wild creature — boars, wolves, ghosts, toads, 36 of the 39 kinds that roam the overworld — from the moment they spawned. Dungeon monsters and town guards were unaffected, and reloading a save cleared it for a while, which is why the bug seemed to come and go between players.<span class="credits"><span class="who">sksniperks</span><span class="who">rubberychicken</span></span></li>
+      <section class="sec sec-intro"><p class="lead">A same-day hotfix for 0.19.0, folding in the short-lived 0.19.1. If enemies could not hurt you, this is the one you were waiting for — there were two separate bugs behind it, and both are fixed.</p></section>
+<section class="sec" id="combat" data-sec="combat"><h2>Combat<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Wild creatures can hurt you again. An internal safety check was silently swallowing the attacks of nearly every wild creature — boars, wolves, ghosts, toads, 36 of the 39 kinds that roam the overworld — from the moment they spawned. Dungeon monsters and town guards were unaffected, and reloading a save cleared it for a while, which is why the bug seemed to come and go between players.<span class="credits"><span class="who">sksniperks</span><span class="who">rubberychicken</span></span></li>
 <li class="change">Separately, a creature you had already wounded stopped being able to hurt you for the rest of the fight. Thorns damage was the one exception, and a trap or a guard wounding a creature could set it off without you attacking at all.<span class="credits"><span class="who">sksniperks</span><span class="who">rubberychicken</span></span></li>
 <li class="change">Bug report files now record far more detail whenever combat damage goes missing, so if anything like this ever comes back it can be tracked down from a single report.</li></ul></section>
 <section class="sec" id="the-safe-homeland-and-world-pacing" data-sec="the-safe-homeland-and-world-pacing"><h2>The Safe Homeland and world pacing<span class="sec-n">7</span></h2><ul class="changes"><li class="change">The calm zone around your starting area shrank from 150 to 80 tiles — the wild was starting an unreasonably long walk away.<span class="credits"><span class="who">Iso</span><span class="who">samv123</span></span></li>

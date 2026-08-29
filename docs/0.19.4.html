@@ -1,221 +1,16 @@
-#!/usr/bin/env python3
-"""Build the Roguefort patch notes site.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roguefort 0.19.4 — Patch Notes</title>
+<meta name="description" content="Roguefort 0.19.4 patch notes. 59 changes across 10 sections.">
+<meta name="theme-color" content="#111D35">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&family=DM+Mono:wght@400;500&family=Grenze+Gotisch:wght@500;700&display=swap" rel="stylesheet">
+<style>
 
-Reads every notes/<version>.md and writes docs/<version>.html, plus
-docs/index.html for the newest version. Run it after editing the notes:
-
-    python3 build.py
-
-Each notes file may start with optional front matter comments:
-
-    <!-- date: 27 August 2026 -->
-    <!-- lede: Hamsters! -->
-    <!-- tag: Playtest -->
-
-The design is driven by the Steam capsule art: a strict PICO-8 palette,
-dot-lattice dithering instead of gradients, hard 1px outlines with a warm
-rim-light, and zero border radius anywhere.
-"""
-
-import html
-import re
-import shutil
-from pathlib import Path
-
-ROOT = Path(__file__).parent
-NOTES = ROOT / "notes"
-DOCS = ROOT / "docs"
-ASSETS = ROOT / "assets"
-
-# Sections that describe what is still broken rather than what changed.
-CAVEAT_SECTIONS = ("known issues",)
-
-
-def version_key(name: str):
-    return [int(p) if p.isdigit() else p for p in re.split(r"[.\-]", name)]
-
-
-def parse(path: Path):
-    text = path.read_text(encoding="utf-8")
-    meta = dict(re.findall(r"<!--\s*(\w+):\s*(.*?)\s*-->", text))
-    text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
-
-    title, sections, intro = "", [], []
-    # A run of consecutive plain lines is one paragraph; a blank line ends it.
-    # Paragraphs before the first "##" belong to the page, after it to the
-    # section. Prose used to be dropped on the floor here, which silently ate
-    # the intros written for 0.19.2 and 0.19.3.
-    para = []
-
-    def flush():
-        if para:
-            (sections[-1]["intro"] if sections else intro).append(" ".join(para))
-            para.clear()
-
-    for line in text.splitlines():
-        line = line.rstrip()
-        if line.startswith("# "):
-            flush()
-            title = line[2:].strip()
-        elif line.startswith("## "):
-            flush()
-            sections.append({"name": line[3:].strip(), "bullets": [], "intro": []})
-        elif line.startswith("- ") and sections:
-            flush()
-            sections[-1]["bullets"].append(line[2:].strip())
-        elif line.strip():
-            para.append(line.strip())
-        else:
-            flush()
-    flush()
-    return {
-        "version": path.stem,
-        "title": title,
-        "intro": intro,
-        "sections": sections,
-        "date": meta.get("date", ""),
-        "lede": meta.get("lede", ""),
-        "tag": meta.get("tag", ""),
-    }
-
-
-def slug(name: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
-
-
-def split_credit(bullet: str):
-    """Peel a trailing (handle, handle) credit off a bullet."""
-    m = re.search(r"\s*\(([^()]{1,90})\)\s*$", bullet)
-    if not m:
-        return bullet, []
-    inner = m.group(1)
-    if inner.endswith((".", "!", "?")) or inner[0].islower() and " " in inner and "," not in inner:
-        # Looks like prose in brackets rather than a credit line.
-        return bullet, []
-    body = bullet[: m.start()].rstrip()
-    if not body.endswith((".", "!", "?", '"')):
-        return bullet, []
-    parts = [p.strip() for p in inner.split(",")]
-    return body, parts
-
-
-def render_bullet(bullet: str) -> str:
-    body, credits = split_credit(bullet)
-    out = html.escape(body)
-    # In-game bracket labels such as [Sheltered] get the game's own chip look.
-    out = re.sub(r"\[([A-Za-z][\w \-]{0,18})\]", r'<span class="tag">[\1]</span>', out)
-    credit_html = ""
-    if credits:
-        bits = []
-        for c in credits:
-            cls = "who" if " " not in c else "who-note"
-            bits.append(f'<span class="{cls}">{html.escape(c)}</span>')
-        credit_html = f'<span class="credits">{"".join(bits)}</span>'
-    return f'<li class="change">{out}{credit_html}</li>'
-
-
-def fill(tpl: str, mapping: dict) -> str:
-    """Single-pass {{key}} substitution.
-
-    Deliberately not str.format: the template is mostly CSS and JS, and
-    doubling every brace in it is a standing invitation to typos.
-    """
-    return re.sub(r"\{\{(\w+)\}\}", lambda m: str(mapping[m.group(1)]), tpl)
-
-
-MAX_CHIPS = 4
-
-
-def build_switcher(current, all_versions):
-    """Newest few versions as chips, plus a link to the full register.
-
-    A chip per release overflows the bar once there are a dozen or so;
-    the register page is the thing that scales.
-    """
-    shown = all_versions[:MAX_CHIPS]
-    if current not in shown:
-        shown = all_versions[: MAX_CHIPS - 1] + [current]
-    chips = "".join(
-        '<a class="ver{on}" href="{v}.html"{cur}>{v}</a>'.format(
-            v=html.escape(v),
-            on=" on" if v == current else "",
-            cur=' aria-current="page"' if v == current else "",
-        )
-        for v in shown
-    )
-    more = f" ({len(all_versions)})" if len(all_versions) > len(shown) else ""
-    return chips + f'<a class="ver ver-all" href="index.html">All{more}</a>'
-
-
-def build_pager(older, newer):
-    def cell(note, kind, label):
-        if not note:
-            return ""
-        name = note["lede"] or note["version"]
-        return (
-            f'<a class="pg pg-{kind}" href="{html.escape(note["version"])}.html">'
-            f'<span class="pg-k">{label}</span>'
-            f'<span class="pg-v">{html.escape(name)}</span>'
-            f'<span class="pg-n">{html.escape(note["version"])}</span></a>'
-        )
-    return (
-        cell(older, "prev", "Previous release")
-        + '<a class="pg pg-all" href="index.html">All releases</a>'
-        + cell(newer, "next", "Next release")
-    )
-
-
-def render(note, all_versions, older=None, newer=None):
-    sections = note["sections"]
-    total = sum(len(s["bullets"]) for s in sections)
-
-    index_rows = []
-    body_rows = []
-    for s in sections:
-        sid = slug(s["name"])
-        n = len(s["bullets"])
-        caveat = any(k in s["name"].lower() for k in CAVEAT_SECTIONS)
-        index_rows.append(
-            f'<li><a class="idx{" idx-caveat" if caveat else ""}" href="#{sid}" data-idx="{sid}">'
-            f'<span class="idx-name">{html.escape(s["name"])}</span>'
-            f'<span class="idx-dots" aria-hidden="true"></span>'
-            f'<span class="idx-n" data-count="{sid}">{n}</span></a></li>'
-        )
-        bullets = "\n".join(render_bullet(b) for b in s["bullets"])
-        lead = "".join(f'<p class="lead">{html.escape(p)}</p>' for p in s.get("intro", []))
-        body_rows.append(
-            f'<section class="sec{" caveat" if caveat else ""}" id="{sid}" data-sec="{sid}">'
-            f'<h2>{html.escape(s["name"])}'
-            f'<span class="sec-n">{n}</span></h2>'
-            f'{lead}'
-            f'<ul class="changes">{bullets}</ul>'
-            f'</section>'
-        )
-
-    if note.get("intro"):
-        body_rows.insert(0, '<section class="sec sec-intro">' + "".join(
-            f'<p class="lead">{html.escape(p)}</p>' for p in note["intro"]) + '</section>')
-
-    switcher = build_switcher(note["version"], all_versions)
-    pager = build_pager(older, newer)
-
-    return fill(TEMPLATE, {
-        "version": html.escape(note["version"]),
-        "title": html.escape(note["title"] or f"Roguefort {note['version']}"),
-        "lede": html.escape(note["lede"]),
-        "date": html.escape(note["date"]),
-        "tag": html.escape(note["tag"] or "Build"),
-        "total": total,
-        "n_sections": len(sections),
-        "index_rows": "\n".join(index_rows),
-        "body_rows": "\n".join(body_rows),
-        "switcher": switcher,
-        "pager": pager,
-        "css": CSS,
-    })
-
-
-CSS = """
 /* ------------------------------------------------------------------
    Palette sampled from the Steam capsules. Strict PICO-8 index:
    the whole capsule is 26-47 unique colours, so nothing here is
@@ -390,7 +185,7 @@ body {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   min-width: 0; flex: 1 1 auto;
 }
-.bar-here::before { content: "\\25B8"; color: var(--rind); margin-right: 8px; }
+.bar-here::before { content: "\25B8"; color: var(--rind); margin-right: 8px; }
 .bar-here:empty::before { content: none; }
 .vers { display: flex; flex-wrap: wrap; gap: 5px; flex: 0 1 auto; min-width: 0; }
 .ver {
@@ -476,8 +271,8 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   font-family: var(--mono); font-size: 13px; font-weight: 400;
   color: var(--cellar); flex: none;
 }
-.sec-n::before { content: "\\27E6"; }
-.sec-n::after  { content: "\\27E7"; }
+.sec-n::before { content: "\27E6"; }
+.sec-n::after  { content: "\27E7"; }
 
 /* Prose above a section's bullets: the lore opening, the release summary. */
 .lead {
@@ -643,22 +438,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   outline-offset: 2px;
 }
 .bar :focus-visible, .mast :focus-visible { outline-color: var(--rind); }
-"""
-
-
-TEMPLATE = """<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{title}}</title>
-<meta name="description" content="Roguefort {{version}} patch notes. {{total}} changes across {{n_sections}} sections.">
-<meta name="theme-color" content="#111D35">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&family=DM+Mono:wght@400;500&family=Grenze+Gotisch:wght@500;700&display=swap" rel="stylesheet">
-<style>
-{{css}}</style>
+</style>
 </head>
 <body>
 
@@ -693,13 +473,13 @@ TEMPLATE = """<!DOCTYPE html>
          srcset="assets/roguefort-wordmark.png 1x, assets/roguefort-wordmark@2x.png 2x"
          width="526" height="166" alt="Roguefort">
     <p class="plaque">
-      <span class="plaque-k">Patch notes</span><span class="plaque-v">{{version}}</span><span class="plaque-t">{{tag}}</span>
+      <span class="plaque-k">Patch notes</span><span class="plaque-v">0.19.4</span><span class="plaque-t">Playtest</span>
     </p>
-    <h1 class="card"><span class="vh">Roguefort {{version}} patch notes: </span>{{lede}}</h1>
+    <h1 class="card"><span class="vh">Roguefort 0.19.4 patch notes: </span>Mahargekdar&#x27;s Plane of Heroes.</h1>
     <p class="mast-meta">
-      <span>{{date}}</span>
-      <span><b>{{total}}</b> changes</span>
-      <span><b>{{n_sections}}</b> sections</span>
+      <span>29 August 2026</span>
+      <span><b>59</b> changes</span>
+      <span><b>10</b> sections</span>
       <span>press <kbd>/</kbd> to filter</span>
     </p>
   </div>
@@ -720,7 +500,7 @@ TEMPLATE = """<!DOCTYPE html>
   <div class="bar-in">
     <a class="bar-mark" href="#top">Roguefort</a>
     <span class="bar-here" id="here" aria-live="off"></span>
-    <nav class="vers" aria-label="Versions">{{switcher}}</nav>
+    <nav class="vers" aria-label="Versions"><a class="ver on" href="0.19.4.html" aria-current="page">0.19.4</a><a class="ver" href="0.19.3.html">0.19.3</a><a class="ver" href="0.19.2.html">0.19.2</a><a class="ver" href="0.19.0.html">0.19.0</a><a class="ver ver-all" href="index.html">All</a></nav>
     <div class="find">
       <input id="q" type="search" placeholder="/ filter changes" aria-label="Filter changes" autocomplete="off">
     </div>
@@ -732,22 +512,89 @@ TEMPLATE = """<!DOCTYPE html>
     <nav class="toc" aria-label="Sections">
       <div class="toc-h">
         <h2>Contents</h2>
-        <span><b id="live-total">{{total}}</b> changes in <b id="live-secs">{{n_sections}}</b> sections</span>
+        <span><b id="live-total">59</b> changes in <b id="live-secs">10</b> sections</span>
       </div>
-      <ul>{{index_rows}}</ul>
+      <ul><li><a class="idx" href="#mahargekdar-s-plane-of-heroes" data-idx="mahargekdar-s-plane-of-heroes"><span class="idx-name">Mahargekdar&#x27;s Plane of Heroes</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="mahargekdar-s-plane-of-heroes">5</span></a></li>
+<li><a class="idx" href="#the-monadic-descent" data-idx="the-monadic-descent"><span class="idx-name">The Monadic Descent</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-monadic-descent">9</span></a></li>
+<li><a class="idx" href="#reading-the-log" data-idx="reading-the-log"><span class="idx-name">Reading the log</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="reading-the-log">5</span></a></li>
+<li><a class="idx" href="#the-world-and-the-map" data-idx="the-world-and-the-map"><span class="idx-name">The world and the map</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-world-and-the-map">13</span></a></li>
+<li><a class="idx" href="#quests-and-factions" data-idx="quests-and-factions"><span class="idx-name">Quests and factions</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="quests-and-factions">4</span></a></li>
+<li><a class="idx" href="#items-crafting-and-combat" data-idx="items-crafting-and-combat"><span class="idx-name">Items, crafting and combat</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="items-crafting-and-combat">6</span></a></li>
+<li><a class="idx" href="#co-op" data-idx="co-op"><span class="idx-name">Co-op</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="co-op">5</span></a></li>
+<li><a class="idx" href="#interface" data-idx="interface"><span class="idx-name">Interface</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="interface">5</span></a></li>
+<li><a class="idx" href="#art-and-words" data-idx="art-and-words"><span class="idx-name">Art and words</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="art-and-words">3</span></a></li>
+<li><a class="idx idx-caveat" href="#known-issues" data-idx="known-issues"><span class="idx-name">Known issues</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="known-issues">4</span></a></li></ul>
       <div class="toc-end"></div>
     </nav>
     <div id="doc">
-      {{body_rows}}
+      <section class="sec" id="mahargekdar-s-plane-of-heroes" data-sec="mahargekdar-s-plane-of-heroes"><h2>Mahargekdar&#x27;s Plane of Heroes<span class="sec-n">5</span></h2><p class="lead">The sealed stair at the bottom of the Old Mouth is open, and it does not lead down to an underground cavern. It leads to Mahargekdar&#x27;s Plane of Heroes, a planar island of ancient stone stranded in a cosmic starfield void.</p><p class="lead">Mahargekdar is one of the thirteen lapsed gods of the Terroir Mythos, keeper of trials and contests, prover of champions, who watches and keeps the score of all adventurers who pass into his planar terroir underworld. But was he really a god? Who or what are the gods? Or is there something else at play, coming back from the ancient subterranean terroir networks, older than the Seven, from the age of lattice?</p><p class="lead">Whatever Mahargekdar is, he is offering a brand new challenge, and cultures from the five great guilds are coming from all around to compete and try their luck.</p><ul class="changes"><li class="change">The short of it: Roguefort is getting raid dungeons. One solo dungeon is open to play, the Monadic Descent. Two-person, three-person and four-person raids are in the pipeline, and the entrances to the Dyadic Vault, the Triadic Gate and the Tetradic Keep are barred for now.</li>
+<li class="change">There are leaderboards for each gate, in the manner of the original Rogue, and Moria and Angband after it.</li>
+<li class="change">The dungeons scale to your level and to your gear, so the challenge is a fair one and it is open to anyone.</li>
+<li class="change">Four raid gates hang off the island&#x27;s north edge on causeways, each with a leaderboard plinth beside it. The Herald of Mahargekdar and the Keeper of Deeds will talk to you, and nothing on the island itself can hurt you.</li>
+<li class="change">Other players are on the island with you. You see them the same way you see people in the market city, standing where they are standing and wearing what they are wearing. There is no chat and no trading.</li></ul></section>
+<section class="sec" id="the-monadic-descent" data-sec="the-monadic-descent"><h2>The Monadic Descent<span class="sec-n">9</span></h2><ul class="changes"><li class="change">Fifteen floors, in five stages of three. The first stage is always the Old Halls and the last is always the Furnace Below. The three in between are drawn from a pool of six biomes on the run&#x27;s own seed, so no two attempts walk the same road down.</li>
+<li class="change">A stage guardian waits on floors 3, 6, 9 and 12, and every stage past the first enforces a build check that its entry line tells you about before you walk in: a spell family, an elemental resistance, or stone hide that wants physical resistance.</li>
+<li class="change">Nadirath waits at the bottom and takes an aspect on each run, Molten or Rimebound or Venomous. The wyrm is 90% resistant to its own element and soft to the element that counters it. You always know who is down there. You never know what it breathes until it breathes.</li>
+<li class="change">The scaling takes the higher of your level and your gear, so deep-dungeon loot on a low-level character will not flatten the Descent, and stripping at the gate buys you nothing.</li>
+<li class="change">Loot is banded by depth. Chests carry a rarity floor that rises as you go down, the stage guardians pay out properly, and the wyrm&#x27;s hoard is the best of it. There are 18 Descent Relics: eight tied to depth, six that only appear in the biome stages a run happens to draw, three from Nadirath, and one that needs the deepest bands.</li>
+<li class="change">Roughly three floors in ten hold a den, a room packed with 6 to 10 of a single creature from that stage&#x27;s biome. About a quarter of the deeper ones are hoard dens, with two chests behind a bigger pack. Arriving on the floor tells you the den is there, so the risk is one you take on purpose.</li>
+<li class="change">The plinth writes what you did. Top ten per gate, all time, with victors ranked by fewest turns and the fallen listed by the floor that took them, each row carrying level, kills, turns, elapsed time and the name of the thing that ended it. The board is kept separately from your run, so permadeath cannot wipe it.</li>
+<li class="change">Dying in the trial is not permadeath. You come back to the Plane with half your health and your debuffs burned off, and the board records a defeat. Walking out of floor 1 or teleporting home also end the run and are recorded the same way.</li>
+<li class="change">Winning grants a title in Mahargekdar&#x27;s own tempering language, keyed to the aspect you beat, with a harder grade for the deepest bands. There are six to collect across runs.</li></ul></section>
+<section class="sec" id="reading-the-log" data-sec="reading-the-log"><h2>Reading the log<span class="sec-n">5</span></h2><ul class="changes"><li class="change">Topic markers are coloured dots now, in their own gutter, so the log reads as a scannable column and a wrapped line hangs indented under its dot. The old symbol prefixes showed up as empty boxes on some machines.<span class="credits"><span class="who-note">The Nomad Soul</span></span></li>
+<li class="change">The log no longer washes out in daylight. The daytime colour wash warms and brightens the whole screen for about 40% of the day cycle, and it was taking the log with it. The band behind the text is more solid now, and the text carries a shadow.<span class="credits"><span class="who-note">The Nomad Soul</span></span></li>
+<li class="change">The CRT scanlines and vignette can be turned off in Settings. They stay on by default. The vignette alone was taking up to 30% of the brightness at the screen edges, which is exactly where the log sits.</li>
+<li class="change">Log text can be set to bold, off by default, for players who want it to read harder.</li>
+<li class="change">Pickup lines are coloured as loot. &quot;You pick up wheat x2&quot; is the most common message in the game and was the only one still drawing a plain grey dot.</li></ul></section>
+<section class="sec" id="the-world-and-the-map" data-sec="the-world-and-the-map"><h2>The world and the map<span class="sec-n">13</span></h2><ul class="changes"><li class="change">The overworld no longer stops spawning on a long save. Road travellers and caravans were never cleaned up the way other wanderers are, so they piled up for the life of a save until there was no room left to place anything else. An affected save clears the backlog within a few turns of loading.<span class="credits"><span class="who">huronlake</span></span></li>
+<li class="change">Hostiles no longer spawn on city streets, and the deep-frontier warning stops firing inside the walls. Two fixed distances stood in for &quot;am I inside the settlement&quot;, both chosen when the largest settlement was about 80 tiles by 90. Cities have been up to 400 tiles across for a while.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Doors go somewhere. Doors were placed in a dungeon floor before it was decorated, and a dozen later steps then moved the walls out from under them. Across 1,760 floors, 23.3% of all doors were opening onto solid rock, standing free in open ground, or walkable around on both sides.</li>
+<li class="change">Rubble, crystal and cobwebs no longer seal off parts of a dungeon floor. Every floor is now checked to be reachable from its entrance stair, and the cheapest way through is opened, usually a single tile. Floors with a sealed-off region fell from 79 to 27 across 2,700 of them, and sealed chests from 14 to 4.</li>
+<li class="change">A dungeon you have found shows on the world map, not only the minimap. Two things were hiding it: places found by sailing never generated a rumour, and a discovered place below its zoom threshold drew nothing at all.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Map pins you place yourself survive zooming out. Every other kind of mark has had two thresholds since the map was written, one for the icon and one for the caption, so a mark keeps its symbol after its name drops away. Player pins had a single threshold covering both, and the default zoom sits under it.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">You can enter a riftstone while standing on it. The menu only offered the riftstone options for a tile next to you, and your own tile does not count as next to you.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">A riftstone tile stops re-announcing its faction every time you step off it and back on. The curated stones are placed on round hundreds and faction borders fall on multiples of a hundred, so several of them sit exactly on a line.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Auto-travel no longer gives up on a road that is working. It decided it had stalled by measuring only the larger of the two distances to your goal, so it could not see the progress it was making on the other one. A highway running due south toward a city to the south-east read as no progress at all for 600 turns.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Guards deal damage again. Every blow a guard landed was being treated as an invalid move and thrown away.<span class="credits"><span class="who">sksniperks</span></span></li>
+<li class="change">Guards stop wearing a sleeping Z on their feet while upright. An earlier fix excused walking guards only, and there are other ways to be awake.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Small trees stop drawing on top of a giant willow. When a big tree is felled, the space it filled is only forgotten once the game is sure nothing is still growing there, and a sapling planted on the stump was enough to convince it the old tree was alive.<span class="credits"><span class="who">Soeshii</span></span></li>
+<li class="change">A shop signpost no longer blocks an alleyway. The check that keeps signs out of walkways counted a planted berry hedge as a wall, so it decided there was no path to block.<span class="credits"><span class="who">rubberychicken</span></span></li></ul></section>
+<section class="sec" id="quests-and-factions" data-sec="quests-and-factions"><h2>Quests and factions<span class="sec-n">4</span></h2><ul class="changes"><li class="change">Fund a Cottage pays out. Every other part of the quest worked, and 1,007 of 1,007 residents moved into the cottages they paid for. The price was the dead part, read from a counter that is always empty.<span class="credits"><span class="who">horth.panthur</span></span></li>
+<li class="change">Gather quests no longer complete with an empty pack. Progress counted the kill rather than the goods, so a deer killed with a full satchel credited hides that had scattered on the ground, and the turn-in then took nothing and paid anyway.<span class="credits"><span class="who">sksniperks</span></span></li>
+<li class="change">Quests come from the right faction. Six Thymerock exclaves and four Brinehold Strand hamlets sit inside another faction&#x27;s regions, and the map kept a second set of borders that had never been told about those claims.<span class="credits"><span class="who">bossman62</span></span></li>
+<li class="change">A dungeon boss drops its loot, and its dungeon reads as finished. Enemies are numbered from 1 again on every floor, so bosses in different dungeons routinely shared a number and the game credited the wrong kill. Across 660 last-floor bosses there were only 91 distinct numbers.<span class="credits"><span class="who">thesquirrel_74982</span><span class="who-note">reporting for Elfie</span></span></li></ul></section>
+<section class="sec" id="items-crafting-and-combat" data-sec="items-crafting-and-combat"><h2>Items, crafting and combat<span class="sec-n">6</span></h2><ul class="changes"><li class="change">Items with impossible stats can no longer be made, and the ones already in your save are repaired when it loads. Each one is rebuilt from what it was meant to be rather than deleted, so affinage upgrades you paid for survive. Items that were already correct are left exactly as they were, and the repair looks everywhere an item can sit, including stashed chunks and the buyback shelf.</li>
+<li class="change">Mining crystal in the Descent pays a real number. Raid floors carry no dungeon tier, the bonus was not expecting that, and every crystal strike printed +NaN and then quietly paid one.</li>
+<li class="change">The wyrm&#x27;s hoard no longer buries the way home. The relics dropped onto the same tile as the return stone and picking one up erased it, which left a fifteen-floor stair climb as the only way out.</li>
+<li class="change">Axes are auto-selected for chopping. A combat axe has chopped at full power for a while, but the tool picked for you was only ever a dedicated harvesting tool, which an axe is not.<span class="credits"><span class="who">sksniperks</span></span></li>
+<li class="change">Pasture Calm stops healing you mid-combat. The check for &quot;is anything hostile nearby&quot; was really asking about settlement standing, which every wild wolf and bandit answers no to.<span class="credits"><span class="who">sksniperks</span></span></li>
+<li class="change">Bow kills earn stealth XP. The XP was granted at a point in the turn where the end-of-turn update wrote straight over it.<span class="credits"><span class="who">horth.panthur</span></span></li></ul></section>
+<section class="sec" id="co-op" data-sec="co-op"><h2>Co-op<span class="sec-n">5</span></h2><ul class="changes"><li class="change">A quest offer closes, and cannot be accepted twice. On a joining player&#x27;s machine the Accept button sent the answer and left the dialog standing.<span class="credits"><span class="who">Soeshii</span></span></li>
+<li class="change">&quot;Dungeon cleared&quot; reaches both players. The celebration only ever existed on the host&#x27;s machine, with nothing to send and nowhere to send it, so a joiner standing in the same dungeon saw nothing.<span class="credits"><span class="who">unknownuluguru_</span></span></li>
+<li class="change">A follower is no longer halted by hostiles it cannot see. Auto-travel was checking what the whole party could see between them rather than what the follower itself could see.<span class="credits"><span class="who">Soeshii</span></span></li>
+<li class="change">A sale is heard by the player who made it. The coin sound plays in two layers, and the second one arrived too late to be sent to the right person, so both of you heard it.<span class="credits"><span class="who">unknownuluguru_</span></span></li>
+<li class="change">The log stops telling a Steam host that their session started on undefined. Nothing was wrong with the session, only with the sentence describing it.<span class="credits"><span class="who">unknownuluguru_</span></span></li></ul></section>
+<section class="sec" id="interface" data-sec="interface"><h2>Interface<span class="sec-n">5</span></h2><ul class="changes"><li class="change">The Font setting applies immediately. Font size already did, but font family needed a trip to the title screen and back, because only one of the two places that hold your settings was applying it.<span class="credits"><span class="who">unknownuluguru_</span></span></li>
+<li class="change">Right-click menus stay on screen. The check that keeps them inside the window was measuring their position from the map area instead of from the window.<span class="credits"><span class="who">unknownuluguru_</span></span></li>
+<li class="change">Ctrl+A, typing over a selection, and pasting all work in text fields. The seed box and every name, code and chat field use the same on-screen keyboard widget, which is not a real text box and had no idea what &quot;selected&quot; meant.<span class="credits"><span class="who">sksniperks</span></span></li>
+<li class="change">Pave, Cobble and the other earthshaping tools have their own icons. The build menu was falling back to guessing an icon from the tool&#x27;s first letter, which is how Pave drew a whey font.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Indigo matches PICO-8. One colour in the palette had been copied down wrong, and it reached night HUD text, wraiths, epic item rarity and several settlement roles.<span class="credits"><span class="who">ArkHaven</span></span></li></ul></section>
+<section class="sec" id="art-and-words" data-sec="art-and-words"><h2>Art and words<span class="sec-n">3</span></h2><ul class="changes"><li class="change">43 community sprite submissions are in. Nineteen things are painted for the first time, among them the void shade, the frost mystic, the crossbow skeleton, the drowned verger, the bone marshal, the bog witch, the tide crawler, the shell knight, the bandit, the magma cloud, and nine item icons that include garlic, a wheel of cheese and its aging twin, drake bile and kingly antlers. The djinn and the hamster get new art, nine terrain glyphs are new and two are replaced, and four keys gained variants.</li>
+<li class="change">The painters, this time round: DatSheepDoe, who drew 36 of the 43, including the bandit, the bog witch, the frost mystic, the crossbow skeleton and every one of the item icons. Elfie the Explorer, who drew the void shade, the drowned verger, the bone marshal and the shell knight. Soeshii, who drew the hamster and the garlic. ArkHaven, who drew a new flower.</li>
+<li class="change">A new ballad joins Tales of the Road. The Lake Squid, submitted by theartolater and printed as written, takes the series from 29 pieces to 30. It turns up in settlements, taverns and the shallower chest pools like the rest of them.</li></ul></section>
+<section class="sec caveat" id="known-issues" data-sec="known-issues"><h2>Known issues<span class="sec-n">4</span></h2><ul class="changes"><li class="change">Only the first raid gate is open. The Dyadic Vault, the Triadic Gate and the Tetradic Keep are sealed.</li>
+<li class="change">The Plane of Heroes holds 50 players at once. Past that, some people on the island will not see each other.</li>
+<li class="change">With a very large vision bonus, beyond about ten points, daytime spawns can still thin out. Going further would mean creatures appearing within sight, and that trade is not worth it.</li>
+<li class="change">27 dungeon floors in 2,700 still have a region cut off from the stairs by the shape of the bedrock itself. That is a separate and older problem from the decoration one fixed above.</li></ul></section>
       <div class="empty hidden" id="empty"></div>
     </div>
   </div>
 </main>
 
-<nav class="pager" aria-label="Other releases">{{pager}}</nav>
+<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.19.3.html"><span class="pg-k">Previous release</span><span class="pg-v">Non Travolta.</span><span class="pg-n">0.19.3</span></a><a class="pg pg-all" href="index.html">All releases</a></nav>
 
 <footer class="foot">
-  <span>Roguefort {{version}} &middot; {{date}}</span>
+  <span>Roguefort 0.19.4 &middot; 29 August 2026</span>
   <span>Community reporters are credited against each change.</span>
 </footer>
 
@@ -838,160 +685,3 @@ TEMPLATE = """<!DOCTYPE html>
 </script>
 </body>
 </html>
-"""
-
-
-INDEX_TEMPLATE = """<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Roguefort patch notes</title>
-<meta name="description" content="Every Roguefort patch note. Latest: {{version}}, {{lede}} - {{total}} changes across {{n_sections}} sections.">
-<meta name="theme-color" content="#111D35">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&family=DM+Mono:wght@400;500&family=Grenze+Gotisch:wght@500;700&display=swap" rel="stylesheet">
-<style>{{css}}</style>
-</head>
-<body>
-
-<a class="skip" href="#releases">Skip to all releases</a>
-
-<header class="mast">
-  <svg class="marks" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
-    <defs>
-      <path id="spk" d="M0,-11 L2.5,-2.5 L11,0 L2.5,2.5 L0,11 L-2.5,2.5 L-11,0 L-2.5,-2.5 Z"/>
-    </defs>
-    <g stroke="#FFF1E8" stroke-opacity=".13" stroke-width="1" fill="none" shape-rendering="crispEdges">
-      <path d="M150 0 V70 M150 104 V190"/>
-      <path d="M470 0 V44 M470 82 V150 M470 186 V240"/>
-      <path d="M860 0 V96 M860 130 V210"/>
-      <path d="M1060 0 V58 M1060 92 V164"/>
-      <path d="M40 118 H96 M132 118 H286 M508 118 H642 M900 118 H1030"/>
-      <path d="M60 300 H210 M250 300 H430 M745 300 H902"/>
-      <path d="M140 58 H160 M150 48 V68"/>
-      <path d="M850 176 H870 M860 166 V186"/>
-      <path d="M60 40 H92 M60 40 V72"/>
-      <path d="M1140 216 H1108 M1140 216 V184"/>
-    </g>
-    <g fill="#FFF1E8" fill-opacity=".34" shape-rendering="crispEdges">
-      <use href="#spk" transform="translate(330,86)"/>
-      <use href="#spk" transform="translate(712,52) scale(.7)"/>
-      <use href="#spk" transform="translate(988,150)"/>
-      <use href="#spk" transform="translate(232,214) scale(.6)"/>
-    </g>
-  </svg>
-  <div class="mast-in">
-    <img class="wordmark" src="assets/roguefort-wordmark.png"
-         srcset="assets/roguefort-wordmark.png 1x, assets/roguefort-wordmark@2x.png 2x"
-         width="526" height="166" alt="Roguefort">
-    <p class="plaque">
-      <span class="plaque-k">Patch notes</span><span class="plaque-v">{{version}}</span><span class="plaque-t">{{tag}}</span>
-    </p>
-    <h1 class="card"><span class="vh">Roguefort patch notes. Latest release: </span>{{lede}}</h1>
-    <p class="mast-meta">
-      <span>{{date}}</span>
-      <span><b>{{total}}</b> changes</span>
-      <span><b>{{n_sections}}</b> sections</span>
-    </p>
-    <p class="cta"><a href="{{version}}.html">Read the {{version}} notes &rarr;</a></p>
-  </div>
-  <div class="ramp" aria-hidden="true">
-    <b class="r1"></b><b class="r2 k"></b><b class="r3"></b><b class="r4 k"></b><b class="r5"></b><b class="r6 k"></b><b class="r7 k"></b><b class="r8"></b>
-  </div>
-  <svg class="ridge" viewBox="0 0 1200 54" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-    <path fill="#49333B" d="M0,54 V22 H74 V10 H158 V30 H242 V16 H340 V34 H424 V20 H524 V38 H604 V24 H704 V12 H792 V32 H880 V18 H978 V36 H1068 V22 H1142 V32 H1200 V54 Z"/>
-    <path fill="none" stroke="#FFA300" stroke-width="3" vector-effect="non-scaling-stroke"
-          d="M0,25 H74 V13 H158 V33 H242 V19 H340 V37 H424 V23 H524 V41 H604 V27 H704 V15 H792 V35 H880 V21 H978 V39 H1068 V25 H1142 V35 H1200"/>
-    <path fill="none" stroke="#271F1B" stroke-width="3" vector-effect="non-scaling-stroke"
-          d="M0,22 H74 V10 H158 V30 H242 V16 H340 V34 H424 V20 H524 V38 H604 V24 H704 V12 H792 V32 H880 V18 H978 V36 H1068 V22 H1142 V32 H1200"/>
-  </svg>
-</header>
-
-<main>
-  <div class="plate">
-    <section class="toc" id="releases">
-      <div class="toc-h">
-        <h2>All releases</h2>
-        <span><b>{{n_versions}}</b> {{release_word}}</span>
-      </div>
-      <ol class="reg">{{rows}}</ol>
-      <div class="toc-end"></div>
-    </section>
-  </div>
-</main>
-
-<footer class="foot">
-  <span>Roguefort patch notes</span>
-  <span>Community reporters are credited against each change.</span>
-</footer>
-</body>
-</html>
-"""
-
-
-def render_index(notes, all_versions):
-    newest = notes[0]
-    rows = []
-    for n in notes:
-        name = n["lede"] or n["version"]
-        total = sum(len(sec["bullets"]) for sec in n["sections"])
-        newest_tag = '<span class="reg-new">latest</span>' if n is newest else ""
-        date = f' &middot; {html.escape(n["date"])}' if n["date"] else ""
-        rows.append(
-            f'<li><a href="{html.escape(n["version"])}.html">'
-            f'<span class="reg-name">{html.escape(name)}</span>'
-            f'<span class="reg-dots" aria-hidden="true"></span>'
-            f'<span class="reg-meta"><b>{html.escape(n["version"])}</b>{date}'
-            f' &middot; {total} changes{newest_tag}</span></a></li>'
-        )
-    return fill(INDEX_TEMPLATE, {
-        "css": CSS,
-        "version": html.escape(newest["version"]),
-        "lede": html.escape(newest["lede"] or newest["version"]),
-        "date": html.escape(newest["date"]),
-        "tag": html.escape(newest["tag"] or "Build"),
-        "total": sum(len(s["bullets"]) for s in newest["sections"]),
-        "n_sections": len(newest["sections"]),
-        "n_versions": len(all_versions),
-        "release_word": "release" if len(all_versions) == 1 else "releases",
-        "rows": "\n".join(rows),
-    })
-
-
-def main():
-    DOCS.mkdir(exist_ok=True)
-    files = sorted(NOTES.glob("*.md"), key=lambda p: version_key(p.stem), reverse=True)
-    if not files:
-        raise SystemExit("No notes found. Add notes/<version>.md and run again.")
-
-    if ASSETS.is_dir():
-        shutil.copytree(ASSETS, DOCS / "assets", dirs_exist_ok=True)
-
-    notes = [parse(f) for f in files]
-    versions = [n["version"] for n in notes]
-
-    for i, note in enumerate(notes):
-        older = notes[i + 1] if i + 1 < len(notes) else None
-        newer = notes[i - 1] if i > 0 else None
-        html_out = render(note, versions, older, newer)
-        (DOCS / f"{note['version']}.html").write_text(html_out, encoding="utf-8")
-        print(f"built docs/{note['version']}.html  ({sum(len(s['bullets']) for s in note['sections'])} changes)")
-
-    (DOCS / "index.html").write_text(render_index(notes, versions), encoding="utf-8")
-    word = "release" if len(versions) == 1 else "releases"
-    print(f"built docs/index.html  ({len(versions)} {word}, newest {versions[0]})")
-
-    # Drop pages whose notes file has gone, so docs/ cannot drift out of sync.
-    keep = {f"{v}.html" for v in versions} | {"index.html"}
-    for stale in sorted(DOCS.glob("*.html")):
-        if stale.name not in keep:
-            stale.unlink()
-            print(f"removed stale docs/{stale.name}")
-
-    (DOCS / ".nojekyll").write_text("", encoding="utf-8")
-
-
-if __name__ == "__main__":
-    main()

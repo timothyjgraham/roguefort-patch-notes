@@ -274,6 +274,14 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
 .sec-n::before { content: "\27E6"; }
 .sec-n::after  { content: "\27E7"; }
 
+/* Prose above a section's bullets: the lore opening, the release summary. */
+.lead {
+  max-width: 68ch; margin: 0 0 22px;
+  font-size: clamp(16px, 1.5vw, 18px); line-height: 1.62;
+}
+.lead:last-child { margin-bottom: 0; }
+.sec-intro { margin-bottom: 44px; }
+
 .changes { list-style: none; margin: 0; padding: 0; max-width: 68ch; }
 .change {
   position: relative; padding: 0 0 14px 26px; margin: 0 0 14px;
@@ -492,7 +500,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   <div class="bar-in">
     <a class="bar-mark" href="#top">Roguefort</a>
     <span class="bar-here" id="here" aria-live="off"></span>
-    <nav class="vers" aria-label="Versions"><a class="ver" href="0.19.3.html">0.19.3</a><a class="ver" href="0.19.2.html">0.19.2</a><a class="ver on" href="0.19.0.html" aria-current="page">0.19.0</a><a class="ver ver-all" href="index.html">All</a></nav>
+    <nav class="vers" aria-label="Versions"><a class="ver" href="0.19.4.html">0.19.4</a><a class="ver" href="0.19.3.html">0.19.3</a><a class="ver" href="0.19.2.html">0.19.2</a><a class="ver on" href="0.19.0.html" aria-current="page">0.19.0</a><a class="ver ver-all" href="index.html">All</a></nav>
     <div class="find">
       <input id="q" type="search" placeholder="/ filter changes" aria-label="Filter changes" autocomplete="off">
     </div>

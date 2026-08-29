@@ -274,6 +274,14 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
 .sec-n::before { content: "\27E6"; }
 .sec-n::after  { content: "\27E7"; }
 
+/* Prose above a section's bullets: the lore opening, the release summary. */
+.lead {
+  max-width: 68ch; margin: 0 0 22px;
+  font-size: clamp(16px, 1.5vw, 18px); line-height: 1.62;
+}
+.lead:last-child { margin-bottom: 0; }
+.sec-intro { margin-bottom: 44px; }
+
 .changes { list-style: none; margin: 0; padding: 0; max-width: 68ch; }
 .change {
   position: relative; padding: 0 0 14px 26px; margin: 0 0 14px;
@@ -492,7 +500,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   <div class="bar-in">
     <a class="bar-mark" href="#top">Roguefort</a>
     <span class="bar-here" id="here" aria-live="off"></span>
-    <nav class="vers" aria-label="Versions"><a class="ver on" href="0.19.3.html" aria-current="page">0.19.3</a><a class="ver" href="0.19.2.html">0.19.2</a><a class="ver" href="0.19.0.html">0.19.0</a><a class="ver ver-all" href="index.html">All</a></nav>
+    <nav class="vers" aria-label="Versions"><a class="ver" href="0.19.4.html">0.19.4</a><a class="ver on" href="0.19.3.html" aria-current="page">0.19.3</a><a class="ver" href="0.19.2.html">0.19.2</a><a class="ver" href="0.19.0.html">0.19.0</a><a class="ver ver-all" href="index.html">All</a></nav>
     <div class="find">
       <input id="q" type="search" placeholder="/ filter changes" aria-label="Filter changes" autocomplete="off">
     </div>
@@ -516,7 +524,8 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
       <div class="toc-end"></div>
     </nav>
     <div id="doc">
-      <section class="sec" id="the-world-stopped-being-empty" data-sec="the-world-stopped-being-empty"><h2>The world stopped being empty<span class="sec-n">5</span></h2><ul class="changes"><li class="change">Wearing a lot of vision gear no longer empties the overworld. Creatures are placed in a ring just outside your sight so nothing ever appears in front of you — but that ring was a fixed distance while your sight was not, so once you stacked enough vision the ring fell inside it and every placement was refused. Past roughly seven points of bonus vision, daytime spawned nothing at all: no wildlife, no hostiles, nothing, for as long as you wore the gear. The ring now moves out to stay ahead of your eyes.</li>
+      <section class="sec sec-intro"><p class="lead">Mostly a fixing patch, and one of them is a big one: if you had built into sharp eyesight, the daytime world had quietly stopped putting anything in it. Twenty-nine changes since 0.19.2, almost all of them yours.</p></section>
+<section class="sec" id="the-world-stopped-being-empty" data-sec="the-world-stopped-being-empty"><h2>The world stopped being empty<span class="sec-n">5</span></h2><ul class="changes"><li class="change">Wearing a lot of vision gear no longer empties the overworld. Creatures are placed in a ring just outside your sight so nothing ever appears in front of you — but that ring was a fixed distance while your sight was not, so once you stacked enough vision the ring fell inside it and every placement was refused. Past roughly seven points of bonus vision, daytime spawned nothing at all: no wildlife, no hostiles, nothing, for as long as you wore the gear. The ring now moves out to stay ahead of your eyes.</li>
 <li class="change">Mythic beasts stop teasing and start appearing. The rare atmospheric omens that build toward a legendary creature — the ravens before the Ravenkin Matriarch, and the rest — went silent forever the moment that beast first spawned somewhere off in the world, which was usually before you had laid eyes on it. The omens now run until you actually see the creature.<span class="credits"><span class="who">unclejiggy</span></span></li>
 <li class="change">The Legends journal no longer claims sightings you never had. A mythic that had merely spawned somewhere unseen was recorded as met, complete with a date. It now fills in when you genuinely see one.<span class="credits"><span class="who">unclejiggy</span></span></li>
 <li class="change">Monsters can fight back against soldiers. There has never been a way for wildlife to hurt a patrol, so a squad could stand next to a wolf trading blows it could not return. Field units can now be hurt and killed by the creatures they attack. Settlement guards are deliberately left out — a town&#x27;s garrison is not a hunting party.<span class="credits"><span class="who">rubberychicken</span></span></li>
@@ -551,7 +560,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   </div>
 </main>
 
-<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.19.2.html"><span class="pg-k">Previous release</span><span class="pg-v">Suitably Wilder.</span><span class="pg-n">0.19.2</span></a><a class="pg pg-all" href="index.html">All releases</a></nav>
+<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.19.2.html"><span class="pg-k">Previous release</span><span class="pg-v">Suitably Wilder.</span><span class="pg-n">0.19.2</span></a><a class="pg pg-all" href="index.html">All releases</a><a class="pg pg-next" href="0.19.4.html"><span class="pg-k">Next release</span><span class="pg-v">Mahargekdar&#x27;s Plane of Heroes.</span><span class="pg-n">0.19.4</span></a></nav>
 
 <footer class="foot">
   <span>Roguefort 0.19.3 &middot; 28 August 2026</span>
