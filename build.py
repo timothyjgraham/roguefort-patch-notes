@@ -99,9 +99,15 @@ def split_credit(bullet: str):
     return body, parts
 
 
+def md_bold(escaped: str) -> str:
+    """**text** to <strong>, applied after escaping. The Steam converter
+    reads the same source, so the markdown stays in the .md files."""
+    return re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escaped)
+
+
 def render_bullet(bullet: str) -> str:
     body, credits = split_credit(bullet)
-    out = html.escape(body)
+    out = md_bold(html.escape(body))
     # In-game bracket labels such as [Sheltered] get the game's own chip look.
     out = re.sub(r"\[([A-Za-z][\w \-]{0,18})\]", r'<span class="tag">[\1]</span>', out)
     credit_html = ""
@@ -182,7 +188,7 @@ def render(note, all_versions, older=None, newer=None):
             f'<span class="idx-n" data-count="{sid}">{n}</span></a></li>'
         )
         bullets = "\n".join(render_bullet(b) for b in s["bullets"])
-        lead = "".join(f'<p class="lead">{html.escape(p)}</p>' for p in s.get("intro", []))
+        lead = "".join(f'<p class="lead">{md_bold(html.escape(p))}</p>' for p in s.get("intro", []))
         body_rows.append(
             f'<section class="sec{" caveat" if caveat else ""}" id="{sid}" data-sec="{sid}">'
             f'<h2>{html.escape(s["name"])}'
@@ -194,7 +200,7 @@ def render(note, all_versions, older=None, newer=None):
 
     if note.get("intro"):
         body_rows.insert(0, '<section class="sec sec-intro">' + "".join(
-            f'<p class="lead">{html.escape(p)}</p>' for p in note["intro"]) + '</section>')
+            f'<p class="lead">{md_bold(html.escape(p))}</p>' for p in note["intro"]) + '</section>')
 
     switcher = build_switcher(note["version"], all_versions)
     pager = build_pager(older, newer)
