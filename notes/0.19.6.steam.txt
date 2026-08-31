@@ -1,0 +1,156 @@
+[b]Roguefort 0.19.6 — Patch Notes[/b]
+
+This one covers everything since 0.19.4, because 0.19.5 went out without notes of its own. Around 90 of the changes below came off reports in the Discord forum.
+
+[b]Legendary items had a stat scaler applying to things it should not have[/b]
+
+Read this one first, because it lands on the save you already have.
+
+A legendary item multiplies its stats by area level. That is correct for damage, because the monsters you swing it at grow with area level as well. It was also being applied to seven stats measured against something that does not grow: visionRange, critChance, goldFind, itemFind, sneakBonus, noiseReduction and sneakAttackBonus.
+
+[list]
+[*]Those seven compounded exactly the way damage does. A level 51 legendary could roll 1694 tiles of vision, or 19,768 noiseReduction on a scale that runs 0 to 100. (rubberychicken)
+[*]Existing items repair themselves the first time you load the save. The repair runs one way only, so an item that comes down does not come back up.
+[*]Damage, armour, HP, lifesteal and thorns are not affected and do not change. Armour and evasion look like percentages and are not. They are points into a mitigation curve the design widens with content tier, so they are measured against a quantity that really does grow and they keep scaling.
+[*]The vision half was doing more harm than the number suggests. Spawn placement refuses to put a creature anywhere you can already see, so a bow with +69 vision could switch spawning off. That end is fixed too.
+[/list]
+
+[b]The plinths go global[/b]
+[list]
+[*]Every finished trial now stands on a per-gate Steam leaderboard, so the boards are shared across everyone playing rather than kept on your own machine.
+[*]A plinth record survives a full browser store. Record keeping got the same quota handling the save slots already had, so a full disk costs you the record and not the run.
+[/list]
+
+[b]New things you can do[/b]
+[list]
+[*][b]The Retracing.[/b] Tradition picks were locked once taken, so over-committing to one discipline capped your keystones permanently. A second tab at the Long Affinage bench now lifts one pick out of a discipline and lays it down in another. The swap is atomic, so there is no loose-pick state to get stuck in. It costs one Reserve Mark plus the bench's existing escalating recast cost, and increments the same counter, so the two actions share one ladder. (rubberychicken)
+[*][b]Fire your own abilities.[/b] Will-o'-Wisp, Purify and Tracker's Eye used to fire themselves on a fixed turn timer. The whole value of three turns of invisibility is in choosing when to spend them, and a fixed timer takes that choice away. All three are now fired by hand from an ability menu on Shift+U, rebindable, with a row in the panel hub for anyone on a controller. Phase Step moved into the same menu and now aims explicitly instead of off your last attempted direction. The automatic firing is still there underneath, so nothing changes if you do not want it to. (loukoumi, with nalathnidragon on Phase Step)
+[*][b]An FAQ in the game.[/b] 29 answers across 9 sections, on a new tab in the help modal, generated from the same document the Discord and Steam copies come from so the three cannot drift apart. (samv123)
+[*][b]The quick bar can be rearranged.[/b] Drag a slot onto another to swap them, or onto the pack to take it off. (rubberychicken)
+[*][b]Refuse a quest offer.[/b] Reroll at the cost of 10 reputation, twice per day. (iso5455)
+[*][b]The affinage screen shows what affinaging will do to the item[/b] before you commit. (rubberychicken)
+[*][b]A supply shop and a well[/b] now sit after the raid guardian floors. (bossman62)
+[*][b]A full quick bar still takes a stack it can merge into.[/b] Enter combines the pair instead of eating one. (iso5455)
+[*][b]The water pouch is linked to the thirst bar[/b], which now draws under the belt container that fills it. (em8595)
+[*][b]A stocked storage container asks once before you demolish it.[/b] (#suggestions)
+[/list]
+
+[b]The Plane of Heroes and the Descent[/b]
+[list]
+[*]Quitting mid-trial no longer teleports you home in silence and eats the run. (rubberychicken)
+[*]A defeat the raid never saw no longer ends a permadeath run. (loukoumi)
+[*]Loot no longer follows you out of the trial. A one-hop carry was wired onto four hub doors. (rubberychicken)
+[*]Every voluntary exit now warns that the loot on earlier floors stays behind.
+[*]The raid boss no longer goes inert. A failed pathfind on its multi-tile body fell through to nothing instead of to a step. (rubberychicken)
+[*]The boss hit flicker is gone. The recoil path was drawing a tile-sized copy of a 4x4 body. (rubberychicken)
+[*]Unequipping at the gate no longer lowers the trial's difficulty. The one gear sample read the worn slots and never the pack. (sksniperks)
+[*]You keep your mount on an early exit. The remount gate did not cover the scene a trial exits to. (rubberychicken)
+[*]The raid plinths are restyled in the game's own dialect, with their copy rewritten.
+[*]Co-op dungeon walls no longer desync. The client rebuilt each floor from its seed while the host served the one it remembered. (thesquirrel_74982)
+[/list]
+
+[b]Sound[/b]
+[list]
+[*]Every dungeon floor has its own ambience. There are five ambience beds and more than fifteen dungeon biomes, and any biome without a bed of its own composed a track name with no file behind it, which the audio layer treats as a request for silence. Measured on real chunks, 35 to 61 percent of floors were silent depending on seed. (sksniperks)
+[*]Raids no longer play the dread drone from floor one. The raid ladder reuses a number that used to mean depth, so the drone was covering 14 of 15 floors and flattening five named stages. Raids now take their bed from the floor's own biome.
+[*]A one-floor location no longer scores its only floor as a boss floor, so an ordinary cheese cave stops opening on the doom drone.
+[*]Ambience loops no longer stack up with no way to stop them. The ambient bus never had the guard the music bus already carried. (sksniperks)
+[/list]
+
+[b]The world and travel[/b]
+[list]
+[*][b]The world could stop.[/b] Enemies stopped moving, the clock froze, townsfolk stopped appearing, and you could still walk around it. A lethal blow queues a death record, and a Lattice Initiate charge draining after it in the same queue could heal you back above zero. The death effect then bailed because your HP was positive, so the record was never cleared and every following turn short-circuited on a player the game thought was dead. Quitting and reloading cured it. Co-op has had this fix for a while, and solo never got the equivalent. (jungcodex)
+[*][b]Nothing spawned once your sight got long.[/b] Spawn placement refuses any candidate the field of view reports as visible, and the ring it draws from stops at 38 tiles. Past that the two rules cannot both hold and the attempt gave up. On real terrain across five seeds, sea spawns succeeded 100 percent of the time up to +8 vision, 34 percent at +10 and never from +12. The veto is now capped at 34 tiles by day. Road patrols, caravans, war-bands, frontier bandits, POI vendors and wilderness hermits ran through the same unbounded veto and are all converted. (rubberychicken, bossman62, nalathnidragon)
+[*]Auto-travel no longer resumes toward the wrong place. The three cancels a player performs never stored the destination. (sksniperks)
+[*]Auto-travel no longer gives up at a lake. The guard could not see a detour and the planner could not walk one. (sksniperks)
+[*]The auto-travel brake is a sight test now rather than an on-screen rectangle. (sksniperks)
+[*]Auto-travel crosses farm plots without harvesting them.
+[*]Auto-exit stops halting with "the way is blocked". The planner asked about friendliness instead of whether the bump moves you. (theartolater)
+[*]A lake reads as a lake. The zone resolver had a branch for the ocean and none for a lake. (rubberychicken)
+[*]Buildings are no longer marooned in the lake. (rubberychicken)
+[*]The compass ping stops reporting a hostile 5,177 tiles away. The scan had no distance bound at all. (theartolater)
+[*]Chests stop spawning on occupied tiles. (.lorddan)
+[*]Accepting one book no longer re-rolls every bookshelf in the world. (sksniperks)
+[*]Fires resume after a load.
+[/list]
+
+[b]Combat[/b]
+[list]
+[*]Vampires ignored fire resistance in the sun. The sun tick did its own arithmetic instead of using the shared resistance gate, and its rounding meant the common case of 1 damage stayed at 1 for every resistance under 100 percent. A vampire at 99 percent burned at exactly the rate of one at zero. Past 100 percent the term went negative and only a floor stopped the sun healing you. (rubberychicken)
+[*][b]Fire resistance is now burn resistance.[/b] Censused over 237 creature rows: no creature attack in the game is elementally typed, and there is no path for one to be. Elemental typing runs one way only, from your spells onto creature resistances. So the stat never had anything to do with taking fire damage from a Cinder Sprite. It governs burning, which is the Blistered tick and a vampire's sun damage, and it is now named for that. statusResist was under-promising in the same panel and now says what it gates. (rubberychicken)
+[*]The Pickled keystone's "100% fire immunity" reached only vampires. (rubberychicken)
+[*]Poison immunity did nothing. Six travel foods grant it for up to 450 turns and drew a timer on the HUD, and the poison tick never read it. It strips the debuff rather than zeroing the damage, because an immunity that leaves the debuff on you re-arms at the next interval. (rubberychicken)
+[*]A sentinel in melee no longer drops that fight the instant it sees you. (bossman62)
+[*]The printed ranged hit chance is the real one. The label showed one of the shot's two rolls, with none of its modifiers. (rubberychicken)
+[*]A struck sleeper wakes on a Quicksilver free action. (rubberychicken)
+[*]A click will not shove an adjacent foe while you hold a ranged weapon. (rubberychicken)
+[*]The direction keys come back when the aim line came from the mouse. (rubberychicken)
+[*]Vision radius no longer lags a turn behind a weapon swap. (rubberychicken)
+[/list]
+
+[b]Items, loot and the pack[/b]
+[list]
+[*][b]A greyed verb no longer eats the click.[/b] Blocked verbs now grey out with their reason instead of vanishing, which was the right call, but a greyed button swallows any click that lands on it. The part of the row it covered stopped selecting the item, and the longer the reason the wider the dead patch. On a raw fish away from a fire the greyed cook button covered nearly half the row. The keyboard went with it, because the per-verb keys act on whatever is selected: g to gut, e to eat and the = menu key all did nothing on any row carrying a greyed verb.
+[*]Mythic items crossed between saves. MYTHIC was missing from the cross-save denylist, and the game does mint it, in culture items, livestock and four tier-6 companion species. A 300 gold mythic culture passed the gate while a 180 gold legendary was blocked. Both panels also claimed the community chest "only takes common and uncommon goods", which was never the rule, and now say what the rule is. (rubberychicken)
+[*]Ship decks built before the mast tables agreed now heal on load. The tables were fixed earlier, but a deck is generated once and stored on the boat item, so no existing save was going to correct itself. A tier 6 hull carried three masts in the wrong columns and a Ship of the Line, at 2400 gold, carried none at all. The heal fires at all three doors, checks the deck is one the old generator made before touching anything, and never overwrites a cell you have built on. (elfietheesp55)
+[*]Legendary bows stop salvaging into scrap metal, and a Wyrmscale Helm stops salvaging into deer pelts. (rubberychicken)
+[*]Epic items had two different colours. The rarity colour is a cache baked at mint time. (rubberychicken)
+[*][b]Epic is vivid purple again[/b], with the muted hue kept as a Display setting.
+[*]Harvest tools are labelled "Tool", so a dropped pickaxe stops reading as a 1-damage weapon. (rubberychicken)
+[*]Consumable rows that stated nothing now state something, and the two dragon wheels are priced. (rubberychicken)
+[*]The auto-stow indicator stops firing on tagged stacks. (samv123)
+[*]Herb Omelet and Egg Custard are cooked over a fire. (unknownuluguru_)
+[/list]
+
+[b]Town, trade and quests[/b]
+[list]
+[*]The Trader's Exchange layout is fixed: wrapped item names, split time-left, ragged rows, and columns running off the panel edge. (loukoumi)
+[*]Town livestock no longer costs you reputation wrongly. The check asked the creature whether it was domestic, and the town-hen spawner never stamped the flag. (samv123)
+[*]The exposure meter stops grading your own livestock. (sksniperks)
+[*]Gather quests warn you when the target drop overlaps town livestock. (samv123)
+[*]Silver Tongue stops promising a sell bonus it cannot pay. (thesquirrel_74982)
+[*]Mail says gold on delivery rather than cash on delivery. (#suggestions)
+[*]The mail known-names toggle is no longer squeezed to nothing by a full column. (rubberychicken)
+[*]The auction stats popup sits where it should. (rubberychicken)
+[*]A signpost inspects as what it says, rather than as a description of signposts. (rubberychicken)
+[*]A terroir mutation says out loud that it does not lock the wheel out of the rest. (rubberychicken)
+[*]The Brulee Beam fork mastery description is right: it forks at the beam's start, not on first hit. (loukoumi)
+[/list]
+
+[b]Pets, mounts and followers[/b]
+[list]
+[*]Followers keep pace with a mounted player. The follow branch spent one tile instead of the rider's. (soeshii)
+[*]Pets heal from the home campfire's ambient regen. (iso5455)
+[*]Right-clicking a mountable creature offers Mount, so you click the horse rather than yourself. (rubberychicken)
+[*]The fading-pet warning reads "within 250 turns" rather than "within250 turns". (theartolater)
+[/list]
+
+[b]Performance and stability[/b]
+[list]
+[*][b]Two renderer crashes disabled hardware acceleration forever.[/b] Any death of the renderer process incremented the counter that arms the permanent safe-GPU downgrade, so a second one in a single session wrote that downgrade to disk. Running out of memory is not evidence of a bad graphics card. Renderer deaths no longer touch that counter, an automatic downgrade now expires after 30 days, and the boot log names the two ways to override it. (rubberychicken)
+[*][b]The performance advisory fired because you alt-tabbed.[/b] Frame samples were only dropped while the document was hidden, and alt-tabbing does not hide a document. The verdict formed while you were away, survived your return intact, and fired on the first ordinary frame back. Unfocused samples are now dropped, all four visibility and focus edges reset the sampler, and the advisory records what set it off. (datsheeptho)
+[*][b]Sailing got heavier the longer you sailed.[/b] 242 separate visibility maps were retained across one sailing run, 9.90 MB of them. Measured on the reporter's own seed with a forced collection before every sample: 73.4 MB per 1000 steps before, 24.7 MB after. (rubberychicken)
+[*]A load decodes the save once rather than three times. (theartolater)
+[*]The autosave's main-thread block is cut in half, because the save stopped rebuilding what had not changed. (theartolater)
+[*]Veteran saves carry a smaller modified-chunk payload. (theartolater)
+[*]The autosave has a 60 second wall-clock floor, so fast travel stops buying a save per batch.
+[*]Backups are written every 5th save rather than every save, which takes the roughly 2MB backup rewrite off the autosave path.
+[*]The 364-dungeon re-tier stops re-running on every boot.
+[*]Two crash fixes for the visibility storm behind the blue screens, including the first one ever recorded on a co-op client. (loukoumi, soeshii)
+[/list]
+
+[b]Reading the screen[/b]
+[list]
+[*]The giant multi-tile sprite artifact is gone. The "sprite" was a building roof, painted per explored tile instead of per building. (theartolater)
+[*]The whey font draws its background out of line of sight. (rubberychicken)
+[*]The mining shake no longer wobbles the whole frame as one flat overlay. (sksniperks)
+[*]The night warning no longer sits on top of the region readout. (rubberychicken)
+[*]The marker name dialog stops overflowing. (rubberychicken)
+[*]The buried cache hover works on the world map, which had two rumour hit tests and only one that knew about the retirement gate. (rubberychicken)
+[*]The build palette advertises the right key for repair, and the accelerator no longer ignores the search box. (bossman62)
+[/list]
+
+[b]Known issues[/b]
+[list]
+[*]The Terroir shrine's commitment footer can render off-screen at some window sizes.
+[/list]
