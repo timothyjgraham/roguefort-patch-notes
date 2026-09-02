@@ -7,8 +7,8 @@ If you're just tuning in to these updates, I want to say a huge thanks to the co
 The headlines tonight are basically:
 
 [list]
-[*]Spellcasting gets a big rework to make it much more viable. More manna sources, more manna regen, and higher caps on manna too, among other things.
-[*]The 2.5D view mode gets a big rework too. I was never happy with the way the engine rendered the sprites, so it's much more in line with my original vision, with a lot of visual polish thrown in. You can also rotate the camera and a bunch of other cool stuff.
+[*]Spellcasting gets a big rework to make it much more viable. More manna sources and higher caps on manna too, among other things.
+[*]The 2.5D view mode gets a big rework too. I was never happy with the way the engine rendered the sprites, so it's much more in line with my original vision, with a lot of visual polish thrown in. You can also rotate the camera and a bunch of other cool stuff. I still have some work to do on it, but it's a lot better.
 [*]The animation system for humanoids is finally seeing the light of day - the character now actually walks and attacks and much more. NPCs too.
 [*]The title screen gets a bit of polish - a bit of animation.
 [*]Huge backpacks are back in town and a pile of UI and inventory fixes and improvements.
@@ -25,52 +25,51 @@ Tim
 [*]Mastery cuts what a spell costs to cast. Expert takes 1 off, Master takes 2, floored at half the base cost. A Master tier 3 spell casts for 5, which is twelve casts out of a full 60 pool.
 [*]Killing something with a tier 3 mastery spell gives manna back, once per cast, always less than what the cast took. Tier 2 nets 1, tier 3 nets 2, tier 4 nets 3. Tier 1 gets nothing rather than casting for free.
 [*]Tier-up messages say what the cap did, and say when it has stopped moving. The Manna bar tooltip explains where the number after the slash comes from. (horth.panthur)
-[*]Spells in tileset mode are drawn as pixel art, built from the same hard pixels as the sprites and dithered rather than blurred. Heat stands flames, cold flies shards that stick and creeps rime, rot bubbles and drips into mold, force rolls a cheese wheel into a spoked shockwave, control drifts fog and question marks, arcane orbits runes and stars. All 54 spells, with their own effect for the marquee ones.
+[*]Spells in tileset mode are drawn as pixel art, built from the same hard pixels as the sprites, dithered where they need to soften. Heat stands flames, cold flies shards that stick and creeps rime, rot bubbles and drips into mold, force rolls a cheese wheel into a spoked shockwave, control drifts fog and question marks, arcane orbits runes and stars. All 54 spells, and the marquee ones get an effect of their own.
 [*]2.5D plays those same pixel effects, drawn in the scene rather than flat over the top of it, so a creature standing in a scorch ring draws over the ring.
 [*]A blocked FORCE push hurts now. The target takes what stopped it: 1 into something soft, 2 into wood, 3 into stone, 4 into spikes. (nalathnidragon)
-[*]Multi-tile creatures are pushed by their whole body. Only the anchor tile was checked, so a 4x4 boss could be shoved three tiles into a wall.
-[*]Winter Sovereign grants full cold weather immunity, 10 to 100. The mythic was softening a blizzard's -4 vision to -3, which read as nothing at all. (nalathnidragon)
-[*]Speed buffs and bat form work underground. Movement now prices the same in dungeons, the market city and the Plane of Heroes as it does on the overworld, from carried sources only. Attacks and every other action cost a flat turn as before. (rubberychicken)
+[*]A push checks a big creature's whole body now. It used to check only the single tile the creature is anchored to, so a 4x4 boss could be shoved three tiles into a wall.
+[*]Winter Sovereign grants full cold weather immunity, so snow costs you no speed, vision or accuracy at all. The mythic was only softening a blizzard's -4 vision to -3, which read as nothing. (nalathnidragon)
+[*]Speed buffs and bat form work underground. Movement now works the same in dungeons, the market city and the Plane of Heroes as it does on the overworld, from carried sources only. Attacks and every other action cost a flat turn as before. (rubberychicken)
 [*]Kills by poison, burn or a lingering zone carry the mastery picks of whoever cast the thing that killed it.
-[*]Every terroir combat roll is seeded.
 [/list]
 
 [b]Co-op[/b]
 [list]
 [*]Each player picks their own mastery upgrades. Casts and tiers stay shared party progression, and only the choice of what a tier buys forks. Host toggle in the pause menu, off by default.
 [*]A host can turn friendly fire on and let the party stand in the blast.
-[*]Outcome words in the detailed combat log reach both players.
+[*]Both players see the same wording in the detailed combat log.
 [/list]
 
 [b]The 2.5D view[/b]
 [list]
-[*]Every actor, tree, prop, item and mount is drawn as the sprite itself, at the size the sprite actually is. No more extruded blocks. A one-tile tree was being drawn 1.08 by 2.2 tiles and then inflated four more times. It is one tile now. (rubberychicken)
+[*]Every actor, tree, prop, item and mount is drawn as the sprite itself, at the size the sprite actually is, rather than an extruded block. A one-tile tree was being drawn 1.08 by 2.2 tiles and then inflated again by four more multipliers on top of that. It is one tile now.
 [*]The camera orbits. PageUp and PageDown rotate, Home and End tilt, = and - zoom, Insert resets. Middle-drag or Alt+left-drag also orbits, and the right stick looks on a pad. All rebindable.
 [*]A compass in the corner of the playfield turns with the camera.
 [*]Movement is camera-relative, so walking up-screen walks the way the camera is looking.
 [*]Ground is flat in 2.5D, matching the 2D tileset. First person keeps its hills.
-[*]Walking starts on the keypress instead of after the turn commits, which is where the reported delay on every step was coming from. (rubberychicken)
+[*]Walking starts the moment you press the key, instead of after the turn has been worked out. That gap is where the reported delay on every step was coming from.
 [*]Draw calls at spawn fell from 415 to 49, triangles from 252k to 23k, and dynamic meshes from 873 to 54.
-[*]Ground geometry is cached per chunk, so dusk does not rebuild every chunk on every turn. Time per rebuild fell from 23.6ms to 17.8ms.
+[*]The ground is only rebuilt where it has actually changed, so the light shifting at dusk does not redraw the whole map every turn. Time per rebuild fell from 23.6ms to 17.8ms.
 [*]Tilt-shift depth of field blurs the top and bottom of the scene and holds the player's row sharp. High and Epic presets, hardware graphics only.
 [*]One HP bar per actor. Two separate draw paths each laid one down, so a damaged creature carried a doubled bar with one copy teleporting and the other following it. (sksniperks)
 [*]Doors fade when you stand in the doorway. (sksniperks)
-[*]Cloud shadows hold the ground, roads take their tan, and the sea skirt keeps off the beach. (sksniperks)
+[*]Cloud shadows stay put on the ground instead of sliding along with you, roads take their proper colour, and the sea keeps out of the beach. (sksniperks)
 [/list]
 
 [b]Characters and the title screen[/b]
 [list]
 [*]Humanoids have a skeleton. The player, townsfolk, workers and co-op partners breathe when idle, stride when walking, tuck and land on a hop, crouch, and swing a strike frame drawn for the weapon they hold. They flinch, guard and dodge when something swings at them.
-[*]Your foot and your weapon both lead the way you are moving.
+[*]Your character faces the way they move, with the weapon leading on that side.
 [*]Settings, Gameplay, Character animation turns all of it off for the classic still figures.
 [*]The title screen moves. Six clouds drift in parallax between 0.7 and 2 pixels a second, the ships each bob on their own swell, the water throws sparkles, and the hero's robe catches a gust every 7 to 15 seconds. Same art, same framing, cut into planes and put back on the pixel grid.
 [/list]
 
 [b]Items and inventory[/b]
 [list]
-[*]Cosmic backpacks are back. Bag of Folding holds 66 slots at 5,000 gold, Portable Pocket Dimension holds 80 at 10,000. Anyone who bought one in the itch days gets it back on the next load. (nalathnidragon)
-[*]Healing cheeses scale with your health. Every pure-heal cheese restores the larger of its flat number and a percentage of your maximum: curds 3%, Lichen Press 4%, Healer's Wheel 5%, Bloomtide Brie 7%, Grand Reserve 8%, Rindwalker's Comte 10%. A 400 HP character's Grand Reserve heals 32 instead of 20, and low levels are unchanged because the flat number still wins. (arkhaven)
-[*]Two new top tiers to find. Sagefold Reserve is rare, 30 or 15%, and the Trial Quartermaster stocks one at 80 gold. Heartrind Masterwork is epic, 40 or 20%, and only ever drops.
+[*]Cosmic backpacks are back. Bag of Folding holds 66 slots at 5,000 gold, Portable Pocket Dimension holds 80 at 10,000. Anyone who bought one in the itch days gets it back on the next load. (dodqoonpooka, thesquirrel_74982)
+[*]Healing cheeses scale with your health. Every pure-heal cheese restores the larger of its flat number and a percentage of your maximum: curds 3%, Lichen Press 4%, Healer's Wheel 5%, Bloomtide Brie 7%, Grand Reserve 8%, Rindwalker's Comté 10%. A 400 HP character's Grand Reserve heals 32 instead of 20, and low levels are unchanged because the flat number still wins. (arkhaven)
+[*]Two new top tiers to find. Sagefold Reserve is rare, healing 30 or 15% of your maximum, and the Trial Quartermaster stocks one at 80 gold. Heartrind Masterwork is epic, healing 40 or 20%, and only ever drops.
 [*]Two escape cheeses. Farslip Curd blinks you 14 tiles, and Shovewheel pushes every adjacent enemy 2 tiles.
 [*]Chest dialogs stop padding your pack out to full capacity. A 38 of 60 pack was drawing 22 Empty rows. (rubberychicken)
 [*]Destroy is called Salvage wherever the item can be salvaged, on the button, in the legend and in the right-click menu. (sksniperks)
@@ -79,21 +78,20 @@ Tim
 [*]A full chest says which stacks it will refuse, and why. (horth.panthur)
 [*]Community chests refuse a take your pack has no room for. (loukoumi)
 [*]A chest row your pack cannot take greys out before you click it.
-[*]Inventory rows keep their name. A wordy refusal ellipsises now instead of erasing it. (rubberychicken)
-[*]One purple per rarity everywhere. Fourteen panels were reading a stale cache. (rubberychicken)
-[*]Forge upgrades move the price tag as well as the stats, and rings gain stats rather than only a name. (sksniperks)
+[*]Inventory rows keep their name. A wordy refusal is cut short with an ellipsis now, so it cannot push the name off the row. (rubberychicken)
+[*]One purple per rarity everywhere. Fourteen panels were still drawing the old colour. (rubberychicken)
+[*]Forge upgrades move the price tag as well as the stats, and rings gain stats to go with the new name. (sksniperks)
 [*]Auction worth estimates price the whole lot, not one unit of it. (rubberychicken)
 [*]Items with no use give you a refusal, and stay in your pack.
 [*]Homing whey works from a quick-slot hotkey.
-[*]Caltrops are gone. They promised a throw nobody ever wrote.
+[*]Caltrops are gone. The item promised a throw the game never actually had.
 [/list]
 
 [b]Perks and traditions[/b]
 [list]
-[*]50 of the 197 perks were paying a number too small to see on screen, and every one of them is repriced. Damage reduction that rounded to nothing went up, rindbound and pressed plate from 5 and 4 to 15. Resists that skipped a tick went up, volcanic from 8 to 40 and stormtouched from 4 to 15. Flat +1 armour on a stat counted in whole points went to 3, and the +2 HP perks went to 8. (nalathnidragon)
-[*]The Settled Vein pays the -50% on its card, at every depth. It was a raw point value being run through a curve, so the card and the game disagreed everywhere but tier 1.
+[*]50 of the 197 perks were paying a number too small to see on screen, and every one of them is repriced. Damage reduction that rounded away to nothing went up, Rindbound and Pressed Plate from 5 and 4 to 15. Resists too small to change an outcome went up, Volcanic Blood's burn resistance from 8 to 40 and Stormtouched from 4 to 15. A flat +1 armour, on a stat that only moves in whole points, went to 3, and the +2 HP perks went to 8. (nalathnidragon)
+[*]The Settled Vein pays the -50% its card promises, at every depth. It used to pay in raw points fed through the mitigation curve, so what you actually got shrank as content tier rose.
 [*]Hardened by Hearth doubles, 10 points to 20.
-[*]Reserve Marks reroll tradition perks.
 [*]Carved Rune and Inkwell's Gift are retired. Inkwell's Gift promised +10% scroll potency and the game has no scrolls yet (they were in the works but I've since abandoned the idea, and might pick it up at a later date), so also retired it.
 [/list]
 
@@ -101,26 +99,26 @@ Tim
 [list]
 [*]Fourteen recipes no player could reach have real sources. Six mills come from a Sawyer's Guide, the iron and steel hatchet and pickaxe from a Toolsmith's Primer, the War Wheel from its own schematic, and rope, herb mix and premium feed are known from the start.
 [*]Each mill knows its species, so milling palm does not spend your oak.
-[*]River Shallows and Deep Water fill water back into ground, at 4 wood and 2 stone, and 16 and 4. Deep Water shares the moat glyph, so this is also how a fort takes its moat back. (iso5455, arkhaven)
+[*]River Shallows and Deep Water fill water back into ground. River Shallows costs 4 wood and 2 stone, Deep Water 16 wood and 4 stone. Deep Water shares the moat glyph, so this is also how a fort takes its moat back. (iso5455, arkhaven)
 [*]Adjacent carpets of one dye read as one rug, with the frame only where the rug ends. Different dyes stay different rugs. (datsheeptho)
 [*]A rug under furniture keeps its dye and its top row.
 [*]Cooking is always an upgrade.
-[*]Pack and Clear take reeds and mushrooms, and take the plant rather than its glyph. (bossman62)
+[*]Pack and Clear take reeds and mushrooms, and lift the whole plant with them. (bossman62)
 [/list]
 
 [b]Settlements and the world[/b]
 [list]
-[*]The road that arrives at a village meets a street. A village grid has fixed exits and nothing ever laid the spur between them, so 14.3% of crossings were served. Across 298 crossings at three seeds it is now all of them. (bossman62)
-[*]Brinehold's lanes are refused the sea the same way its houses are, which is the end of boardwalks to nowhere. (rubberychicken)
+[*]The road that arrives at a village meets a street. A village grid has fixed exits and nothing ever laid the spur between them, so only 14.3% of village crossings had a road that actually joined the town. Across 298 crossings of every settlement type it is now all of them. (bossman62)
+[*]Brinehold stops laying its lanes out across open water, the same way it already refused to put houses there. No more boardwalks to nowhere. (rubberychicken)
 [*]The capital builds its fourth cottage. The ground was open and the search was only looking at one band of it. (bossman62)
 [*]Notice boards only charge for a cottage they actually built. (bossman62)
-[*]A funded cottage finishes as a home rather than a bare box, and the town, the map and the sign all say which cottages you paid for.
-[*]Market teleport stones survive a veteran save. The part of the save that records the places you changed was written over the regenerated square cell for cell, portal included. That is the fourth report of this and the first fix measured on a loaded save rather than a fresh world. (rubberychicken)
+[*]A funded cottage finishes as a home, furnished and lived in, and the town, the map and the sign all say which cottages you paid for.
+[*]Market teleport stones survive a veteran save. The part of the save that records the places you changed was written over the regenerated square cell for cell, portal included. Every earlier fix for this was measured on a freshly generated world, which is why it kept coming back on old saves. (rubberychicken)
 [*]A warehouse corner door does not seal the room behind it. (datsheeptho)
 [*]Wild livestock stop spawning inside pens. (bossman62)
 [*]Zone headers name who holds the region you are standing in. (craft16)
 [*]Worldforge shores report their own faction owners, and the legend lists them. (craft16)
-[*]Territory entry lines wear the faction's colour, and patrol livery follows the shore.
+[*]The line telling you whose territory you have entered is drawn in that faction's colour, and patrols along the coast wear the colours of whoever actually holds it.
 [/list]
 
 [b]Combat and the log[/b]
@@ -130,30 +128,29 @@ Tim
 [*]When an ability refuses to fire, the log says why.
 [*]Every surface that offers Use says when it costs a turn, and the log says so the first time one does.
 [*]Honey slows. A mired creature acts every other turn, and the buff line now says as much.
-[*]Chains do not leap onto bystander wildlife. Free-fire is allowed, auto-aim is not.
+[*]Chains do not leap onto bystander wildlife. You can still fire into a crowd on purpose, but the spell will not pick a bystander for you.
 [*]Campfires refuse to pay out while a hostile is in sight.
 [*]Resting works with pacified or dormant company nearby. (iso5455)
 [*]A grazing deer does not count as the weakest thing in sight.
 [*]A miserable companion refuses to fight and says so.
-[*]Smoked stops claiming an accuracy debuff that has never existed.
+[*]Smoked drops its claim to an accuracy debuff that has never existed.
 [*]Raid trash eases off ten percent. The stage guardians do not. (bossman62)
-[*]Nothing hostile stands in a shared scene. (thesquirrel_74982)
+[*]Invulnerable enemies are cleared out of the Plane of Heroes, including from saves that already had them. (thesquirrel_74982)
 [/list]
 
 [b]Interface[/b]
 [list]
 [*]F1 hides the whole interface, and the controls list names the key. (rubberychicken)
 [*]Build menus have a Close button. Touch players had no way out of one at all.
-[*]The minimap toggle reaches disk. Five routes flipped a setting nothing ever saved. (rubberychicken)
-[*]Fishing reel buttons sit where the bar they move goes. (rubberychicken)
+[*]The minimap toggle is remembered between sessions. Five different routes flipped the setting and not one of them saved it. (rubberychicken)
+[*]The fishing minigame's pull and slack buttons swap sides, so each sits under the end of the bar it moves. (rubberychicken)
 [*]Number boxes can be emptied. Backspace was putting the digit back. (rubberychicken)
-[*]A greyed verb does not eat the click. Inventory rows had a dead strip across the middle.
-[*]The leaderboard's two tabs agree about the day, and your own runs are not shown as the world's while it reads Steam. (rubberychicken)
+[*]A greyed-out action does not swallow your click. Inventory rows had a dead strip across the middle.
+[*]The leaderboard's two tabs agree about the date a run was set. While the board is still loading from Steam, your own runs are not shown as the world's. (rubberychicken)
 [*]XP gains can be read in the log, off by default, covering stealth, botany, fishing, companions and spell mastery. (horth.panthur)
 [*]Riftstones open two-way travel from either end. (rubberychicken)
-[*]Ride hints are priced before they are offered, so the saddle says what it is worth on the tile you are standing on. (bossman62)
-[*]Factions and Biomes chips on the world map render unlit until you pick one. (craft16)
-[*]A returned letter does not read like an answer, and a reply by postal tag reaches its character. (datsheeptho)
+[*]The game stops telling you to ride for speed when the mount would not be any faster. On a major road 5 of 8 mounts gain nothing over walking, and both the travel banner and the Speed tooltip were crediting the mount anyway. (bossman62)
+[*]A letter that came back to you reads as your own again. A letter handed back, or one that timed out uncollected, showed your own words under the other person's name. Replies also reach a correspondent who has since changed their name. (datsheeptho)
 [*]Whey tops up a stack you already carry.
 [*]Equipment slot rows and pack rows keep their names at any width.
 [/list]
@@ -162,7 +159,7 @@ Tim
 [list]
 [*]Only the first raid gate is open. The Dyadic Vault, the Triadic Gate and the Tetradic Keep are sealed.
 [*]In 2.5D a lobbed spell's arc rises north instead of toward the top of the screen.
-[*]In 2.5D adjacent carpets still draw as separate rugs. That renderer reads raw tiles and cannot see the new pattern yet.
-[*]Tilt-shift depth of field is off on the Steam Deck and on software graphics, where it costs too much fill to be worth it.
+[*]In 2.5D adjacent carpets still draw as separate rugs. The 2.5D view draws straight from the tiles and cannot see the new pattern yet.
+[*]Tilt-shift depth of field is off on the Steam Deck and on software graphics, where it costs more performance than it is worth.
 [*]27 dungeon floors in 2,700 still have a region cut off from the stairs by the shape of the bedrock itself.
 [/list]
