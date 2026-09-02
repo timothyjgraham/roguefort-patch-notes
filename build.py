@@ -49,8 +49,19 @@ def parse(path: Path):
 
     def flush():
         if para:
-            (sections[-1]["intro"] if sections else intro).append(" ".join(para))
+            target = sections[-1]["intro"] if sections else intro
+            target.append({"t": "p", "text": " ".join(para)})
             para.clear()
+
+    def add_intro_bullet(item):
+        # A "- " run before the first "##" is the letter's own list, not a
+        # change. It keeps its place among the paragraphs and is NOT counted
+        # in the change total, which only ever sums section bullets.
+        target = sections[-1]["intro"] if sections else intro
+        if target and target[-1]["t"] == "ul":
+            target[-1]["items"].append(item)
+        else:
+            target.append({"t": "ul", "items": [item]})
 
     for line in text.splitlines():
         line = line.rstrip()
@@ -60,9 +71,12 @@ def parse(path: Path):
         elif line.startswith("## "):
             flush()
             sections.append({"name": line[3:].strip(), "bullets": [], "intro": []})
-        elif line.startswith("- ") and sections:
+        elif line.startswith("- "):
             flush()
-            sections[-1]["bullets"].append(line[2:].strip())
+            if sections:
+                sections[-1]["bullets"].append(line[2:].strip())
+            else:
+                add_intro_bullet(line[2:].strip())
         elif line.strip():
             para.append(line.strip())
         else:
@@ -97,6 +111,18 @@ def split_credit(bullet: str):
         return bullet, []
     parts = [p.strip() for p in inner.split(",")]
     return body, parts
+
+
+def render_intro(blocks) -> str:
+    out = []
+    for b in blocks or ():
+        if b["t"] == "p":
+            out.append(f'<p class="lead">{md_bold(html.escape(b["text"]))}</p>')
+        else:
+            items = "".join(
+                f'<li>{md_bold(html.escape(i))}</li>' for i in b["items"])
+            out.append(f'<ul class="lead-list">{items}</ul>')
+    return "".join(out)
 
 
 def md_bold(escaped: str) -> str:
@@ -188,7 +214,7 @@ def render(note, all_versions, older=None, newer=None):
             f'<span class="idx-n" data-count="{sid}">{n}</span></a></li>'
         )
         bullets = "\n".join(render_bullet(b) for b in s["bullets"])
-        lead = "".join(f'<p class="lead">{md_bold(html.escape(p))}</p>' for p in s.get("intro", []))
+        lead = render_intro(s.get("intro", []))
         body_rows.append(
             f'<section class="sec{" caveat" if caveat else ""}" id="{sid}" data-sec="{sid}">'
             f'<h2>{html.escape(s["name"])}'
@@ -199,8 +225,8 @@ def render(note, all_versions, older=None, newer=None):
         )
 
     if note.get("intro"):
-        body_rows.insert(0, '<section class="sec sec-intro">' + "".join(
-            f'<p class="lead">{md_bold(html.escape(p))}</p>' for p in note["intro"]) + '</section>')
+        body_rows.insert(0, '<section class="sec sec-intro">'
+                         + render_intro(note["intro"]) + '</section>')
 
     switcher = build_switcher(note["version"], all_versions)
     pager = build_pager(older, newer)
@@ -492,6 +518,8 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
 }
 .lead:last-child { margin-bottom: 0; }
 .sec-intro { margin-bottom: 44px; }
+.lead-list { max-width: 68ch; margin: 0 0 18px; padding: 0 0 0 22px; }
+.lead-list li { margin: 0 0 8px; }
 
 .changes { list-style: none; margin: 0; padding: 0; max-width: 68ch; }
 .change {

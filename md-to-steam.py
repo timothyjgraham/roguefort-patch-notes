@@ -6,6 +6,11 @@
 Matches the conventions in notes/0.19.4.steam.txt: [b] for the H1 and every
 "##" section, [list]/[*] for bullets, **bold** to [b]bold[/b], header comments
 dropped, and no blank line between a section header and its list.
+
+A note carrying "<!-- steam-title: none -->" drops the H1 line from the Steam
+twin only. Steam announcements set their own title, so a note that opens with
+a letter does not want the heading repeated above "Hey everyone,". The website
+still renders the H1, which is the page's own heading.
 """
 import re, sys
 
@@ -13,11 +18,13 @@ def inline(t):
     return re.sub(r'\*\*(.+?)\*\*', r'[b]\1[/b]', t)
 
 def convert(md):
+    drop_title = re.search(r'<!--\s*steam-title:\s*none\s*-->', md) is not None
     out, in_list = [], False
     for ln in md.split('\n'):
         if ln.startswith('<!--'):
             continue
         if ln.startswith('# '):
+            if drop_title: continue
             out.append('[b]' + inline(ln[2:].strip()) + '[/b]'); continue
         if ln.startswith('## '):
             if in_list: out.append('[/list]'); in_list = False

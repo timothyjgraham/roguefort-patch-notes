@@ -281,6 +281,8 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
 }
 .lead:last-child { margin-bottom: 0; }
 .sec-intro { margin-bottom: 44px; }
+.lead-list { max-width: 68ch; margin: 0 0 18px; padding: 0 0 0 22px; }
+.lead-list li { margin: 0 0 8px; }
 
 .changes { list-style: none; margin: 0; padding: 0; max-width: 68ch; }
 .change {
@@ -528,7 +530,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
       <div class="toc-end"></div>
     </nav>
     <div id="doc">
-      <section class="sec sec-intro"><p class="lead">This one covers everything since 0.19.6. A hundred and twenty-seven changes, and most of them began as your reports on the Discord.</p></section>
+      <section class="sec sec-intro"><p class="lead">Hey everyone,</p><p class="lead">Another big update tonight - v0.20.0 packs in a huge amount of new content and bug fixes and polish.</p><p class="lead">If you&#x27;re just tuning in to these updates, I want to say a huge thanks to the community for all the bug reports and suggestions over the past week. A game like this couldn&#x27;t exist without you all to test it - there&#x27;s so many systems and emergent behaviour and balancing to be done, and there&#x27;s absolutely no way a solo dev could do it even with 10 years to work on it. So, thanks as always to you all.</p><p class="lead">The headlines tonight are basically:</p><ul class="lead-list"><li>Spellcasting gets a big rework to make it much more viable. More manna sources, more manna regen, and higher caps on manna too, among other things.</li><li>The 2.5D view mode gets a big rework too. I was never happy with the way the engine rendered the sprites, so it&#x27;s much more in line with my original vision, with a lot of visual polish thrown in. You can also rotate the camera and a bunch of other cool stuff.</li><li>The animation system for humanoids is finally seeing the light of day - the character now actually walks and attacks and much more. NPCs too.</li><li>The title screen gets a bit of polish - a bit of animation.</li><li>Huge backpacks are back in town and a pile of UI and inventory fixes and improvements.</li><li>And a bunch of other stuff as below.</li></ul><p class="lead">Thanks and I hope you enjoy the playtest.</p><p class="lead">Tim</p></section>
 <section class="sec" id="spellcasting" data-sec="spellcasting"><h2>Spellcasting<span class="sec-n">12</span></h2><ul class="changes"><li class="change">Manna cap goes past 40. It rises 2 a tier to 40 at fifteen mastery tiers as before, then 1 a tier to 60 at thirty-five. Dungeons still have no refill by design, so the cap alone was never going to make a caster work down there.<span class="credits"><span class="who">horth.panthur</span></span></li>
 <li class="change">Mastery cuts what a spell costs to cast. Expert takes 1 off, Master takes 2, floored at half the base cost. A Master tier 3 spell casts for 5, which is twelve casts out of a full 60 pool.</li>
 <li class="change">Killing something with a tier 3 mastery spell gives manna back, once per cast, always less than what the cast took. Tier 2 nets 1, tier 3 nets 2, tier 4 nets 3. Tier 1 gets nothing rather than casting for free.</li>
@@ -582,7 +584,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
 <li class="change">The Settled Vein pays the -50% on its card, at every depth. It was a raw point value being run through a curve, so the card and the game disagreed everywhere but tier 1.</li>
 <li class="change">Hardened by Hearth doubles, 10 points to 20.</li>
 <li class="change">Reserve Marks reroll tradition perks.</li>
-<li class="change">Carved Rune and Inkwell&#x27;s Gift are retired. Inkwell&#x27;s Gift promised +10% scroll potency and this game has no scrolls.</li></ul></section>
+<li class="change">Carved Rune and Inkwell&#x27;s Gift are retired. Inkwell&#x27;s Gift promised +10% scroll potency and the game has no scrolls yet (they were in the works but I&#x27;ve since abandoned the idea, and might pick it up at a later date), so also retired it.</li></ul></section>
 <section class="sec" id="crafting-and-building" data-sec="crafting-and-building"><h2>Crafting and building<span class="sec-n">7</span></h2><ul class="changes"><li class="change">Fourteen recipes no player could reach have real sources. Six mills come from a Sawyer&#x27;s Guide, the iron and steel hatchet and pickaxe from a Toolsmith&#x27;s Primer, the War Wheel from its own schematic, and rope, herb mix and premium feed are known from the start.</li>
 <li class="change">Each mill knows its species, so milling palm does not spend your oak.</li>
 <li class="change">River Shallows and Deep Water fill water back into ground, at 4 wood and 2 stone, and 16 and 4. Deep Water shares the moat glyph, so this is also how a fort takes its moat back.<span class="credits"><span class="who">iso5455</span><span class="who">arkhaven</span></span></li>
