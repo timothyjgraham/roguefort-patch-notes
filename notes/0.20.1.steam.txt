@@ -23,8 +23,8 @@ Tim
 [*]Spend a moment together and Share some food are now offered to any settlement NPC who isn't your spouse, alongside Talk.
 [*]Talking nudges the relationship once a day. A grudge or a bond forming announces itself the first time it happens, and a strong reaction ripples outward: "Her husband Bram will hear of it."
 [*]NPC talk pools nearly doubled: four work lines per role, two lines about themselves, deeper how-are-you responses, and no topic dead-ends any more.
-[*]The bard at the Old Mouth actually sings now. His song had been keyed to the wrong kind of record, so the one bard placed as market flavour had no song row at all. (timothyjgraham)
-[*]The barkeep's line about the bard "taking requests" is reworded. The bard plays for the room. There was never a request system behind that line. (timothyjgraham)
+[*]The bard at the Old Mouth actually sings now. His song had been keyed to the wrong kind of record, so the one bard placed as market flavour had no song row at all. (datsheeptho)
+[*]The barkeep's line about the bard "taking requests" is reworded. The bard plays for the room. There was never a request system behind that line. (datsheeptho)
 [/list]
 
 [b]The Worldsmith[/b]
