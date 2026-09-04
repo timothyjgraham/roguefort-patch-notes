@@ -1,0 +1,109 @@
+Hey everyone,
+
+This one opens with an apology. Autosave has not been saving. Not late, not sometimes, not at all, on every build up to 0.20.1, for everybody. The game booked the save and then waited for a quiet moment that a running game never gives it. That is fixed, and it is the first thing below.
+
+The rest is two nights of work off your reports and Dr_Bicinium's long Steam write-up: beast handlers back in every town, your animals getting a Release and a Come here, cheese aging moved onto the calendar so a big wheel is an event again, a Linux black-screen rescue, and a long tail of fixes.
+
+Thanks for testing this into shape.
+
+Tim
+
+[b]Autosave[/b]
+[list]
+[*]Autosave never actually saved. Every 200 actions or 60 seconds the game booked a save and then waited for the main thread to go idle before writing it, with no time limit, and a game that is drawing frames and running turns never goes idle. Only the story-event saves, the one path with a two-second cap, ever reached the disk, which is why a save could sit hours behind you. The save now fires within two seconds of coming due, and it only counts as taken once the file is actually written. (samv123, Dr_Bicinium)
+[/list]
+
+[b]Performance[/b]
+[list]
+[*]Walking on the surface hitched every step. Once a turn the spawn roll flooded up to 1,500 cells to prove a candidate tile had open ground around it, then usually threw the candidate away, and on samv123's worst turn that was 113 of its 170 ms. The check now waits for a candidate that survives the roll, and the per-turn count of water barrels skips any chunk with nothing growing. (samv123)
+[/list]
+
+[b]Linux[/b]
+[list]
+[*]Linux players whose window goes black without a crash get rescued now. The game reads its own window's pixels, and if the frame stays black while the game is still running it redraws, nudges the window size, rebuilds the window, and as a last resort relaunches itself, saving your game before the last two steps. A second black relaunch inside half an hour switches to safe graphics for good, a single one does not. The screen is also held awake while you play, because the default X11 screensaver kicks in after ten minutes and a gamepad does not reset it. (Dr_Bicinium, HONEY BADGER)
+[/list]
+
+[b]Cheese[/b]
+[list]
+[*]Cheese caves say up front whether they can age a wheel. Only the bustling kind of cave has an ageing rack, 270 of the 1,017 caves in the world, and nothing told you which was which until you had walked it. A cave now states its rack, its quality bonus, and that it wants an unfinished wheel. (Dr_Bicinium)
+[*]Laying a wheel in the Reserve Cellar now says plainly that the cellars keep it and pay you Reserve Marks. Every screen used to read as if the wheel came back to you improved. Patronage ranks grant a title and nothing else, and now say so. (Dr_Bicinium)
+[*]Carpets and rugs take two wool to weave, on the plain carpet and every dye. (Dr_Bicinium)
+[/list]
+
+[b]Animals and companions[/b]
+[list]
+[*]Walking into a butterfly used to kill it. The gentle-creature check read a species table that the narrator's little creatures were never in. Right-click Attack still works if you really want to. (Dr_Bicinium)
+[*]Ropes are only spent when you choose Tame from an animal's menu. Taming used to be the bump itself, so every accidental step into a goat was an attempt, and a rope. (Dr_Bicinium)
+[*]Release lets a tamed animal go. It walks off wild. Before this the only exits an owned animal had were the butcher's block and starvation. (Dr_Bicinium)
+[*]Come here calls your companion to your side: the tilde key, the row on the companion's menu, or the button on its panel. A pet pressed against the outside wall of your shack now walks round to the door instead of deciding it has arrived, because the follow leash was measured straight through the wall. (Dr_Bicinium)
+[*]Beast handlers exist again. The role was dropped when the settlement rosters were rebuilt, so the only handler left in the world was the one in Hearthmere. Every city and town now has one with a stable, and about two villages in three. (Dr_Bicinium)
+[/list]
+
+[b]Settlements[/b]
+[list]
+[*]Garrison quest givers are awake when you visit. Day and night watch were split on a coin toss over the roster, so a fort could post no day watch at all and still hand its quest to a guard asleep in the barracks. Four of the ten forts did. (Dr_Bicinium)
+[*]Houses are signed for the people who live in them. An empty house used to borrow the name and trade of whoever had a job there, a stranger a third of the time. An empty house now reads House. (Dr_Bicinium)
+[*]Townsfolk work from their own home or a real workplace. Anyone without a trade of their own, the goodwives, elders, youths, labourers, farmers, herders and fishermen, was handed a job in a random neighbour's house, and that is where you found them standing. Across the world that was 2,776 people in someone else's front room. A labourer still goes to a real forge or bench. (Dr_Bicinium)
+[*]City beast handlers live at their stable now. Every one of them slept somewhere across town, on average a hundred tiles from the pens and past the range the game keeps people awake in, so you found the stable empty. They sleep in the pens now, and a city as large as Thymerock finally wakes its people up when you come in through its own gate, which it never did before. (Dr_Bicinium)
+[/list]
+
+[b]Interface[/b]
+[list]
+[*]Food on your belt describes itself when you hover it on the main screen. Those belt tiles had no hover at all, so the card only ever appeared from the inventory's belt rows. (Dr_Bicinium)
+[*]That yellow rectangle on the inventory's character sprite is gone. It was the selection cursor, starting on the weapon slot before you had picked anything. (Dr_Bicinium)
+[*]World map biome and faction filters are readable now. The biome colours really were too close, arctic against snow peak worst of all, and the faction wash let so much ground through that one faction changed colour by terrain while two factions on the same ground matched. New colours, a stronger wash, a legend, and arctic is a pale blue. (Dr_Bicinium)
+[*]Hover cards in chests, vaults, mailboxes, caves, trade and the ledger stay on screen. Six of the seven container panels still flipped the card off the left edge across their own list.
+[*]Your character's idle breath keeps its head on its shoulders. The exhale used to sink the head into the body, and an unarmed character folded its arms into its own chest.
+[*]Settled Vein's card says -50 % damage taken in both places. It always halved damage taken and the quote at the bottom was right, but the line at the top printed a plus on a stat that takes something away. Every such stat is signed correctly now. (samv123)
+[/list]
+
+[b]Your retinue earns its keep[/b]
+[list]
+[*]Hire a Herald and they walk ahead of you into every settlement and say who you are, at length: the log carries the announcement with your grandest title, and the nearest townsperson turns to face you and answers by name. Once a day per town.
+[*]Hire a Standard-Bearer and your colours go up beside the gate the moment you arrive. The banner stands while you are in town, comes down when you leave, and the locals have things to say about it when you talk to them.
+[*]Hire a Cellarer and the Homestead Ledger gains a note in their hand: how many wheels you have aging and where, which one ripens next, and how long it has to go.
+[*]Prices and titles are unchanged. Until now a retainer was a title and a wage, and nothing else.
+[/list]
+
+[b]Coastal towns[/b]
+[list]
+[*]Coastal settlements were being carved half a map-cell into the sea. The town planner and the terrain disagreed about where the coast was by fifty tiles, so a shore town on a south or east coast came out with most of its streets under deep water and a sharp straight edge where the plan stopped. Bonemouth was 93 % deep water, and twenty-two of the world's twenty-three coastal settlements were off to some degree. All of them generate dry now, and a town you have not yet visited fixes itself the next time you load. (trespiratesque)
+[/list]
+
+[b]Dungeons[/b]
+[list]
+[*]Wells fill your pouch again on The Furnace Below, including the one beside the quartermaster. The refill check judged the floor you stood on, which is magma, and never asked what you were drawing from. Drinking straight from the well worked all along because it took a different path. The lava itself is still not water. (samv123)
+[/list]
+
+[b]Animals[/b]
+[list]
+[*]Release is on the Animals panel too, beside Follow, Roam and Stay. It is greyed with a reason until you stand beside the animal, and asks you to confirm.
+[/list]
+
+[b]Building[/b]
+[list]
+[*]Beds and banners take two wool each, the same as a carpet, and hand the wool back when demolished. Two wool is a sheep befriended with a handful of flora, or a shearing or two. (Dr_Bicinium)
+[/list]
+
+[b]Cheese aging moves onto the calendar[/b]
+
+This is a deliberate balance change, not a fix. A Legendary wheel ripened in 200 turns, a tenth of an in-game day, and then gave you forty turns of something. The books talk about wheels that take seasons. The game now does too, and the wait is worth it.
+
+[list]
+[*]Aging now runs in days. A Rare wheel takes a day, a Legendary wheel four days, an Uncommon one a quarter of a day, and fresh cheese stays fresh. Your own cave still ages at double speed, triple once you reach Artisan, so a Legendary wheel in your cave is two days, and a cave rack out in the world is slower and better, as before.
+[*]Every screen that names the wait says it in your units: turns under a day, days above it, and once a wheel is laid, the calendar day it will be ready. Press, cave, hover card, the crafting bench, the recipe book and the cellar ledger all agree.
+[*]Aged cheese is a lot stronger. Uncommon buffs last twice as long. Rare buffs last five times as long and hit one harder. Legendary buffs last ten times as long and hit harder still: a Founder's Wheel is now a full day of +4 to everything, Frostfire Reserve regenerates 4 a turn for 400 turns, Eternal Truffle gives three extra cave slots for a day. Each card states its numbers.
+[*]Prices follow the wait. Uncommon 24, Rare 60, Legendary 300, and the vendor shelves are raised to match so a wheel never sells for less than its band.
+[*]Sleeping no longer credits a flat 50 turns of aging on top of the turns it already passed. Every rest that moves the clock ages your wheels by exactly that much.
+[*]Reserve Cellar niches take a wheel that is still ripening, age it while it is laid, and hand it back ripe beside the marks. Its three terms are named for what they are: a Day, Three Days, Nine Days.
+[*]Four Season Wheels. Grand Opus, Starwheel, Deepvault Reserve and Riftcheese are pressed from the flora of a Legendary parent, tripled, and take one full season, forty days, under stone. They age on the calendar wherever they lie, in your cave, on a cave rack or in the Reserve Cellar, never in your pack, and the Deepvault will only take a rack under stone. Each gives you a day of something extraordinary and then a gift that lasts for the rest of your life, given once: the Grand Opus leaves +2 damage, +2 armour and +2 sight, the Starwheel +3 sight and a quicker step under the night sky, the Deepvault Reserve +25 max health with burn and cold weather resistance, and the Riftcheese +15 max manna with every spell a point cheaper. The primer in the books has a new section on them.
+[*]Veil of Voidstruck and Arcane Pinnacle can be learned at last. Neither Legendary recipe had ever been in any chest, hermit or shelf, so nobody could have pressed either one. They now come with the Deepvein Masterwork and Grand Affineur blueprints, and the recipe book says so on those rows.
+[*]Wheels already aging in an old save keep the clock they were pressed with. Nothing you had ripening slows down.
+[/list]
+
+[b]Known issues[/b]
+[list]
+[*]Linux's black-screen rescue was built and tested on a Mac by faking a black window. If your window still goes black, the log now records the power, visibility and graphics events leading up to it, so please send it.
+[*]Forgefloor Cheddar still describes a fire resistance its buff does not deliver. That one needs a design decision, not a fix. (rubberychicken)
+[*]Only the first raid gate is open. The Dyadic Vault, the Triadic Gate and the Tetradic Keep are sealed.
+[/list]
