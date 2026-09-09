@@ -1,10 +1,12 @@
+[b]Roguefort 0.21.0 — Patch Notes[/b]
+
 Hey everyone,
 
-This is a big one. Since 0.20.1 I’ve rebuilt most of the game’s menus, replaced hundreds of placeholder icons, added a proper character creation screen, and turned imprisonment from a dialogue box into an actual place you can escape from.
+Since 0.20.1 I’ve rebuilt most of the game’s menus and UI, replaced hundreds of placeholder icons with beautiful new pixel artwork by Bladimir (aka imkingsfool), added a proper character creation screen, and turned imprisonment from a dialogue box into an actual place you can escape from.
 
-There are plenty of less glamorous fixes in here too. Autosave now actually saves, towns can grow again, companions are easier to manage, cheese recipes finally explain what they need, and old worlds should stay where you left them.
+There are many bug fixes and community suggestions in here too, which you can find in detail below.
 
-Thanks, as always, to everyone who sent saves, screenshots and bug reports. They found a lot of this, and I’ve credited everyone I could trace at the end.
+Thanks, as always, to everyone who sent saves, screenshots and bug reports as part of the playtest. The game is coming along in leaps and bounds thanks to your efforts, and I've added some credits down below as well.
 
 Tim
 
@@ -107,17 +109,9 @@ Tim
 [*]Coastal settlements now generate on land instead of partly in the sea. Unvisited coastal towns in existing worlds repair themselves when loaded. (trespiratesque)
 [/list]
 
-[b]Known issues[/b]
-[list]
-[*]Only the Monadic Descent is open. The Dyadic Vault, Triadic Gate and Tetradic Keep are still sealed.
-[*]Adjacent carpets still appear as separate rugs in 2.5D.
-[*]Tilt-shift depth of field remains disabled on Steam Deck and software graphics because of the performance cost.
-[*]A small number of dungeon floors can still generate with an area cut off from the stairs.
-[/list]
-
 [b]Credits[/b]
 [list]
-[*]Reports, saves, suggestions and playtest feedback: .scarletfan, aj01657, arkhaven, bossman62, darthoddish, datsheeptho, Dr_Bicinium, elanto, elfietheesp55, Entloch, Hlord, horth.panthur, HONEY BADGER, iso5455, nalathnidragon, niceypoo, rubberychicken, SamV, sksniperks, soeshii, theartolater, thesquirrel_74982, timmaeus and trespiratesque.
-[*]New card art: Bladimir.
-[*]New creature and terrain sprites: the Roguefort Discord pixel-art team.
+[*]Reports, saves, suggestions and playtest feedback: scarletfan, aj01657, arkhaven, bossman62, darthoddish, datsheeptho, Dr_Bicinium, elanto, elfietheesp55, Entloch, Hlord, horth.panthur, HONEY BADGER, iso5455, nalathnidragon, niceypoo, rubberychicken, SamV, sksniperks, soeshii, theartolater, thesquirrel_74982, and trespiratesque.
+[*]New card art: Bladimir (imkingsfool on fiverr.com)
+[*]New creature and terrain sprites: the Roguefort Discord pixel art team.
 [/list]

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Roguefort 0.21.0 — Patch Notes</title>
-<meta name="description" content="Roguefort 0.21.0 patch notes. 74 changes across 10 sections.">
+<meta name="description" content="Roguefort 0.21.0 patch notes. 70 changes across 9 sections.">
 <meta name="theme-color" content="#111D35">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -480,8 +480,8 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
     <h1 class="card"><span class="vh">Roguefort 0.21.0 patch notes: </span>Cells and Spells</h1>
     <p class="mast-meta">
       <span>9 September 2026</span>
-      <span><b>74</b> changes</span>
-      <span><b>10</b> sections</span>
+      <span><b>70</b> changes</span>
+      <span><b>9</b> sections</span>
       <span>press <kbd>/</kbd> to filter</span>
     </p>
   </div>
@@ -514,7 +514,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
     <nav class="toc" aria-label="Sections">
       <div class="toc-h">
         <h2>Contents</h2>
-        <span><b id="live-total">74</b> changes in <b id="live-secs">10</b> sections</span>
+        <span><b id="live-total">70</b> changes in <b id="live-secs">9</b> sections</span>
       </div>
       <ul><li><a class="idx" href="#the-big-stuff" data-idx="the-big-stuff"><span class="idx-name">The big stuff</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-big-stuff">6</span></a></li>
 <li><a class="idx" href="#autosave-and-old-worlds" data-idx="autosave-and-old-worlds"><span class="idx-name">Autosave and old worlds</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="autosave-and-old-worlds">5</span></a></li>
@@ -524,12 +524,11 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
 <li><a class="idx" href="#animals-and-companions" data-idx="animals-and-companions"><span class="idx-name">Animals and companions</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="animals-and-companions">8</span></a></li>
 <li><a class="idx" href="#towns-npcs-and-co-op" data-idx="towns-npcs-and-co-op"><span class="idx-name">Towns, NPCs and co-op</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="towns-npcs-and-co-op">8</span></a></li>
 <li><a class="idx" href="#fixes-and-polish" data-idx="fixes-and-polish"><span class="idx-name">Fixes and polish</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fixes-and-polish">14</span></a></li>
-<li><a class="idx idx-caveat" href="#known-issues" data-idx="known-issues"><span class="idx-name">Known issues</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="known-issues">4</span></a></li>
 <li><a class="idx" href="#credits" data-idx="credits"><span class="idx-name">Credits</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="credits">3</span></a></li></ul>
       <div class="toc-end"></div>
     </nav>
     <div id="doc">
-      <section class="sec sec-intro"><p class="lead">Hey everyone,</p><p class="lead">This is a big one. Since 0.20.1 I’ve rebuilt most of the game’s menus, replaced hundreds of placeholder icons, added a proper character creation screen, and turned imprisonment from a dialogue box into an actual place you can escape from.</p><p class="lead">There are plenty of less glamorous fixes in here too. Autosave now actually saves, towns can grow again, companions are easier to manage, cheese recipes finally explain what they need, and old worlds should stay where you left them.</p><p class="lead">Thanks, as always, to everyone who sent saves, screenshots and bug reports. They found a lot of this, and I’ve credited everyone I could trace at the end.</p><p class="lead">Tim</p></section>
+      <section class="sec sec-intro"><p class="lead">Hey everyone,</p><p class="lead">Since 0.20.1 I’ve rebuilt most of the game’s menus and UI, replaced hundreds of placeholder icons with beautiful new pixel artwork by Bladimir (aka imkingsfool), added a proper character creation screen, and turned imprisonment from a dialogue box into an actual place you can escape from.</p><p class="lead">There are many bug fixes and community suggestions in here too, which you can find in detail below.</p><p class="lead">Thanks, as always, to everyone who sent saves, screenshots and bug reports as part of the playtest. The game is coming along in leaps and bounds thanks to your efforts, and I&#x27;ve added some credits down below as well.</p><p class="lead">Tim</p></section>
 <section class="sec" id="the-big-stuff" data-sec="the-big-stuff"><h2>The big stuff<span class="sec-n">6</span></h2><ul class="changes"><li class="change">Getting arrested now puts you in a real settlement lock-up. You can walk around the cell, sleep off your sentence, pay the fine, bribe the gaoler, or try the bent spoon somebody thoughtfully left on the floor. Break out and the town will treat you accordingly.</li>
 <li class="change">Character creation has been rebuilt from scratch. You can see your character, starting equipment and standing before you choose, and every origin now starts with the kit its description promises.</li>
 <li class="change">The Going Rogue introduction is now a short illustrated sequence instead of a wall of text.</li>
@@ -597,13 +596,9 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
 <li class="change">Houses have roofs in 2.5D again, rain no longer turns the ground into a checkerboard, and doors and windows no longer flash solid as you walk past.</li>
 <li class="change">Fishing respects doors, windows, backpack capacity and the water you are actually standing on. Driftwood gives wood, river trout stay in rivers, and the level-up message appears on the correct catch.<span class="credits"><span class="who">rubberychicken</span></span></li>
 <li class="change">Coastal settlements now generate on land instead of partly in the sea. Unvisited coastal towns in existing worlds repair themselves when loaded.<span class="credits"><span class="who">trespiratesque</span></span></li></ul></section>
-<section class="sec caveat" id="known-issues" data-sec="known-issues"><h2>Known issues<span class="sec-n">4</span></h2><ul class="changes"><li class="change">Only the Monadic Descent is open. The Dyadic Vault, Triadic Gate and Tetradic Keep are still sealed.</li>
-<li class="change">Adjacent carpets still appear as separate rugs in 2.5D.</li>
-<li class="change">Tilt-shift depth of field remains disabled on Steam Deck and software graphics because of the performance cost.</li>
-<li class="change">A small number of dungeon floors can still generate with an area cut off from the stairs.</li></ul></section>
-<section class="sec" id="credits" data-sec="credits"><h2>Credits<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Reports, saves, suggestions and playtest feedback: .scarletfan, aj01657, arkhaven, bossman62, darthoddish, datsheeptho, Dr_Bicinium, elanto, elfietheesp55, Entloch, Hlord, horth.panthur, HONEY BADGER, iso5455, nalathnidragon, niceypoo, rubberychicken, SamV, sksniperks, soeshii, theartolater, thesquirrel_74982, timmaeus and trespiratesque.</li>
-<li class="change">New card art: Bladimir.</li>
-<li class="change">New creature and terrain sprites: the Roguefort Discord pixel-art team.</li></ul></section>
+<section class="sec" id="credits" data-sec="credits"><h2>Credits<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Reports, saves, suggestions and playtest feedback: scarletfan, aj01657, arkhaven, bossman62, darthoddish, datsheeptho, Dr_Bicinium, elanto, elfietheesp55, Entloch, Hlord, horth.panthur, HONEY BADGER, iso5455, nalathnidragon, niceypoo, rubberychicken, SamV, sksniperks, soeshii, theartolater, thesquirrel_74982, and trespiratesque.</li>
+<li class="change">New card art: Bladimir (imkingsfool on fiverr.com)</li>
+<li class="change">New creature and terrain sprites: the Roguefort Discord pixel art team.</li></ul></section>
       <div class="empty hidden" id="empty"></div>
     </div>
   </div>
