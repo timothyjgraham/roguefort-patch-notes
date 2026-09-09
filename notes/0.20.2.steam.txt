@@ -1,10 +1,8 @@
 Hey everyone,
 
-This one opens with an apology. Autosave has not been saving. Not late, not sometimes, not at all, on every build up to 0.20.1, for everybody. The game booked the save and then waited for a quiet moment that a running game never gives it. That is fixed, and it is the first thing below.
+This build fixes autosave, which was not writing to disk on 0.20.1 and earlier. Alongside it: beast handlers are back in every town, your animals get a Release and a Come here, cheese ageing has moved onto the calendar so a big wheel is an event again, there is a rescue for the Linux black screen, and a long tail of smaller fixes.
 
-The rest is two nights of work off your reports and Dr_Bicinium's long Steam write-up: beast handlers back in every town, your animals getting a Release and a Come here, cheese aging moved onto the calendar so a big wheel is an event again, a Linux black-screen rescue, and a long tail of fixes.
-
-Thanks for testing this into shape.
+Thanks to everyone playtesting and sending in bug reports and suggestions. Enjoy.
 
 Tim
 
