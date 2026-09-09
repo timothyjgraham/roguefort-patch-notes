@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Roguefort 0.21.0 — Patch Notes</title>
-<meta name="description" content="Roguefort 0.21.0 patch notes. 29 changes across 9 sections.">
+<meta name="description" content="Roguefort 0.21.0 patch notes. 74 changes across 10 sections.">
 <meta name="theme-color" content="#111D35">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -477,11 +477,11 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
     <p class="plaque">
       <span class="plaque-k">Patch notes</span><span class="plaque-v">0.21.0</span><span class="plaque-t">Playtest</span>
     </p>
-    <h1 class="card"><span class="vh">Roguefort 0.21.0 patch notes: </span>Every screen gets the same window.</h1>
+    <h1 class="card"><span class="vh">Roguefort 0.21.0 patch notes: </span>Cells and Spells</h1>
     <p class="mast-meta">
       <span>9 September 2026</span>
-      <span><b>29</b> changes</span>
-      <span><b>9</b> sections</span>
+      <span><b>74</b> changes</span>
+      <span><b>10</b> sections</span>
       <span>press <kbd>/</kbd> to filter</span>
     </p>
   </div>
@@ -514,50 +514,96 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
     <nav class="toc" aria-label="Sections">
       <div class="toc-h">
         <h2>Contents</h2>
-        <span><b id="live-total">29</b> changes in <b id="live-secs">9</b> sections</span>
+        <span><b id="live-total">74</b> changes in <b id="live-secs">10</b> sections</span>
       </div>
-      <ul><li><a class="idx" href="#every-screen-wears-the-same-window" data-idx="every-screen-wears-the-same-window"><span class="idx-name">Every screen wears the same window</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="every-screen-wears-the-same-window">3</span></a></li>
-<li><a class="idx" href="#starting-a-new-game" data-idx="starting-a-new-game"><span class="idx-name">Starting a new game</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="starting-a-new-game">3</span></a></li>
-<li><a class="idx" href="#the-lock-up" data-idx="the-lock-up"><span class="idx-name">The lock-up</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-lock-up">3</span></a></li>
-<li><a class="idx" href="#icons-and-art" data-idx="icons-and-art"><span class="idx-name">Icons and art</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="icons-and-art">3</span></a></li>
-<li><a class="idx" href="#delving-and-getting-about" data-idx="delving-and-getting-about"><span class="idx-name">Delving and getting about</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="delving-and-getting-about">3</span></a></li>
-<li><a class="idx" href="#cheese-and-spells" data-idx="cheese-and-spells"><span class="idx-name">Cheese and spells</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="cheese-and-spells">3</span></a></li>
-<li><a class="idx" href="#carrying-things" data-idx="carrying-things"><span class="idx-name">Carrying things</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="carrying-things">3</span></a></li>
-<li><a class="idx" href="#towns-and-the-world" data-idx="towns-and-the-world"><span class="idx-name">Towns and the world</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="towns-and-the-world">3</span></a></li>
-<li><a class="idx" href="#fixes" data-idx="fixes"><span class="idx-name">Fixes</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fixes">5</span></a></li></ul>
+      <ul><li><a class="idx" href="#the-big-stuff" data-idx="the-big-stuff"><span class="idx-name">The big stuff</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-big-stuff">6</span></a></li>
+<li><a class="idx" href="#autosave-and-old-worlds" data-idx="autosave-and-old-worlds"><span class="idx-name">Autosave and old worlds</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="autosave-and-old-worlds">5</span></a></li>
+<li><a class="idx" href="#exploring-the-world" data-idx="exploring-the-world"><span class="idx-name">Exploring the world</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="exploring-the-world">8</span></a></li>
+<li><a class="idx" href="#cheese-and-spellcasting" data-idx="cheese-and-spellcasting"><span class="idx-name">Cheese and spellcasting</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="cheese-and-spellcasting">10</span></a></li>
+<li><a class="idx" href="#art-inventory-and-hud" data-idx="art-inventory-and-hud"><span class="idx-name">Art, inventory and HUD</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="art-inventory-and-hud">8</span></a></li>
+<li><a class="idx" href="#animals-and-companions" data-idx="animals-and-companions"><span class="idx-name">Animals and companions</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="animals-and-companions">8</span></a></li>
+<li><a class="idx" href="#towns-npcs-and-co-op" data-idx="towns-npcs-and-co-op"><span class="idx-name">Towns, NPCs and co-op</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="towns-npcs-and-co-op">8</span></a></li>
+<li><a class="idx" href="#fixes-and-polish" data-idx="fixes-and-polish"><span class="idx-name">Fixes and polish</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fixes-and-polish">14</span></a></li>
+<li><a class="idx idx-caveat" href="#known-issues" data-idx="known-issues"><span class="idx-name">Known issues</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="known-issues">4</span></a></li>
+<li><a class="idx" href="#credits" data-idx="credits"><span class="idx-name">Credits</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="credits">3</span></a></li></ul>
       <div class="toc-end"></div>
     </nav>
     <div id="doc">
-      <section class="sec sec-intro"><p class="lead">Hey everyone,</p><p class="lead">Four days on from 0.20.2, and this is the largest patch the beta has had. Almost every screen has been rebuilt on one window, a new game now opens with a character creation screen and an intro that were made for each other, and losing a fight to a town&#x27;s guards puts you in a cell you can walk around.</p><p class="lead">What follows is the high-level version. Thanks as ever to everyone filing reports, and to Entloch and Hlord in particular for the two that changed how the world is laid out.</p><p class="lead">Tim</p></section>
-<section class="sec" id="every-screen-wears-the-same-window" data-sec="every-screen-wears-the-same-window"><h2>Every screen wears the same window<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Menus, panels and the HUD are all drawn on one window now, with a close box, a rail along the bottom carrying the keys, and a scrollbar wherever a list can outrun its box. Settings, the pause menu, the spell belt, the Homestead Ledger, Records, Achievements, the Plinth of Deeds, the Post Office and the Traders&#x27; Exchange all sit inside it.</li>
-<li class="change">Panels fit on a small screen. Your Companion Panel used to hang off both ends of a 720p display, and the title menu has a compact tier so 1280x720 with a save on it still fits.</li>
-<li class="change">When the bottom of the screen runs out of room, things give way in an order you can predict. The message log gives up lines, the toolbar drops to icons, a widget you resized in Customize HUD keeps the room it asked for, and with touch on the whole stack moves beside the buttons.</li></ul></section>
-<section class="sec" id="starting-a-new-game" data-sec="starting-a-new-game"><h2>Starting a new game<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Character creation has been rebuilt: two columns, a character who breathes while you make up your mind, and the kit you begin with laid out where you can read it. All five origins draw their packs from one table now, so what the card describes is what you carry.</li>
-<li class="change">Going Rogue is told as five beats in pictures, on the same window as everything else.</li>
-<li class="change">Graphics modes are shown side by side, and the game asks you which one you want once.</li></ul></section>
-<section class="sec" id="the-lock-up" data-sec="the-lock-up"><h2>The lock-up<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Losing a fight inside a settlement takes you to a cell you can walk around. There is a cot to sleep the sentence off on, a locked door, a guardroom chest holding everything the guards took off you, and a gaoler on the other side of the bars.</li>
-<li class="change">You can serve the time, bribe the gaoler, settle the fine, or work the lock with the bent spoon somebody left on the floor. Breaking out ends your sentence early and turns the town on you, which is about the price you would expect.</li>
-<li class="change">All of it reads and plays the same on keyboard, pad, Deck and touch. The old prison was a box on the screen that only a keyboard could answer.</li></ul></section>
-<section class="sec" id="icons-and-art" data-sec="icons-and-art"><h2>Icons and art<span class="sec-n">3</span></h2><ul class="changes"><li class="change">235 item and spell icons have real pixel art from the Clockwork Raven packs, 48 cheese spells among them, 25 of which had only a letter before. Another 122 cover slots that carried no picture at all, including the gold, wood and stone counters on the HUD.</li>
-<li class="change">Perk, upgrade and keystone cards wear Bladimir&#x27;s icon pack, recoloured as they are drawn.</li>
-<li class="change">Wheels of War has been rebuilt with painted sprites and the juice a card game ought to have.</li></ul></section>
-<section class="sec" id="delving-and-getting-about" data-sec="delving-and-getting-about"><h2>Delving and getting about<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Harder dungeons are much closer to home. The first step up begins about 1,200 tiles from a starting village instead of 2,200, and innkeepers, scholars and guards will tell you which way it lies, with a mark for it on the world map. Ground you have already walked keeps the tiers it was stamped with.<span class="credits"><span class="who">Entloch</span></span></li>
-<li class="change">Every hub village has a waystone. On a Crossing shore that holds for worlds made from this patch onward, because a shore you already live on is kept exactly as it was.<span class="credits"><span class="who">Entloch</span></span></li>
-<li class="change">Your death pile waits for you however long you take. Piles are a list rather than a single marker, the 2,000-turn expiry is gone, and a skull on the world map offers to travel you back to your gear.<span class="credits"><span class="who">Hlord</span></span></li></ul></section>
-<section class="sec" id="cheese-and-spells" data-sec="cheese-and-spells"><h2>Cheese and spells<span class="sec-n">3</span></h2><ul class="changes"><li class="change">All sixteen cheese cultures can be got hold of. Four come off the harvest tiles they were painted for, eleven are on the shelves their own descriptions point at, and the Moon Hare gives up her Moonculture on a full-moon night.</li>
-<li class="change">The Recipe Book tells the whole spell-wheel chain. Every Spell Cheese row names the curd, the flora, the press and the turns it takes, coloured against what you are carrying, with a card that explains how a wheel is made from end to end.</li>
-<li class="change">Arcane Rennet is on every cheese merchant&#x27;s shelf at every tier. Whoever works cheese in a settlement will also walk you through your first wheel if you hold a spell recipe and have never pressed one.</li></ul></section>
-<section class="sec" id="carrying-things" data-sec="carrying-things"><h2>Carrying things<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Eight actions and carried consumables sit on the Quick Bar at the bottom of the HUD, fired by click and bound by right-click or from the Panel Hub.</li>
-<li class="change">Your first eight war cheeses ride on the Wheel Belt, and a hatchet, pickaxe and fishing rod on the Tool Roll, none of them spending pack space.</li>
-<li class="change">A padlocked stack is safe from everything that picks an item for you: taming bait, feeding a companion, an offering at the Blight shrine, ageing at the forge, and handing a quest in.</li></ul></section>
-<section class="sec" id="towns-and-the-world" data-sec="towns-and-the-world"><h2>Towns and the world<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Towns and cities can grow again. One village-sized ceiling of 28 people was applied to every settlement, and a city&#x27;s roster runs to a median of 203, so 10 of 10 cities and 36 of 50 towns could only lose people while you were away.</li>
-<li class="change">A world you already live on keeps its shape. A placement change had landed inside the same generation 0.20.2 shipped, which moved towns and ran a river through one playtester&#x27;s homestead, so worlds made before this patch are frozen and come back exactly as they were.</li>
-<li class="change">Woodland pockets with no stone within reach have an outcrop in them now.</li></ul></section>
-<section class="sec" id="fixes" data-sec="fixes"><h2>Fixes<span class="sec-n">5</span></h2><ul class="changes"><li class="change">One failed save no longer switches autosave off for the rest of the session. It backs off instead, doubling the wait each time, so a passing blip costs you one skipped save.</li>
-<li class="change">Achievements that were written and could never be earned now fire, the vampire arc past the turning among them, and seven of the Crossing&#x27;s own.</li>
-<li class="change">Villagers on a far shore can tell you what happened there. The Crossing has derived a history for every shore since it shipped, and nothing ever read it out loud.</li>
-<li class="change">A partner&#x27;s village stays alive around them in co-op. Every settlement pass was measured from a bubble 50 tiles round whoever was acting, so a joiner standing in the square kept nothing loaded.</li>
-<li class="change">Pet all handles a party of five in one press, and Travel pressed while you are already travelling re-routes you instead of asking for a waypoint.</li></ul></section>
+      <section class="sec sec-intro"><p class="lead">Hey everyone,</p><p class="lead">This is a big one. Since 0.20.1 I’ve rebuilt most of the game’s menus, replaced hundreds of placeholder icons, added a proper character creation screen, and turned imprisonment from a dialogue box into an actual place you can escape from.</p><p class="lead">There are plenty of less glamorous fixes in here too. Autosave now actually saves, towns can grow again, companions are easier to manage, cheese recipes finally explain what they need, and old worlds should stay where you left them.</p><p class="lead">Thanks, as always, to everyone who sent saves, screenshots and bug reports. They found a lot of this, and I’ve credited everyone I could trace at the end.</p><p class="lead">Tim</p></section>
+<section class="sec" id="the-big-stuff" data-sec="the-big-stuff"><h2>The big stuff<span class="sec-n">6</span></h2><ul class="changes"><li class="change">Getting arrested now puts you in a real settlement lock-up. You can walk around the cell, sleep off your sentence, pay the fine, bribe the gaoler, or try the bent spoon somebody thoughtfully left on the floor. Break out and the town will treat you accordingly.</li>
+<li class="change">Character creation has been rebuilt from scratch. You can see your character, starting equipment and standing before you choose, and every origin now starts with the kit its description promises.</li>
+<li class="change">The Going Rogue introduction is now a short illustrated sequence instead of a wall of text.</li>
+<li class="change">Menus and panels now share one consistent style, with proper close buttons, key hints and scrollbars. This includes Settings, the pause menu, Records, Achievements, the Homestead Ledger, the Post Office, the Traders’ Exchange and most of the smaller panels.</li>
+<li class="change">The interface copes much better with 720p windows, Steam Deck, large text, controllers and touch. When space gets tight, the message log and toolbar now shrink sensibly instead of covering other controls.</li>
+<li class="change">Wheels of War has had a full visual overhaul, with new painted pieces and much livelier feedback.</li></ul></section>
+<section class="sec" id="autosave-and-old-worlds" data-sec="autosave-and-old-worlds"><h2>Autosave and old worlds<span class="sec-n">5</span></h2><ul class="changes"><li class="change">Fixed autosave not writing to disk in 0.20.1 and earlier. It now completes within two seconds of becoming due instead of waiting forever for an idle moment that never came.<span class="credits"><span class="who">SamV</span><span class="who">Dr_Bicinium</span></span></li>
+<li class="change">If an autosave fails, the game retries later instead of silently disabling autosave for the rest of the session.</li>
+<li class="change">Existing Crossings now keep their original layout. A world-generation change could move towns or run a river through an established homestead; older worlds are now locked to the generation they were created with.</li>
+<li class="change">Chopped trees and saplings no longer leave hidden data behind or grow back through something you built in their place.</li>
+<li class="change">Built cheese caves, signs and other player changes survive leaving the area and returning.<span class="credits"><span class="who">horth.panthur</span><span class="who">thesquirrel_74982</span></span></li></ul></section>
+<section class="sec" id="exploring-the-world" data-sec="exploring-the-world"><h2>Exploring the world<span class="sec-n">8</span></h2><ul class="changes"><li class="change">Higher-tier dungeons start much closer to the early game: the first step up is now roughly 1,200 tiles from a starting village instead of 2,200.</li>
+<li class="change">Innkeepers, scholars and guards can point you towards the next tier of dungeon, and the world map marks it for you.<span class="credits"><span class="who">Entloch</span></span></li>
+<li class="change">Every hub village now has a waystone. New Crossings get them too; existing worlds keep their old geography.<span class="credits"><span class="who">Entloch</span></span></li>
+<li class="change">Death piles no longer expire. The world map shows each one with a skull and can start a journey back to your gear. If the pile is inside a dungeon, it waits safely at the entrance.<span class="credits"><span class="who">Hlord</span></span></li>
+<li class="change">Pressing Travel while already on a journey now changes your destination instead of asking you to choose a waypoint again.<span class="credits"><span class="who">theartolater</span></span></li>
+<li class="change">Automatic travel gives a reason when it stops, routes around ordinary town obstacles, and stops when an eclipse begins.</li>
+<li class="change">Woodland areas that had no reachable stone now get a small outcrop.<span class="credits"><span class="who">darthoddish</span></span></li>
+<li class="change">Launching a boat into a pond no longer packs the boat away as if you had reached open water.</li></ul></section>
+<section class="sec" id="cheese-and-spellcasting" data-sec="cheese-and-spellcasting"><h2>Cheese and spellcasting<span class="sec-n">10</span></h2><ul class="changes"><li class="change">The Recipe Book now explains the full spell-cheese process: which curd, flora and press a recipe needs, how long it takes, and which ingredients you already have.</li>
+<li class="change">Arcane Rennet is stocked by every cheese merchant, at every tier.</li>
+<li class="change">Cheese workers can teach your first wheel if you know a spell recipe but have never pressed one.</li>
+<li class="change">All sixteen cheese cultures are now obtainable, including Moonculture from the Moon Hare on a full moon.</li>
+<li class="change">Cheese ageing now follows the calendar. Better wheels take longer, last much longer, and sell for more. Existing wheels keep the ageing time they started with.</li>
+<li class="change">Reserve Cellars now clearly explain that they keep your wheel, age it and pay Reserve Marks. A finished wheel is labelled “ready to collect”.</li>
+<li class="change">Four Season Wheels can be made from Legendary flora and aged underground for powerful permanent rewards.</li>
+<li class="change">Veil of Voidstruck and Arcane Pinnacle can finally be learned.</li>
+<li class="change">The forge can age Monadic Descent relics and can use a catalyst from a nearby chest.</li>
+<li class="change">A padlocked stack is now protected from automatic use by taming, companion feeding, shrine offerings, quest hand-ins and the forge.<span class="credits"><span class="who">arkhaven</span></span></li></ul></section>
+<section class="sec" id="art-inventory-and-hud" data-sec="art-inventory-and-hud"><h2>Art, inventory and HUD<span class="sec-n">8</span></h2><ul class="changes"><li class="change">Added an eight-slot Quick Bar for usable items and actions. Click to use a slot; right-click an item or bind it through the Panel Hub to add it.</li>
+<li class="change">The Wheel Belt carries your first eight war cheeses, while the Tool Roll carries a hatchet, pickaxe and fishing rod. Neither takes backpack space.</li>
+<li class="change">Added real pixel art for 235 items and spells from the Clockwork Raven packs, plus 122 UI and creature slots that previously showed a letter or no image at all.</li>
+<li class="change">Perks, upgrades and keystones now use Bladimir’s pixel art, recoloured to suit each card.<span class="credits"><span class="who">Bladimir</span></span></li>
+<li class="change">Eight new submissions from the Discord pixel-art team are now in the game: the crystal golem, jungle god, a new revenant, spider and phase spider, plus three new terrain tiles. The spider’s blink was redrawn to match its new side-on sprite.<span class="credits"><span class="who-note">Roguefort Discord pixel-art team</span></span></li>
+<li class="change">The Items panel, notice board, Terroir screen and other long lists behave properly at large text sizes and remember their scroll position.<span class="credits"><span class="who">.scarletfan</span><span class="who">rubberychicken</span></span></li>
+<li class="change">Critical chance is now calculated and displayed consistently across the HUD and character sheets.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Temporary Health appears above Rinded, matching the order damage is actually taken.<span class="credits"><span class="who">rubberychicken</span></span></li></ul></section>
+<section class="sec" id="animals-and-companions" data-sec="animals-and-companions"><h2>Animals and companions<span class="sec-n">8</span></h2><ul class="changes"><li class="change">Beast handlers are back in towns and cities, and in most villages.<span class="credits"><span class="who">Dr_Bicinium</span></span></li>
+<li class="change">Tamed animals can be released instead of being kept forever.</li>
+<li class="change">Come here calls your companion to your side, and companions now path around walls instead of deciding they are already close enough.<span class="credits"><span class="who">Dr_Bicinium</span></span></li>
+<li class="change">Pet all handles a full party in one press.</li>
+<li class="change">Stay back now really means stay back; companions no longer wander into the fight or intercept attacks from the position they were told to hold.<span class="credits"><span class="who">datsheeptho</span></span></li>
+<li class="change">Led livestock queue through narrow passages instead of blocking one another.<span class="credits"><span class="who">thesquirrel_74982</span></span></li>
+<li class="change">Taming only spends a rope when you choose Tame, and recipes can use any suitable hide instead of requiring a randomly encountered deer.</li>
+<li class="change">Cooked meat and food on the Quick Bar can be used as bait.</li></ul></section>
+<section class="sec" id="towns-npcs-and-co-op" data-sec="towns-npcs-and-co-op"><h2>Towns, NPCs and co-op<span class="sec-n">8</span></h2><ul class="changes"><li class="change">Towns and cities can grow again. A village population cap had accidentally been applied everywhere, leaving larger settlements able to shrink but never recover.</li>
+<li class="change">A co-op partner now keeps the settlement around them active, even when the host is somewhere else.</li>
+<li class="change">Far-shore villagers can talk about events from their own shore’s generated history.</li>
+<li class="change">Townsfolk route around each other better in narrow streets and no longer repeatedly calculate impossible commutes.</li>
+<li class="change">Farmers stop taking over plots you built, and settlement graves will not appear on top of player construction.</li>
+<li class="change">NPCs identify cities as cities instead of calling every settlement a town.</li>
+<li class="change">Shops belong to the trader who runs them, rather than whichever resident happens to be standing nearby.</li>
+<li class="change">Indirectly killing a townsperson now carries the same consequences as killing them directly, and dead quest givers no longer pay their own bounties.</li></ul></section>
+<section class="sec" id="fixes-and-polish" data-sec="fixes-and-polish"><h2>Fixes and polish<span class="sec-n">14</span></h2><ul class="changes"><li class="change">Fixed surface movement hitching while the game searched for spawn locations.<span class="credits"><span class="who">SamV</span></span></li>
+<li class="change">Fixed Linux builds sometimes opening to a black window. The game now attempts a redraw, rebuild or safe-mode relaunch and saves before the more disruptive recovery steps. It also keeps the display awake while playing.<span class="credits"><span class="who">Dr_Bicinium</span><span class="who-note">HONEY BADGER</span></span></li>
+<li class="change">Fixed achievements that had conditions but could never trigger, including most of the vampire arc and seven Crossing achievements.</li>
+<li class="change">Fixed leaving a dungeon counting as tens of thousands of tiles walked and repeatedly offering the same level-up perk.</li>
+<li class="change">Fixed paid perk rerolls offering a card that was already on the table.</li>
+<li class="change">Fixed sale-gold popups using a different colour and multiple gold popups stacking on top of one another.</li>
+<li class="change">Fixed a fire-warded vampire being told that sunlight hurt them when no damage was taken.</li>
+<li class="change">Fixed vendors occasionally listing the same item twice.</li>
+<li class="change">Fixed empty bookshelves still drawing books, murdered villagers appearing to drop meat, and waterskins merging into invalid stacks.</li>
+<li class="change">Fixed the player, menus, full backpacks, gathering, locks, crafting and revives missing their intended sound effects. A Mute option has also been added to Audio settings.</li>
+<li class="change">Fixed 2.5D movement drifting off-grid, attacks swinging in the wrong direction, spell effects lying flat, night becoming unreadably dark, and dungeon floors rendering as bright violet.</li>
+<li class="change">Houses have roofs in 2.5D again, rain no longer turns the ground into a checkerboard, and doors and windows no longer flash solid as you walk past.</li>
+<li class="change">Fishing respects doors, windows, backpack capacity and the water you are actually standing on. Driftwood gives wood, river trout stay in rivers, and the level-up message appears on the correct catch.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Coastal settlements now generate on land instead of partly in the sea. Unvisited coastal towns in existing worlds repair themselves when loaded.<span class="credits"><span class="who">trespiratesque</span></span></li></ul></section>
+<section class="sec caveat" id="known-issues" data-sec="known-issues"><h2>Known issues<span class="sec-n">4</span></h2><ul class="changes"><li class="change">Only the Monadic Descent is open. The Dyadic Vault, Triadic Gate and Tetradic Keep are still sealed.</li>
+<li class="change">Adjacent carpets still appear as separate rugs in 2.5D.</li>
+<li class="change">Tilt-shift depth of field remains disabled on Steam Deck and software graphics because of the performance cost.</li>
+<li class="change">A small number of dungeon floors can still generate with an area cut off from the stairs.</li></ul></section>
+<section class="sec" id="credits" data-sec="credits"><h2>Credits<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Reports, saves, suggestions and playtest feedback: .scarletfan, aj01657, arkhaven, bossman62, darthoddish, datsheeptho, Dr_Bicinium, elanto, elfietheesp55, Entloch, Hlord, horth.panthur, HONEY BADGER, iso5455, nalathnidragon, niceypoo, rubberychicken, SamV, sksniperks, soeshii, theartolater, thesquirrel_74982, timmaeus and trespiratesque.</li>
+<li class="change">New card art: Bladimir.</li>
+<li class="change">New creature and terrain sprites: the Roguefort Discord pixel-art team.</li></ul></section>
       <div class="empty hidden" id="empty"></div>
     </div>
   </div>
