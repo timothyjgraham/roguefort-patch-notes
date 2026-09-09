@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Roguefort patch notes</title>
-<meta name="description" content="Every Roguefort patch note. Latest: 0.21.0, Every screen gets the same window. - 29 changes across 9 sections.">
+<title>Roguefort 0.21.0 — Patch Notes</title>
+<meta name="description" content="Roguefort 0.21.0 patch notes. 29 changes across 9 sections.">
 <meta name="theme-color" content="#111D35">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&family=DM+Mono:wght@400;500&family=Grenze+Gotisch:wght@500;700&display=swap" rel="stylesheet">
 <style>
+
 /* ------------------------------------------------------------------
    Palette sampled from the Steam capsules. Strict PICO-8 index:
    the whole capsule is 26-47 unique colours, so nothing here is
@@ -443,7 +444,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
 </head>
 <body>
 
-<a class="skip" href="#releases">Skip to all releases</a>
+<a class="skip" href="#doc">Skip to the changes</a>
 
 <header class="mast">
   <svg class="marks" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
@@ -476,13 +477,13 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
     <p class="plaque">
       <span class="plaque-k">Patch notes</span><span class="plaque-v">0.21.0</span><span class="plaque-t">Playtest</span>
     </p>
-    <h1 class="card"><span class="vh">Roguefort patch notes. Latest release: </span>Every screen gets the same window.</h1>
+    <h1 class="card"><span class="vh">Roguefort 0.21.0 patch notes: </span>Every screen gets the same window.</h1>
     <p class="mast-meta">
       <span>9 September 2026</span>
       <span><b>29</b> changes</span>
       <span><b>9</b> sections</span>
+      <span>press <kbd>/</kbd> to filter</span>
     </p>
-    <p class="cta"><a href="0.21.0.html">Read the 0.21.0 notes &rarr;</a></p>
   </div>
   <div class="ramp" aria-hidden="true">
     <b class="r1"></b><b class="r2 k"></b><b class="r3"></b><b class="r4 k"></b><b class="r5"></b><b class="r6 k"></b><b class="r7 k"></b><b class="r8"></b>
@@ -496,30 +497,163 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   </svg>
 </header>
 
-<main>
+<div class="bar">
+  <div class="rail" id="rail"></div>
+  <div class="bar-in">
+    <a class="bar-mark" href="#top">Roguefort</a>
+    <span class="bar-here" id="here" aria-live="off"></span>
+    <nav class="vers" aria-label="Versions"><a class="ver on" href="0.21.0.html" aria-current="page">0.21.0</a><a class="ver" href="0.20.2.html">0.20.2</a><a class="ver" href="0.20.1.html">0.20.1</a><a class="ver" href="0.20.0.html">0.20.0</a><a class="ver ver-all" href="index.html">All (9)</a></nav>
+    <div class="find">
+      <input id="q" type="search" placeholder="/ filter changes" aria-label="Filter changes" autocomplete="off">
+    </div>
+  </div>
+</div>
+
+<main id="top">
   <div class="plate">
-    <section class="toc" id="releases">
+    <nav class="toc" aria-label="Sections">
       <div class="toc-h">
-        <h2>All releases</h2>
-        <span><b>9</b> releases</span>
+        <h2>Contents</h2>
+        <span><b id="live-total">29</b> changes in <b id="live-secs">9</b> sections</span>
       </div>
-      <ol class="reg"><li><a href="0.21.0.html"><span class="reg-name">Every screen gets the same window.</span><span class="reg-dots" aria-hidden="true"></span><span class="reg-meta"><b>0.21.0</b> &middot; 9 September 2026 &middot; 29 changes<span class="reg-new">latest</span></span></a></li>
-<li><a href="0.20.2.html"><span class="reg-name">Save early, save often</span><span class="reg-dots" aria-hidden="true"></span><span class="reg-meta"><b>0.20.2</b> &middot; 6 September 2026 &middot; 41 changes</span></a></li>
-<li><a href="0.20.1.html"><span class="reg-name">Razzle Dazzle Root Beer</span><span class="reg-dots" aria-hidden="true"></span><span class="reg-meta"><b>0.20.1</b> &middot; 3 September 2026 &middot; 69 changes</span></a></li>
-<li><a href="0.20.0.html"><span class="reg-name">Looks Like Spellcasting Is Back On The Menu</span><span class="reg-dots" aria-hidden="true"></span><span class="reg-meta"><b>0.20.0</b> &middot; 2 September 2026 &middot; 101 changes</span></a></li>
-<li><a href="0.19.6.html"><span class="reg-name">Leaderboards go global.</span><span class="reg-dots" aria-hidden="true"></span><span class="reg-meta"><b>0.19.6</b> &middot; 31 August 2026 &middot; 96 changes</span></a></li>
-<li><a href="0.19.4.html"><span class="reg-name">Mahargekdar&#x27;s Plane of Heroes.</span><span class="reg-dots" aria-hidden="true"></span><span class="reg-meta"><b>0.19.4</b> &middot; 29 August 2026 &middot; 59 changes</span></a></li>
-<li><a href="0.19.3.html"><span class="reg-name">Non Travolta.</span><span class="reg-dots" aria-hidden="true"></span><span class="reg-meta"><b>0.19.3</b> &middot; 28 August 2026 &middot; 30 changes</span></a></li>
-<li><a href="0.19.2.html"><span class="reg-name">Suitably Wilder.</span><span class="reg-dots" aria-hidden="true"></span><span class="reg-meta"><b>0.19.2</b> &middot; 27 August 2026 &middot; 16 changes</span></a></li>
-<li><a href="0.19.0.html"><span class="reg-name">Hamsters!</span><span class="reg-dots" aria-hidden="true"></span><span class="reg-meta"><b>0.19.0</b> &middot; 27 August 2026 &middot; 407 changes</span></a></li></ol>
+      <ul><li><a class="idx" href="#every-screen-wears-the-same-window" data-idx="every-screen-wears-the-same-window"><span class="idx-name">Every screen wears the same window</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="every-screen-wears-the-same-window">3</span></a></li>
+<li><a class="idx" href="#starting-a-new-game" data-idx="starting-a-new-game"><span class="idx-name">Starting a new game</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="starting-a-new-game">3</span></a></li>
+<li><a class="idx" href="#the-lock-up" data-idx="the-lock-up"><span class="idx-name">The lock-up</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-lock-up">3</span></a></li>
+<li><a class="idx" href="#icons-and-art" data-idx="icons-and-art"><span class="idx-name">Icons and art</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="icons-and-art">3</span></a></li>
+<li><a class="idx" href="#delving-and-getting-about" data-idx="delving-and-getting-about"><span class="idx-name">Delving and getting about</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="delving-and-getting-about">3</span></a></li>
+<li><a class="idx" href="#cheese-and-spells" data-idx="cheese-and-spells"><span class="idx-name">Cheese and spells</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="cheese-and-spells">3</span></a></li>
+<li><a class="idx" href="#carrying-things" data-idx="carrying-things"><span class="idx-name">Carrying things</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="carrying-things">3</span></a></li>
+<li><a class="idx" href="#towns-and-the-world" data-idx="towns-and-the-world"><span class="idx-name">Towns and the world</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="towns-and-the-world">3</span></a></li>
+<li><a class="idx" href="#fixes" data-idx="fixes"><span class="idx-name">Fixes</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fixes">5</span></a></li></ul>
       <div class="toc-end"></div>
-    </section>
+    </nav>
+    <div id="doc">
+      <section class="sec sec-intro"><p class="lead">Hey everyone,</p><p class="lead">Four days on from 0.20.2, and this is the largest patch the beta has had. Almost every screen has been rebuilt on one window, a new game now opens with a character creation screen and an intro that were made for each other, and losing a fight to a town&#x27;s guards puts you in a cell you can walk around.</p><p class="lead">What follows is the high-level version. Thanks as ever to everyone filing reports, and to Entloch and Hlord in particular for the two that changed how the world is laid out.</p><p class="lead">Tim</p></section>
+<section class="sec" id="every-screen-wears-the-same-window" data-sec="every-screen-wears-the-same-window"><h2>Every screen wears the same window<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Menus, panels and the HUD are all drawn on one window now, with a close box, a rail along the bottom carrying the keys, and a scrollbar wherever a list can outrun its box. Settings, the pause menu, the spell belt, the Homestead Ledger, Records, Achievements, the Plinth of Deeds, the Post Office and the Traders&#x27; Exchange all sit inside it.</li>
+<li class="change">Panels fit on a small screen. Your Companion Panel used to hang off both ends of a 720p display, and the title menu has a compact tier so 1280x720 with a save on it still fits.</li>
+<li class="change">When the bottom of the screen runs out of room, things give way in an order you can predict. The message log gives up lines, the toolbar drops to icons, a widget you resized in Customize HUD keeps the room it asked for, and with touch on the whole stack moves beside the buttons.</li></ul></section>
+<section class="sec" id="starting-a-new-game" data-sec="starting-a-new-game"><h2>Starting a new game<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Character creation has been rebuilt: two columns, a character who breathes while you make up your mind, and the kit you begin with laid out where you can read it. All five origins draw their packs from one table now, so what the card describes is what you carry.</li>
+<li class="change">Going Rogue is told as five beats in pictures, on the same window as everything else.</li>
+<li class="change">Graphics modes are shown side by side, and the game asks you which one you want once.</li></ul></section>
+<section class="sec" id="the-lock-up" data-sec="the-lock-up"><h2>The lock-up<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Losing a fight inside a settlement takes you to a cell you can walk around. There is a cot to sleep the sentence off on, a locked door, a guardroom chest holding everything the guards took off you, and a gaoler on the other side of the bars.</li>
+<li class="change">You can serve the time, bribe the gaoler, settle the fine, or work the lock with the bent spoon somebody left on the floor. Breaking out ends your sentence early and turns the town on you, which is about the price you would expect.</li>
+<li class="change">All of it reads and plays the same on keyboard, pad, Deck and touch. The old prison was a box on the screen that only a keyboard could answer.</li></ul></section>
+<section class="sec" id="icons-and-art" data-sec="icons-and-art"><h2>Icons and art<span class="sec-n">3</span></h2><ul class="changes"><li class="change">235 item and spell icons have real pixel art from the Clockwork Raven packs, 48 cheese spells among them, 25 of which had only a letter before. Another 122 cover slots that carried no picture at all, including the gold, wood and stone counters on the HUD.</li>
+<li class="change">Perk, upgrade and keystone cards wear Bladimir&#x27;s icon pack, recoloured as they are drawn.</li>
+<li class="change">Wheels of War has been rebuilt with painted sprites and the juice a card game ought to have.</li></ul></section>
+<section class="sec" id="delving-and-getting-about" data-sec="delving-and-getting-about"><h2>Delving and getting about<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Harder dungeons are much closer to home. The first step up begins about 1,200 tiles from a starting village instead of 2,200, and innkeepers, scholars and guards will tell you which way it lies, with a mark for it on the world map. Ground you have already walked keeps the tiers it was stamped with.<span class="credits"><span class="who">Entloch</span></span></li>
+<li class="change">Every hub village has a waystone. On a Crossing shore that holds for worlds made from this patch onward, because a shore you already live on is kept exactly as it was.<span class="credits"><span class="who">Entloch</span></span></li>
+<li class="change">Your death pile waits for you however long you take. Piles are a list rather than a single marker, the 2,000-turn expiry is gone, and a skull on the world map offers to travel you back to your gear.<span class="credits"><span class="who">Hlord</span></span></li></ul></section>
+<section class="sec" id="cheese-and-spells" data-sec="cheese-and-spells"><h2>Cheese and spells<span class="sec-n">3</span></h2><ul class="changes"><li class="change">All sixteen cheese cultures can be got hold of. Four come off the harvest tiles they were painted for, eleven are on the shelves their own descriptions point at, and the Moon Hare gives up her Moonculture on a full-moon night.</li>
+<li class="change">The Recipe Book tells the whole spell-wheel chain. Every Spell Cheese row names the curd, the flora, the press and the turns it takes, coloured against what you are carrying, with a card that explains how a wheel is made from end to end.</li>
+<li class="change">Arcane Rennet is on every cheese merchant&#x27;s shelf at every tier. Whoever works cheese in a settlement will also walk you through your first wheel if you hold a spell recipe and have never pressed one.</li></ul></section>
+<section class="sec" id="carrying-things" data-sec="carrying-things"><h2>Carrying things<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Eight actions and carried consumables sit on the Quick Bar at the bottom of the HUD, fired by click and bound by right-click or from the Panel Hub.</li>
+<li class="change">Your first eight war cheeses ride on the Wheel Belt, and a hatchet, pickaxe and fishing rod on the Tool Roll, none of them spending pack space.</li>
+<li class="change">A padlocked stack is safe from everything that picks an item for you: taming bait, feeding a companion, an offering at the Blight shrine, ageing at the forge, and handing a quest in.</li></ul></section>
+<section class="sec" id="towns-and-the-world" data-sec="towns-and-the-world"><h2>Towns and the world<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Towns and cities can grow again. One village-sized ceiling of 28 people was applied to every settlement, and a city&#x27;s roster runs to a median of 203, so 10 of 10 cities and 36 of 50 towns could only lose people while you were away.</li>
+<li class="change">A world you already live on keeps its shape. A placement change had landed inside the same generation 0.20.2 shipped, which moved towns and ran a river through one playtester&#x27;s homestead, so worlds made before this patch are frozen and come back exactly as they were.</li>
+<li class="change">Woodland pockets with no stone within reach have an outcrop in them now.</li></ul></section>
+<section class="sec" id="fixes" data-sec="fixes"><h2>Fixes<span class="sec-n">5</span></h2><ul class="changes"><li class="change">One failed save no longer switches autosave off for the rest of the session. It backs off instead, doubling the wait each time, so a passing blip costs you one skipped save.</li>
+<li class="change">Achievements that were written and could never be earned now fire, the vampire arc past the turning among them, and seven of the Crossing&#x27;s own.</li>
+<li class="change">Villagers on a far shore can tell you what happened there. The Crossing has derived a history for every shore since it shipped, and nothing ever read it out loud.</li>
+<li class="change">A partner&#x27;s village stays alive around them in co-op. Every settlement pass was measured from a bubble 50 tiles round whoever was acting, so a joiner standing in the square kept nothing loaded.</li>
+<li class="change">Pet all handles a party of five in one press, and Travel pressed while you are already travelling re-routes you instead of asking for a waypoint.</li></ul></section>
+      <div class="empty hidden" id="empty"></div>
+    </div>
   </div>
 </main>
 
+<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.20.2.html"><span class="pg-k">Previous release</span><span class="pg-v">Save early, save often</span><span class="pg-n">0.20.2</span></a><a class="pg pg-all" href="index.html">All releases</a></nav>
+
 <footer class="foot">
-  <span>Roguefort patch notes</span>
+  <span>Roguefort 0.21.0 &middot; 9 September 2026</span>
   <span>Community reporters are credited against each change.</span>
 </footer>
+
+<script>
+(function () {
+  var q = document.getElementById('q');
+  var empty = document.getElementById('empty');
+  var rail = document.getElementById('rail');
+  var here = document.getElementById('here');
+  var liveTotal = document.getElementById('live-total');
+  var liveSecs = document.getElementById('live-secs');
+  var secs = [].slice.call(document.querySelectorAll('.sec'));
+  var idx = [].slice.call(document.querySelectorAll('.idx'));
+
+  var items = [];
+  secs.forEach(function (s) {
+    [].slice.call(s.querySelectorAll('.change')).forEach(function (li) {
+      items.push({ el: li, sec: s, text: li.textContent.toLowerCase() });
+    });
+  });
+
+  function countEl(id) { return document.querySelector('[data-count="' + id + '"]'); }
+
+  function filter() {
+    var term = q.value.trim().toLowerCase();
+    var shown = 0;
+    secs.forEach(function (s) { s._n = 0; });
+    items.forEach(function (it) {
+      var hit = !term || it.text.indexOf(term) !== -1;
+      it.el.classList.toggle('hidden', !hit);
+      if (hit) { it.sec._n++; shown++; }
+    });
+    secs.forEach(function (s) {
+      s.classList.toggle('hidden', s._n === 0);
+      var id = s.dataset.sec;
+      countEl(id).textContent = s._n;
+      document.querySelector('[data-idx="' + id + '"]').parentElement
+        .classList.toggle('hidden', s._n === 0);
+      s.querySelector('.sec-n').textContent = s._n;
+    });
+    liveTotal.textContent = shown;
+    liveSecs.textContent = secs.filter(function (s) { return s._n > 0; }).length;
+    if (shown === 0) {
+      empty.textContent = '';
+      empty.appendChild(document.createTextNode('Nothing matches '));
+      var b = document.createElement('b');
+      b.textContent = q.value;
+      empty.appendChild(b);
+      empty.appendChild(document.createTextNode('. Try a shorter word, like mount, save or road.'));
+      empty.classList.remove('hidden');
+    } else {
+      empty.classList.add('hidden');
+    }
+    onScroll();
+  }
+
+  q.addEventListener('input', filter);
+  q.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { q.value = ''; filter(); q.blur(); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+  });
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      rail.style.width = (h > 0 ? Math.min(1, window.scrollY / h) * 100 : 0) + '%';
+      var top = window.scrollY + 120, cur = null, curName = '';
+      secs.forEach(function (s) {
+        if (!s.classList.contains('hidden') && s.offsetTop <= top) {
+          cur = s.dataset.sec;
+          curName = s.querySelector('h2').firstChild.textContent;
+        }
+      });
+      idx.forEach(function (a) { a.classList.toggle('on', a.dataset.idx === cur); });
+      here.textContent = curName;
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
 </body>
 </html>

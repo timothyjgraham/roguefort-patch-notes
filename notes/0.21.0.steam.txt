@@ -1,0 +1,74 @@
+[b]Roguefort 0.21.0 — Patch Notes[/b]
+
+Hey everyone,
+
+Four days on from 0.20.2, and this is the largest patch the beta has had. Almost every screen has been rebuilt on one window, a new game now opens with a character creation screen and an intro that were made for each other, and losing a fight to a town's guards puts you in a cell you can walk around.
+
+What follows is the high-level version. Thanks as ever to everyone filing reports, and to Entloch and Hlord in particular for the two that changed how the world is laid out.
+
+Tim
+
+[b]Every screen wears the same window[/b]
+[list]
+[*]Menus, panels and the HUD are all drawn on one window now, with a close box, a rail along the bottom carrying the keys, and a scrollbar wherever a list can outrun its box. Settings, the pause menu, the spell belt, the Homestead Ledger, Records, Achievements, the Plinth of Deeds, the Post Office and the Traders' Exchange all sit inside it.
+[*]Panels fit on a small screen. Your Companion Panel used to hang off both ends of a 720p display, and the title menu has a compact tier so 1280x720 with a save on it still fits.
+[*]When the bottom of the screen runs out of room, things give way in an order you can predict. The message log gives up lines, the toolbar drops to icons, a widget you resized in Customize HUD keeps the room it asked for, and with touch on the whole stack moves beside the buttons.
+[/list]
+
+[b]Starting a new game[/b]
+[list]
+[*]Character creation has been rebuilt: two columns, a character who breathes while you make up your mind, and the kit you begin with laid out where you can read it. All five origins draw their packs from one table now, so what the card describes is what you carry.
+[*]Going Rogue is told as five beats in pictures, on the same window as everything else.
+[*]Graphics modes are shown side by side, and the game asks you which one you want once.
+[/list]
+
+[b]The lock-up[/b]
+[list]
+[*]Losing a fight inside a settlement takes you to a cell you can walk around. There is a cot to sleep the sentence off on, a locked door, a guardroom chest holding everything the guards took off you, and a gaoler on the other side of the bars.
+[*]You can serve the time, bribe the gaoler, settle the fine, or work the lock with the bent spoon somebody left on the floor. Breaking out ends your sentence early and turns the town on you, which is about the price you would expect.
+[*]All of it reads and plays the same on keyboard, pad, Deck and touch. The old prison was a box on the screen that only a keyboard could answer.
+[/list]
+
+[b]Icons and art[/b]
+[list]
+[*]235 item and spell icons have real pixel art from the Clockwork Raven packs, 48 cheese spells among them, 25 of which had only a letter before. Another 122 cover slots that carried no picture at all, including the gold, wood and stone counters on the HUD.
+[*]Perk, upgrade and keystone cards wear Bladimir's icon pack, recoloured as they are drawn.
+[*]Wheels of War has been rebuilt with painted sprites and the juice a card game ought to have.
+[/list]
+
+[b]Delving and getting about[/b]
+[list]
+[*]Harder dungeons are much closer to home. The first step up begins about 1,200 tiles from a starting village instead of 2,200, and innkeepers, scholars and guards will tell you which way it lies, with a mark for it on the world map. Ground you have already walked keeps the tiers it was stamped with. (Entloch)
+[*]Every hub village has a waystone. On a Crossing shore that holds for worlds made from this patch onward, because a shore you already live on is kept exactly as it was. (Entloch)
+[*]Your death pile waits for you however long you take. Piles are a list rather than a single marker, the 2,000-turn expiry is gone, and a skull on the world map offers to travel you back to your gear. (Hlord)
+[/list]
+
+[b]Cheese and spells[/b]
+[list]
+[*]All sixteen cheese cultures can be got hold of. Four come off the harvest tiles they were painted for, eleven are on the shelves their own descriptions point at, and the Moon Hare gives up her Moonculture on a full-moon night.
+[*]The Recipe Book tells the whole spell-wheel chain. Every Spell Cheese row names the curd, the flora, the press and the turns it takes, coloured against what you are carrying, with a card that explains how a wheel is made from end to end.
+[*]Arcane Rennet is on every cheese merchant's shelf at every tier. Whoever works cheese in a settlement will also walk you through your first wheel if you hold a spell recipe and have never pressed one.
+[/list]
+
+[b]Carrying things[/b]
+[list]
+[*]Eight actions and carried consumables sit on the Quick Bar at the bottom of the HUD, fired by click and bound by right-click or from the Panel Hub.
+[*]Your first eight war cheeses ride on the Wheel Belt, and a hatchet, pickaxe and fishing rod on the Tool Roll, none of them spending pack space.
+[*]A padlocked stack is safe from everything that picks an item for you: taming bait, feeding a companion, an offering at the Blight shrine, ageing at the forge, and handing a quest in.
+[/list]
+
+[b]Towns and the world[/b]
+[list]
+[*]Towns and cities can grow again. One village-sized ceiling of 28 people was applied to every settlement, and a city's roster runs to a median of 203, so 10 of 10 cities and 36 of 50 towns could only lose people while you were away.
+[*]A world you already live on keeps its shape. A placement change had landed inside the same generation 0.20.2 shipped, which moved towns and ran a river through one playtester's homestead, so worlds made before this patch are frozen and come back exactly as they were.
+[*]Woodland pockets with no stone within reach have an outcrop in them now.
+[/list]
+
+[b]Fixes[/b]
+[list]
+[*]One failed save no longer switches autosave off for the rest of the session. It backs off instead, doubling the wait each time, so a passing blip costs you one skipped save.
+[*]Achievements that were written and could never be earned now fire, the vampire arc past the turning among them, and seven of the Crossing's own.
+[*]Villagers on a far shore can tell you what happened there. The Crossing has derived a history for every shore since it shipped, and nothing ever read it out loud.
+[*]A partner's village stays alive around them in co-op. Every settlement pass was measured from a bubble 50 tiles round whoever was acting, so a joiner standing in the square kept nothing loaded.
+[*]Pet all handles a party of five in one press, and Travel pressed while you are already travelling re-routes you instead of asking for a waypoint.
+[/list]
