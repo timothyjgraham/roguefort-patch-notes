@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roguefort 0.23.0 — Patch Notes</title>
+<meta name="description" content="Roguefort 0.23.0 patch notes. 279 changes across 20 sections.">
+<meta name="theme-color" content="#111D35">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&family=DM+Mono:wght@400;500&family=Grenze+Gotisch:wght@500;700&display=swap" rel="stylesheet">
+<style>
+
+/* ------------------------------------------------------------------
+   Palette sampled from the Steam capsules. Strict PICO-8 index:
+   the whole capsule is 26-47 unique colours, so nothing here is
+   invented or nudged. Sky is the dominant colour of the art (22-32%
+   of every capsule); yellow is under 2% and belongs to the wordmark.
+   Warm colours fail contrast on cream, so they are structure only --
+   markers, rules, keylines, offsets -- never letterforms on paper.
+   ------------------------------------------------------------------ */
+:root {
+  --sky:    #29ADFF;   /* Cantal Sky   - dominant field */
+  --deep:   #065AB5;   /* deep sea / upper sky band     */
+  --mid:    #1D2B53;   /* bridges night to deep in the ramp */
+  --night:  #111D35;   /* Deep Night   - text, substrate*/
+  --cream:  #FFF1E8;   /* Curd Cream   - the paper      */
+  --crust:  #49333B;   /* the cliff. unlisted in the kit*/
+  --ember:  #FF6C24;   /* Ember Rock   - accent         */
+  --rind:   #FFA300;   /* Rind Orange  - 1px rim-light  */
+  --cellar: #742F29;   /* Cellar Brown - muted text     */
+  --ink:    #271F1B;   /* Ink Black    - hard outline   */
+  --yellow: #FFEC27;   /* Roguefort Yellow - wordmark   */
+
+  --disp: "Grenze Gotisch", "Palatino Linotype", Georgia, serif;
+  --body: Bitter, Georgia, "Times New Roman", serif;
+  --mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --wrap: 1040px;
+  --pad: 56px;
+  --barh: 54px;
+}
+
+/* Dot-lattice dither. The art ramps every colour transition with a
+   1px dot on a 2px lattice, not with a blend. conic-gradient at a
+   quarter turn gives exactly that, with hard axis-aligned edges. */
+.dot { background-image: conic-gradient(currentColor 25%, #0000 0); background-size: 2px 2px; }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--barh) + 16px); }
+body {
+  margin: 0;
+  background: var(--sky);
+  color: var(--night);
+  font-family: var(--body);
+  font-size: 16.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+/* The art has no curves anywhere. Neither does this page. */
+* { border-radius: 0 !important; }
+
+.skip {
+  position: absolute; left: 8px; top: -60px; z-index: 90;
+  background: var(--night); color: var(--cream); padding: 10px 14px;
+  font-family: var(--mono); font-size: 13px; text-decoration: none;
+  border: 2px solid var(--rind);
+}
+.skip:focus { top: 8px; }
+
+/* ================= masthead ================= */
+.mast {
+  position: relative; overflow: hidden;
+  background: var(--night);
+  padding: 46px 0 0;
+}
+.mast-in {
+  position: relative; z-index: 3;
+  max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad) 52px;
+}
+.wordmark {
+  display: block; width: 100%; max-width: 370px; height: auto;
+  image-rendering: pixelated;              /* press kit: nearest-neighbour only */
+}
+/* Build plaque: says what the document is and which build it covers.
+   Left-aligned and cellular rather than a lone big numeral -- the
+   version reads loud because its cell is filled, not because it is huge. */
+.plaque {
+  display: inline-flex; flex-wrap: wrap; margin: 24px 0 0;
+  font-family: var(--mono); font-size: 15px; line-height: 1;
+  border: 2px solid var(--rind); box-shadow: 4px 4px 0 var(--deep);
+}
+.plaque span { padding: 11px 15px; display: block; }
+.plaque-k { color: var(--cream); }
+.plaque-v { background: var(--rind); color: var(--night); font-weight: 500; }
+.plaque-t { color: var(--cream); border-left: 2px solid var(--rind); }
+
+/* Visually hidden, still announced. The h1's visible text is the update
+   name; screen readers get the full "Roguefort 0.19.0 patch notes" first. */
+.vh {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+/* --- the signature: the update name as an extruded pixel title card.
+   Borrows the wordmark's construction -- yellow face, ink outline,
+   brown extrusion falling down-right, zero blur -- at the light 500
+   cut, which is condensed and sharp like the real logo rather than
+   fat. A short two-step extrusion; a long one reads as cartoon 3D.
+   Offsets are in em so the construction scales with the type. Used
+   ONLY here; spending it on 25 section headings would waste it. --- */
+.card {
+  font-family: var(--disp); font-weight: 500;
+  font-size: clamp(40px, 9.5vw, 104px); line-height: 1.06;
+  margin: 26px 0 0; padding: 0 0 .12em;
+  color: var(--yellow);
+  letter-spacing: .005em;
+  text-shadow:
+    .02em 0 0 var(--ink), -.02em 0 0 var(--ink),
+    0 .02em 0 var(--ink), 0 -.02em 0 var(--ink),
+    .02em .02em 0 var(--ink), -.02em .02em 0 var(--ink),
+    .02em -.02em 0 var(--ink), -.02em -.02em 0 var(--ink),
+    .032em .032em 0 var(--cellar), .044em .044em 0 var(--cellar),
+    .056em .056em 0 var(--ink);
+}
+.mast-meta {
+  position: relative; margin: 30px 0 0;
+  font-family: var(--mono); font-size: 13.5px; color: var(--cream);
+  display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: baseline;
+}
+.mast-meta b { color: var(--rind); font-weight: 500; }
+.mast-meta kbd {
+  font-family: var(--mono); font-size: 12px; color: var(--night);
+  background: var(--cream); padding: 1px 6px; border: 1px solid var(--cream);
+  box-shadow: 2px 2px 0 var(--deep);
+}
+
+/* Dither ramp, night -> deep -> sky. Density comes from the lattice
+   itself -- a quarter dot (25%) and a checker (50%) -- rather than from
+   masked rows, which read as scanlines instead of as a screen. */
+.ramp { position: relative; z-index: 3; }
+.ramp b {
+  display: block; height: 11px;
+  background-image: conic-gradient(currentColor 25%, #0000 0);
+  background-size: 2px 2px;
+}
+.ramp b.k {
+  background-image: conic-gradient(currentColor 25%, #0000 0),
+                    conic-gradient(currentColor 25%, #0000 0);
+  background-size: 2px 2px, 2px 2px;
+  background-position: 0 0, 1px 1px;
+}
+.r1 { background-color: var(--night); color: var(--mid); }
+.r2 { background-color: var(--night); color: var(--mid); }
+.r3 { background-color: var(--mid);   color: var(--deep); }
+.r4 { background-color: var(--mid);   color: var(--deep); }
+.r5 { background-color: var(--deep);  color: var(--sky); }
+.r6 { background-color: var(--deep);  color: var(--sky); }
+.r7 { background-color: var(--sky);   color: var(--deep); }
+.r8 { background-color: var(--sky);   color: var(--deep); }
+
+/* blueprint construction marks -- only here, where the art puts them */
+.marks { position: absolute; inset: 0 0 auto; height: 320px; z-index: 2; width: 100%; height: 100%; pointer-events: none; }
+
+.ridge { display: block; width: 100%; height: 54px; background: var(--sky); }
+
+/* ================= sticky bar ================= */
+.bar {
+  position: sticky; top: 0; z-index: 40;
+  background: var(--night);
+  border-bottom: 2px solid var(--ink);
+}
+.rail { height: 3px; background: var(--rind); width: 0; }
+.bar-in {
+  max-width: var(--wrap); margin: 0 auto;
+  padding: 9px var(--pad); min-height: var(--barh);
+  display: flex; align-items: center; gap: 14px;
+}
+.bar-mark {
+  font-family: var(--disp); font-weight: 700; font-size: 21px;
+  color: var(--yellow); text-decoration: none; flex: none; line-height: 1;
+}
+.bar-here {
+  font-family: var(--mono); font-size: 12.5px; color: var(--cream);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  min-width: 0; flex: 1 1 auto;
+}
+.bar-here::before { content: "\25B8"; color: var(--rind); margin-right: 8px; }
+.bar-here:empty::before { content: none; }
+.vers { display: flex; flex-wrap: wrap; gap: 5px; flex: 0 1 auto; min-width: 0; }
+.ver {
+  font-family: var(--mono); font-size: 12px; line-height: 1;
+  padding: 6px 8px; text-decoration: none;
+  color: var(--cream); border: 1px solid var(--deep);
+}
+.ver:hover { border-color: var(--rind); }
+.ver.on { color: var(--night); background: var(--rind); border-color: var(--rind); }
+.find { flex: none; }
+.find input {
+  font-family: var(--mono); font-size: 13px;
+  width: 210px; padding: 7px 10px;
+  color: var(--night); background: var(--cream);
+  border: 1px solid var(--cream); box-shadow: 3px 3px 0 var(--deep);
+}
+.find input::placeholder { color: var(--cellar); opacity: 1; }
+.find input:focus { box-shadow: 3px 3px 0 var(--rind); }
+
+/* ================= the cream plate ================= */
+main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
+.plate {
+  background: var(--cream);
+  border-left: 2px solid var(--ink); border-right: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--deep);
+  padding: 0 var(--pad) 60px;
+}
+
+/* ---- contents: one ruled plate, not a grid of cards ---- */
+.toc { padding: 44px 0 40px; }
+.toc-h {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16px; margin: 0 0 4px;
+  border-bottom: 2px solid var(--night); padding-bottom: 10px;
+}
+.toc-h h2 { font-family: var(--disp); font-weight: 700; font-size: 26px; margin: 0; line-height: 1; }
+.toc-h span { font-family: var(--mono); font-size: 12.5px; color: var(--cellar); }
+.toc ul {
+  list-style: none; margin: 14px 0 0; padding: 0;
+  columns: 3; column-gap: 40px;
+}
+.toc li { break-inside: avoid; margin: 0 0 1px; }
+.idx {
+  display: flex; align-items: baseline; gap: 6px;
+  text-decoration: none; color: var(--night);
+  font-size: 14px; line-height: 1.45; padding: 2px 4px 2px 0;
+}
+.idx-name { flex: 0 1 auto; }
+.idx-dots {
+  flex: 1 1 auto; min-width: 8px; height: 1px; align-self: center;
+  color: var(--cellar); opacity: .55;
+  background-image: conic-gradient(currentColor 25%, #0000 0);
+  background-size: 2px 2px;
+}
+.idx-n { font-family: var(--mono); font-size: 12px; color: var(--cellar); flex: none; }
+.idx:hover { color: var(--cellar); }
+.idx:hover .idx-name { text-decoration: underline; }
+.idx.on { background: var(--night); color: var(--cream); padding-left: 4px; }
+.idx.on .idx-n { color: var(--rind); }
+.idx.on .idx-dots { color: var(--sky); opacity: .8; }
+.idx-caveat .idx-n { color: var(--cellar); }
+.toc-end { border-top: 2px solid var(--night); margin-top: 16px; }
+
+/* ---- sections ---- */
+.sec { margin: 0 0 52px; scroll-margin-top: calc(var(--barh) + 16px); }
+.sec h2 {
+  position: relative;
+  font-family: var(--disp); font-weight: 700;
+  font-size: clamp(25px, 3.6vw, 34px); line-height: 1.12;
+  margin: 0 0 30px; padding-bottom: 12px; max-width: 68ch;
+  border-bottom: 2px solid var(--night);
+  display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
+}
+/* dither rule, in place of a plain hairline */
+.sec h2::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -9px; height: 5px;
+  color: var(--ember);
+  background-image: conic-gradient(currentColor 25%, #0000 0);
+  background-size: 2px 2px;
+}
+.sec-n {
+  font-family: var(--mono); font-size: 13px; font-weight: 400;
+  color: var(--cellar); flex: none;
+}
+.sec-n::before { content: "\27E6"; }
+.sec-n::after  { content: "\27E7"; }
+
+/* Prose above a section's bullets: the lore opening, the release summary. */
+.lead {
+  max-width: 68ch; margin: 0 0 22px;
+  font-size: clamp(16px, 1.5vw, 18px); line-height: 1.62;
+}
+.lead:last-child { margin-bottom: 0; }
+.sec-intro { margin-bottom: 44px; }
+.lead-list { max-width: 68ch; margin: 0 0 18px; padding: 0 0 0 22px; }
+.lead-list li { margin: 0 0 8px; }
+
+.changes { list-style: none; margin: 0; padding: 0; max-width: 68ch; }
+.change {
+  position: relative; padding: 0 0 14px 26px; margin: 0 0 14px;
+  border-bottom: 1px solid rgba(73,51,59,.22);
+}
+.change:last-child { border-bottom: 0; }
+.change::before {
+  content: ""; position: absolute; left: 0; top: .52em;
+  width: 7px; height: 7px; background: var(--ember);
+}
+.tag { font-family: var(--mono); font-size: .84em; color: var(--cellar); }
+
+/* credit chips: cream face, hard outline, hard rim-light offset. 200+
+   of these, so they stay quiet but sit at 10.4:1 on the plate. */
+.credits { display: inline; }
+.who {
+  font-family: var(--mono); font-size: 11.5px; line-height: 1.5;
+  color: var(--crust); background: var(--cream);
+  border: 1px solid var(--crust); box-shadow: 2px 2px 0 var(--rind);
+  padding: 0 6px; margin: 0 2px 0 8px;
+  display: inline-block; vertical-align: 1px; white-space: nowrap;
+}
+.who-note {
+  font-family: var(--mono); font-size: 11.5px; color: var(--cellar);
+  margin-left: 8px;
+}
+
+/* ---- known issues: a different material, not a different colour ---- */
+.sec.caveat {
+  background-color: var(--night);
+  background-image: conic-gradient(rgba(6,90,181,.45) 25%, #0000 0);
+  background-size: 2px 2px;
+  color: var(--cream);
+  margin: 64px calc(var(--pad) * -1) -60px;
+  padding: 38px var(--pad) 60px;
+  border-top: 2px solid var(--ink);
+}
+.caveat h2 { color: var(--cream); border-bottom-color: var(--rind); }
+.caveat h2::after { color: var(--rind); }
+.caveat .sec-n { color: var(--rind); }
+.caveat .change { border-bottom-color: rgba(255,241,232,.18); }
+.caveat .change::before { background: none; border: 2px solid var(--rind); }
+.caveat .tag { color: var(--sky); }
+.caveat .who {
+  color: var(--cream); background: var(--night);
+  border-color: var(--rind); box-shadow: 2px 2px 0 var(--deep);
+}
+.caveat .who-note { color: var(--sky); }
+
+/* ---- filter states ---- */
+.hidden { display: none !important; }
+.empty {
+  border: 2px solid var(--night); box-shadow: 5px 5px 0 var(--ember);
+  padding: 30px; margin: 30px 0 10px; font-size: 15.5px; max-width: 68ch;
+}
+.empty b { font-family: var(--mono); font-weight: 500; }
+
+/* ---- index: featured release + the register ---- */
+.cta { margin: 26px 0 0; }
+.cta a {
+  display: inline-block; font-family: var(--mono); font-size: 15px; line-height: 1;
+  background: var(--cream); color: var(--night); text-decoration: none;
+  padding: 14px 18px; border: 2px solid var(--cream); box-shadow: 5px 5px 0 var(--rind);
+}
+.cta a:hover { box-shadow: 5px 5px 0 var(--ember); }
+
+.reg { list-style: none; margin: 14px 0 0; padding: 0; }
+.reg li { border-bottom: 1px solid rgba(73,51,59,.22); }
+.reg li:last-child { border-bottom: 0; }
+.reg a {
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 15px 6px; text-decoration: none; color: var(--night);
+}
+.reg a:hover { background: var(--night); color: var(--cream); }
+.reg-name { font-family: var(--disp); font-weight: 500; font-size: 23px; line-height: 1.15; flex: 0 1 auto; }
+.reg-dots {
+  flex: 1 1 auto; min-width: 12px; height: 1px; align-self: center;
+  color: var(--cellar); opacity: .5;
+  background-image: conic-gradient(currentColor 25%, #0000 0); background-size: 2px 2px;
+}
+.reg-meta { font-family: var(--mono); font-size: 12.5px; color: var(--cellar); flex: none; }
+.reg-meta b { color: var(--night); font-weight: 500; }
+.reg-new {
+  font-family: var(--mono); font-size: 11px; color: var(--night);
+  background: var(--rind); padding: 2px 7px; margin-left: 10px;
+}
+.reg a:hover .reg-meta { color: var(--sky); }
+.reg a:hover .reg-meta b { color: var(--cream); }
+.reg a:hover .reg-dots { color: var(--sky); opacity: .8; }
+
+/* ---- release page: prev / next ---- */
+.pager {
+  max-width: var(--wrap); margin: 0 auto; padding: 34px var(--pad) 0;
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: stretch;
+}
+.pg {
+  flex: 1 1 220px; text-decoration: none; padding: 14px 16px;
+  background: var(--cream); color: var(--night);
+  border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--deep);
+}
+.pg:hover { box-shadow: 4px 4px 0 var(--rind); }
+.pg-k { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--cellar); margin-bottom: 5px; }
+.pg-v { display: block; font-family: var(--disp); font-weight: 500; font-size: 21px; line-height: 1.1; }
+.pg-n { display: block; font-family: var(--mono); font-size: 12px; color: var(--cellar); margin-top: 3px; }
+.pg-next { text-align: right; }
+.pg-all { flex: 0 1 auto; display: flex; align-items: center; font-family: var(--mono); font-size: 13px; }
+
+.foot {
+  max-width: var(--wrap); margin: 0 auto; padding: 26px var(--pad) 70px;
+  font-family: var(--mono); font-size: 12.5px; color: var(--night);
+  display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: space-between;
+}
+.foot a { color: var(--night); text-underline-offset: 3px; }
+
+/* ================= responsive ================= */
+@media (max-width: 900px) { .toc ul { columns: 2; } }
+@media (max-width: 760px) {
+  :root { --pad: 26px; }
+  .toc ul { columns: 2; }
+  .mast { padding-top: 30px; }
+  .bar-in { flex-wrap: wrap; gap: 9px 12px; }
+  .bar-here { order: 5; flex: 1 1 100%; }
+  .find { flex: 1 1 100%; }
+  .find input { width: 100%; }
+  .plaque { font-size: 14px; }
+  .plaque span { padding: 10px 12px; }
+  .plate { border-left: 0; border-right: 0; box-shadow: none; }
+  .sec.caveat { margin-left: calc(var(--pad) * -1); margin-right: calc(var(--pad) * -1); }
+}
+@media (max-width: 460px) {
+  :root { --pad: 16px; }
+  .reg a { flex-wrap: wrap; gap: 4px 10px; }
+  .reg-dots { display: none; }
+  .reg-name { flex: 1 1 100%; font-size: 21px; }
+  .pg-next { text-align: left; }
+  body { font-size: 16px; }
+  .toc ul { columns: 1; }
+  .wordmark { max-width: 250px; }
+  .plaque { font-size: 12.5px; }
+  .plaque span { padding: 9px 10px; }
+  .ramp b { height: 8px; }
+  .mast { padding-top: 24px; }
+  .ridge { height: 34px; }
+  .change { padding-left: 20px; }
+  .foot { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+:focus-visible {
+  outline: 3px solid var(--ember);
+  outline-offset: 2px;
+}
+.bar :focus-visible, .mast :focus-visible { outline-color: var(--rind); }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#doc">Skip to the changes</a>
+
+<header class="mast">
+  <svg class="marks" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
+    <defs>
+      <path id="spk" d="M0,-11 L2.5,-2.5 L11,0 L2.5,2.5 L0,11 L-2.5,2.5 L-11,0 L-2.5,-2.5 Z"/>
+    </defs>
+    <g stroke="#FFF1E8" stroke-opacity=".13" stroke-width="1" fill="none" shape-rendering="crispEdges">
+      <path d="M150 0 V70 M150 104 V190"/>
+      <path d="M470 0 V44 M470 82 V150 M470 186 V240"/>
+      <path d="M860 0 V96 M860 130 V210"/>
+      <path d="M1060 0 V58 M1060 92 V164"/>
+      <path d="M40 118 H96 M132 118 H286 M508 118 H642 M900 118 H1030"/>
+      <path d="M60 300 H210 M250 300 H430 M745 300 H902"/>
+      <path d="M140 58 H160 M150 48 V68"/>
+      <path d="M850 176 H870 M860 166 V186"/>
+      <path d="M60 40 H92 M60 40 V72"/>
+      <path d="M1140 216 H1108 M1140 216 V184"/>
+    </g>
+    <g fill="#FFF1E8" fill-opacity=".34" shape-rendering="crispEdges">
+      <use href="#spk" transform="translate(330,86)"/>
+      <use href="#spk" transform="translate(712,52) scale(.7)"/>
+      <use href="#spk" transform="translate(988,150)"/>
+      <use href="#spk" transform="translate(232,214) scale(.6)"/>
+    </g>
+  </svg>
+  <div class="mast-in">
+    <img class="wordmark" src="assets/roguefort-wordmark.png"
+         srcset="assets/roguefort-wordmark.png 1x, assets/roguefort-wordmark@2x.png 2x"
+         width="526" height="166" alt="Roguefort">
+    <p class="plaque">
+      <span class="plaque-k">Patch notes</span><span class="plaque-v">0.23.0</span><span class="plaque-t">Playtest</span>
+    </p>
+    <h1 class="card"><span class="vh">Roguefort 0.23.0 patch notes: </span>Colonies and Curds</h1>
+    <p class="mast-meta">
+      <span>25 September 2026</span>
+      <span><b>279</b> changes</span>
+      <span><b>20</b> sections</span>
+      <span>press <kbd>/</kbd> to filter</span>
+    </p>
+  </div>
+  <div class="ramp" aria-hidden="true">
+    <b class="r1"></b><b class="r2 k"></b><b class="r3"></b><b class="r4 k"></b><b class="r5"></b><b class="r6 k"></b><b class="r7 k"></b><b class="r8"></b>
+  </div>
+  <svg class="ridge" viewBox="0 0 1200 54" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path fill="#49333B" d="M0,54 V22 H74 V10 H158 V30 H242 V16 H340 V34 H424 V20 H524 V38 H604 V24 H704 V12 H792 V32 H880 V18 H978 V36 H1068 V22 H1142 V32 H1200 V54 Z"/>
+    <path fill="none" stroke="#FFA300" stroke-width="3" vector-effect="non-scaling-stroke"
+          d="M0,25 H74 V13 H158 V33 H242 V19 H340 V37 H424 V23 H524 V41 H604 V27 H704 V15 H792 V35 H880 V21 H978 V39 H1068 V25 H1142 V35 H1200"/>
+    <path fill="none" stroke="#271F1B" stroke-width="3" vector-effect="non-scaling-stroke"
+          d="M0,22 H74 V10 H158 V30 H242 V16 H340 V34 H424 V20 H524 V38 H604 V24 H704 V12 H792 V32 H880 V18 H978 V36 H1068 V22 H1142 V32 H1200"/>
+  </svg>
+</header>
+
+<div class="bar">
+  <div class="rail" id="rail"></div>
+  <div class="bar-in">
+    <a class="bar-mark" href="#top">Roguefort</a>
+    <span class="bar-here" id="here" aria-live="off"></span>
+    <nav class="vers" aria-label="Versions"><a class="ver on" href="0.23.0.html" aria-current="page">0.23.0</a><a class="ver" href="0.21.0.html">0.21.0</a><a class="ver" href="0.20.2.html">0.20.2</a><a class="ver" href="0.20.1.html">0.20.1</a><a class="ver ver-all" href="index.html">All (10)</a></nav>
+    <div class="find">
+      <input id="q" type="search" placeholder="/ filter changes" aria-label="Filter changes" autocomplete="off">
+    </div>
+  </div>
+</div>
+
+<main id="top">
+  <div class="plate">
+    <nav class="toc" aria-label="Sections">
+      <div class="toc-h">
+        <h2>Contents</h2>
+        <span><b id="live-total">279</b> changes in <b id="live-secs">20</b> sections</span>
+      </div>
+      <ul><li><a class="idx" href="#the-affineur-s-bench" data-idx="the-affineur-s-bench"><span class="idx-name">The affineur&#x27;s bench</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-affineur-s-bench">18</span></a></li>
+<li><a class="idx" href="#milk-bread-and-the-kitchen" data-idx="milk-bread-and-the-kitchen"><span class="idx-name">Milk, bread and the kitchen</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="milk-bread-and-the-kitchen">10</span></a></li>
+<li><a class="idx" href="#steam-deck-and-controllers" data-idx="steam-deck-and-controllers"><span class="idx-name">Steam Deck and controllers</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="steam-deck-and-controllers">14</span></a></li>
+<li><a class="idx" href="#how-the-world-looks" data-idx="how-the-world-looks"><span class="idx-name">How the world looks</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="how-the-world-looks">23</span></a></li>
+<li><a class="idx" href="#co-op" data-idx="co-op"><span class="idx-name">Co-op</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="co-op">14</span></a></li>
+<li><a class="idx" href="#fortress" data-idx="fortress"><span class="idx-name">Fortress</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fortress">14</span></a></li>
+<li><a class="idx" href="#dungeons" data-idx="dungeons"><span class="idx-name">Dungeons</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="dungeons">21</span></a></li>
+<li><a class="idx" href="#combat-and-weapons" data-idx="combat-and-weapons"><span class="idx-name">Combat and weapons</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="combat-and-weapons">14</span></a></li>
+<li><a class="idx" href="#towns-people-and-the-law" data-idx="towns-people-and-the-law"><span class="idx-name">Towns, people and the law</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="towns-people-and-the-law">21</span></a></li>
+<li><a class="idx" href="#quests" data-idx="quests"><span class="idx-name">Quests</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="quests">14</span></a></li>
+<li><a class="idx" href="#exploring-the-world" data-idx="exploring-the-world"><span class="idx-name">Exploring the world</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="exploring-the-world">20</span></a></li>
+<li><a class="idx" href="#homestead-and-farming" data-idx="homestead-and-farming"><span class="idx-name">Homestead and farming</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="homestead-and-farming">15</span></a></li>
+<li><a class="idx" href="#defences-and-hirelings" data-idx="defences-and-hirelings"><span class="idx-name">Defences and hirelings</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="defences-and-hirelings">6</span></a></li>
+<li><a class="idx" href="#animals-and-companions" data-idx="animals-and-companions"><span class="idx-name">Animals and companions</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="animals-and-companions">9</span></a></li>
+<li><a class="idx" href="#your-pack-and-the-shops" data-idx="your-pack-and-the-shops"><span class="idx-name">Your pack and the shops</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="your-pack-and-the-shops">21</span></a></li>
+<li><a class="idx" href="#interface-and-settings" data-idx="interface-and-settings"><span class="idx-name">Interface and settings</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="interface-and-settings">21</span></a></li>
+<li><a class="idx" href="#game-text" data-idx="game-text"><span class="idx-name">Game text</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="game-text">2</span></a></li>
+<li><a class="idx" href="#saves-and-performance" data-idx="saves-and-performance"><span class="idx-name">Saves and performance</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="saves-and-performance">10</span></a></li>
+<li><a class="idx idx-caveat" href="#known-issues" data-idx="known-issues"><span class="idx-name">Known issues</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="known-issues">9</span></a></li>
+<li><a class="idx" href="#credits" data-idx="credits"><span class="idx-name">Credits</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="credits">3</span></a></li></ul>
+      <div class="toc-end"></div>
+    </nav>
+    <div id="doc">
+      <section class="sec sec-intro"><p class="lead">Hey everyone,</p><p class="lead">This is the biggest update the playtest has had. 0.22.0 went out without patch notes, so these cover both builds: everything since 0.21.0.</p><p class="lead">The headlines:</p><ul class="lead-list"><li>Fortress, a new colony mode on the title screen. Found a colony with seven settlers, then dig, farm, make cheese and hold off raiders.</li><li>The affineur&#x27;s bench. Design your own spell cheese from curd, herbs and a working, then age it on a cave rack for months of game time. Some of the new wheels heal and shield your friends.</li><li>A long pass on Steam Deck and controllers: text entry, sleep and wake, pad buttons in every prompt, and a lot of performance work.</li><li>The world looks different in all three views, with new tile art, living water, cloud shadows, heavy storms and firelight. First person has roofs, arms and a horizon now.</li><li>Secret rooms, beset holdfasts, a fence for stolen goods, your family moving in, javelins, and spears that actually reach.</li></ul><p class="lead">After that comes a very long list of fixes, most of them from your reports, with your names on them.</p><p class="lead">Thanks to everyone who sent saves, screenshots and reports. Enjoy.</p><p class="lead">Tim</p></section>
+<section class="sec" id="the-affineur-s-bench" data-sec="the-affineur-s-bench"><h2>The affineur&#x27;s bench<span class="sec-n">18</span></h2><ul class="changes"><li class="change">Pressing a cheese in the full game now opens the affineur&#x27;s bench, where you design your own spell cheese. Bring curd and two heart herbs to the press, pick a working to give the spell its shape, choose how long to age it, and press. The named recipes you already know sit behind Known cheeses.</li>
+<li class="change">There are eight attack workings, Pin, Draw, Break, Scrape, Breathe, Thread, Toss and Ring, and four friendly ones. The 25 heart herbs are plants you already gather, and which of them a press will take depends on the country it stands in. Arcane Rennet and the rarer cultures widen the choice.</li>
+<li class="change">Your wheel is named for its region, its heart herb and its age, something like Meadow Heather Wheel, and it remembers where it was pressed. Pressing takes 12 turns and the wheel stays on your spell belt for good: a cast costs Manna and a cooldown, never the cheese.</li>
+<li class="change">Before anything is spent, a panel shows what each ingredient brings, and the Notebook keeps every wheel you have pressed. Use up three of one herb at the press and you learn its rind working, an extra effect your wheels can carry.<span class="credits"><span class="who">arkhaven</span></span></li>
+<li class="change">Put a crafted wheel on a cheese cave&#x27;s ageing rack and it ages by the calendar, even while you are off somewhere else. At seven days it is Settled and gains a second rind working plus its region&#x27;s effect, at forty days it is Reserve with a third, and a wheel left for a year or two picks up the long-lay effects. Off the rack it keeps the age it has.</li>
+<li class="change">Four friendly workings look after your side. Tend heals one friend at range, Gather everyone within two tiles, Trace friends along a line, and Relay jumps from friend to friend. Depending on the herb, a wheel restores health, gives Rinded, or clears poison, sickness, slowing and corrosion.</li>
+<li class="change">Friendly wheels reach you, your co-op partners, pets (a partner&#x27;s too), hirelings and summons. They can never hurt anyone or heal an enemy, and a cast with nobody to help is refused before it costs you anything.</li>
+<li class="change">Emmental Mend is a new Swiss wheel that heals you and every wounded friend within two tiles. Its blueprint is Arcane, and you make it at the press.<span class="credits"><span class="who">arkhaven</span></span></li>
+<li class="change">Your wheel belt holds the wheels you have ready to cast. On a full belt you get asked which slot to use, dragging a wheel onto the belt strip in your pack puts it on the belt, and spells can be dragged between belt slots.<span class="credits"><span class="who">theartolater</span><span class="who">bancheis</span></span></li>
+<li class="change">Whether war cheese you pick up goes straight onto your belt is now a setting, on by default. The BELT tag shows in the vault, the trade window and the exchange, so a belted wheel can&#x27;t be mistaken for its twin.<span class="credits"><span class="who">bancheis</span></span></li>
+<li class="change">Crafted wheels stack with the same wheel bought or found, and packs that had already split them fold back together when you load.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Affinage names the exact cheese it is about to use and lets you pick a different one.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">Padlocks guard your cheese at the press, the germinator and the Reserve Cellar as well. The padlock shows on the quick bar, where you can take it off, and dropping or salvaging a padlocked item asks you once and then does it.<span class="credits"><span class="who">trespiratesque</span><span class="who">arkhaven</span></span></li>
+<li class="change">War cheese shows its mastery on the pack row and the hover card, with the casts so far and what the next tier needs.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Each spell cheese in the Recipe Book leads with the spell it makes and puts a tick or a cross beside every ingredient. Its pages are all one size now, a search box finds recipes, and learning a recipe tells you what kind it is.<span class="credits"><span class="who">rubberychicken</span><span class="who">.knifee</span></span></li>
+<li class="change">Roquelle&#x27;s starting war cheese recipe can be studied, and so can a recipe left in a chest, right where it lies.<span class="credits"><span class="who">thesquirrel_74982</span></span></li>
+<li class="change">Forgefloor Cheddar and the other forge cheeses give 25% burn resistance. Their fire resistance had never done anything at all.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">About half the time, the First Wheel lesson asked for the Ember Wheel twice. Now it asks once.<span class="credits"><span class="who">horth.panthur</span></span></li></ul></section>
+<section class="sec" id="milk-bread-and-the-kitchen" data-sec="milk-bread-and-the-kitchen"><h2>Milk, bread and the kitchen<span class="sec-n">10</span></h2><ul class="changes"><li class="change">Village herders sell milk by the pail, so cheesemaking no longer starts with owning a farm.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Milk keeps for a day and a half, up from a tenth of a day, and every screen that uses milk says how long a pail lasts. Two soured pails make a Lactic Culture at the workbench.<span class="credits"><span class="who">xxturiflower47xx</span></span></li>
+<li class="change">Drink a fresh pail, cook Milk Porridge or Creamed Root Soup at the campfire, or warm a Honeyed Acorn Milk on the stove.</li>
+<li class="change">Build a Yogurt Barrel beside the bee box. It holds three scoops and makes one more a day, and each scoop throws a free Cinder Bolt.</li>
+<li class="change">Wheat and feed grain grind into flour at the workbench, and two flour bake a loaf at any fire.</li>
+<li class="change">Carrots, potatoes, turnips and onions roast at a fire, and the Drover&#x27;s Bun turns bread, cooked meat and curd into a meal worth carrying. Garden Potage and Mushroom Broth are new as well.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Well Fed holds your hunger bar where it is for as long as it lasts. Thirst still drops.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Cooking and the cheese vat take ingredients from chests and stockpiles within 20 tiles, and the cheese cave and germinator reach into a chest beside them.<span class="credits"><span class="who">.knifee</span></span></li>
+<li class="change">Untick a food in the cooking window and Cook All leaves it alone.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Bees come back. A wild hive refills 750 turns after you rob it, and a bee box you build fills a comb every 400.<span class="credits"><span class="who">horth.panthur</span></span></li></ul></section>
+<section class="sec" id="steam-deck-and-controllers" data-sec="steam-deck-and-controllers"><h2>Steam Deck and controllers<span class="sec-n">14</span></h2><ul class="changes"><li class="change">Roguefort knows it is on a Steam Deck more reliably, so the Deck&#x27;s button prompts and graphics settings apply. Gaming Mode always opens fullscreen and sharp, whatever window size you saved on a desktop.<span class="credits"><span class="who">tthfry</span></span></li>
+<li class="change">Text fields typed every key twice in Gaming Mode. That&#x27;s fixed, and on a pad or a touch every text field opens the game&#x27;s own on-screen keyboard.<span class="credits"><span class="who">tthfry</span></span></li>
+<li class="change">Putting the Deck to sleep saves your game, and the sound comes back when it wakes.</li>
+<li class="change">Joining a friend from the Steam friends list works when Roguefort was closed. Before, the game opened on the title screen and lost the invite.<span class="credits"><span class="who">peacook</span></span></li>
+<li class="change">On a pad, prompts across the game show pad buttons: How to Play, the intro popups, window titles, the shop, crafting and map hints, level-up cards, the pack and the Spell Belt. The mouse pointer hides while you play on a pad.</li>
+<li class="change">Every action in the game can be reached by pad. L2 and View open the menu for your own tile, keyboard-only actions have rows in the Panels hub, and Controls can put a world action and a menu action on one button.<span class="credits"><span class="who">tthfry</span></span></li>
+<li class="change">Tap R1 for the Panels hub and hold it to swap weapons. A trip to the hub had been swapping your weapon and spending the turn.</li>
+<li class="change">A pad can throw a javelin, loose a bow or swing a polearm at reach: A aims, R1 picks the next target, and A again strikes. Sending a scout works by pad too, with a crosshair to show where it flies.</li>
+<li class="change">The Post Office, the Exchange and the trade window all work by pad, and L2 beside another player in the Old Mouth offers a trade. Skip tutorial sits in the pause menu.</li>
+<li class="change">With a docked Deck and a second controller, the game follows whichever controller you press.<span class="credits"><span class="who">tthfry</span></span></li>
+<li class="change">Deck text is never smaller than 12 pixels, the world map legend folds away, and the spell belt docks above the log. Tall windows keep their title and close box on screen, and the tutorial card stays off an open chest or shop.</li>
+<li class="change">On a slow machine, walking in 2.5D runs at about twice the frame rate it did, blows in a fight cost less, and the hitch from the far mountains every few steps is gone. On a Deck, zooming out stops before the frame rate falls apart.<span class="credits"><span class="who">tthfry</span></span></li>
+<li class="change">Building a world shows a loading screen while it works, so the button you pressed doesn&#x27;t sit frozen for a few seconds.</li>
+<li class="change">Performance warnings on a Deck talk about the Deck, and the performance report saves by pad without a file dialog.</li></ul></section>
+<section class="sec" id="how-the-world-looks" data-sec="how-the-world-looks"><h2>How the world looks<span class="sec-n">23</span></h2><ul class="changes"><li class="change">Walls, floors and ground have new pixel-art tiles everywhere: every dungeon biome, towns, interiors, the overworld and ships, all in the PICO-8 palette. Walls show a textured face above open floor, and corners and thin walls join up properly.</li>
+<li class="change">Ancient Ruins, the Underground Grove, the Sunken Library and the Old Mouth have been dressed by hand, with castle masonry, root walls, low bookcases and stocked shelves.</li>
+<li class="change">Grass is darker and greener, roads have their dithered edges back, and ten grounds that printed one tile over and over now vary, from shells on the Brinehold strand to cinders in the ash. Each kind of wood floor looks like its own wood.</li>
+<li class="change">Sand was one flat bright sheet under the new art. The desert shows its dunes again.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">You can build 63 new pieces of furniture, among them tables, desks, benches, bookcases, beds, chests, barrels, plants, busts, a standing lamp, banners and a scarecrow. Chests store things, beds let you rest and the lamp gives light.</li>
+<li class="change">Every art pixel is the same size in 2D, 2.5D and first person, so nothing gets squashed or stretched to fit. 2D zoom steps between sizes that keep every pixel crisp.</li>
+<li class="change">Shadows follow the sun, the moon and the weather in all three views. They fall away from fires and stay out of house interiors, and Settings has a Shadows checkbox (sun and moon shadows need High or Epic quality).</li>
+<li class="change">Water in 2D is alive: sun glints, surf running up the beach, rolling swell, lake laps, rings where you wade and where rain lands, and shallows that blend into deep water. It runs at Medium graphics quality and up.</li>
+<li class="change">In 2.5D and first person, each kind of water moves its own way. The sea surfs, lakes lap, rivers run, ponds shimmer and marshes bubble, and deep water lost its dotted grid.</li>
+<li class="change">Clouds in 2D hold still while you walk, and each one casts its own shadow on the ground. Storms are dark and heavy now, and lightning lights up the scene.</li>
+<li class="change">Days in 2D have a golden hour, a blue hour after sunset and a cool rose dawn, and at night campfires, torches and lamps throw warm, flickering pools of light.</li>
+<li class="change">Fireflies come out on warm nights in 2.5D and first person. Seed fluff drifts over summer meadows, smoke rises from fires and lived-in houses, and mist lies on the water for the first hours of a clear morning. The Visual effects setting scales all of it.</li>
+<li class="change">Weather in 2.5D and first person got heavier: lightning lights the scene, sandstorms stream low along the wind, rain falls on lakes as well as land, and it drips off the eaves.</li>
+<li class="change">Dark colours survive in 2.5D, so pebble beaches, dirt paths and night blues stop reading as black holes. At night your sight is a soft round pool.</li>
+<li class="change">Sprites in 2.5D stand on their lowest pixel, so flowers stop floating above the ground. Dungeon entrances have real stonework, and beds and siege engines stopped glowing like campfires.</li>
+<li class="change">Levelling up is a moment now. A rune seal stamps out under your feet, a column of light goes up, and a shield with your new level rises.</li>
+<li class="change">Spell effects, zone borders, the aiming path, head badges and sleeping Zs are drawn in proper pixels in 2D.</li>
+<li class="change">First person was rebuilt on flat ground from the same art as the other views, with a pixel sky and mouse look. Your arms are pixel art and wear your chest and hand gear, and houses have roofs and plank ceilings.</li>
+<li class="change">First person has its own action flow. Tab (Y on a pad) opens an Actions menu, 1 to 8 ready a spell, left-click uses what is readied and right-click opens the actions nearby. The Height Traversal setting is gone.</li>
+<li class="change">You see further in first person, and hills, mountain ranges and villages you have found stand on the horizon.</li>
+<li class="change">Menus and windows have a new look: navy panels, teal buttons and one continuous pixel frame round every window. The interface icons are redrawn as pixel art.</li>
+<li class="change">People walk with a carried stride and have new poses for mining, gathering and slashing, and a robe sways at the hem.</li>
+<li class="change">95 community sprites are in. ArkHaven redrew 88 of them, mostly item icons, and Elfie the Explorer painted the Magma Reaver, the Stoneforged Berserker, the Lattice Hierarch and the Cultist Hexer, who now draw their own art. DatSheepDoe drew a new terrain tile.</li></ul></section>
+<section class="sec" id="co-op" data-sec="co-op"><h2>Co-op<span class="sec-n">14</span></h2><ul class="changes"><li class="change">Rejoin a world and you keep your name and guild. After the host reloads, a returning joiner gets their own character back, level, perks and pack, and on Steam a friend is matched by their account.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Walking on a long-lived save used to lag the whole party, with the ping climbing from about 50 ms to a full second on every step, because each step sent the run&#x27;s whole progress. A quiet step sends a few bytes now.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Each player has their own Arts and Spell Mastery. A joiner had been reading, and moving, the host&#x27;s.</li>
+<li class="change">Turn bubbles reach 12 tiles by default, and the host can set anything from 6 tiles to Everywhere. Fights far away pause while their players are idle.<span class="credits"><span class="who">morigh</span><span class="who">shexara</span></span></li>
+<li class="change">Your turn alert shows over open menus, says why it is your turn, plays a sound and blinks the window title, and your partner sees that you have a turn alert up. YOU ARE DOWN and the sleep banner show over menus too.<span class="credits"><span class="who">morigh</span><span class="who">shexara</span></span></li>
+<li class="change">On your first connection, the Traveller&#x27;s Pact explains how co-op works, and after that Esc then Co-op opens the co-op panel. A host waiting on their own reads Hosting, where a red Not connected used to sit.<span class="credits"><span class="who">peacook</span><span class="who">arkhaven</span></span></li>
+<li class="change">Save party gives every player a copy they can play, on their own or as host.</li>
+<li class="change">When a join fails, a screen tells you why: different versions, demo and full game, different world settings, or a full party. The host leaving has its own dialog, and the lobby shows its progress and can be cancelled.</li>
+<li class="change">Joiners start with their own guild&#x27;s bread in their quick slots, see your animals by name, and get healed by your Emmental Mend.<span class="credits"><span class="who">arkhaven</span></span></li>
+<li class="change">Partner health reads against their real maximum, 641/641 where it said 641/298, and a hit on your partner counts the health their gear gives them.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Right after joining, the bag waits for your own things to arrive from the host. It had been showing a starter kit that wasn&#x27;t yours.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">A guest&#x27;s Attack and Tame on a calm animal land now. A guest who reconnects while the party is in a dungeon or the market arrives where the party is.</li>
+<li class="change">The host checks more of what each guest&#x27;s game sends. Two players using one chest, water barrel, bench or family panel at the same moment can&#x27;t duplicate or lose items or be charged twice, and a guest&#x27;s lockpicking runs through the host.</li>
+<li class="change">Exchange listings and Post Office letters can only ever pay out once, and ships, mounts and pack animals stay in the save they belong to.<span class="credits"><span class="who">rubberychicken</span></span></li></ul></section>
+<section class="sec" id="fortress" data-sec="fortress"><h2>Fortress<span class="sec-n">14</span></h2><ul class="changes"><li class="change">Fortress is a new mode on the title screen, in the full game and the Playtest. Generate a continent, pick one of up to eight starting sites, name your colony and found it with seven settlers.</li>
+<li class="change">You don&#x27;t play one character in Fortress. You pause, set the speed and drag orders across the map, digging, felling, gathering, building and drawing water, and your settlers take the work, haul it to storage, eat, sleep and slowly get better at their jobs.</li>
+<li class="change">Your colony starts with three levels, surface, cellar and deep rock, with caves hidden in the rock, and you can survey more land as it grows. Farm wheat and cave truffles, milk goats and a cow, and age cheese on racks, where a wheel aged underground yields an extra one.</li>
+<li class="change">Seasons, weather, fire, flooding and roof collapse all happen to your colony. Settlers get hurt and need care, and they make friends and rivals. Salt caravans come to trade, and visitors ask to join, up to 32 living settlers.</li>
+<li class="change">Raiders come too, Ravenkin Slingers and bandits running on the same AI and damage as in Adventure. Craft spears, slings, mail and shot, and each raid arrives as a letter with Locate and Defense buttons.</li>
+<li class="change">Send expeditions to places on the world chart and set up outposts. Ambitions give the colony something to aim for, and when you are done with a colony you can retire it.</li>
+<li class="change">A guided first day takes you through your people, a first tree order, a bed, food and water and a shared home. Time keeps running while it does, and you can skip it or tuck it away.</li>
+<li class="change">Fortress has its own soundtrack, 17 tracks from alkakrab&#x27;s 50 Cozy Fantasy RPG Tracks, and the combat music fades in when raiders arrive.</li>
+<li class="change">Every colony key can be rebound, in Settings &gt; Controls or from the colony menu. The mouse wheel zooms, Shift and the wheel pan, and Escape backs out of the founding screen and opens the menu inside a colony.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">WASD and the arrow keys pan the camera, which moved Dig to M, Stairs to Z and Territory to C. Space always pauses, Generate another world really does give you another world, and a single button founds the colony.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">Accept on a visitor asking to join admits them, or tells you what is missing, such as how many more beds to build.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">Starting sites cover every biome on the map, and far fewer of them sit on mountains. Hardy, Steadfast and Industrious are common traits now, so about half of new settlers roll a good one.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">Whole colonies were dying of thirst beside a well. Settlers drink water left on the ground when no bin will take it, caregivers carry it to settlers who can&#x27;t walk, and wells keep drawing.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">During the guided first day the Fell trees tool stays in your hand, so one drag marks a whole stand of trees.<span class="credits"><span class="who">rubberychicken</span></span></li></ul></section>
+<section class="sec" id="dungeons" data-sec="dungeons"><h2>Dungeons<span class="sec-n">21</span></h2><ul class="changes"><li class="change">Secret rooms. About a third of dungeon floors hide a sealed room in the rock. Stand beside its door for a few turns and the wall gives way, and what waits inside suits the dungeon: drowned shelves, crystal, an ice larder, a hoard nook, a caged beast. Every one has a chest, and the secret chest rolls Rare or better.<span class="credits"><span class="who">Splattercat</span></span></li>
+<li class="change">The Dungeon Rat King you meet in a secret room has more health and a poisoning bite now, and his Swarm Scouts leave a ring on the minimap where each creature stood.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">horth.panthur</span></span></li>
+<li class="change">A few plains and forest dungeon mouths are now beset holdfasts, walled yards under siege. Step inside and five waves come over the wall, and the strongbox stays barred until the last one is down. Walk away mid-siege and the next attempt starts again at wave one.</li>
+<li class="change">Every dungeon has a companion worth freeing somewhere in its cages, and one you have freed stays freed. Three dungeons in four had nobody in them to rescue.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Cages hold more than rats. The Cave Bat and the Rat King turn up in any dungeon, every biome has at least two kinds of captive, and an empty cage may hold one of the floor&#x27;s own monsters, which comes out fighting if you open the door.<span class="credits"><span class="who">drachasor</span><span class="who">trespiratesque</span><span class="who">datsheeptho</span></span></li>
+<li class="change">Dungeons look like the country they stand in. Arctic, taiga, snow peak, glade, savanna and coastal delves have their own layouts, monsters and bosses, where they used to be plains ruins with the Archlich at the bottom of more than half of them. The plains boss is now The Stilled Affineur.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">arkhaven</span></span></li>
+<li class="change">Empty a dungeon and a new band may move in at a later season boundary, one tier harder, and the log tells you when it happens.<span class="credits"><span class="who">bossman62</span></span></li>
+<li class="change">A delve you had already started keeps the floors, cages and captives it had when its biome got its new layout.</li>
+<li class="change">Enemies that lost you behind a door used to walk into the wall and vanish. They stay on the floor now, and one that ends up inside a wall is carried to the nearest open tile.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">In the Descent the boss music ends when the boss dies, and a delve keeps one tune where it used to switch tracks at odd moments.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Your mines keep paying while you are in the Old Mouth or down the Descent.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Your horse waits at the dungeon entrance, where the Descent used to offer to put it in your pack, and cooling lava crust is a dark skin you can tell from the lava beside it.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Long grass in dungeons can be cut with the scythe. Once cut, it stays cut.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Dungeon chests never offer a blueprint you already know.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">nalathnidragon</span></span></li>
+<li class="change">Explored rooms you can&#x27;t currently see are brighter, rooms the Cave Bat found for you are drawn in grey, and Settings &gt; Display has a slider for how bright they are.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Your Cave Bat&#x27;s echolocation works now. While it follows you it maps the rooms your room opens onto, and its card says AUTOMATIC so you know you don&#x27;t have to order it.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Searched barrels stand open and empty, and any container you have already been through says (searched) when you hover or look at it.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Crossbow bolts turn up in geodes and weapon racks, and a slain archer or crossbowman can drop its own ammunition whatever you are holding.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">bancheis</span></span></li>
+<li class="change">Before a trial dungeon, the entry screen explains what defeat costs and how saving works there, and altars and cages explain themselves the first time you meet one.</li>
+<li class="change">On a boss floor the ambient drone fades while the music plays, so the two stop fighting each other.</li>
+<li class="change">Each floor you walk into announces its band name, and the dungeon header fits on one row again.<span class="credits"><span class="who">danekjovaxutc5</span></span></li></ul></section>
+<section class="sec" id="combat-and-weapons" data-sec="combat-and-weapons"><h2>Combat and weapons<span class="sec-n">14</span></h2><ul class="changes"><li class="change">F aims whatever you are holding. A sword strikes beside you, a spear reaches any tile two out (the knight&#x27;s moves included), and a bow or javelin aims at range. Click and the right-click Strike at reach row work as well.<span class="credits"><span class="who">rubberychicken</span><span class="who">nalathnidragon</span></span></li>
+<li class="change">Step toward an enemy two tiles away in a straight line with a spear in hand and you swing at it. That is a Gameplay setting, on by default.</li>
+<li class="change">Javelins are a new one-handed weapon. They stack to five in the hand, F or a click throws one, you pick it back up afterwards, and a following dog fetches it for you. Make them at the workbench from planks and nails, or buy them from a blacksmith.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Curses bite harder on gear found further out, and a cursed item now carries a bargain on its good stats. Deep in the game a cursed item is the strongest thing you can wear and the nastiest, and its card shows what the curse took.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Unidentified gear waits in your pack until you know what it is, since it might carry a hidden curse that won&#x27;t come off.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">A new run rule lets your own blasts catch you. Tick it in Going Rogue or on the Crossing bench. It is off unless you choose it.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">While hidden you can walk right up to a sleeping creature, so the blow that wakes it can be a backstab.<span class="credits"><span class="who">.knifee</span></span></li>
+<li class="change">Monsters at ease leave you be while you are hidden. Some had been walking straight toward you.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Each banked level-up deals its own three cards, and walking about or closing the panel can&#x27;t change them. No more taking the same mythic twenty times.<span class="credits"><span class="who">tobacoos</span><span class="who">drachasor</span></span></li>
+<li class="change">Both character sheets say dual wielding is one strike, and show what the off hand adds to it.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">nalathnidragon</span></span></li>
+<li class="change">Weapon cards show their Range or Reach, a perk you have taken several times shows its total on the card, and the Fully Reserved achievement can be earned.<span class="credits"><span class="who">horth.panthur</span><span class="who">rubberychicken</span></span></li>
+<li class="change">Playing a vampire, auto eat and drink reaches for Fresh Blood when you get hungry, and rivers and barrels turn you away with the same line the well uses. Biting something with no blood in it costs you nothing.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Dawn is called at dawn for a vampire, the Old Mouth stopped announcing sunrises nobody can see down there, and the sun stops claiming to burn a vampire whose burn is fully resisted.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">New characters start on full health. The starting robe&#x27;s bonus was landing after health had been set.</li></ul></section>
+<section class="sec" id="towns-people-and-the-law" data-sec="towns-people-and-the-law"><h2>Towns, people and the law<span class="sec-n">21</span></h2><ul class="changes"><li class="change">A killing costs you standing only with the people who saw it, the way theft always has. Kill a guard on an empty road and nobody knows. Kill one in the market square and the whole town does.<span class="credits"><span class="who">arkhaven</span></span></li>
+<li class="change">Catch a villager in a blast aimed at something else and the watch arrests you, where the whole town used to turn on you. The jail line tells you what the watch takes.<span class="credits"><span class="who">arkhaven</span></span></li>
+<li class="change">A town&#x27;s standing readout agrees with its patrols. One could tell you that you may settle there while its guards were hunting you.<span class="credits"><span class="who">_garmr</span></span></li>
+<li class="change">The main story stays reachable in a town that has turned on you. Story quest givers keep their posts under lockdown, speak to you warily, and are driven off rather than buried if they are killed.<span class="credits"><span class="who">theartolater</span></span></li>
+<li class="change">Cities have a fence. Find one in the tenements or the shambles: they buy stolen goods at a cut, no questions asked, and keep lockpicks on the shelf.</li>
+<li class="change">Every general store sells lockpicks, so selling your starting bundle is no longer a one-way door.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Your family can move in with you. Ask from the Family panel and your spouse and children move to a bed near your home campfire, keep house by the fire and eat from your larder.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Marrying someone sticks. Spouses stopped reading as Unwed, your spouse&#x27;s door opens to you at night, and your own spouse and children don&#x27;t ask you to leave any more.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">elfietheesp55</span></span></li>
+<li class="change">Sending food home works out what fits first and says how many days it buys, and the leftovers stay in your pack.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Feeding, petting, cooking, crafting and loading a station each take a turn now, and an evening with your family spends the evening.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Talking to someone answers you. A villager woken by a night alarm could swap places with you instead.<span class="credits"><span class="who">urughak</span></span></li>
+<li class="change">Beside a person, the interact key talks to them, where it used to open the farm plot under your feet. Creatures bigger than one tile can be talked to from any part of them.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Frightened villagers go back to bed, and a city resident you killed stays dead, where the same house kept turning out a fresh one.<span class="credits"><span class="who">theartolater</span></span></li>
+<li class="change">Villagers with quests stand at their door during working hours, so you can find them without walking into a house you are barred from.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Town guards and townsfolk treat a yard you have fenced as yours, and the watch stopped using your gate as a shortcut.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">House signs name the trader who works inside and their hours, and the sector journal can pin a street or a shop door you have found.</li>
+<li class="change">Salvaging a sword in the street used to earn you a scolding for littering. Dropping rubbish on the ground earns it now.<span class="credits"><span class="who">elfietheesp55</span></span></li>
+<li class="change">Villagers killed by a spell stay dressed as they fall. They used to turn into a bare grey figure.<span class="credits"><span class="who">theartolater</span></span></li>
+<li class="change">The traveller you are paid to escort has a name and clothes, walks out of the inn with you, and can&#x27;t be hit by accident, and the contract checks that they actually arrived.<span class="credits"><span class="who">arkhaven</span><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Waystone caravan merchants walk in from somewhere out of sight. They had been appearing at your elbow.<span class="credits"><span class="who">theartolater</span></span></li>
+<li class="change">District names read properly (Stillmen&#x27;s Vennel), people are called by their names, and knocking down Hearthmere&#x27;s wall no longer calls it The Hearthmere.<span class="credits"><span class="who">trespiratesque</span><span class="who">rubberychicken</span></span></li></ul></section>
+<section class="sec" id="quests" data-sec="quests"><h2>Quests<span class="sec-n">14</span></h2><ul class="changes"><li class="change">Quest text says what the game checks. Every questline&#x27;s objectives were rewritten from what completes them, so nothing sends you hunting for a shed that isn&#x27;t there.</li>
+<li class="change">The arrow to a quest giver follows them through their day. A contract signed underground used to point thirty thousand tiles away.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Gather, rare-find and supply contracts can be handed in at the settlement&#x27;s board when the giver is away, for 2 standing. Ask a neighbour where the giver is and they will walk you there, and a contract whose giver nobody can find can be dropped once without breaking an oath.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">samv123</span></span></li>
+<li class="change">Village work pays faction standing. The fisher&#x27;s contract only ever paid coin.<span class="credits"><span class="who">jungcodex</span></span></li>
+<li class="change">The main story pays its full standing. The limit that stops you farming one town for reputation had been eating the back half of every questline.<span class="credits"><span class="who">theartolater</span></span></li>
+<li class="change">Clear a story dungeon early and the stage it belongs to is still offered when you get there.<span class="credits"><span class="who">thesquirrel_74982</span></span></li>
+<li class="change">Investigate contracts close the moment you walk into the place they name, and when two dungeons share a name the contract says which one it means.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">A new run starts outdoors on ground you can reach, and every tutorial mark can be walked to from camp without opening a door. One Fennmarche start had put the camp inside a shop wall.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Quest rewards that don&#x27;t fit in your pack land at your feet.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Deliver quests have somebody to deliver to: the destination&#x27;s board takes the handover.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Contracts with no single place say so on the card, and contracts name the cave or town they were taken in.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Gather totals in the log count what you are holding.<span class="credits"><span class="who">.knifee</span></span></li>
+<li class="change">The quest you are tracking sits at the top of the log, and the tracker finishes its sentence at any font size.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Quest givers with no guild read Unaligned, and &quot;Return to Thymerock&quot; has its space back.<span class="credits"><span class="who">rubberychicken</span><span class="who">theartolater</span></span></li></ul></section>
+<section class="sec" id="exploring-the-world" data-sec="exploring-the-world"><h2>Exploring the world<span class="sec-n">20</span></h2><ul class="changes"><li class="change">Every new Crossing has a desert. Deserts had been so rare that none of twelve test worlds had one.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">New Crossings join up their roads, so the capital your first quest names can be walked to, and far shores have signposts. Roads along lake shores stay roads, camps aren&#x27;t pitched across them, and forts have a gate where the road meets the wall. The crafted continent gets the same road fixes.</li>
+<li class="change">Signposts name the towns their own road goes to.<span class="credits"><span class="who">drachasor</span></span></li>
+<li class="change">The Crossing setup screen reads properly: every choice opens its whole list, the intro is shorter, the houses fold away, and the Peoples line agrees with the map.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">Fast travel sets you down on open ground outside the place you picked, never inside a wall or somebody&#x27;s bedroom.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Auto-travel lays footprints along the way it plans to walk, in 2D and 2.5D.</li>
+<li class="change">The world map has a Waypoints list (K, or L3 on a pad) to track, rename, remove or find your pins, and the distance beside the minimap arrow is readable again, with a switch for the arrow itself.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Shift and click the minimap to walk to that tile. A tracked target already on the minimap gets a bracket on it, and the minimap paints the ground in the same colours as the main view.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">On the world map, a ring marks each settlement with a waystone, filled in once you have activated it. General stores in bigger towns sell the waystone blueprint.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">bossman62</span><span class="who">arkhaven</span><span class="who">horth.panthur</span></span></li>
+<li class="change">Dungeon bosses sometimes drop a torn note that marks the country around one of the far riftstones.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">Eclipses are now the Dimming, and they come about once a fortnight, down from twice a week, and never in your first six days.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">xxturiflower47xx</span></span></li>
+<li class="change">Hunting contracts can be filled. Small game stays in its own biomes however far from home you walk, and a hunted-out valley fills up again.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Mountain sage, acorns, pistachios and dustcap grow where they were always meant to, and cinnamon bark grows on the coast.</li>
+<li class="change">Critter Bait brings the wildlife to you, three times the local spawn rate for 150 turns. Want turtle shells? Expect crabs.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">Night-sight builds keep their view through dawn, fading with the sky.<span class="credits"><span class="who">theartolater</span></span></li>
+<li class="change">Island names on the world map are readable, biome names stay put when you zoom in, and biome regions have labels and edges you can read without telling colours apart.<span class="credits"><span class="who">rubberychicken</span><span class="who">trespiratesque</span></span></li>
+<li class="change">Road caravans and wandering adventurers show on the minimap, and clicking the map only describes what you can actually see.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Before you cross into a more dangerous region or leave a cave, the game tells you how dangerous the ground ahead is, and night-travel options are explained before dusk.</li>
+<li class="change">The Sky-Serpent event points one way now, and it is the right way.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">River mouths grade from shallow to deep water, with no hard square line between them.<span class="credits"><span class="who">rubberychicken</span></span></li></ul></section>
+<section class="sec" id="homestead-and-farming" data-sec="homestead-and-farming"><h2>Homestead and farming<span class="sec-n">15</span></h2><ul class="changes"><li class="change">Walk across your own farm. A plot with nothing to tend is ground, planting and harvesting are their own actions, and you choose which crop goes in. Seeds you have padlocked stay in the pouch.<span class="credits"><span class="who">xxturiflower47xx</span></span></li>
+<li class="change">Hold Alt as you bump a plot to plant the seed you chose last, and a Gameplay setting stops seeds sowing when you walk into farmland.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">One swing of the scythe cuts every patch you can reach, and the scythe, whistle and bucket ride free in the tool roll.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Move furniture and chests, contents and all, instead of tearing them down.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">samv123</span></span></li>
+<li class="change">Set a bigger chest down on a smaller one and it upgrades in place.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Furnish the hold of a bigger ship. Furniture, storage and lights go below decks and sail with it.</li>
+<li class="change">While you walk with a build armed, the preview follows the tile under your pointer.</li>
+<li class="change">Homestead workers eat three meals a day from chests near their cottage, so a stocked larder feeds them, and Give food feeds one by hand. By the end of their first day they used to be starving.<span class="credits"><span class="who">drachasor</span><span class="who">bancheis</span><span class="who">arkhaven</span><span class="who">urughak</span></span></li>
+<li class="change">Workers search further out once the nearby grove is bare, and their hover card says why they are unhappy. A worker you just paid for stays on the crew.<span class="credits"><span class="who">urughak</span></span></li>
+<li class="change">Workers haul their loads to storage near home and tell you when a stockpile is blocked, and dropped loads stopped paving over the homestead.<span class="credits"><span class="who">bancheis</span></span></li>
+<li class="change">Soldiers are hired at your level, and the Tender heals.<span class="credits"><span class="who">bancheis</span></span></li>
+<li class="change">Livestock heal when fed. Led animals follow you through a teleport, breeding has an off switch, and one order reaches the whole herd nearby.<span class="credits"><span class="who">bancheis</span><span class="who">drachasor</span></span></li>
+<li class="change">Two goats can&#x27;t share one square, and the right-click menu names the goat you hovered.<span class="credits"><span class="who">drachasor</span></span></li>
+<li class="change">Hovering a trough says how many feedings are left, and the water barrel, bee box, yogurt barrel and the rest say what they hold.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">A mushroom bloom sprouting on a herb you just picked left a tile you couldn&#x27;t walk on or harvest. That can&#x27;t happen now, and saves holding one mend themselves.<span class="credits"><span class="who">danekjovaxutc5</span></span></li></ul></section>
+<section class="sec" id="defences-and-hirelings" data-sec="defences-and-hirelings"><h2>Defences and hirelings<span class="sec-n">6</span></h2><ul class="changes"><li class="change">The beacon draws every enemy within seven tiles off you and onto itself. It used to be ignored whenever you stood near it, which is exactly when you want it.<span class="credits"><span class="who">thesquirrel_74982</span></span></li>
+<li class="change">The watchtower&#x27;s extra range and the forge&#x27;s extra damage reach your turrets and allies in Adventure. You had been paying for half a building.<span class="credits"><span class="who">thesquirrel_74982</span></span></li>
+<li class="change">The Channeler has its blast and the Sapper its cooldown, both of which their cards had always promised.<span class="credits"><span class="who">bancheis</span></span></li>
+<li class="change">Kills by turrets and other emplacements pay a quarter of the gold they did.<span class="credits"><span class="who">bancheis</span></span></li>
+<li class="change">Raiders go for walls and doors before your torches.</li>
+<li class="change">Ballistae firing every turn tanked the frame rate. They don&#x27;t now.<span class="credits"><span class="who">bancheis</span></span></li></ul></section>
+<section class="sec" id="animals-and-companions" data-sec="animals-and-companions"><h2>Animals and companions<span class="sec-n">9</span></h2><ul class="changes"><li class="change">Winged companions fly scouting runs. Send one from the world map (E, R3 or the button) and it reveals the ground along its path and around where it lands.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Dismiss is now Stable, since the old word sounded like letting the animal go. Pack animals and mounts can be stabled from their own tile.<span class="credits"><span class="who">.knifee</span><span class="who">arkhaven</span><span class="who">drachasor</span></span></li>
+<li class="change">A pet left at base stops helping you from across the world.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">What your pets find follows your loot filter, and a pet&#x27;s kill arrives by name: &quot;Crag brings you Bone.&quot;<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Pets face the way they walk, and you and your mount pass behind the Old Mouth tables and counters.<span class="credits"><span class="who">arkhaven</span><span class="who">rubberychicken</span></span></li>
+<li class="change">Follow a townsperson without holding Wait.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">Auto-travel and Move here keep going with a pet knocked out, told to stay back, or still growing up.<span class="credits"><span class="who">theartolater</span><span class="who">urughak</span><span class="who">bossman62</span><span class="who">drachasor</span></span></li>
+<li class="change">The silk weaver and the hoarfrost spider mend over time like other animals.</li>
+<li class="change">Before you board a ship, the game explains where animals you send away will go.</li></ul></section>
+<section class="sec" id="your-pack-and-the-shops" data-sec="your-pack-and-the-shops"><h2>Your pack and the shops<span class="sec-n">21</span></h2><ul class="changes"><li class="change">The starting backpack holds 24, up from 16 in 0.21.0, and every bigger bag holds eight more than it used to.<span class="credits"><span class="who">trespiratesque</span><span class="who">samv123</span></span></li>
+<li class="change">Bigger bags take more than gold now. The shopkeeper shows what opens the next one, clearing dungeons, a legend tier or standing with a faction, and bags you already own are kept.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">Tabs filter your pack and your storage by category without changing the order you arranged.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Chests sort six ways, by type, rarity, value, name, quantity or lock.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Shift, Ctrl and Alt move or drop one, five, or however many you pick, and hovering a stat shows where each part of it comes from.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Your mouse wheel scrolls the pack while you drag an item, and dragging to the edge of the list scrolls it too.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Food you marked Retain can go in a quick slot, and pressing the slot eats it. A food card on the belt goes away when its slot empties.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Crafted arrows go straight into the quiver you are shooting from.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">In the shop&#x27;s sell list, a hidden seed pouch stays hidden, and the list keeps your pack&#x27;s order.<span class="credits"><span class="who">hugomad</span><span class="who">samv123</span></span></li>
+<li class="change">An item&#x27;s hover card opens beside the chest, clear of the rows you opened the chest to read.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Shops show the full item card on Buy, Sell and Buyback, say when they restock, and shelve their stock by kind so the three waterskins stand together.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">samv123</span><span class="who">trespiratesque</span></span></li>
+<li class="change">Item cards say what a thing is: a hatchet reads Rare (tool), and Execute is named for the damage it deals.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Destroying a spell wheel, a blueprint or rare gear asks first, with Cancel already selected.</li>
+<li class="change">A bid you already have on a lot counts toward its buyout price.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Waterskins that merged into one big stack in older saves split back apart, and Homing Whey goes to the nearest chest and leaves your scythe alone.<span class="credits"><span class="who">horth.panthur</span><span class="who">drachasor</span></span></li>
+<li class="change">Iron nails are a starting recipe, so a crossbow can feed itself: one scrap makes two nails.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Roquelle characters start with real food again.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Every cooked fish has the cooked fish icon, and the Maple Seed looks like a winged seed, not a cow&#x27;s heart.<span class="credits"><span class="who">arkhaven</span><span class="who">urughak</span></span></li>
+<li class="change">A wilderness find that mentions water, driftwood or timbers now has them lying there.</li>
+<li class="change">Crafting puts the item card away so you can read the line that changed, and recipes are coloured by whether you can make them.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Backpack upgrades stopped claiming a trader will buy them back, and a shop&#x27;s restock time and your journal count turns from the start of your adventure.<span class="credits"><span class="who">samv123</span></span></li></ul></section>
+<section class="sec" id="interface-and-settings" data-sec="interface-and-settings"><h2>Interface and settings<span class="sec-n">21</span></h2><ul class="changes"><li class="change">Health reads as a bar by default with Manna beside it in the top bar, and hearts are still an option. The dungeon Health and Manna box can be switched off.<span class="credits"><span class="who">rubberychicken</span><span class="who">danekjovaxutc5</span><span class="who">samv123</span></span></li>
+<li class="change">A colour-blind friendly setting moves the game&#x27;s good-or-bad readouts off red and green, and every have-or-lack mark is a tick or a cross.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">rubberychicken</span><span class="who">.knifee</span></span></li>
+<li class="change">Show first-time hints is a Gameplay setting, and hints you have dismissed stay dismissed on your next character.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">Large message banners can be turned off in Settings &gt; Display. Everything they say still goes to the log.</li>
+<li class="change">AZERTY players have a French keyboard preset, and key labels follow your bindings.</li>
+<li class="change">Gather has its own key to rebind, panel hints show the keys you actually have bound, and a Drop rebound to Alt+X drops the item without asking how many.</li>
+<li class="change">In Customize HUD, the whole widget is the handle, a resized message log or market chat grows its box instead of its text, and a widget can&#x27;t get lost behind the bar.<span class="credits"><span class="who">horth.panthur</span><span class="who">rubberychicken</span><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Step through the title screen hints with the chevrons, Q and E, or a pad&#x27;s shoulders, and the Continue plaque shows your own character.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Roll draws a name from the origin you picked, and Enter in the name field works.<span class="credits"><span class="who">rubberychicken</span><span class="who">theartolater</span></span></li>
+<li class="change">Keys go to the window you can see on top. Neither the arrow keys in Settings nor Escape in the quick-action window go dead after a couple of minutes.<span class="credits"><span class="who">samv123</span><span class="who">trespiratesque</span></span></li>
+<li class="change">The perk screen scrolls its cards, your build and the info strip separately, perk rarity is readable, and the header reads CHOICE 2 OF 3.<span class="credits"><span class="who">.knifee</span><span class="who">nalathnidragon</span><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Quick bar icons and key caps are readable, and at large text the belt keeps its quantities, the crystal count fits its box and guild names break in sensible places.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">The quick slot bar stretches sideways without growing taller, the main menu opens at your text size, the N on the world map is readable again, long key names wrap, and a HUD widget can sit in the top centre.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">The mouse wheel scrolls a panel from anywhere on it, a greyed action says why in full, the pack reopens where you left it, and the valuable-item warning follows your loot filter.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">The Abilities panel has a tab per key and room to read, and Homestead is one button with one name.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">On macOS, moving the window to another display no longer throws off where you click.<span class="credits"><span class="who">grumpykolmogrov</span></span></li>
+<li class="change">The sea track plays while you sail, towns have their music back, and closing the bag makes a sound however you shut it.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Temp HP and Rinded explain themselves on hover, the home pointer says what it points to, and the area name at the top lets the map show through.<span class="credits"><span class="who">rubberychicken</span><span class="who">samv123</span></span></li>
+<li class="change">The spell belt&#x27;s key hint stopped reading Unbound after you close the bag, the Cook All button is readable, and a direction prompt lists one choice per row.<span class="credits"><span class="who">samv123</span><span class="who">rubberychicken</span></span></li>
+<li class="change">Felling a tree could flash the view as the top bar wrapped to another row. That&#x27;s fixed, a falling tree respects Screen Shake off, and breaking gold or crystal shakes the screen once.<span class="credits"><span class="who">thesquirrel_74982</span></span></li>
+<li class="change">Sleeping draws one plume of Zs. Wheels of War cards have quieter backgrounds, and the two Physician cards have different names.</li></ul></section>
+<section class="sec" id="game-text" data-sec="game-text"><h2>Game text<span class="sec-n">2</span></h2><ul class="changes"><li class="change">All 306 books were read and 297 of them rewritten, and the library is about a third of its old length. Dialogue, tutorials, help, item text and the endings had the same pass.</li>
+<li class="change">The word potion is gone from item text, since there are no potions, and the town standing meter stopped describing a town losing its patience.</li></ul></section>
+<section class="sec" id="saves-and-performance" data-sec="saves-and-performance"><h2>Saves and performance<span class="sec-n">10</span></h2><ul class="changes"><li class="change">A chest built where a big tree once stood could crash the game while loading a save. Those saves open again.<span class="credits"><span class="who">thesquirrel_74982</span></span></li>
+<li class="change">A long-played save stuttered for seconds after it loaded. The step behind it went from almost two seconds to a blink.<span class="credits"><span class="who">.knifee</span></span></li>
+<li class="change">Long-lived worlds save at most once a minute, where they had been saving every fifteen seconds whenever something new spawned.<span class="credits"><span class="who">theartolater</span></span></li>
+<li class="change">Saves are smaller, because faint friendships between people who never did anything together are dropped when you save.</li>
+<li class="change">Desktop saves are written to a temporary file and then swapped in, so a crash mid-save can&#x27;t leave you half a file.</li>
+<li class="change">Planning the next leg of a long trip costs a third less.<span class="credits"><span class="who">nagayun</span></span></li>
+<li class="change">The Old Mouth stopped crawling, and spinning the mouse wheel zooms the map in one go.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">The performance warning waits for five long stalls in a minute before it speaks.<span class="credits"><span class="who">theartolater</span></span></li>
+<li class="change">After a jailbreak, casting could throw you back to the menu and mined rocks could grow straight back. Both are fixed, and saves that were affected are repaired when they load.</li>
+<li class="change">Bug report exports say where the file went and what to do with it.</li></ul></section>
+<section class="sec caveat" id="known-issues" data-sec="known-issues"><h2>Known issues<span class="sec-n">9</span></h2><ul class="changes"><li class="change">Only the Monadic Descent is open. The Dyadic Vault, the Triadic Gate and the Tetradic Keep are still sealed.</li>
+<li class="change">Fortress is mouse and keyboard only, with no pad support yet, and it only draws in 2D.</li>
+<li class="change">In Fortress, a roof built beside a support can still collapse.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">The Deck changes were tested on a desktop set up like a Deck, and still need checking on a real one. 2D is the smoothest view on a Deck, and the Windows build run through Proton does not see a controller, so use the Linux build.</li>
+<li class="change">Crafted spell cheese balance is not settled, and How to Play does not cover the affineur&#x27;s bench yet.</li>
+<li class="change">Some of the dungeon combat music does not suit the world at all.<span class="credits"><span class="who">urughak</span></span></li>
+<li class="change">The Abandoned Altar draws over the rock above it.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Built stone walls are too close to the grass in colour.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Guards and travelling merchants can still hang about outside a base built at a town&#x27;s edge.<span class="credits"><span class="who">danekjovaxutc5</span></span></li></ul></section>
+<section class="sec" id="credits" data-sec="credits"><h2>Credits<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Reports, saves, suggestions and playtest feedback: .knifee, _garmr, arkhaven, bancheis, bossman62, danekjovaxutc5, datsheeptho, drachasor, elfietheesp55, grumpykolmogrov, horth.panthur, hugomad, jungcodex, morigh, nagayun, nalathnidragon, peacook, rubberychicken, samv123, shexara, theartolater, thesquirrel_74982, tobacoos, trespiratesque, tthfry, urughak and xxturiflower47xx.</li>
+<li class="change">Community sprites: ArkHaven, Elfie the Explorer and DatSheepDoe.</li>
+<li class="change">Fortress soundtrack: alkakrab.</li></ul></section>
+      <div class="empty hidden" id="empty"></div>
+    </div>
+  </div>
+</main>
+
+<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.21.0.html"><span class="pg-k">Previous release</span><span class="pg-v">Cells and Spells</span><span class="pg-n">0.21.0</span></a><a class="pg pg-all" href="index.html">All releases</a></nav>
+
+<footer class="foot">
+  <span>Roguefort 0.23.0 &middot; 25 September 2026</span>
+  <span>Community reporters are credited against each change.</span>
+</footer>
+
+<script>
+(function () {
+  var q = document.getElementById('q');
+  var empty = document.getElementById('empty');
+  var rail = document.getElementById('rail');
+  var here = document.getElementById('here');
+  var liveTotal = document.getElementById('live-total');
+  var liveSecs = document.getElementById('live-secs');
+  var secs = [].slice.call(document.querySelectorAll('.sec'));
+  var idx = [].slice.call(document.querySelectorAll('.idx'));
+
+  var items = [];
+  secs.forEach(function (s) {
+    [].slice.call(s.querySelectorAll('.change')).forEach(function (li) {
+      items.push({ el: li, sec: s, text: li.textContent.toLowerCase() });
+    });
+  });
+
+  function countEl(id) { return document.querySelector('[data-count="' + id + '"]'); }
+
+  function filter() {
+    var term = q.value.trim().toLowerCase();
+    var shown = 0;
+    secs.forEach(function (s) { s._n = 0; });
+    items.forEach(function (it) {
+      var hit = !term || it.text.indexOf(term) !== -1;
+      it.el.classList.toggle('hidden', !hit);
+      if (hit) { it.sec._n++; shown++; }
+    });
+    secs.forEach(function (s) {
+      s.classList.toggle('hidden', s._n === 0);
+      var id = s.dataset.sec;
+      countEl(id).textContent = s._n;
+      document.querySelector('[data-idx="' + id + '"]').parentElement
+        .classList.toggle('hidden', s._n === 0);
+      s.querySelector('.sec-n').textContent = s._n;
+    });
+    liveTotal.textContent = shown;
+    liveSecs.textContent = secs.filter(function (s) { return s._n > 0; }).length;
+    if (shown === 0) {
+      empty.textContent = '';
+      empty.appendChild(document.createTextNode('Nothing matches '));
+      var b = document.createElement('b');
+      b.textContent = q.value;
+      empty.appendChild(b);
+      empty.appendChild(document.createTextNode('. Try a shorter word, like mount, save or road.'));
+      empty.classList.remove('hidden');
+    } else {
+      empty.classList.add('hidden');
+    }
+    onScroll();
+  }
+
+  q.addEventListener('input', filter);
+  q.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { q.value = ''; filter(); q.blur(); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+  });
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      rail.style.width = (h > 0 ? Math.min(1, window.scrollY / h) * 100 : 0) + '%';
+      var top = window.scrollY + 120, cur = null, curName = '';
+      secs.forEach(function (s) {
+        if (!s.classList.contains('hidden') && s.offsetTop <= top) {
+          cur = s.dataset.sec;
+          curName = s.querySelector('h2').firstChild.textContent;
+        }
+      });
+      idx.forEach(function (a) { a.classList.toggle('on', a.dataset.idx === cur); });
+      here.textContent = curName;
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>

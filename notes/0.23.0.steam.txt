@@ -1,0 +1,378 @@
+Hey everyone,
+
+This is the biggest update the playtest has had. 0.22.0 went out without patch notes, so these cover both builds: everything since 0.21.0.
+
+The headlines:
+
+[list]
+[*]Fortress, a new colony mode on the title screen. Found a colony with seven settlers, then dig, farm, make cheese and hold off raiders.
+[*]The affineur's bench. Design your own spell cheese from curd, herbs and a working, then age it on a cave rack for months of game time. Some of the new wheels heal and shield your friends.
+[*]A long pass on Steam Deck and controllers: text entry, sleep and wake, pad buttons in every prompt, and a lot of performance work.
+[*]The world looks different in all three views, with new tile art, living water, cloud shadows, heavy storms and firelight. First person has roofs, arms and a horizon now.
+[*]Secret rooms, beset holdfasts, a fence for stolen goods, your family moving in, javelins, and spears that actually reach.
+[/list]
+
+After that comes a very long list of fixes, most of them from your reports, with your names on them.
+
+Thanks to everyone who sent saves, screenshots and reports. Enjoy.
+
+Tim
+
+[b]The affineur's bench[/b]
+[list]
+[*]Pressing a cheese in the full game now opens the affineur's bench, where you design your own spell cheese. Bring curd and two heart herbs to the press, pick a working to give the spell its shape, choose how long to age it, and press. The named recipes you already know sit behind Known cheeses.
+[*]There are eight attack workings, Pin, Draw, Break, Scrape, Breathe, Thread, Toss and Ring, and four friendly ones. The 25 heart herbs are plants you already gather, and which of them a press will take depends on the country it stands in. Arcane Rennet and the rarer cultures widen the choice.
+[*]Your wheel is named for its region, its heart herb and its age, something like Meadow Heather Wheel, and it remembers where it was pressed. Pressing takes 12 turns and the wheel stays on your spell belt for good: a cast costs Manna and a cooldown, never the cheese.
+[*]Before anything is spent, a panel shows what each ingredient brings, and the Notebook keeps every wheel you have pressed. Use up three of one herb at the press and you learn its rind working, an extra effect your wheels can carry. (arkhaven)
+[*]Put a crafted wheel on a cheese cave's ageing rack and it ages by the calendar, even while you are off somewhere else. At seven days it is Settled and gains a second rind working plus its region's effect, at forty days it is Reserve with a third, and a wheel left for a year or two picks up the long-lay effects. Off the rack it keeps the age it has.
+[*]Four friendly workings look after your side. Tend heals one friend at range, Gather everyone within two tiles, Trace friends along a line, and Relay jumps from friend to friend. Depending on the herb, a wheel restores health, gives Rinded, or clears poison, sickness, slowing and corrosion.
+[*]Friendly wheels reach you, your co-op partners, pets (a partner's too), hirelings and summons. They can never hurt anyone or heal an enemy, and a cast with nobody to help is refused before it costs you anything.
+[*]Emmental Mend is a new Swiss wheel that heals you and every wounded friend within two tiles. Its blueprint is Arcane, and you make it at the press. (arkhaven)
+[*]Your wheel belt holds the wheels you have ready to cast. On a full belt you get asked which slot to use, dragging a wheel onto the belt strip in your pack puts it on the belt, and spells can be dragged between belt slots. (theartolater, bancheis)
+[*]Whether war cheese you pick up goes straight onto your belt is now a setting, on by default. The BELT tag shows in the vault, the trade window and the exchange, so a belted wheel can't be mistaken for its twin. (bancheis)
+[*]Crafted wheels stack with the same wheel bought or found, and packs that had already split them fold back together when you load. (danekjovaxutc5)
+[*]Affinage names the exact cheese it is about to use and lets you pick a different one. (trespiratesque)
+[*]Padlocks guard your cheese at the press, the germinator and the Reserve Cellar as well. The padlock shows on the quick bar, where you can take it off, and dropping or salvaging a padlocked item asks you once and then does it. (trespiratesque, arkhaven)
+[*]War cheese shows its mastery on the pack row and the hover card, with the casts so far and what the next tier needs. (rubberychicken)
+[*]Each spell cheese in the Recipe Book leads with the spell it makes and puts a tick or a cross beside every ingredient. Its pages are all one size now, a search box finds recipes, and learning a recipe tells you what kind it is. (rubberychicken, .knifee)
+[*]Roquelle's starting war cheese recipe can be studied, and so can a recipe left in a chest, right where it lies. (thesquirrel_74982)
+[*]Forgefloor Cheddar and the other forge cheeses give 25% burn resistance. Their fire resistance had never done anything at all. (rubberychicken)
+[*]About half the time, the First Wheel lesson asked for the Ember Wheel twice. Now it asks once. (horth.panthur)
+[/list]
+
+[b]Milk, bread and the kitchen[/b]
+[list]
+[*]Village herders sell milk by the pail, so cheesemaking no longer starts with owning a farm. (rubberychicken)
+[*]Milk keeps for a day and a half, up from a tenth of a day, and every screen that uses milk says how long a pail lasts. Two soured pails make a Lactic Culture at the workbench. (xxturiflower47xx)
+[*]Drink a fresh pail, cook Milk Porridge or Creamed Root Soup at the campfire, or warm a Honeyed Acorn Milk on the stove.
+[*]Build a Yogurt Barrel beside the bee box. It holds three scoops and makes one more a day, and each scoop throws a free Cinder Bolt.
+[*]Wheat and feed grain grind into flour at the workbench, and two flour bake a loaf at any fire.
+[*]Carrots, potatoes, turnips and onions roast at a fire, and the Drover's Bun turns bread, cooked meat and curd into a meal worth carrying. Garden Potage and Mushroom Broth are new as well. (danekjovaxutc5)
+[*]Well Fed holds your hunger bar where it is for as long as it lasts. Thirst still drops. (danekjovaxutc5)
+[*]Cooking and the cheese vat take ingredients from chests and stockpiles within 20 tiles, and the cheese cave and germinator reach into a chest beside them. (.knifee)
+[*]Untick a food in the cooking window and Cook All leaves it alone. (danekjovaxutc5)
+[*]Bees come back. A wild hive refills 750 turns after you rob it, and a bee box you build fills a comb every 400. (horth.panthur)
+[/list]
+
+[b]Steam Deck and controllers[/b]
+[list]
+[*]Roguefort knows it is on a Steam Deck more reliably, so the Deck's button prompts and graphics settings apply. Gaming Mode always opens fullscreen and sharp, whatever window size you saved on a desktop. (tthfry)
+[*]Text fields typed every key twice in Gaming Mode. That's fixed, and on a pad or a touch every text field opens the game's own on-screen keyboard. (tthfry)
+[*]Putting the Deck to sleep saves your game, and the sound comes back when it wakes.
+[*]Joining a friend from the Steam friends list works when Roguefort was closed. Before, the game opened on the title screen and lost the invite. (peacook)
+[*]On a pad, prompts across the game show pad buttons: How to Play, the intro popups, window titles, the shop, crafting and map hints, level-up cards, the pack and the Spell Belt. The mouse pointer hides while you play on a pad.
+[*]Every action in the game can be reached by pad. L2 and View open the menu for your own tile, keyboard-only actions have rows in the Panels hub, and Controls can put a world action and a menu action on one button. (tthfry)
+[*]Tap R1 for the Panels hub and hold it to swap weapons. A trip to the hub had been swapping your weapon and spending the turn.
+[*]A pad can throw a javelin, loose a bow or swing a polearm at reach: A aims, R1 picks the next target, and A again strikes. Sending a scout works by pad too, with a crosshair to show where it flies.
+[*]The Post Office, the Exchange and the trade window all work by pad, and L2 beside another player in the Old Mouth offers a trade. Skip tutorial sits in the pause menu.
+[*]With a docked Deck and a second controller, the game follows whichever controller you press. (tthfry)
+[*]Deck text is never smaller than 12 pixels, the world map legend folds away, and the spell belt docks above the log. Tall windows keep their title and close box on screen, and the tutorial card stays off an open chest or shop.
+[*]On a slow machine, walking in 2.5D runs at about twice the frame rate it did, blows in a fight cost less, and the hitch from the far mountains every few steps is gone. On a Deck, zooming out stops before the frame rate falls apart. (tthfry)
+[*]Building a world shows a loading screen while it works, so the button you pressed doesn't sit frozen for a few seconds.
+[*]Performance warnings on a Deck talk about the Deck, and the performance report saves by pad without a file dialog.
+[/list]
+
+[b]How the world looks[/b]
+[list]
+[*]Walls, floors and ground have new pixel-art tiles everywhere: every dungeon biome, towns, interiors, the overworld and ships, all in the PICO-8 palette. Walls show a textured face above open floor, and corners and thin walls join up properly.
+[*]Ancient Ruins, the Underground Grove, the Sunken Library and the Old Mouth have been dressed by hand, with castle masonry, root walls, low bookcases and stocked shelves.
+[*]Grass is darker and greener, roads have their dithered edges back, and ten grounds that printed one tile over and over now vary, from shells on the Brinehold strand to cinders in the ash. Each kind of wood floor looks like its own wood.
+[*]Sand was one flat bright sheet under the new art. The desert shows its dunes again. (danekjovaxutc5)
+[*]You can build 63 new pieces of furniture, among them tables, desks, benches, bookcases, beds, chests, barrels, plants, busts, a standing lamp, banners and a scarecrow. Chests store things, beds let you rest and the lamp gives light.
+[*]Every art pixel is the same size in 2D, 2.5D and first person, so nothing gets squashed or stretched to fit. 2D zoom steps between sizes that keep every pixel crisp.
+[*]Shadows follow the sun, the moon and the weather in all three views. They fall away from fires and stay out of house interiors, and Settings has a Shadows checkbox (sun and moon shadows need High or Epic quality).
+[*]Water in 2D is alive: sun glints, surf running up the beach, rolling swell, lake laps, rings where you wade and where rain lands, and shallows that blend into deep water. It runs at Medium graphics quality and up.
+[*]In 2.5D and first person, each kind of water moves its own way. The sea surfs, lakes lap, rivers run, ponds shimmer and marshes bubble, and deep water lost its dotted grid.
+[*]Clouds in 2D hold still while you walk, and each one casts its own shadow on the ground. Storms are dark and heavy now, and lightning lights up the scene.
+[*]Days in 2D have a golden hour, a blue hour after sunset and a cool rose dawn, and at night campfires, torches and lamps throw warm, flickering pools of light.
+[*]Fireflies come out on warm nights in 2.5D and first person. Seed fluff drifts over summer meadows, smoke rises from fires and lived-in houses, and mist lies on the water for the first hours of a clear morning. The Visual effects setting scales all of it.
+[*]Weather in 2.5D and first person got heavier: lightning lights the scene, sandstorms stream low along the wind, rain falls on lakes as well as land, and it drips off the eaves.
+[*]Dark colours survive in 2.5D, so pebble beaches, dirt paths and night blues stop reading as black holes. At night your sight is a soft round pool.
+[*]Sprites in 2.5D stand on their lowest pixel, so flowers stop floating above the ground. Dungeon entrances have real stonework, and beds and siege engines stopped glowing like campfires.
+[*]Levelling up is a moment now. A rune seal stamps out under your feet, a column of light goes up, and a shield with your new level rises.
+[*]Spell effects, zone borders, the aiming path, head badges and sleeping Zs are drawn in proper pixels in 2D.
+[*]First person was rebuilt on flat ground from the same art as the other views, with a pixel sky and mouse look. Your arms are pixel art and wear your chest and hand gear, and houses have roofs and plank ceilings.
+[*]First person has its own action flow. Tab (Y on a pad) opens an Actions menu, 1 to 8 ready a spell, left-click uses what is readied and right-click opens the actions nearby. The Height Traversal setting is gone.
+[*]You see further in first person, and hills, mountain ranges and villages you have found stand on the horizon.
+[*]Menus and windows have a new look: navy panels, teal buttons and one continuous pixel frame round every window. The interface icons are redrawn as pixel art.
+[*]People walk with a carried stride and have new poses for mining, gathering and slashing, and a robe sways at the hem.
+[*]95 community sprites are in. ArkHaven redrew 88 of them, mostly item icons, and Elfie the Explorer painted the Magma Reaver, the Stoneforged Berserker, the Lattice Hierarch and the Cultist Hexer, who now draw their own art. DatSheepDoe drew a new terrain tile.
+[/list]
+
+[b]Co-op[/b]
+[list]
+[*]Rejoin a world and you keep your name and guild. After the host reloads, a returning joiner gets their own character back, level, perks and pack, and on Steam a friend is matched by their account. (rubberychicken)
+[*]Walking on a long-lived save used to lag the whole party, with the ping climbing from about 50 ms to a full second on every step, because each step sent the run's whole progress. A quiet step sends a few bytes now. (rubberychicken)
+[*]Each player has their own Arts and Spell Mastery. A joiner had been reading, and moving, the host's.
+[*]Turn bubbles reach 12 tiles by default, and the host can set anything from 6 tiles to Everywhere. Fights far away pause while their players are idle. (morigh, shexara)
+[*]Your turn alert shows over open menus, says why it is your turn, plays a sound and blinks the window title, and your partner sees that you have a turn alert up. YOU ARE DOWN and the sleep banner show over menus too. (morigh, shexara)
+[*]On your first connection, the Traveller's Pact explains how co-op works, and after that Esc then Co-op opens the co-op panel. A host waiting on their own reads Hosting, where a red Not connected used to sit. (peacook, arkhaven)
+[*]Save party gives every player a copy they can play, on their own or as host.
+[*]When a join fails, a screen tells you why: different versions, demo and full game, different world settings, or a full party. The host leaving has its own dialog, and the lobby shows its progress and can be cancelled.
+[*]Joiners start with their own guild's bread in their quick slots, see your animals by name, and get healed by your Emmental Mend. (arkhaven)
+[*]Partner health reads against their real maximum, 641/641 where it said 641/298, and a hit on your partner counts the health their gear gives them. (rubberychicken)
+[*]Right after joining, the bag waits for your own things to arrive from the host. It had been showing a starter kit that wasn't yours. (rubberychicken)
+[*]A guest's Attack and Tame on a calm animal land now. A guest who reconnects while the party is in a dungeon or the market arrives where the party is.
+[*]The host checks more of what each guest's game sends. Two players using one chest, water barrel, bench or family panel at the same moment can't duplicate or lose items or be charged twice, and a guest's lockpicking runs through the host.
+[*]Exchange listings and Post Office letters can only ever pay out once, and ships, mounts and pack animals stay in the save they belong to. (rubberychicken)
+[/list]
+
+[b]Fortress[/b]
+[list]
+[*]Fortress is a new mode on the title screen, in the full game and the Playtest. Generate a continent, pick one of up to eight starting sites, name your colony and found it with seven settlers.
+[*]You don't play one character in Fortress. You pause, set the speed and drag orders across the map, digging, felling, gathering, building and drawing water, and your settlers take the work, haul it to storage, eat, sleep and slowly get better at their jobs.
+[*]Your colony starts with three levels, surface, cellar and deep rock, with caves hidden in the rock, and you can survey more land as it grows. Farm wheat and cave truffles, milk goats and a cow, and age cheese on racks, where a wheel aged underground yields an extra one.
+[*]Seasons, weather, fire, flooding and roof collapse all happen to your colony. Settlers get hurt and need care, and they make friends and rivals. Salt caravans come to trade, and visitors ask to join, up to 32 living settlers.
+[*]Raiders come too, Ravenkin Slingers and bandits running on the same AI and damage as in Adventure. Craft spears, slings, mail and shot, and each raid arrives as a letter with Locate and Defense buttons.
+[*]Send expeditions to places on the world chart and set up outposts. Ambitions give the colony something to aim for, and when you are done with a colony you can retire it.
+[*]A guided first day takes you through your people, a first tree order, a bed, food and water and a shared home. Time keeps running while it does, and you can skip it or tuck it away.
+[*]Fortress has its own soundtrack, 17 tracks from alkakrab's 50 Cozy Fantasy RPG Tracks, and the combat music fades in when raiders arrive.
+[*]Every colony key can be rebound, in Settings > Controls or from the colony menu. The mouse wheel zooms, Shift and the wheel pan, and Escape backs out of the founding screen and opens the menu inside a colony. (rubberychicken)
+[*]WASD and the arrow keys pan the camera, which moved Dig to M, Stairs to Z and Territory to C. Space always pauses, Generate another world really does give you another world, and a single button founds the colony. (trespiratesque)
+[*]Accept on a visitor asking to join admits them, or tells you what is missing, such as how many more beds to build. (trespiratesque)
+[*]Starting sites cover every biome on the map, and far fewer of them sit on mountains. Hardy, Steadfast and Industrious are common traits now, so about half of new settlers roll a good one. (trespiratesque)
+[*]Whole colonies were dying of thirst beside a well. Settlers drink water left on the ground when no bin will take it, caregivers carry it to settlers who can't walk, and wells keep drawing. (trespiratesque)
+[*]During the guided first day the Fell trees tool stays in your hand, so one drag marks a whole stand of trees. (rubberychicken)
+[/list]
+
+[b]Dungeons[/b]
+[list]
+[*]Secret rooms. About a third of dungeon floors hide a sealed room in the rock. Stand beside its door for a few turns and the wall gives way, and what waits inside suits the dungeon: drowned shelves, crystal, an ice larder, a hoard nook, a caged beast. Every one has a chest, and the secret chest rolls Rare or better. (Splattercat)
+[*]The Dungeon Rat King you meet in a secret room has more health and a poisoning bite now, and his Swarm Scouts leave a ring on the minimap where each creature stood. (danekjovaxutc5, horth.panthur)
+[*]A few plains and forest dungeon mouths are now beset holdfasts, walled yards under siege. Step inside and five waves come over the wall, and the strongbox stays barred until the last one is down. Walk away mid-siege and the next attempt starts again at wave one.
+[*]Every dungeon has a companion worth freeing somewhere in its cages, and one you have freed stays freed. Three dungeons in four had nobody in them to rescue. (danekjovaxutc5)
+[*]Cages hold more than rats. The Cave Bat and the Rat King turn up in any dungeon, every biome has at least two kinds of captive, and an empty cage may hold one of the floor's own monsters, which comes out fighting if you open the door. (drachasor, trespiratesque, datsheeptho)
+[*]Dungeons look like the country they stand in. Arctic, taiga, snow peak, glade, savanna and coastal delves have their own layouts, monsters and bosses, where they used to be plains ruins with the Archlich at the bottom of more than half of them. The plains boss is now The Stilled Affineur. (danekjovaxutc5, arkhaven)
+[*]Empty a dungeon and a new band may move in at a later season boundary, one tier harder, and the log tells you when it happens. (bossman62)
+[*]A delve you had already started keeps the floors, cages and captives it had when its biome got its new layout.
+[*]Enemies that lost you behind a door used to walk into the wall and vanish. They stay on the floor now, and one that ends up inside a wall is carried to the nearest open tile. (rubberychicken)
+[*]In the Descent the boss music ends when the boss dies, and a delve keeps one tune where it used to switch tracks at odd moments. (rubberychicken)
+[*]Your mines keep paying while you are in the Old Mouth or down the Descent. (rubberychicken)
+[*]Your horse waits at the dungeon entrance, where the Descent used to offer to put it in your pack, and cooling lava crust is a dark skin you can tell from the lava beside it. (rubberychicken)
+[*]Long grass in dungeons can be cut with the scythe. Once cut, it stays cut. (danekjovaxutc5)
+[*]Dungeon chests never offer a blueprint you already know. (danekjovaxutc5, nalathnidragon)
+[*]Explored rooms you can't currently see are brighter, rooms the Cave Bat found for you are drawn in grey, and Settings > Display has a slider for how bright they are. (danekjovaxutc5)
+[*]Your Cave Bat's echolocation works now. While it follows you it maps the rooms your room opens onto, and its card says AUTOMATIC so you know you don't have to order it. (danekjovaxutc5)
+[*]Searched barrels stand open and empty, and any container you have already been through says (searched) when you hover or look at it. (danekjovaxutc5)
+[*]Crossbow bolts turn up in geodes and weapon racks, and a slain archer or crossbowman can drop its own ammunition whatever you are holding. (danekjovaxutc5, bancheis)
+[*]Before a trial dungeon, the entry screen explains what defeat costs and how saving works there, and altars and cages explain themselves the first time you meet one.
+[*]On a boss floor the ambient drone fades while the music plays, so the two stop fighting each other.
+[*]Each floor you walk into announces its band name, and the dungeon header fits on one row again. (danekjovaxutc5)
+[/list]
+
+[b]Combat and weapons[/b]
+[list]
+[*]F aims whatever you are holding. A sword strikes beside you, a spear reaches any tile two out (the knight's moves included), and a bow or javelin aims at range. Click and the right-click Strike at reach row work as well. (rubberychicken, nalathnidragon)
+[*]Step toward an enemy two tiles away in a straight line with a spear in hand and you swing at it. That is a Gameplay setting, on by default.
+[*]Javelins are a new one-handed weapon. They stack to five in the hand, F or a click throws one, you pick it back up afterwards, and a following dog fetches it for you. Make them at the workbench from planks and nails, or buy them from a blacksmith. (danekjovaxutc5)
+[*]Curses bite harder on gear found further out, and a cursed item now carries a bargain on its good stats. Deep in the game a cursed item is the strongest thing you can wear and the nastiest, and its card shows what the curse took. (danekjovaxutc5)
+[*]Unidentified gear waits in your pack until you know what it is, since it might carry a hidden curse that won't come off. (danekjovaxutc5)
+[*]A new run rule lets your own blasts catch you. Tick it in Going Rogue or on the Crossing bench. It is off unless you choose it. (danekjovaxutc5)
+[*]While hidden you can walk right up to a sleeping creature, so the blow that wakes it can be a backstab. (.knifee)
+[*]Monsters at ease leave you be while you are hidden. Some had been walking straight toward you. (danekjovaxutc5)
+[*]Each banked level-up deals its own three cards, and walking about or closing the panel can't change them. No more taking the same mythic twenty times. (tobacoos, drachasor)
+[*]Both character sheets say dual wielding is one strike, and show what the off hand adds to it. (danekjovaxutc5, nalathnidragon)
+[*]Weapon cards show their Range or Reach, a perk you have taken several times shows its total on the card, and the Fully Reserved achievement can be earned. (horth.panthur, rubberychicken)
+[*]Playing a vampire, auto eat and drink reaches for Fresh Blood when you get hungry, and rivers and barrels turn you away with the same line the well uses. Biting something with no blood in it costs you nothing. (rubberychicken)
+[*]Dawn is called at dawn for a vampire, the Old Mouth stopped announcing sunrises nobody can see down there, and the sun stops claiming to burn a vampire whose burn is fully resisted. (rubberychicken)
+[*]New characters start on full health. The starting robe's bonus was landing after health had been set.
+[/list]
+
+[b]Towns, people and the law[/b]
+[list]
+[*]A killing costs you standing only with the people who saw it, the way theft always has. Kill a guard on an empty road and nobody knows. Kill one in the market square and the whole town does. (arkhaven)
+[*]Catch a villager in a blast aimed at something else and the watch arrests you, where the whole town used to turn on you. The jail line tells you what the watch takes. (arkhaven)
+[*]A town's standing readout agrees with its patrols. One could tell you that you may settle there while its guards were hunting you. (_garmr)
+[*]The main story stays reachable in a town that has turned on you. Story quest givers keep their posts under lockdown, speak to you warily, and are driven off rather than buried if they are killed. (theartolater)
+[*]Cities have a fence. Find one in the tenements or the shambles: they buy stolen goods at a cut, no questions asked, and keep lockpicks on the shelf.
+[*]Every general store sells lockpicks, so selling your starting bundle is no longer a one-way door. (samv123)
+[*]Your family can move in with you. Ask from the Family panel and your spouse and children move to a bed near your home campfire, keep house by the fire and eat from your larder. (danekjovaxutc5)
+[*]Marrying someone sticks. Spouses stopped reading as Unwed, your spouse's door opens to you at night, and your own spouse and children don't ask you to leave any more. (danekjovaxutc5, elfietheesp55)
+[*]Sending food home works out what fits first and says how many days it buys, and the leftovers stay in your pack. (danekjovaxutc5)
+[*]Feeding, petting, cooking, crafting and loading a station each take a turn now, and an evening with your family spends the evening. (danekjovaxutc5)
+[*]Talking to someone answers you. A villager woken by a night alarm could swap places with you instead. (urughak)
+[*]Beside a person, the interact key talks to them, where it used to open the farm plot under your feet. Creatures bigger than one tile can be talked to from any part of them. (samv123)
+[*]Frightened villagers go back to bed, and a city resident you killed stays dead, where the same house kept turning out a fresh one. (theartolater)
+[*]Villagers with quests stand at their door during working hours, so you can find them without walking into a house you are barred from. (samv123)
+[*]Town guards and townsfolk treat a yard you have fenced as yours, and the watch stopped using your gate as a shortcut. (danekjovaxutc5)
+[*]House signs name the trader who works inside and their hours, and the sector journal can pin a street or a shop door you have found.
+[*]Salvaging a sword in the street used to earn you a scolding for littering. Dropping rubbish on the ground earns it now. (elfietheesp55)
+[*]Villagers killed by a spell stay dressed as they fall. They used to turn into a bare grey figure. (theartolater)
+[*]The traveller you are paid to escort has a name and clothes, walks out of the inn with you, and can't be hit by accident, and the contract checks that they actually arrived. (arkhaven, danekjovaxutc5)
+[*]Waystone caravan merchants walk in from somewhere out of sight. They had been appearing at your elbow. (theartolater)
+[*]District names read properly (Stillmen's Vennel), people are called by their names, and knocking down Hearthmere's wall no longer calls it The Hearthmere. (trespiratesque, rubberychicken)
+[/list]
+
+[b]Quests[/b]
+[list]
+[*]Quest text says what the game checks. Every questline's objectives were rewritten from what completes them, so nothing sends you hunting for a shed that isn't there.
+[*]The arrow to a quest giver follows them through their day. A contract signed underground used to point thirty thousand tiles away. (danekjovaxutc5)
+[*]Gather, rare-find and supply contracts can be handed in at the settlement's board when the giver is away, for 2 standing. Ask a neighbour where the giver is and they will walk you there, and a contract whose giver nobody can find can be dropped once without breaking an oath. (danekjovaxutc5, samv123)
+[*]Village work pays faction standing. The fisher's contract only ever paid coin. (jungcodex)
+[*]The main story pays its full standing. The limit that stops you farming one town for reputation had been eating the back half of every questline. (theartolater)
+[*]Clear a story dungeon early and the stage it belongs to is still offered when you get there. (thesquirrel_74982)
+[*]Investigate contracts close the moment you walk into the place they name, and when two dungeons share a name the contract says which one it means. (danekjovaxutc5)
+[*]A new run starts outdoors on ground you can reach, and every tutorial mark can be walked to from camp without opening a door. One Fennmarche start had put the camp inside a shop wall. (samv123)
+[*]Quest rewards that don't fit in your pack land at your feet. (samv123)
+[*]Deliver quests have somebody to deliver to: the destination's board takes the handover. (samv123)
+[*]Contracts with no single place say so on the card, and contracts name the cave or town they were taken in. (danekjovaxutc5)
+[*]Gather totals in the log count what you are holding. (.knifee)
+[*]The quest you are tracking sits at the top of the log, and the tracker finishes its sentence at any font size. (rubberychicken)
+[*]Quest givers with no guild read Unaligned, and "Return to Thymerock" has its space back. (rubberychicken, theartolater)
+[/list]
+
+[b]Exploring the world[/b]
+[list]
+[*]Every new Crossing has a desert. Deserts had been so rare that none of twelve test worlds had one. (trespiratesque)
+[*]New Crossings join up their roads, so the capital your first quest names can be walked to, and far shores have signposts. Roads along lake shores stay roads, camps aren't pitched across them, and forts have a gate where the road meets the wall. The crafted continent gets the same road fixes.
+[*]Signposts name the towns their own road goes to. (drachasor)
+[*]The Crossing setup screen reads properly: every choice opens its whole list, the intro is shorter, the houses fold away, and the Peoples line agrees with the map. (trespiratesque)
+[*]Fast travel sets you down on open ground outside the place you picked, never inside a wall or somebody's bedroom. (danekjovaxutc5)
+[*]Auto-travel lays footprints along the way it plans to walk, in 2D and 2.5D.
+[*]The world map has a Waypoints list (K, or L3 on a pad) to track, rename, remove or find your pins, and the distance beside the minimap arrow is readable again, with a switch for the arrow itself. (danekjovaxutc5)
+[*]Shift and click the minimap to walk to that tile. A tracked target already on the minimap gets a bracket on it, and the minimap paints the ground in the same colours as the main view. (danekjovaxutc5)
+[*]On the world map, a ring marks each settlement with a waystone, filled in once you have activated it. General stores in bigger towns sell the waystone blueprint. (danekjovaxutc5, bossman62, arkhaven, horth.panthur)
+[*]Dungeon bosses sometimes drop a torn note that marks the country around one of the far riftstones. (trespiratesque)
+[*]Eclipses are now the Dimming, and they come about once a fortnight, down from twice a week, and never in your first six days. (danekjovaxutc5, xxturiflower47xx)
+[*]Hunting contracts can be filled. Small game stays in its own biomes however far from home you walk, and a hunted-out valley fills up again. (danekjovaxutc5)
+[*]Mountain sage, acorns, pistachios and dustcap grow where they were always meant to, and cinnamon bark grows on the coast.
+[*]Critter Bait brings the wildlife to you, three times the local spawn rate for 150 turns. Want turtle shells? Expect crabs. (trespiratesque)
+[*]Night-sight builds keep their view through dawn, fading with the sky. (theartolater)
+[*]Island names on the world map are readable, biome names stay put when you zoom in, and biome regions have labels and edges you can read without telling colours apart. (rubberychicken, trespiratesque)
+[*]Road caravans and wandering adventurers show on the minimap, and clicking the map only describes what you can actually see. (rubberychicken)
+[*]Before you cross into a more dangerous region or leave a cave, the game tells you how dangerous the ground ahead is, and night-travel options are explained before dusk.
+[*]The Sky-Serpent event points one way now, and it is the right way. (rubberychicken)
+[*]River mouths grade from shallow to deep water, with no hard square line between them. (rubberychicken)
+[/list]
+
+[b]Homestead and farming[/b]
+[list]
+[*]Walk across your own farm. A plot with nothing to tend is ground, planting and harvesting are their own actions, and you choose which crop goes in. Seeds you have padlocked stay in the pouch. (xxturiflower47xx)
+[*]Hold Alt as you bump a plot to plant the seed you chose last, and a Gameplay setting stops seeds sowing when you walk into farmland. (danekjovaxutc5)
+[*]One swing of the scythe cuts every patch you can reach, and the scythe, whistle and bucket ride free in the tool roll. (danekjovaxutc5)
+[*]Move furniture and chests, contents and all, instead of tearing them down. (danekjovaxutc5, samv123)
+[*]Set a bigger chest down on a smaller one and it upgrades in place. (danekjovaxutc5)
+[*]Furnish the hold of a bigger ship. Furniture, storage and lights go below decks and sail with it.
+[*]While you walk with a build armed, the preview follows the tile under your pointer.
+[*]Homestead workers eat three meals a day from chests near their cottage, so a stocked larder feeds them, and Give food feeds one by hand. By the end of their first day they used to be starving. (drachasor, bancheis, arkhaven, urughak)
+[*]Workers search further out once the nearby grove is bare, and their hover card says why they are unhappy. A worker you just paid for stays on the crew. (urughak)
+[*]Workers haul their loads to storage near home and tell you when a stockpile is blocked, and dropped loads stopped paving over the homestead. (bancheis)
+[*]Soldiers are hired at your level, and the Tender heals. (bancheis)
+[*]Livestock heal when fed. Led animals follow you through a teleport, breeding has an off switch, and one order reaches the whole herd nearby. (bancheis, drachasor)
+[*]Two goats can't share one square, and the right-click menu names the goat you hovered. (drachasor)
+[*]Hovering a trough says how many feedings are left, and the water barrel, bee box, yogurt barrel and the rest say what they hold. (danekjovaxutc5)
+[*]A mushroom bloom sprouting on a herb you just picked left a tile you couldn't walk on or harvest. That can't happen now, and saves holding one mend themselves. (danekjovaxutc5)
+[/list]
+
+[b]Defences and hirelings[/b]
+[list]
+[*]The beacon draws every enemy within seven tiles off you and onto itself. It used to be ignored whenever you stood near it, which is exactly when you want it. (thesquirrel_74982)
+[*]The watchtower's extra range and the forge's extra damage reach your turrets and allies in Adventure. You had been paying for half a building. (thesquirrel_74982)
+[*]The Channeler has its blast and the Sapper its cooldown, both of which their cards had always promised. (bancheis)
+[*]Kills by turrets and other emplacements pay a quarter of the gold they did. (bancheis)
+[*]Raiders go for walls and doors before your torches.
+[*]Ballistae firing every turn tanked the frame rate. They don't now. (bancheis)
+[/list]
+
+[b]Animals and companions[/b]
+[list]
+[*]Winged companions fly scouting runs. Send one from the world map (E, R3 or the button) and it reveals the ground along its path and around where it lands. (danekjovaxutc5)
+[*]Dismiss is now Stable, since the old word sounded like letting the animal go. Pack animals and mounts can be stabled from their own tile. (.knifee, arkhaven, drachasor)
+[*]A pet left at base stops helping you from across the world. (danekjovaxutc5)
+[*]What your pets find follows your loot filter, and a pet's kill arrives by name: "Crag brings you Bone." (danekjovaxutc5)
+[*]Pets face the way they walk, and you and your mount pass behind the Old Mouth tables and counters. (arkhaven, rubberychicken)
+[*]Follow a townsperson without holding Wait. (trespiratesque)
+[*]Auto-travel and Move here keep going with a pet knocked out, told to stay back, or still growing up. (theartolater, urughak, bossman62, drachasor)
+[*]The silk weaver and the hoarfrost spider mend over time like other animals.
+[*]Before you board a ship, the game explains where animals you send away will go.
+[/list]
+
+[b]Your pack and the shops[/b]
+[list]
+[*]The starting backpack holds 24, up from 16 in 0.21.0, and every bigger bag holds eight more than it used to. (trespiratesque, samv123)
+[*]Bigger bags take more than gold now. The shopkeeper shows what opens the next one, clearing dungeons, a legend tier or standing with a faction, and bags you already own are kept. (trespiratesque)
+[*]Tabs filter your pack and your storage by category without changing the order you arranged. (samv123)
+[*]Chests sort six ways, by type, rarity, value, name, quantity or lock. (danekjovaxutc5)
+[*]Shift, Ctrl and Alt move or drop one, five, or however many you pick, and hovering a stat shows where each part of it comes from. (danekjovaxutc5)
+[*]Your mouse wheel scrolls the pack while you drag an item, and dragging to the edge of the list scrolls it too. (danekjovaxutc5)
+[*]Food you marked Retain can go in a quick slot, and pressing the slot eats it. A food card on the belt goes away when its slot empties. (danekjovaxutc5)
+[*]Crafted arrows go straight into the quiver you are shooting from. (danekjovaxutc5)
+[*]In the shop's sell list, a hidden seed pouch stays hidden, and the list keeps your pack's order. (hugomad, samv123)
+[*]An item's hover card opens beside the chest, clear of the rows you opened the chest to read. (samv123)
+[*]Shops show the full item card on Buy, Sell and Buyback, say when they restock, and shelve their stock by kind so the three waterskins stand together. (danekjovaxutc5, samv123, trespiratesque)
+[*]Item cards say what a thing is: a hatchet reads Rare (tool), and Execute is named for the damage it deals. (rubberychicken)
+[*]Destroying a spell wheel, a blueprint or rare gear asks first, with Cancel already selected.
+[*]A bid you already have on a lot counts toward its buyout price. (rubberychicken)
+[*]Waterskins that merged into one big stack in older saves split back apart, and Homing Whey goes to the nearest chest and leaves your scythe alone. (horth.panthur, drachasor)
+[*]Iron nails are a starting recipe, so a crossbow can feed itself: one scrap makes two nails. (samv123)
+[*]Roquelle characters start with real food again. (samv123)
+[*]Every cooked fish has the cooked fish icon, and the Maple Seed looks like a winged seed, not a cow's heart. (arkhaven, urughak)
+[*]A wilderness find that mentions water, driftwood or timbers now has them lying there.
+[*]Crafting puts the item card away so you can read the line that changed, and recipes are coloured by whether you can make them. (danekjovaxutc5)
+[*]Backpack upgrades stopped claiming a trader will buy them back, and a shop's restock time and your journal count turns from the start of your adventure. (samv123)
+[/list]
+
+[b]Interface and settings[/b]
+[list]
+[*]Health reads as a bar by default with Manna beside it in the top bar, and hearts are still an option. The dungeon Health and Manna box can be switched off. (rubberychicken, danekjovaxutc5, samv123)
+[*]A colour-blind friendly setting moves the game's good-or-bad readouts off red and green, and every have-or-lack mark is a tick or a cross. (danekjovaxutc5, rubberychicken, .knifee)
+[*]Show first-time hints is a Gameplay setting, and hints you have dismissed stay dismissed on your next character. (trespiratesque)
+[*]Large message banners can be turned off in Settings > Display. Everything they say still goes to the log.
+[*]AZERTY players have a French keyboard preset, and key labels follow your bindings.
+[*]Gather has its own key to rebind, panel hints show the keys you actually have bound, and a Drop rebound to Alt+X drops the item without asking how many.
+[*]In Customize HUD, the whole widget is the handle, a resized message log or market chat grows its box instead of its text, and a widget can't get lost behind the bar. (horth.panthur, rubberychicken, danekjovaxutc5)
+[*]Step through the title screen hints with the chevrons, Q and E, or a pad's shoulders, and the Continue plaque shows your own character. (rubberychicken)
+[*]Roll draws a name from the origin you picked, and Enter in the name field works. (rubberychicken, theartolater)
+[*]Keys go to the window you can see on top. Neither the arrow keys in Settings nor Escape in the quick-action window go dead after a couple of minutes. (samv123, trespiratesque)
+[*]The perk screen scrolls its cards, your build and the info strip separately, perk rarity is readable, and the header reads CHOICE 2 OF 3. (.knifee, nalathnidragon, danekjovaxutc5)
+[*]Quick bar icons and key caps are readable, and at large text the belt keeps its quantities, the crystal count fits its box and guild names break in sensible places. (rubberychicken)
+[*]The quick slot bar stretches sideways without growing taller, the main menu opens at your text size, the N on the world map is readable again, long key names wrap, and a HUD widget can sit in the top centre. (rubberychicken)
+[*]The mouse wheel scrolls a panel from anywhere on it, a greyed action says why in full, the pack reopens where you left it, and the valuable-item warning follows your loot filter. (rubberychicken)
+[*]The Abilities panel has a tab per key and room to read, and Homestead is one button with one name. (rubberychicken)
+[*]On macOS, moving the window to another display no longer throws off where you click. (grumpykolmogrov)
+[*]The sea track plays while you sail, towns have their music back, and closing the bag makes a sound however you shut it. (rubberychicken)
+[*]Temp HP and Rinded explain themselves on hover, the home pointer says what it points to, and the area name at the top lets the map show through. (rubberychicken, samv123)
+[*]The spell belt's key hint stopped reading Unbound after you close the bag, the Cook All button is readable, and a direction prompt lists one choice per row. (samv123, rubberychicken)
+[*]Felling a tree could flash the view as the top bar wrapped to another row. That's fixed, a falling tree respects Screen Shake off, and breaking gold or crystal shakes the screen once. (thesquirrel_74982)
+[*]Sleeping draws one plume of Zs. Wheels of War cards have quieter backgrounds, and the two Physician cards have different names.
+[/list]
+
+[b]Game text[/b]
+[list]
+[*]All 306 books were read and 297 of them rewritten, and the library is about a third of its old length. Dialogue, tutorials, help, item text and the endings had the same pass.
+[*]The word potion is gone from item text, since there are no potions, and the town standing meter stopped describing a town losing its patience.
+[/list]
+
+[b]Saves and performance[/b]
+[list]
+[*]A chest built where a big tree once stood could crash the game while loading a save. Those saves open again. (thesquirrel_74982)
+[*]A long-played save stuttered for seconds after it loaded. The step behind it went from almost two seconds to a blink. (.knifee)
+[*]Long-lived worlds save at most once a minute, where they had been saving every fifteen seconds whenever something new spawned. (theartolater)
+[*]Saves are smaller, because faint friendships between people who never did anything together are dropped when you save.
+[*]Desktop saves are written to a temporary file and then swapped in, so a crash mid-save can't leave you half a file.
+[*]Planning the next leg of a long trip costs a third less. (nagayun)
+[*]The Old Mouth stopped crawling, and spinning the mouse wheel zooms the map in one go. (rubberychicken)
+[*]The performance warning waits for five long stalls in a minute before it speaks. (theartolater)
+[*]After a jailbreak, casting could throw you back to the menu and mined rocks could grow straight back. Both are fixed, and saves that were affected are repaired when they load.
+[*]Bug report exports say where the file went and what to do with it.
+[/list]
+
+[b]Known issues[/b]
+[list]
+[*]Only the Monadic Descent is open. The Dyadic Vault, the Triadic Gate and the Tetradic Keep are still sealed.
+[*]Fortress is mouse and keyboard only, with no pad support yet, and it only draws in 2D.
+[*]In Fortress, a roof built beside a support can still collapse. (trespiratesque)
+[*]The Deck changes were tested on a desktop set up like a Deck, and still need checking on a real one. 2D is the smoothest view on a Deck, and the Windows build run through Proton does not see a controller, so use the Linux build.
+[*]Crafted spell cheese balance is not settled, and How to Play does not cover the affineur's bench yet.
+[*]Some of the dungeon combat music does not suit the world at all. (urughak)
+[*]The Abandoned Altar draws over the rock above it. (samv123)
+[*]Built stone walls are too close to the grass in colour. (samv123)
+[*]Guards and travelling merchants can still hang about outside a base built at a town's edge. (danekjovaxutc5)
+[/list]
+
+[b]Credits[/b]
+[list]
+[*]Reports, saves, suggestions and playtest feedback: .knifee, _garmr, arkhaven, bancheis, bossman62, danekjovaxutc5, datsheeptho, drachasor, elfietheesp55, grumpykolmogrov, horth.panthur, hugomad, jungcodex, morigh, nagayun, nalathnidragon, peacook, rubberychicken, samv123, shexara, theartolater, thesquirrel_74982, tobacoos, trespiratesque, tthfry, urughak and xxturiflower47xx.
+[*]Community sprites: ArkHaven, Elfie the Explorer and DatSheepDoe.
+[*]Fortress soundtrack: alkakrab.
+[/list]
