@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roguefort 0.24.0 — Patch Notes</title>
+<meta name="description" content="Roguefort 0.24.0 patch notes. 106 changes across 20 sections.">
+<meta name="theme-color" content="#111D35">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&family=DM+Mono:wght@400;500&family=Grenze+Gotisch:wght@500;700&display=swap" rel="stylesheet">
+<style>
+
+/* ------------------------------------------------------------------
+   Palette sampled from the Steam capsules. Strict PICO-8 index:
+   the whole capsule is 26-47 unique colours, so nothing here is
+   invented or nudged. Sky is the dominant colour of the art (22-32%
+   of every capsule); yellow is under 2% and belongs to the wordmark.
+   Warm colours fail contrast on cream, so they are structure only --
+   markers, rules, keylines, offsets -- never letterforms on paper.
+   ------------------------------------------------------------------ */
+:root {
+  --sky:    #29ADFF;   /* Cantal Sky   - dominant field */
+  --deep:   #065AB5;   /* deep sea / upper sky band     */
+  --mid:    #1D2B53;   /* bridges night to deep in the ramp */
+  --night:  #111D35;   /* Deep Night   - text, substrate*/
+  --cream:  #FFF1E8;   /* Curd Cream   - the paper      */
+  --crust:  #49333B;   /* the cliff. unlisted in the kit*/
+  --ember:  #FF6C24;   /* Ember Rock   - accent         */
+  --rind:   #FFA300;   /* Rind Orange  - 1px rim-light  */
+  --cellar: #742F29;   /* Cellar Brown - muted text     */
+  --ink:    #271F1B;   /* Ink Black    - hard outline   */
+  --yellow: #FFEC27;   /* Roguefort Yellow - wordmark   */
+
+  --disp: "Grenze Gotisch", "Palatino Linotype", Georgia, serif;
+  --body: Bitter, Georgia, "Times New Roman", serif;
+  --mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --wrap: 1040px;
+  --pad: 56px;
+  --barh: 54px;
+}
+
+/* Dot-lattice dither. The art ramps every colour transition with a
+   1px dot on a 2px lattice, not with a blend. conic-gradient at a
+   quarter turn gives exactly that, with hard axis-aligned edges. */
+.dot { background-image: conic-gradient(currentColor 25%, #0000 0); background-size: 2px 2px; }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--barh) + 16px); }
+body {
+  margin: 0;
+  background: var(--sky);
+  color: var(--night);
+  font-family: var(--body);
+  font-size: 16.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+/* The art has no curves anywhere. Neither does this page. */
+* { border-radius: 0 !important; }
+
+.skip {
+  position: absolute; left: 8px; top: -60px; z-index: 90;
+  background: var(--night); color: var(--cream); padding: 10px 14px;
+  font-family: var(--mono); font-size: 13px; text-decoration: none;
+  border: 2px solid var(--rind);
+}
+.skip:focus { top: 8px; }
+
+/* ================= masthead ================= */
+.mast {
+  position: relative; overflow: hidden;
+  background: var(--night);
+  padding: 46px 0 0;
+}
+.mast-in {
+  position: relative; z-index: 3;
+  max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad) 52px;
+}
+.wordmark {
+  display: block; width: 100%; max-width: 370px; height: auto;
+  image-rendering: pixelated;              /* press kit: nearest-neighbour only */
+}
+/* Build plaque: says what the document is and which build it covers.
+   Left-aligned and cellular rather than a lone big numeral -- the
+   version reads loud because its cell is filled, not because it is huge. */
+.plaque {
+  display: inline-flex; flex-wrap: wrap; margin: 24px 0 0;
+  font-family: var(--mono); font-size: 15px; line-height: 1;
+  border: 2px solid var(--rind); box-shadow: 4px 4px 0 var(--deep);
+}
+.plaque span { padding: 11px 15px; display: block; }
+.plaque-k { color: var(--cream); }
+.plaque-v { background: var(--rind); color: var(--night); font-weight: 500; }
+.plaque-t { color: var(--cream); border-left: 2px solid var(--rind); }
+
+/* Visually hidden, still announced. The h1's visible text is the update
+   name; screen readers get the full "Roguefort 0.19.0 patch notes" first. */
+.vh {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+/* --- the signature: the update name as an extruded pixel title card.
+   Borrows the wordmark's construction -- yellow face, ink outline,
+   brown extrusion falling down-right, zero blur -- at the light 500
+   cut, which is condensed and sharp like the real logo rather than
+   fat. A short two-step extrusion; a long one reads as cartoon 3D.
+   Offsets are in em so the construction scales with the type. Used
+   ONLY here; spending it on 25 section headings would waste it. --- */
+.card {
+  font-family: var(--disp); font-weight: 500;
+  font-size: clamp(40px, 9.5vw, 104px); line-height: 1.06;
+  margin: 26px 0 0; padding: 0 0 .12em;
+  color: var(--yellow);
+  letter-spacing: .005em;
+  text-shadow:
+    .02em 0 0 var(--ink), -.02em 0 0 var(--ink),
+    0 .02em 0 var(--ink), 0 -.02em 0 var(--ink),
+    .02em .02em 0 var(--ink), -.02em .02em 0 var(--ink),
+    .02em -.02em 0 var(--ink), -.02em -.02em 0 var(--ink),
+    .032em .032em 0 var(--cellar), .044em .044em 0 var(--cellar),
+    .056em .056em 0 var(--ink);
+}
+.mast-meta {
+  position: relative; margin: 30px 0 0;
+  font-family: var(--mono); font-size: 13.5px; color: var(--cream);
+  display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: baseline;
+}
+.mast-meta b { color: var(--rind); font-weight: 500; }
+.mast-meta kbd {
+  font-family: var(--mono); font-size: 12px; color: var(--night);
+  background: var(--cream); padding: 1px 6px; border: 1px solid var(--cream);
+  box-shadow: 2px 2px 0 var(--deep);
+}
+
+/* Dither ramp, night -> deep -> sky. Density comes from the lattice
+   itself -- a quarter dot (25%) and a checker (50%) -- rather than from
+   masked rows, which read as scanlines instead of as a screen. */
+.ramp { position: relative; z-index: 3; }
+.ramp b {
+  display: block; height: 11px;
+  background-image: conic-gradient(currentColor 25%, #0000 0);
+  background-size: 2px 2px;
+}
+.ramp b.k {
+  background-image: conic-gradient(currentColor 25%, #0000 0),
+                    conic-gradient(currentColor 25%, #0000 0);
+  background-size: 2px 2px, 2px 2px;
+  background-position: 0 0, 1px 1px;
+}
+.r1 { background-color: var(--night); color: var(--mid); }
+.r2 { background-color: var(--night); color: var(--mid); }
+.r3 { background-color: var(--mid);   color: var(--deep); }
+.r4 { background-color: var(--mid);   color: var(--deep); }
+.r5 { background-color: var(--deep);  color: var(--sky); }
+.r6 { background-color: var(--deep);  color: var(--sky); }
+.r7 { background-color: var(--sky);   color: var(--deep); }
+.r8 { background-color: var(--sky);   color: var(--deep); }
+
+/* blueprint construction marks -- only here, where the art puts them */
+.marks { position: absolute; inset: 0 0 auto; height: 320px; z-index: 2; width: 100%; height: 100%; pointer-events: none; }
+
+.ridge { display: block; width: 100%; height: 54px; background: var(--sky); }
+
+/* ================= sticky bar ================= */
+.bar {
+  position: sticky; top: 0; z-index: 40;
+  background: var(--night);
+  border-bottom: 2px solid var(--ink);
+}
+.rail { height: 3px; background: var(--rind); width: 0; }
+.bar-in {
+  max-width: var(--wrap); margin: 0 auto;
+  padding: 9px var(--pad); min-height: var(--barh);
+  display: flex; align-items: center; gap: 14px;
+}
+.bar-mark {
+  font-family: var(--disp); font-weight: 700; font-size: 21px;
+  color: var(--yellow); text-decoration: none; flex: none; line-height: 1;
+}
+.bar-here {
+  font-family: var(--mono); font-size: 12.5px; color: var(--cream);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  min-width: 0; flex: 1 1 auto;
+}
+.bar-here::before { content: "\25B8"; color: var(--rind); margin-right: 8px; }
+.bar-here:empty::before { content: none; }
+.vers { display: flex; flex-wrap: wrap; gap: 5px; flex: 0 1 auto; min-width: 0; }
+.ver {
+  font-family: var(--mono); font-size: 12px; line-height: 1;
+  padding: 6px 8px; text-decoration: none;
+  color: var(--cream); border: 1px solid var(--deep);
+}
+.ver:hover { border-color: var(--rind); }
+.ver.on { color: var(--night); background: var(--rind); border-color: var(--rind); }
+.find { flex: none; }
+.find input {
+  font-family: var(--mono); font-size: 13px;
+  width: 210px; padding: 7px 10px;
+  color: var(--night); background: var(--cream);
+  border: 1px solid var(--cream); box-shadow: 3px 3px 0 var(--deep);
+}
+.find input::placeholder { color: var(--cellar); opacity: 1; }
+.find input:focus { box-shadow: 3px 3px 0 var(--rind); }
+
+/* ================= the cream plate ================= */
+main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
+.plate {
+  background: var(--cream);
+  border-left: 2px solid var(--ink); border-right: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--deep);
+  padding: 0 var(--pad) 60px;
+}
+
+/* ---- contents: one ruled plate, not a grid of cards ---- */
+.toc { padding: 44px 0 40px; }
+.toc-h {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16px; margin: 0 0 4px;
+  border-bottom: 2px solid var(--night); padding-bottom: 10px;
+}
+.toc-h h2 { font-family: var(--disp); font-weight: 700; font-size: 26px; margin: 0; line-height: 1; }
+.toc-h span { font-family: var(--mono); font-size: 12.5px; color: var(--cellar); }
+.toc ul {
+  list-style: none; margin: 14px 0 0; padding: 0;
+  columns: 3; column-gap: 40px;
+}
+.toc li { break-inside: avoid; margin: 0 0 1px; }
+.idx {
+  display: flex; align-items: baseline; gap: 6px;
+  text-decoration: none; color: var(--night);
+  font-size: 14px; line-height: 1.45; padding: 2px 4px 2px 0;
+}
+.idx-name { flex: 0 1 auto; }
+.idx-dots {
+  flex: 1 1 auto; min-width: 8px; height: 1px; align-self: center;
+  color: var(--cellar); opacity: .55;
+  background-image: conic-gradient(currentColor 25%, #0000 0);
+  background-size: 2px 2px;
+}
+.idx-n { font-family: var(--mono); font-size: 12px; color: var(--cellar); flex: none; }
+.idx:hover { color: var(--cellar); }
+.idx:hover .idx-name { text-decoration: underline; }
+.idx.on { background: var(--night); color: var(--cream); padding-left: 4px; }
+.idx.on .idx-n { color: var(--rind); }
+.idx.on .idx-dots { color: var(--sky); opacity: .8; }
+.idx-caveat .idx-n { color: var(--cellar); }
+.toc-end { border-top: 2px solid var(--night); margin-top: 16px; }
+
+/* ---- sections ---- */
+.sec { margin: 0 0 52px; scroll-margin-top: calc(var(--barh) + 16px); }
+.sec h2 {
+  position: relative;
+  font-family: var(--disp); font-weight: 700;
+  font-size: clamp(25px, 3.6vw, 34px); line-height: 1.12;
+  margin: 0 0 30px; padding-bottom: 12px; max-width: 68ch;
+  border-bottom: 2px solid var(--night);
+  display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
+}
+/* dither rule, in place of a plain hairline */
+.sec h2::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -9px; height: 5px;
+  color: var(--ember);
+  background-image: conic-gradient(currentColor 25%, #0000 0);
+  background-size: 2px 2px;
+}
+.sec-n {
+  font-family: var(--mono); font-size: 13px; font-weight: 400;
+  color: var(--cellar); flex: none;
+}
+.sec-n::before { content: "\27E6"; }
+.sec-n::after  { content: "\27E7"; }
+
+/* Prose above a section's bullets: the lore opening, the release summary. */
+.lead {
+  max-width: 68ch; margin: 0 0 22px;
+  font-size: clamp(16px, 1.5vw, 18px); line-height: 1.62;
+}
+.lead:last-child { margin-bottom: 0; }
+.sec-intro { margin-bottom: 44px; }
+.lead-list { max-width: 68ch; margin: 0 0 18px; padding: 0 0 0 22px; }
+.lead-list li { margin: 0 0 8px; }
+
+.changes { list-style: none; margin: 0; padding: 0; max-width: 68ch; }
+.change {
+  position: relative; padding: 0 0 14px 26px; margin: 0 0 14px;
+  border-bottom: 1px solid rgba(73,51,59,.22);
+}
+.change:last-child { border-bottom: 0; }
+.change::before {
+  content: ""; position: absolute; left: 0; top: .52em;
+  width: 7px; height: 7px; background: var(--ember);
+}
+.tag { font-family: var(--mono); font-size: .84em; color: var(--cellar); }
+
+/* credit chips: cream face, hard outline, hard rim-light offset. 200+
+   of these, so they stay quiet but sit at 10.4:1 on the plate. */
+.credits { display: inline; }
+.who {
+  font-family: var(--mono); font-size: 11.5px; line-height: 1.5;
+  color: var(--crust); background: var(--cream);
+  border: 1px solid var(--crust); box-shadow: 2px 2px 0 var(--rind);
+  padding: 0 6px; margin: 0 2px 0 8px;
+  display: inline-block; vertical-align: 1px; white-space: nowrap;
+}
+.who-note {
+  font-family: var(--mono); font-size: 11.5px; color: var(--cellar);
+  margin-left: 8px;
+}
+
+/* ---- known issues: a different material, not a different colour ---- */
+.sec.caveat {
+  background-color: var(--night);
+  background-image: conic-gradient(rgba(6,90,181,.45) 25%, #0000 0);
+  background-size: 2px 2px;
+  color: var(--cream);
+  margin: 64px calc(var(--pad) * -1) -60px;
+  padding: 38px var(--pad) 60px;
+  border-top: 2px solid var(--ink);
+}
+.caveat h2 { color: var(--cream); border-bottom-color: var(--rind); }
+.caveat h2::after { color: var(--rind); }
+.caveat .sec-n { color: var(--rind); }
+.caveat .change { border-bottom-color: rgba(255,241,232,.18); }
+.caveat .change::before { background: none; border: 2px solid var(--rind); }
+.caveat .tag { color: var(--sky); }
+.caveat .who {
+  color: var(--cream); background: var(--night);
+  border-color: var(--rind); box-shadow: 2px 2px 0 var(--deep);
+}
+.caveat .who-note { color: var(--sky); }
+
+/* ---- filter states ---- */
+.hidden { display: none !important; }
+.empty {
+  border: 2px solid var(--night); box-shadow: 5px 5px 0 var(--ember);
+  padding: 30px; margin: 30px 0 10px; font-size: 15.5px; max-width: 68ch;
+}
+.empty b { font-family: var(--mono); font-weight: 500; }
+
+/* ---- index: featured release + the register ---- */
+.cta { margin: 26px 0 0; }
+.cta a {
+  display: inline-block; font-family: var(--mono); font-size: 15px; line-height: 1;
+  background: var(--cream); color: var(--night); text-decoration: none;
+  padding: 14px 18px; border: 2px solid var(--cream); box-shadow: 5px 5px 0 var(--rind);
+}
+.cta a:hover { box-shadow: 5px 5px 0 var(--ember); }
+
+.reg { list-style: none; margin: 14px 0 0; padding: 0; }
+.reg li { border-bottom: 1px solid rgba(73,51,59,.22); }
+.reg li:last-child { border-bottom: 0; }
+.reg a {
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 15px 6px; text-decoration: none; color: var(--night);
+}
+.reg a:hover { background: var(--night); color: var(--cream); }
+.reg-name { font-family: var(--disp); font-weight: 500; font-size: 23px; line-height: 1.15; flex: 0 1 auto; }
+.reg-dots {
+  flex: 1 1 auto; min-width: 12px; height: 1px; align-self: center;
+  color: var(--cellar); opacity: .5;
+  background-image: conic-gradient(currentColor 25%, #0000 0); background-size: 2px 2px;
+}
+.reg-meta { font-family: var(--mono); font-size: 12.5px; color: var(--cellar); flex: none; }
+.reg-meta b { color: var(--night); font-weight: 500; }
+.reg-new {
+  font-family: var(--mono); font-size: 11px; color: var(--night);
+  background: var(--rind); padding: 2px 7px; margin-left: 10px;
+}
+.reg a:hover .reg-meta { color: var(--sky); }
+.reg a:hover .reg-meta b { color: var(--cream); }
+.reg a:hover .reg-dots { color: var(--sky); opacity: .8; }
+
+/* ---- release page: prev / next ---- */
+.pager {
+  max-width: var(--wrap); margin: 0 auto; padding: 34px var(--pad) 0;
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: stretch;
+}
+.pg {
+  flex: 1 1 220px; text-decoration: none; padding: 14px 16px;
+  background: var(--cream); color: var(--night);
+  border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--deep);
+}
+.pg:hover { box-shadow: 4px 4px 0 var(--rind); }
+.pg-k { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--cellar); margin-bottom: 5px; }
+.pg-v { display: block; font-family: var(--disp); font-weight: 500; font-size: 21px; line-height: 1.1; }
+.pg-n { display: block; font-family: var(--mono); font-size: 12px; color: var(--cellar); margin-top: 3px; }
+.pg-next { text-align: right; }
+.pg-all { flex: 0 1 auto; display: flex; align-items: center; font-family: var(--mono); font-size: 13px; }
+
+.foot {
+  max-width: var(--wrap); margin: 0 auto; padding: 26px var(--pad) 70px;
+  font-family: var(--mono); font-size: 12.5px; color: var(--night);
+  display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: space-between;
+}
+.foot a { color: var(--night); text-underline-offset: 3px; }
+
+/* ================= responsive ================= */
+@media (max-width: 900px) { .toc ul { columns: 2; } }
+@media (max-width: 760px) {
+  :root { --pad: 26px; }
+  .toc ul { columns: 2; }
+  .mast { padding-top: 30px; }
+  .bar-in { flex-wrap: wrap; gap: 9px 12px; }
+  .bar-here { order: 5; flex: 1 1 100%; }
+  .find { flex: 1 1 100%; }
+  .find input { width: 100%; }
+  .plaque { font-size: 14px; }
+  .plaque span { padding: 10px 12px; }
+  .plate { border-left: 0; border-right: 0; box-shadow: none; }
+  .sec.caveat { margin-left: calc(var(--pad) * -1); margin-right: calc(var(--pad) * -1); }
+}
+@media (max-width: 460px) {
+  :root { --pad: 16px; }
+  .reg a { flex-wrap: wrap; gap: 4px 10px; }
+  .reg-dots { display: none; }
+  .reg-name { flex: 1 1 100%; font-size: 21px; }
+  .pg-next { text-align: left; }
+  body { font-size: 16px; }
+  .toc ul { columns: 1; }
+  .wordmark { max-width: 250px; }
+  .plaque { font-size: 12.5px; }
+  .plaque span { padding: 9px 10px; }
+  .ramp b { height: 8px; }
+  .mast { padding-top: 24px; }
+  .ridge { height: 34px; }
+  .change { padding-left: 20px; }
+  .foot { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+:focus-visible {
+  outline: 3px solid var(--ember);
+  outline-offset: 2px;
+}
+.bar :focus-visible, .mast :focus-visible { outline-color: var(--rind); }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#doc">Skip to the changes</a>
+
+<header class="mast">
+  <svg class="marks" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
+    <defs>
+      <path id="spk" d="M0,-11 L2.5,-2.5 L11,0 L2.5,2.5 L0,11 L-2.5,2.5 L-11,0 L-2.5,-2.5 Z"/>
+    </defs>
+    <g stroke="#FFF1E8" stroke-opacity=".13" stroke-width="1" fill="none" shape-rendering="crispEdges">
+      <path d="M150 0 V70 M150 104 V190"/>
+      <path d="M470 0 V44 M470 82 V150 M470 186 V240"/>
+      <path d="M860 0 V96 M860 130 V210"/>
+      <path d="M1060 0 V58 M1060 92 V164"/>
+      <path d="M40 118 H96 M132 118 H286 M508 118 H642 M900 118 H1030"/>
+      <path d="M60 300 H210 M250 300 H430 M745 300 H902"/>
+      <path d="M140 58 H160 M150 48 V68"/>
+      <path d="M850 176 H870 M860 166 V186"/>
+      <path d="M60 40 H92 M60 40 V72"/>
+      <path d="M1140 216 H1108 M1140 216 V184"/>
+    </g>
+    <g fill="#FFF1E8" fill-opacity=".34" shape-rendering="crispEdges">
+      <use href="#spk" transform="translate(330,86)"/>
+      <use href="#spk" transform="translate(712,52) scale(.7)"/>
+      <use href="#spk" transform="translate(988,150)"/>
+      <use href="#spk" transform="translate(232,214) scale(.6)"/>
+    </g>
+  </svg>
+  <div class="mast-in">
+    <img class="wordmark" src="assets/roguefort-wordmark.png"
+         srcset="assets/roguefort-wordmark.png 1x, assets/roguefort-wordmark@2x.png 2x"
+         width="526" height="166" alt="Roguefort">
+    <p class="plaque">
+      <span class="plaque-k">Patch notes</span><span class="plaque-v">0.24.0</span><span class="plaque-t">Playtest</span>
+    </p>
+    <h1 class="card"><span class="vh">Roguefort 0.24.0 patch notes: </span>A Room for the Night</h1>
+    <p class="mast-meta">
+      <span>27 September 2026</span>
+      <span><b>106</b> changes</span>
+      <span><b>20</b> sections</span>
+      <span>press <kbd>/</kbd> to filter</span>
+    </p>
+  </div>
+  <div class="ramp" aria-hidden="true">
+    <b class="r1"></b><b class="r2 k"></b><b class="r3"></b><b class="r4 k"></b><b class="r5"></b><b class="r6 k"></b><b class="r7 k"></b><b class="r8"></b>
+  </div>
+  <svg class="ridge" viewBox="0 0 1200 54" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path fill="#49333B" d="M0,54 V22 H74 V10 H158 V30 H242 V16 H340 V34 H424 V20 H524 V38 H604 V24 H704 V12 H792 V32 H880 V18 H978 V36 H1068 V22 H1142 V32 H1200 V54 Z"/>
+    <path fill="none" stroke="#FFA300" stroke-width="3" vector-effect="non-scaling-stroke"
+          d="M0,25 H74 V13 H158 V33 H242 V19 H340 V37 H424 V23 H524 V41 H604 V27 H704 V15 H792 V35 H880 V21 H978 V39 H1068 V25 H1142 V35 H1200"/>
+    <path fill="none" stroke="#271F1B" stroke-width="3" vector-effect="non-scaling-stroke"
+          d="M0,22 H74 V10 H158 V30 H242 V16 H340 V34 H424 V20 H524 V38 H604 V24 H704 V12 H792 V32 H880 V18 H978 V36 H1068 V22 H1142 V32 H1200"/>
+  </svg>
+</header>
+
+<div class="bar">
+  <div class="rail" id="rail"></div>
+  <div class="bar-in">
+    <a class="bar-mark" href="#top">Roguefort</a>
+    <span class="bar-here" id="here" aria-live="off"></span>
+    <nav class="vers" aria-label="Versions"><a class="ver on" href="0.24.0.html" aria-current="page">0.24.0</a><a class="ver" href="0.23.0.html">0.23.0</a><a class="ver" href="0.21.0.html">0.21.0</a><a class="ver" href="0.20.2.html">0.20.2</a><a class="ver ver-all" href="index.html">All (11)</a></nav>
+    <div class="find">
+      <input id="q" type="search" placeholder="/ filter changes" aria-label="Filter changes" autocomplete="off">
+    </div>
+  </div>
+</div>
+
+<main id="top">
+  <div class="plate">
+    <nav class="toc" aria-label="Sections">
+      <div class="toc-h">
+        <h2>Contents</h2>
+        <span><b id="live-total">106</b> changes in <b id="live-secs">20</b> sections</span>
+      </div>
+      <ul><li><a class="idx" href="#towns-and-villages" data-idx="towns-and-villages"><span class="idx-name">Towns and villages</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="towns-and-villages">7</span></a></li>
+<li><a class="idx" href="#the-capitals" data-idx="the-capitals"><span class="idx-name">The capitals</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-capitals">6</span></a></li>
+<li><a class="idx" href="#inns-and-taverns" data-idx="inns-and-taverns"><span class="idx-name">Inns and taverns</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="inns-and-taverns">4</span></a></li>
+<li><a class="idx" href="#rivers-and-roads" data-idx="rivers-and-roads"><span class="idx-name">Rivers and roads</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="rivers-and-roads">5</span></a></li>
+<li><a class="idx" href="#amelia-s-grace" data-idx="amelia-s-grace"><span class="idx-name">Amelia&#x27;s Grace</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="amelia-s-grace">3</span></a></li>
+<li><a class="idx" href="#co-op" data-idx="co-op"><span class="idx-name">Co-op</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="co-op">8</span></a></li>
+<li><a class="idx" href="#farming-and-home" data-idx="farming-and-home"><span class="idx-name">Farming and home</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="farming-and-home">6</span></a></li>
+<li><a class="idx" href="#trading-and-gear" data-idx="trading-and-gear"><span class="idx-name">Trading and gear</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="trading-and-gear">6</span></a></li>
+<li><a class="idx" href="#item-cards-and-the-pack" data-idx="item-cards-and-the-pack"><span class="idx-name">Item cards and the pack</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="item-cards-and-the-pack">9</span></a></li>
+<li><a class="idx" href="#getting-around" data-idx="getting-around"><span class="idx-name">Getting around</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="getting-around">8</span></a></li>
+<li><a class="idx" href="#steam-deck-and-controllers" data-idx="steam-deck-and-controllers"><span class="idx-name">Steam Deck and controllers</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="steam-deck-and-controllers">4</span></a></li>
+<li><a class="idx" href="#combat-and-creatures" data-idx="combat-and-creatures"><span class="idx-name">Combat and creatures</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="combat-and-creatures">6</span></a></li>
+<li><a class="idx" href="#stories-and-townsfolk" data-idx="stories-and-townsfolk"><span class="idx-name">Stories and townsfolk</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="stories-and-townsfolk">4</span></a></li>
+<li><a class="idx" href="#fortress" data-idx="fortress"><span class="idx-name">Fortress</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fortress">4</span></a></li>
+<li><a class="idx" href="#cheese-and-the-recipe-book" data-idx="cheese-and-the-recipe-book"><span class="idx-name">Cheese and the Recipe Book</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="cheese-and-the-recipe-book">3</span></a></li>
+<li><a class="idx" href="#how-it-looks" data-idx="how-it-looks"><span class="idx-name">How it looks</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="how-it-looks">6</span></a></li>
+<li><a class="idx" href="#performance" data-idx="performance"><span class="idx-name">Performance</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="performance">5</span></a></li>
+<li><a class="idx" href="#fixes" data-idx="fixes"><span class="idx-name">Fixes</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fixes">9</span></a></li>
+<li><a class="idx idx-caveat" href="#known-issues" data-idx="known-issues"><span class="idx-name">Known issues</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="known-issues">2</span></a></li>
+<li><a class="idx" href="#credits" data-idx="credits"><span class="idx-name">Credits</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="credits">1</span></a></li></ul>
+      <div class="toc-end"></div>
+    </nav>
+    <div id="doc">
+      <section class="sec sec-intro"><p class="lead">Hey everyone,</p><p class="lead">0.24.0 is mostly about the places you walk into. In a new game, every village, town and city is built from scratch, the continent has proper rivers and roads, and inns are real inns, with a fire, a bar, a bard and a room you can rent for the night.</p><p class="lead">Co-op also got a big lag fix after a four-player session showed how bad things were getting, and there&#x27;s a long list of fixes from your reports.</p><p class="lead">Most of the world changes need a new game. An older save keeps every place you&#x27;ve already visited exactly as it was, and places you haven&#x27;t reached yet are built the new way.</p><p class="lead">Tim</p></section>
+<section class="sec" id="towns-and-villages" data-sec="towns-and-villages"><h2>Towns and villages<span class="sec-n">7</span></h2><ul class="changes"><li class="change">Villages, towns and cities in a new game are laid out the way real ones grow: a green or crossroads at the heart, houses facing their street with gardens behind, and fields and pasture beyond. Every household has a bed for each person in it, children included.</li>
+<li class="change">Each kind of village builds to suit its land. Fishing villages have a harbour and jetties, desert villages gather round an oasis with flat plaster roofs and sandstone walls, and a place that stands in a lake is built on an island.</li>
+<li class="change">Fences have gates where the paths meet them, so you never have to walk right round a village to leave it.</li>
+<li class="change">Pens and pastures have animals in them: goats and sheep on the terraces, cattle in the fold, yaks in the byres of cold-country halls, buffalo round the fens, hens about the yards and gulls on the jetties. They belong to the village, and killing one costs you standing there.</li>
+<li class="change">Market squares and harbours are busy by day. Stallholders keep their stalls, goodwives run errands about the square, and fishers each work their own spot on the jetties.</li>
+<li class="change">Towns are dressed with the clutter of their trades, and hovering a prop tells you what it is.</li>
+<li class="change">Arriving at a town or city used to cost most of a second. The game now plans it in the background as you walk toward it.</li></ul></section>
+<section class="sec" id="the-capitals" data-sec="the-capitals"><h2>The capitals<span class="sec-n">6</span></h2><ul class="changes"><li class="change">Roquelle&#x27;s rock has three Upper Doors and gated cuts leading out through the massif. The Archive stands in the great cave mouth, with the Vault behind it racked with blue wheels.</li>
+<li class="change">Thymerock&#x27;s citadel is built at last, with the Ringlord&#x27;s seat, the Legion&#x27;s barracks and the Stone-shrine round the drill yard. Its terraces have stairs.</li>
+<li class="change">Fennmarche&#x27;s Physician-Council hall and great hospital stand on islands in the mere, and every family has a house along its shores.</li>
+<li class="change">Brinehold lives off the sea, with sharks hung on the jetty heads, boats on trestles, fish drying on the flakes and the Salt Council hall standing at last. Every Strand hamlet has its salt pans.</li>
+<li class="change">Grasse-Verdenne&#x27;s Council square sells cheese, bread and wine beside a bank of chalk cellar doors.</li>
+<li class="change">Each capital flies its own colours, and each has its own famous inn.</li></ul></section>
+<section class="sec" id="inns-and-taverns" data-sec="inns-and-taverns"><h2>Inns and taverns<span class="sec-n">4</span></h2><ul class="changes"><li class="change">Inns and alehouses in a new game are places to spend an evening. Each has a fire with settles in front of it, a bar with casks, lanterns at the door and a sign with the house&#x27;s name, and the keeper works in their own house.</li>
+<li class="change">You can rent a room. Guest rooms stay locked until you pay, at the door or with the keeper: 16 gold for a night, 40 for three or 80 for a week. The key lets your whole party in until ten in the morning on the day you check out, and at night you ring the bell to wake the keeper.</li>
+<li class="change">Bards play in the evenings. Each line of the song floats up off the bard, the room joins in the chorus, and every people sings its own songs. Stay for a whole song and you get Bard&#x27;s Spirits.</li>
+<li class="change">Townsfolk head out for the evening to the nearest house with a free seat, then go home to bed.</li></ul></section>
+<section class="sec" id="rivers-and-roads" data-sec="rivers-and-roads"><h2>Rivers and roads<span class="sec-n">5</span></h2><ul class="changes"><li class="change">Start a new game on the main continent and you&#x27;ll find a real river network, from mountain streams to great rivers with estuaries, shoals and white-water rapids.</li>
+<li class="change">Boats follow the rivers. The width of the river decides how big a boat it will float, bridges let boats pass under, and a ship&#x27;s helm follows the channel.</li>
+<li class="change">Roads join up into one network, keep off lake edges and cross water only by a bridge or causeway. Rest stops with a well and a trough, and wayside shrines, sit along the long stretches between towns.</li>
+<li class="change">Biome and territory borders bend in ragged curves, where they used to follow straight lines.<span class="credits"><span class="who">thesquirrel_74982</span><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">New Crossings get the same rivers and roads, and the world map draws all of it. A Crossing where no guild holds the ground says so.</li></ul></section>
+<section class="sec" id="amelia-s-grace" data-sec="amelia-s-grace"><h2>Amelia&#x27;s Grace<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Angelica&#x27;s Grace is now Amelia&#x27;s Grace. The place names, the healer in all fifteen lore chapters, her fruit tree and her blessing all carry the new name.</li>
+<li class="change">Every glade is its own lush clearing, with a spring, fruit trees on grass, daisies, stepping stones, moss and a standing stone that tells her story again.</li>
+<li class="change">Four glades that sat deep in lakes, and one on a flooded shore, are now on dry land you can walk to.</li></ul></section>
+<section class="sec" id="co-op" data-sec="co-op"><h2>Co-op<span class="sec-n">8</span></h2><ul class="changes"><li class="change">Joiners see their own step the moment they press the key. The host still decides every move, but over a long-distance connection the wait before your character moved went from about a third of a second to almost nothing.</li>
+<li class="change">The host sends about half as much data as before, which eases the lag a four-player party put on everyone, host included. The host&#x27;s game also redraws the screen less often each turn.</li>
+<li class="change">Kill XP is shared. Everyone who hurt a monster, or stood within eight tiles when it died, gets the full XP. Gold and loot stay with the player who landed the kill.</li>
+<li class="change">Kills by your pet, hired soldier, turret, spike wall, spell zone, trap or fire pay you, whoever&#x27;s turn it was, and your pet&#x27;s finds follow your own loot settings.<span class="credits"><span class="who">bancheis</span></span></li>
+<li class="change">Hosts can press Alt+T to switch the turn mode, and everyone sees the new mode on screen for two seconds.</li>
+<li class="change">Guests can ride, dismount and stable their own horse or mule, take yogurt and honey, open a holdfast&#x27;s strongbox and see a secret wall give way when they find it.</li>
+<li class="change">A guest who drops out in a dungeon and comes back later arrives beside the party. The log names your partner when something bites them, where it used to say P2.</li>
+<li class="change">A guest&#x27;s spells cost what the guest&#x27;s own belt shows, and a guest&#x27;s reckless kill brings the watch for the guest, not the host.</li></ul></section>
+<section class="sec" id="farming-and-home" data-sec="farming-and-home"><h2>Farming and home<span class="sec-n">6</span></h2><ul class="changes"><li class="change">Plant Field in the Homestead build menu marks out a field with a drag, then walks it and sows a seed in each empty plot. Plant Tree does the same for an orchard, with a sapling on every other tile so the trees never wall anyone in.<span class="credits"><span class="who">urughak</span></span></li>
+<li class="change">Alt+P sows your chosen seed in every empty plot on and around you.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">urughak</span></span></li>
+<li class="change">Your family sleeps inside the house you built them. Right-click a bed to choose who sleeps in it, and send one or all of them back to their old home from the Family panel.<span class="credits"><span class="who">elfietheesp55</span></span></li>
+<li class="change">Hired soldiers level up from kills made near them, up to your own level, and use a weapon and a piece of armour you give them.<span class="credits"><span class="who">bancheis</span></span></li>
+<li class="change">Wells can&#x27;t be dug on volcanic ground, and a desert well starts empty and refills slowly.<span class="credits"><span class="who">.knifee</span></span></li>
+<li class="change">You&#x27;ll find the campfire under Homestead in the build menu now, where it used to sit with Furniture.</li></ul></section>
+<section class="sec" id="trading-and-gear" data-sec="trading-and-gear"><h2>Trading and gear<span class="sec-n">6</span></h2><ul class="changes"><li class="change">The Exchange has a Wanted board. Post what you&#x27;re after with a gold reward paid up front, and anyone holding the goods can fill it and get paid by mail. Withdraw it, or let it run out, and the whole reward comes back.<span class="credits"><span class="who">arkhaven</span></span></li>
+<li class="change">Unidentified gear sells for half price, and the Sell row says so. The scholar shows the identify fee on each item.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">nalathnidragon</span></span></li>
+<li class="change">The forge&#x27;s Reroll and Upgrade tabs list gear in your pack as well as what you&#x27;re wearing.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Putting on a third ring or a third one-handed weapon asks which one it replaces.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">The city fence buys goods stolen in its own town, as its sign always said.</li>
+<li class="change">Handing goods over through the Exchange takes the exact stack you picked.<span class="credits"><span class="who">arkhaven</span></span></li></ul></section>
+<section class="sec" id="item-cards-and-the-pack" data-sec="item-cards-and-the-pack"><h2>Item cards and the pack<span class="sec-n">9</span></h2><ul class="changes"><li class="change">Hold an item card still with the apostrophe key (R3 on a pad) and point at any line to see what that stat, affix, set bonus or status means.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">nalathnidragon</span></span></li>
+<li class="change">Pointing at a spell belt or quick slot shows a short card with what the slot does and its numbers. Hold Shift for the full card. Ctrl+I turns item tooltips on and off, and a Short item cards setting leaves the stat glossary off.</li>
+<li class="change">Evasion and Resist open a breakdown of where each point comes from, set pieces show how many of the set you wear, and comparisons mark a gain with an up triangle and a loss with a down one.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">nalathnidragon</span><span class="who">.knifee</span></span></li>
+<li class="change">Fruit, soup and stew quench thirst as they feed, and the item card says by how much.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">The mouse wheel steps any number box, one a notch or ten with Shift.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Right-click a knocked-out pet, or press interact beside it, to use a Revive Tonic.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Germinators, vats and presses tell you what&#x27;s inside them.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">iso5455</span></span></li>
+<li class="change">Greyed-out actions explain why on their tooltip, and pack rows keep their height when you move through them.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">rubberychicken</span></span></li>
+<li class="change">Opening the pack puts you at the top of it.<span class="credits"><span class="who">rubberychicken</span><span class="who">samv123</span></span></li></ul></section>
+<section class="sec" id="getting-around" data-sec="getting-around"><h2>Getting around<span class="sec-n">8</span></h2><ul class="changes"><li class="change">Click a far campfire, chest, workbench, tree, bed or trader and you walk up to it and use it. If it&#x27;s gone or a foe turns up, you stop.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">urughak</span></span></li>
+<li class="change">Long trips remember the way they came, so the trip back follows the same road. When a trip stops, it tells you what stopped it.<span class="credits"><span class="who">.knifee</span><span class="who">tthfry</span></span></li>
+<li class="change">Shift+X after you stop a trip heads back toward where you last set off for.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Waypoints can have a colour, a tag and a note, shown when you point at them on the map.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Alt+S (L2+Menu on a pad) sends a scout. Its range circle is easier to see, and aiming past it shows where the bird will actually fly.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Arriving somewhere new shows a pixel title card with the place&#x27;s name, and a new game opens on the land&#x27;s name with its guild&#x27;s shields. You can keep the region name on screen from Customize HUD.</li>
+<li class="change">Places named on a signpost now show their names on the world map, and towns you&#x27;ve explored stay drawn after you leave or reload.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Boarding a ship moored at the quay doesn&#x27;t ram it any more.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">rubberychicken</span><span class="who">thesquirrel_74982</span></span></li></ul></section>
+<section class="sec" id="steam-deck-and-controllers" data-sec="steam-deck-and-controllers"><h2>Steam Deck and controllers<span class="sec-n">4</span></h2><ul class="changes"><li class="change">Fortress plays on a controller. The D-pad walks every button, View brings up a map cursor, A marks orders, and hints show pad buttons.</li>
+<li class="change">The right stick scrolls whichever window is on top, including the Load Game list and every full-screen menu. Settings and seven more lists mark the row the pad is on.</li>
+<li class="change">Small text on a Deck is a little larger, in every font.</li>
+<li class="change">Fixed holding A on the graphics picker skipping past the Crossing setup.</li></ul></section>
+<section class="sec" id="combat-and-creatures" data-sec="combat-and-creatures"><h2>Combat and creatures<span class="sec-n">6</span></h2><ul class="changes"><li class="change">Monsters walk onto your traps and landmines, which they used to walk round forever.</li>
+<li class="change">A creature killed by the last tick of poison or burning, or caught in a catapult blast beside its target, pays out XP and loot.</li>
+<li class="change">Dungeon boss fights play the ordinary fight music, and Mahargekdar&#x27;s Plane plays the calm underground piece.<span class="credits"><span class="who">urughak</span><span class="who">rubberychicken</span></span></li>
+<li class="change">Forager&#x27;s Seeker gives the second sprig its card promises.<span class="credits"><span class="who">nalathnidragon</span><span class="who">trespiratesque</span></span></li>
+<li class="change">Heartwood bolete, tideberry, voidberry, brimstone fungus and the other volcanic rarities grow in the wild.<span class="credits"><span class="who">arkhaven</span><span class="who">trespiratesque</span></span></li>
+<li class="change">A vampire the sun can&#x27;t burn isn&#x27;t told to seek shelter, and food and milk stop promising a vampire things it can&#x27;t have.<span class="credits"><span class="who">rubberychicken</span><span class="who">danekjovaxutc5</span></span></li></ul></section>
+<section class="sec" id="stories-and-townsfolk" data-sec="stories-and-townsfolk"><h2>Stories and townsfolk<span class="sec-n">4</span></h2><ul class="changes"><li class="change">All 306 books sit on a shelf somewhere in every world, saves included, so the Loremaster achievement can be finished. Every Crimson Hours and Journals volume has a shelf too.<span class="credits"><span class="who">elfietheesp55</span></span></li>
+<li class="change">Keeper Sennet&#x27;s Blue Guild stage can be accepted. It had been offered forever and refused every time.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">For a new character&#x27;s first three days, contracts offer short, nearby work only.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Townsfolk show their pronouns from the first meeting, and their titles and family words match. A townsperson&#x27;s title can&#x27;t contradict itself either, so no more Gentle Thugs.<span class="credits"><span class="who">danekjovaxutc5</span></span></li></ul></section>
+<section class="sec" id="fortress" data-sec="fortress"><h2>Fortress<span class="sec-n">4</span></h2><ul class="changes"><li class="change">Roofs with no finished support wait as an order until the support is built.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">Nobody dies of thirst beside an open well, and a sick settler with nothing in reach keeps working.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">A picked order keeps the Work list open, is outlined on the map and has Hold, Resume and Cancel.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">Arms and shot stay whole in storage, so a colony short on bin space can still be saved.<span class="credits"><span class="who">trespiratesque</span></span></li></ul></section>
+<section class="sec" id="cheese-and-the-recipe-book" data-sec="cheese-and-the-recipe-book"><h2>Cheese and the Recipe Book<span class="sec-n">3</span></h2><ul class="changes"><li class="change">The Recipe Book says what each spell wheel does before you press it, and its Spell Cheese tab filters by element and tier.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">Sort your perks on the Long Affinage bench by rarity or name.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">The Spell Belt window shows a Fine or Superior wheel&#x27;s real damage. The pack&#x27;s wheel belt now lines up with the spell bar, slot for slot.</li></ul></section>
+<section class="sec" id="how-it-looks" data-sec="how-it-looks"><h2>How it looks<span class="sec-n">6</span></h2><ul class="changes"><li class="change">The meadow is a calmer olive, so bushes, green items and the health bar stand out on it.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">Thunderstorms stay dark but you can read the ground and every creature under them, and Settings has a Weather darkness slider.<span class="credits"><span class="who">samv123</span></span></li>
+<li class="change">The Old Mouth&#x27;s pond, the springs in Amelia&#x27;s Grace and harbour boats sit in the living water. Dungeon pools and magma move in 2.5D as well.</li>
+<li class="change">Inside the Old Mouth the sun and moon cast no shadows, and its lamps cast theirs by day too.</li>
+<li class="change">Fixed toads raining onto the winter snow.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">The graphics-mode picker has 64 new pictures: eight places in eight lights, in all four views.</li></ul></section>
+<section class="sec" id="performance" data-sec="performance"><h2>Performance<span class="sec-n">5</span></h2><ul class="changes"><li class="change">Memory filled up over a long session until the game ran out and threw you back to the title, about ten hours in on a Deck. That&#x27;s fixed.<span class="credits"><span class="who">tthfry</span></span></li>
+<li class="change">On Windows, walking zoomed out, in a storm, through the Old Mouth or with Shadows on is much faster.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">samv123</span></span></li>
+<li class="change">Sound no longer piles up in memory over a long session.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Moving the mouse over the pack, a chest or the crafting bench costs far less.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">New games load about two thirds of a second sooner.</li></ul></section>
+<section class="sec" id="fixes" data-sec="fixes"><h2>Fixes<span class="sec-n">9</span></h2><ul class="changes"><li class="change">Fixed a bed below decks throwing you back to the bedside when you slept.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Item filters put the scythe under Tools.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Travelling merchants turn round at the end of the road, where they used to park at your gate, and the town keeps its water, work and posts out of your fenced base.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
+<li class="change">Only walls, fences, gates and doors you built claim ground as yours.</li>
+<li class="change">Barred doors stay barred with someone standing in them.</li>
+<li class="change">A town&#x27;s loot sits only in containers you can see, and settlement barrels on old wild-plant ground can be searched.</li>
+<li class="change">The ruins altar sits properly behind its book and draws cleanly over the rock.<span class="credits"><span class="who">samv123</span><span class="who">urughak</span></span></li>
+<li class="change">Finding a hidden room grinds for about a second, and a harvest says what it gave once.<span class="credits"><span class="who">rubberychicken</span></span></li>
+<li class="change">The log&#x27;s key hints show the right keys after a panel closes, and Customize HUD remembers being tucked away.<span class="credits"><span class="who">samv123</span><span class="who">rubberychicken</span></span></li></ul></section>
+<section class="sec caveat" id="known-issues" data-sec="known-issues"><h2>Known issues<span class="sec-n">2</span></h2><ul class="changes"><li class="change">Only the Monadic Descent is open. The Dyadic Vault, the Triadic Gate and the Tetradic Keep are still sealed.</li>
+<li class="change">The new towns, rivers and roads need a new game to see in full.</li></ul></section>
+<section class="sec" id="credits" data-sec="credits"><h2>Credits<span class="sec-n">1</span></h2><ul class="changes"><li class="change">Reports, saves, suggestions and playtest feedback: .knifee, arkhaven, bancheis, danekjovaxutc5, elfietheesp55, iso5455, nalathnidragon, rubberychicken, samv123, thesquirrel_74982, trespiratesque, tthfry and urughak.</li></ul></section>
+      <div class="empty hidden" id="empty"></div>
+    </div>
+  </div>
+</main>
+
+<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.23.0.html"><span class="pg-k">Previous release</span><span class="pg-v">Colonies and Curds</span><span class="pg-n">0.23.0</span></a><a class="pg pg-all" href="index.html">All releases</a></nav>
+
+<footer class="foot">
+  <span>Roguefort 0.24.0 &middot; 27 September 2026</span>
+  <span>Community reporters are credited against each change.</span>
+</footer>
+
+<script>
+(function () {
+  var q = document.getElementById('q');
+  var empty = document.getElementById('empty');
+  var rail = document.getElementById('rail');
+  var here = document.getElementById('here');
+  var liveTotal = document.getElementById('live-total');
+  var liveSecs = document.getElementById('live-secs');
+  var secs = [].slice.call(document.querySelectorAll('.sec'));
+  var idx = [].slice.call(document.querySelectorAll('.idx'));
+
+  var items = [];
+  secs.forEach(function (s) {
+    [].slice.call(s.querySelectorAll('.change')).forEach(function (li) {
+      items.push({ el: li, sec: s, text: li.textContent.toLowerCase() });
+    });
+  });
+
+  function countEl(id) { return document.querySelector('[data-count="' + id + '"]'); }
+
+  function filter() {
+    var term = q.value.trim().toLowerCase();
+    var shown = 0;
+    secs.forEach(function (s) { s._n = 0; });
+    items.forEach(function (it) {
+      var hit = !term || it.text.indexOf(term) !== -1;
+      it.el.classList.toggle('hidden', !hit);
+      if (hit) { it.sec._n++; shown++; }
+    });
+    secs.forEach(function (s) {
+      s.classList.toggle('hidden', s._n === 0);
+      var id = s.dataset.sec;
+      countEl(id).textContent = s._n;
+      document.querySelector('[data-idx="' + id + '"]').parentElement
+        .classList.toggle('hidden', s._n === 0);
+      s.querySelector('.sec-n').textContent = s._n;
+    });
+    liveTotal.textContent = shown;
+    liveSecs.textContent = secs.filter(function (s) { return s._n > 0; }).length;
+    if (shown === 0) {
+      empty.textContent = '';
+      empty.appendChild(document.createTextNode('Nothing matches '));
+      var b = document.createElement('b');
+      b.textContent = q.value;
+      empty.appendChild(b);
+      empty.appendChild(document.createTextNode('. Try a shorter word, like mount, save or road.'));
+      empty.classList.remove('hidden');
+    } else {
+      empty.classList.add('hidden');
+    }
+    onScroll();
+  }
+
+  q.addEventListener('input', filter);
+  q.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { q.value = ''; filter(); q.blur(); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+  });
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      rail.style.width = (h > 0 ? Math.min(1, window.scrollY / h) * 100 : 0) + '%';
+      var top = window.scrollY + 120, cur = null, curName = '';
+      secs.forEach(function (s) {
+        if (!s.classList.contains('hidden') && s.offsetTop <= top) {
+          cur = s.dataset.sec;
+          curName = s.querySelector('h2').firstChild.textContent;
+        }
+      });
+      idx.forEach(function (a) { a.classList.toggle('on', a.dataset.idx === cur); });
+      here.textContent = curName;
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>

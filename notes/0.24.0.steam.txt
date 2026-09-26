@@ -1,0 +1,195 @@
+Hey everyone,
+
+0.24.0 is mostly about the places you walk into. In a new game, every village, town and city is built from scratch, the continent has proper rivers and roads, and inns are real inns, with a fire, a bar, a bard and a room you can rent for the night.
+
+Co-op also got a big lag fix after a four-player session showed how bad things were getting, and there's a long list of fixes from your reports.
+
+Most of the world changes need a new game. An older save keeps every place you've already visited exactly as it was, and places you haven't reached yet are built the new way.
+
+Tim
+
+[b]Towns and villages[/b]
+[list]
+[*]Villages, towns and cities in a new game are laid out the way real ones grow: a green or crossroads at the heart, houses facing their street with gardens behind, and fields and pasture beyond. Every household has a bed for each person in it, children included.
+[*]Each kind of village builds to suit its land. Fishing villages have a harbour and jetties, desert villages gather round an oasis with flat plaster roofs and sandstone walls, and a place that stands in a lake is built on an island.
+[*]Fences have gates where the paths meet them, so you never have to walk right round a village to leave it.
+[*]Pens and pastures have animals in them: goats and sheep on the terraces, cattle in the fold, yaks in the byres of cold-country halls, buffalo round the fens, hens about the yards and gulls on the jetties. They belong to the village, and killing one costs you standing there.
+[*]Market squares and harbours are busy by day. Stallholders keep their stalls, goodwives run errands about the square, and fishers each work their own spot on the jetties.
+[*]Towns are dressed with the clutter of their trades, and hovering a prop tells you what it is.
+[*]Arriving at a town or city used to cost most of a second. The game now plans it in the background as you walk toward it.
+[/list]
+
+[b]The capitals[/b]
+[list]
+[*]Roquelle's rock has three Upper Doors and gated cuts leading out through the massif. The Archive stands in the great cave mouth, with the Vault behind it racked with blue wheels.
+[*]Thymerock's citadel is built at last, with the Ringlord's seat, the Legion's barracks and the Stone-shrine round the drill yard. Its terraces have stairs.
+[*]Fennmarche's Physician-Council hall and great hospital stand on islands in the mere, and every family has a house along its shores.
+[*]Brinehold lives off the sea, with sharks hung on the jetty heads, boats on trestles, fish drying on the flakes and the Salt Council hall standing at last. Every Strand hamlet has its salt pans.
+[*]Grasse-Verdenne's Council square sells cheese, bread and wine beside a bank of chalk cellar doors.
+[*]Each capital flies its own colours, and each has its own famous inn.
+[/list]
+
+[b]Inns and taverns[/b]
+[list]
+[*]Inns and alehouses in a new game are places to spend an evening. Each has a fire with settles in front of it, a bar with casks, lanterns at the door and a sign with the house's name, and the keeper works in their own house.
+[*]You can rent a room. Guest rooms stay locked until you pay, at the door or with the keeper: 16 gold for a night, 40 for three or 80 for a week. The key lets your whole party in until ten in the morning on the day you check out, and at night you ring the bell to wake the keeper.
+[*]Bards play in the evenings. Each line of the song floats up off the bard, the room joins in the chorus, and every people sings its own songs. Stay for a whole song and you get Bard's Spirits.
+[*]Townsfolk head out for the evening to the nearest house with a free seat, then go home to bed.
+[/list]
+
+[b]Rivers and roads[/b]
+[list]
+[*]Start a new game on the main continent and you'll find a real river network, from mountain streams to great rivers with estuaries, shoals and white-water rapids.
+[*]Boats follow the rivers. The width of the river decides how big a boat it will float, bridges let boats pass under, and a ship's helm follows the channel.
+[*]Roads join up into one network, keep off lake edges and cross water only by a bridge or causeway. Rest stops with a well and a trough, and wayside shrines, sit along the long stretches between towns.
+[*]Biome and territory borders bend in ragged curves, where they used to follow straight lines. (thesquirrel_74982, danekjovaxutc5)
+[*]New Crossings get the same rivers and roads, and the world map draws all of it. A Crossing where no guild holds the ground says so.
+[/list]
+
+[b]Amelia's Grace[/b]
+[list]
+[*]Angelica's Grace is now Amelia's Grace. The place names, the healer in all fifteen lore chapters, her fruit tree and her blessing all carry the new name.
+[*]Every glade is its own lush clearing, with a spring, fruit trees on grass, daisies, stepping stones, moss and a standing stone that tells her story again.
+[*]Four glades that sat deep in lakes, and one on a flooded shore, are now on dry land you can walk to.
+[/list]
+
+[b]Co-op[/b]
+[list]
+[*]Joiners see their own step the moment they press the key. The host still decides every move, but over a long-distance connection the wait before your character moved went from about a third of a second to almost nothing.
+[*]The host sends about half as much data as before, which eases the lag a four-player party put on everyone, host included. The host's game also redraws the screen less often each turn.
+[*]Kill XP is shared. Everyone who hurt a monster, or stood within eight tiles when it died, gets the full XP. Gold and loot stay with the player who landed the kill.
+[*]Kills by your pet, hired soldier, turret, spike wall, spell zone, trap or fire pay you, whoever's turn it was, and your pet's finds follow your own loot settings. (bancheis)
+[*]Hosts can press Alt+T to switch the turn mode, and everyone sees the new mode on screen for two seconds.
+[*]Guests can ride, dismount and stable their own horse or mule, take yogurt and honey, open a holdfast's strongbox and see a secret wall give way when they find it.
+[*]A guest who drops out in a dungeon and comes back later arrives beside the party. The log names your partner when something bites them, where it used to say P2.
+[*]A guest's spells cost what the guest's own belt shows, and a guest's reckless kill brings the watch for the guest, not the host.
+[/list]
+
+[b]Farming and home[/b]
+[list]
+[*]Plant Field in the Homestead build menu marks out a field with a drag, then walks it and sows a seed in each empty plot. Plant Tree does the same for an orchard, with a sapling on every other tile so the trees never wall anyone in. (urughak)
+[*]Alt+P sows your chosen seed in every empty plot on and around you. (danekjovaxutc5, urughak)
+[*]Your family sleeps inside the house you built them. Right-click a bed to choose who sleeps in it, and send one or all of them back to their old home from the Family panel. (elfietheesp55)
+[*]Hired soldiers level up from kills made near them, up to your own level, and use a weapon and a piece of armour you give them. (bancheis)
+[*]Wells can't be dug on volcanic ground, and a desert well starts empty and refills slowly. (.knifee)
+[*]You'll find the campfire under Homestead in the build menu now, where it used to sit with Furniture.
+[/list]
+
+[b]Trading and gear[/b]
+[list]
+[*]The Exchange has a Wanted board. Post what you're after with a gold reward paid up front, and anyone holding the goods can fill it and get paid by mail. Withdraw it, or let it run out, and the whole reward comes back. (arkhaven)
+[*]Unidentified gear sells for half price, and the Sell row says so. The scholar shows the identify fee on each item. (danekjovaxutc5, nalathnidragon)
+[*]The forge's Reroll and Upgrade tabs list gear in your pack as well as what you're wearing. (danekjovaxutc5)
+[*]Putting on a third ring or a third one-handed weapon asks which one it replaces. (danekjovaxutc5)
+[*]The city fence buys goods stolen in its own town, as its sign always said.
+[*]Handing goods over through the Exchange takes the exact stack you picked. (arkhaven)
+[/list]
+
+[b]Item cards and the pack[/b]
+[list]
+[*]Hold an item card still with the apostrophe key (R3 on a pad) and point at any line to see what that stat, affix, set bonus or status means. (danekjovaxutc5, nalathnidragon)
+[*]Pointing at a spell belt or quick slot shows a short card with what the slot does and its numbers. Hold Shift for the full card. Ctrl+I turns item tooltips on and off, and a Short item cards setting leaves the stat glossary off.
+[*]Evasion and Resist open a breakdown of where each point comes from, set pieces show how many of the set you wear, and comparisons mark a gain with an up triangle and a loss with a down one. (danekjovaxutc5, nalathnidragon, .knifee)
+[*]Fruit, soup and stew quench thirst as they feed, and the item card says by how much. (danekjovaxutc5)
+[*]The mouse wheel steps any number box, one a notch or ten with Shift. (danekjovaxutc5)
+[*]Right-click a knocked-out pet, or press interact beside it, to use a Revive Tonic. (danekjovaxutc5)
+[*]Germinators, vats and presses tell you what's inside them. (danekjovaxutc5, iso5455)
+[*]Greyed-out actions explain why on their tooltip, and pack rows keep their height when you move through them. (danekjovaxutc5, rubberychicken)
+[*]Opening the pack puts you at the top of it. (rubberychicken, samv123)
+[/list]
+
+[b]Getting around[/b]
+[list]
+[*]Click a far campfire, chest, workbench, tree, bed or trader and you walk up to it and use it. If it's gone or a foe turns up, you stop. (danekjovaxutc5, urughak)
+[*]Long trips remember the way they came, so the trip back follows the same road. When a trip stops, it tells you what stopped it. (.knifee, tthfry)
+[*]Shift+X after you stop a trip heads back toward where you last set off for. (rubberychicken)
+[*]Waypoints can have a colour, a tag and a note, shown when you point at them on the map. (danekjovaxutc5)
+[*]Alt+S (L2+Menu on a pad) sends a scout. Its range circle is easier to see, and aiming past it shows where the bird will actually fly. (danekjovaxutc5)
+[*]Arriving somewhere new shows a pixel title card with the place's name, and a new game opens on the land's name with its guild's shields. You can keep the region name on screen from Customize HUD.
+[*]Places named on a signpost now show their names on the world map, and towns you've explored stay drawn after you leave or reload. (danekjovaxutc5)
+[*]Boarding a ship moored at the quay doesn't ram it any more. (danekjovaxutc5, rubberychicken, thesquirrel_74982)
+[/list]
+
+[b]Steam Deck and controllers[/b]
+[list]
+[*]Fortress plays on a controller. The D-pad walks every button, View brings up a map cursor, A marks orders, and hints show pad buttons.
+[*]The right stick scrolls whichever window is on top, including the Load Game list and every full-screen menu. Settings and seven more lists mark the row the pad is on.
+[*]Small text on a Deck is a little larger, in every font.
+[*]Fixed holding A on the graphics picker skipping past the Crossing setup.
+[/list]
+
+[b]Combat and creatures[/b]
+[list]
+[*]Monsters walk onto your traps and landmines, which they used to walk round forever.
+[*]A creature killed by the last tick of poison or burning, or caught in a catapult blast beside its target, pays out XP and loot.
+[*]Dungeon boss fights play the ordinary fight music, and Mahargekdar's Plane plays the calm underground piece. (urughak, rubberychicken)
+[*]Forager's Seeker gives the second sprig its card promises. (nalathnidragon, trespiratesque)
+[*]Heartwood bolete, tideberry, voidberry, brimstone fungus and the other volcanic rarities grow in the wild. (arkhaven, trespiratesque)
+[*]A vampire the sun can't burn isn't told to seek shelter, and food and milk stop promising a vampire things it can't have. (rubberychicken, danekjovaxutc5)
+[/list]
+
+[b]Stories and townsfolk[/b]
+[list]
+[*]All 306 books sit on a shelf somewhere in every world, saves included, so the Loremaster achievement can be finished. Every Crimson Hours and Journals volume has a shelf too. (elfietheesp55)
+[*]Keeper Sennet's Blue Guild stage can be accepted. It had been offered forever and refused every time. (danekjovaxutc5)
+[*]For a new character's first three days, contracts offer short, nearby work only. (samv123)
+[*]Townsfolk show their pronouns from the first meeting, and their titles and family words match. A townsperson's title can't contradict itself either, so no more Gentle Thugs. (danekjovaxutc5)
+[/list]
+
+[b]Fortress[/b]
+[list]
+[*]Roofs with no finished support wait as an order until the support is built. (trespiratesque)
+[*]Nobody dies of thirst beside an open well, and a sick settler with nothing in reach keeps working. (trespiratesque)
+[*]A picked order keeps the Work list open, is outlined on the map and has Hold, Resume and Cancel. (trespiratesque)
+[*]Arms and shot stay whole in storage, so a colony short on bin space can still be saved. (trespiratesque)
+[/list]
+
+[b]Cheese and the Recipe Book[/b]
+[list]
+[*]The Recipe Book says what each spell wheel does before you press it, and its Spell Cheese tab filters by element and tier. (rubberychicken)
+[*]Sort your perks on the Long Affinage bench by rarity or name. (rubberychicken)
+[*]The Spell Belt window shows a Fine or Superior wheel's real damage. The pack's wheel belt now lines up with the spell bar, slot for slot.
+[/list]
+
+[b]How it looks[/b]
+[list]
+[*]The meadow is a calmer olive, so bushes, green items and the health bar stand out on it. (samv123)
+[*]Thunderstorms stay dark but you can read the ground and every creature under them, and Settings has a Weather darkness slider. (samv123)
+[*]The Old Mouth's pond, the springs in Amelia's Grace and harbour boats sit in the living water. Dungeon pools and magma move in 2.5D as well.
+[*]Inside the Old Mouth the sun and moon cast no shadows, and its lamps cast theirs by day too.
+[*]Fixed toads raining onto the winter snow. (danekjovaxutc5)
+[*]The graphics-mode picker has 64 new pictures: eight places in eight lights, in all four views.
+[/list]
+
+[b]Performance[/b]
+[list]
+[*]Memory filled up over a long session until the game ran out and threw you back to the title, about ten hours in on a Deck. That's fixed. (tthfry)
+[*]On Windows, walking zoomed out, in a storm, through the Old Mouth or with Shadows on is much faster. (danekjovaxutc5, samv123)
+[*]Sound no longer piles up in memory over a long session. (danekjovaxutc5)
+[*]Moving the mouse over the pack, a chest or the crafting bench costs far less. (danekjovaxutc5)
+[*]New games load about two thirds of a second sooner.
+[/list]
+
+[b]Fixes[/b]
+[list]
+[*]Fixed a bed below decks throwing you back to the bedside when you slept. (danekjovaxutc5)
+[*]Item filters put the scythe under Tools. (danekjovaxutc5)
+[*]Travelling merchants turn round at the end of the road, where they used to park at your gate, and the town keeps its water, work and posts out of your fenced base. (danekjovaxutc5)
+[*]Only walls, fences, gates and doors you built claim ground as yours.
+[*]Barred doors stay barred with someone standing in them.
+[*]A town's loot sits only in containers you can see, and settlement barrels on old wild-plant ground can be searched.
+[*]The ruins altar sits properly behind its book and draws cleanly over the rock. (samv123, urughak)
+[*]Finding a hidden room grinds for about a second, and a harvest says what it gave once. (rubberychicken)
+[*]The log's key hints show the right keys after a panel closes, and Customize HUD remembers being tucked away. (samv123, rubberychicken)
+[/list]
+
+[b]Known issues[/b]
+[list]
+[*]Only the Monadic Descent is open. The Dyadic Vault, the Triadic Gate and the Tetradic Keep are still sealed.
+[*]The new towns, rivers and roads need a new game to see in full.
+[/list]
+
+[b]Credits[/b]
+[list]
+[*]Reports, saves, suggestions and playtest feedback: .knifee, arkhaven, bancheis, danekjovaxutc5, elfietheesp55, iso5455, nalathnidragon, rubberychicken, samv123, thesquirrel_74982, trespiratesque, tthfry and urughak.
+[/list]
