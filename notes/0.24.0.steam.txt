@@ -1,6 +1,6 @@
 Hey everyone,
 
-Before anything else, a big thank you to our community pixel artists: ArkHaven, DatSheepDoe, Elfie the Explorer, sometimesihavequestions / Merlin and Briarios. They've drawn more than 600 of the game's sprites between them, and Roguefort wouldn't look anything like it does without them.
+Before anything else, I’d like to say a big thank you to our community pixel artists: ArkHaven, DatSheepDoe, Elfie the Explorer, sometimesihavequestions / Merlin and Briarios. They’ve drawn more than 600 (!) of the game's sprites between them, which is incredible. Roguefort wouldn't look anything like it does without this work and the many discussions that have gone into cohering and developing the visual style. So, I wanted to say thanks again, especially as we get closer to Early Access and there are so many more eyes on the game.
 
 OK, on to the update. This is the biggest one the playtest has had, and since 0.22.0 and 0.23.0 both went out without patch notes, these cover everything since 0.21.0.
 
