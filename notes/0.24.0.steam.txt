@@ -1,6 +1,6 @@
 Hey everyone,
 
-Before anything else, a big thank you to our community pixel artists, ArkHaven, Elfie the Explorer and DatSheepDoe. So much of what you see in Roguefort is their work. Their sprites brought the game to life and have shaped its whole look, and it wouldn't look anything like it does without them.
+Before anything else, a big thank you to our community pixel artists: ArkHaven, DatSheepDoe, Elfie the Explorer, sometimesihavequestions / Merlin and Briarios. Between them they've drawn more than 600 of the game's sprites, from creatures and bosses to item icons and terrain. Their work brought the game to life and has shaped its whole look, and Roguefort wouldn't look anything like it does without them.
 
 This is the biggest update the playtest has had. 0.22.0 and 0.23.0 both went out without patch notes, so these cover everything since 0.21.0.
 
@@ -250,6 +250,6 @@ Tim
 [b]Credits[/b]
 [list]
 [*]Reports, saves, suggestions and playtest feedback: .knifee, _garmr, arkhaven, bancheis, bossman62, danekjovaxutc5, datsheeptho, drachasor, elfietheesp55, grumpykolmogrov, horth.panthur, hugomad, iso5455, jungcodex, morigh, nagayun, nalathnidragon, peacook, rubberychicken, samv123, shexara, Splattercat, theartolater, thesquirrel_74982, tobacoos, trespiratesque, tthfry, urughak and xxturiflower47xx.
-[*]Community pixel art: ArkHaven, Elfie the Explorer and DatSheepDoe.
+[*]Community pixel art: ArkHaven, DatSheepDoe, Elfie the Explorer, sometimesihavequestions / Merlin and Briarios.
 [*]Fortress soundtrack: alkakrab.
 [/list]
