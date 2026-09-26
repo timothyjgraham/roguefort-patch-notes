@@ -1,5 +1,7 @@
 Hey everyone,
 
+Before anything else, a big thank you to our community pixel artists, ArkHaven, Elfie the Explorer and DatSheepDoe. So much of what you see in Roguefort is their work. Their sprites brought the game to life and have shaped its whole look, and it wouldn't look anything like it does without them.
+
 This is the biggest update the playtest has had. 0.22.0 and 0.23.0 both went out without patch notes, so these cover everything since 0.21.0.
 
 The headlines:
