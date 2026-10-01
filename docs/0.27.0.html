@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Roguefort 0.19.2 — Patch Notes</title>
-<meta name="description" content="Roguefort 0.19.2 patch notes. 16 changes across 5 sections.">
+<title>Roguefort 0.27.0 — Patch Notes</title>
+<meta name="description" content="Roguefort 0.27.0 patch notes. 20 changes across 3 sections.">
 <meta name="theme-color" content="#111D35">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -475,13 +475,13 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
          srcset="assets/roguefort-wordmark.png 1x, assets/roguefort-wordmark@2x.png 2x"
          width="526" height="166" alt="Roguefort">
     <p class="plaque">
-      <span class="plaque-k">Patch notes</span><span class="plaque-v">0.19.2</span><span class="plaque-t">Playtest</span>
+      <span class="plaque-k">Patch notes</span><span class="plaque-v">0.27.0</span><span class="plaque-t">Playtest</span>
     </p>
-    <h1 class="card"><span class="vh">Roguefort 0.19.2 patch notes: </span>Suitably Wilder.</h1>
+    <h1 class="card"><span class="vh">Roguefort 0.27.0 patch notes: </span>An Easier Fortress and a New Font</h1>
     <p class="mast-meta">
-      <span>27 August 2026</span>
-      <span><b>16</b> changes</span>
-      <span><b>5</b> sections</span>
+      <span>2 October 2026</span>
+      <span><b>20</b> changes</span>
+      <span><b>3</b> sections</span>
       <span>press <kbd>/</kbd> to filter</span>
     </p>
   </div>
@@ -502,7 +502,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   <div class="bar-in">
     <a class="bar-mark" href="#top">Roguefort</a>
     <span class="bar-here" id="here" aria-live="off"></span>
-    <nav class="vers" aria-label="Versions"><a class="ver" href="0.27.0.html">0.27.0</a><a class="ver" href="0.26.0.html">0.26.0</a><a class="ver" href="0.25.0.html">0.25.0</a><a class="ver on" href="0.19.2.html" aria-current="page">0.19.2</a><a class="ver ver-all" href="index.html">All (13)</a></nav>
+    <nav class="vers" aria-label="Versions"><a class="ver on" href="0.27.0.html" aria-current="page">0.27.0</a><a class="ver" href="0.26.0.html">0.26.0</a><a class="ver" href="0.25.0.html">0.25.0</a><a class="ver" href="0.24.0.html">0.24.0</a><a class="ver ver-all" href="index.html">All (13)</a></nav>
     <div class="find">
       <input id="q" type="search" placeholder="/ filter changes" aria-label="Filter changes" autocomplete="off">
     </div>
@@ -514,42 +514,44 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
     <nav class="toc" aria-label="Sections">
       <div class="toc-h">
         <h2>Contents</h2>
-        <span><b id="live-total">16</b> changes in <b id="live-secs">5</b> sections</span>
+        <span><b id="live-total">20</b> changes in <b id="live-secs">3</b> sections</span>
       </div>
-      <ul><li><a class="idx" href="#combat" data-idx="combat"><span class="idx-name">Combat</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="combat">3</span></a></li>
-<li><a class="idx" href="#the-safe-homeland-and-world-pacing" data-idx="the-safe-homeland-and-world-pacing"><span class="idx-name">The Safe Homeland and world pacing</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-safe-homeland-and-world-pacing">7</span></a></li>
-<li><a class="idx" href="#quests" data-idx="quests"><span class="idx-name">Quests</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="quests">3</span></a></li>
-<li><a class="idx" href="#settlements-and-townspeople" data-idx="settlements-and-townspeople"><span class="idx-name">Settlements and townspeople</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="settlements-and-townspeople">2</span></a></li>
-<li><a class="idx" href="#ui" data-idx="ui"><span class="idx-name">UI</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="ui">1</span></a></li></ul>
+      <ul><li><a class="idx" href="#a-new-font" data-idx="a-new-font"><span class="idx-name">A new font</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="a-new-font">4</span></a></li>
+<li><a class="idx" href="#fortress" data-idx="fortress"><span class="idx-name">Fortress</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fortress">13</span></a></li>
+<li><a class="idx" href="#keyboard-and-controller-in-fortress" data-idx="keyboard-and-controller-in-fortress"><span class="idx-name">Keyboard and controller in Fortress</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="keyboard-and-controller-in-fortress">3</span></a></li></ul>
       <div class="toc-end"></div>
     </nav>
     <div id="doc">
-      <section class="sec sec-intro"><p class="lead">A same-day hotfix for 0.19.0, folding in the short-lived 0.19.1. If enemies could not hurt you, this is the one you were waiting for — there were two separate bugs behind it, and both are fixed.</p></section>
-<section class="sec" id="combat" data-sec="combat"><h2>Combat<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Wild creatures can hurt you again. An internal safety check was silently swallowing the attacks of nearly every wild creature — boars, wolves, ghosts, toads, 36 of the 39 kinds that roam the overworld — from the moment they spawned. Dungeon monsters and town guards were unaffected, and reloading a save cleared it for a while, which is why the bug seemed to come and go between players.<span class="credits"><span class="who">sksniperks</span><span class="who">rubberychicken</span></span></li>
-<li class="change">Separately, a creature you had already wounded stopped being able to hurt you for the rest of the fight. Thorns damage was the one exception, and a trap or a guard wounding a creature could set it off without you attacking at all.<span class="credits"><span class="who">sksniperks</span><span class="who">rubberychicken</span></span></li>
-<li class="change">Bug report files now record far more detail whenever combat damage goes missing, so if anything like this ever comes back it can be tracked down from a single report.</li></ul></section>
-<section class="sec" id="the-safe-homeland-and-world-pacing" data-sec="the-safe-homeland-and-world-pacing"><h2>The Safe Homeland and world pacing<span class="sec-n">7</span></h2><ul class="changes"><li class="change">The calm zone around your starting area shrank from 150 to 80 tiles — the wild was starting an unreasonably long walk away.<span class="credits"><span class="who">Iso</span><span class="who">samv123</span></span></li>
-<li class="change">Walking out of the starter valley finds trouble quickly now, but between 80 and 150 tiles from the start, pack species arrive as a single scout rather than a full pack. You will meet a lone wolf before you meet its family. Past 150, the packs are at full strength.</li>
-<li class="change">Your homestead is a sanctuary, not a force field. Setting a home in the wild no longer projects starter-valley safety around it: packs still will not spawn within 150 tiles of your base, but lone predators of the local danger tier will come calling, and mythic beasts no longer avoid the area. Planting a campfire in dangerous country to farm it in perfect safety was an exploit, and it is closed.</li>
-<li class="change">Grazing wildlife no longer crowds out predators. Peaceful animals and hostile creatures now draw from separate spawn budgets, where previously five deer at your camp meant no threat could even roll the dice.</li>
-<li class="change">The countryside around settlements has wildlife and threats again. Townsfolk were being counted against the wildlife limit, so the land around every village and town had spawned nothing at all — ever.</li>
-<li class="change">Daytime spawn rates rose slightly outside the starter valley. Nights were already lively and are untouched.</li>
-<li class="change">The Shadow Wolf exists. A quirk of the old safe-zone rules made it the one creature no player could ever meet — it has never once appeared in the full game. Look for it at night, alone, just beyond the starter valley. All 57 wild creatures can now be found in the world.</li></ul></section>
-<section class="sec" id="quests" data-sec="quests"><h2>Quests<span class="sec-n">3</span></h2><ul class="changes"><li class="change">&quot;Clear hostile creatures near the village&quot; contracts can be completed without dragging enemies toward town. Kills now count across the village&#x27;s real hunting grounds, past the quiet ring that keeps wolves away from the town gates — within 120 tiles of the giver for a village, 150 for a town. Quests already in your journal keep their old range.<span class="credits"><span class="who">samv123</span></span></li>
-<li class="change">Villages inside the starter valley no longer post clear notices at all — there is nothing there to clear, so the giver offers different work instead.</li>
-<li class="change">Fixed a quest marker in the starting town pointing at an NPC who then had no quest to give. The marker and the conversation now agree.<span class="credits"><span class="who">samv123</span></span></li></ul></section>
-<section class="sec" id="settlements-and-townspeople" data-sec="settlements-and-townspeople"><h2>Settlements and townspeople<span class="sec-n">2</span></h2><ul class="changes"><li class="change">Faction leaders no longer scream &quot;This is my house!&quot; at you in the middle of the covered market. A household had been moved into the market hall in all five capitals; the leaders have been properly rehoused.<span class="credits"><span class="who">arkhaven</span><span class="who">trespiratesque</span></span></li>
-<li class="change">Signposts step to the road&#x27;s shoulder instead of planting themselves in the middle of the carriageway — some were blocking town roads and, in the worst cases, villagers&#x27; front doors.<span class="credits"><span class="who">soeshii</span></span></li></ul></section>
-<section class="sec" id="ui" data-sec="ui"><h2>UI<span class="sec-n">1</span></h2><ul class="changes"><li class="change">Character sheet tag tooltips count the perks you actually hold instead of always claiming &quot;you carry no perks with this tag yet&quot;.<span class="credits"><span class="who">nalathnidragon</span></span></li></ul></section>
+      <section class="sec sec-intro"><p class="lead">Hey everyone,</p><p class="lead">Thank you to the playtesters and community for testing 0.26.0 and showing me where Fortress was hard to get into. This update makes it much easier to pick up, and brings in a new default font.</p><p class="lead">Tim</p></section>
+<section class="sec" id="a-new-font" data-sec="a-new-font"><h2>A new font<span class="sec-n">4</span></h2><ul class="changes"><li class="change">Standard is the new default font. What you read stays in the smooth Readable font, and titles, tabs, buttons and labels use a pixel font.</li>
+<li class="change">If you were on Readable, you&#x27;ve been moved to Standard and the game tells you once. To go back, pick Readable in Settings, Display, Font.</li>
+<li class="change">Classic and Hyperlegible stay as you set them.</li>
+<li class="change">The pixel font is Fusion Pixel by TakWolf.</li></ul></section>
+<section class="sec" id="fortress" data-sec="fortress"><h2>Fortress<span class="sec-n">13</span></h2><ul class="changes"><li class="change">Starting a colony takes one press. Start your colony is the big button in the middle of the screen, and the world, site and settler options sit under Customise.</li>
+<li class="change">If you have a colony saved, the start screen opens on its Resume button, so Enter or A takes you straight back in.</li>
+<li class="change">Menu on the top bar, or Escape, opens a Paused menu with Resume, Save colony, Settings, Help and tutorial, Save and exit to title, and Save and quit. Resume carries on at the speed you paused at.</li>
+<li class="change">When a save fails, the Paused menu says so in one plain line.</li>
+<li class="change">Build has tabs now. It opens on Essentials, which holds everything a new colony needs.</li>
+<li class="change">Demolish takes down anything built, cancels anything planned and refunds it, and takes roofs off. Click a tile and Demolish or Cancel order is the first thing offered.</li>
+<li class="change">You can plan a whole sleeping room in one drag. The Sleeping room tool lays out the walls, a door, a roof and a bed for every settler, and Room does the same without the beds. Both work around walls that are already standing.</li>
+<li class="change">The bed, kitchen and sleeping room lessons hand you the tool and outline the spot on the map. The sleeping room lesson also has Place it for me.</li>
+<li class="change">Settlers stay out of the campfire. They gather round it on tiles of their own, and anyone with no work wanders the camp. Older colonies get this too.</li>
+<li class="change">Planned things say what they are on their tile card, like Planned stone wall, and a roof waiting on walls you&#x27;ve ordered shows as queued.</li>
+<li class="change">The top bar names its buttons when there&#x27;s room for the words, the bottom bar has Log and More, and the ? button is called Help and tutorial.</li>
+<li class="change">The Settlers panel opens on a short summary with the four bars, and the rest folds away underneath.</li>
+<li class="change">An empty Gardens page points you to its Build garden button.</li></ul></section>
+<section class="sec" id="keyboard-and-controller-in-fortress" data-sec="keyboard-and-controller-in-fortress"><h2>Keyboard and controller in Fortress<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Choosing a Build tool with Enter or Space puts you on the map, ready to place it.</li>
+<li class="change">When a lesson moves on, the keyboard jumps to its next button.</li>
+<li class="change">On a controller, the Paused menu wraps top to bottom like the arrow keys do, and the D-pad reaches every site on the start screen.</li></ul></section>
       <div class="empty hidden" id="empty"></div>
     </div>
   </div>
 </main>
 
-<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.19.0.html"><span class="pg-k">Previous release</span><span class="pg-v">Hamsters!</span><span class="pg-n">0.19.0</span></a><a class="pg pg-all" href="index.html">All releases</a><a class="pg pg-next" href="0.19.3.html"><span class="pg-k">Next release</span><span class="pg-v">Non Travolta.</span><span class="pg-n">0.19.3</span></a></nav>
+<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.26.0.html"><span class="pg-k">Previous release</span><span class="pg-v">Comfort and Moonlight</span><span class="pg-n">0.26.0</span></a><a class="pg pg-all" href="index.html">All releases</a></nav>
 
 <footer class="foot">
-  <span>Roguefort 0.19.2 &middot; 27 August 2026</span>
+  <span>Roguefort 0.27.0 &middot; 2 October 2026</span>
   <span>Community reporters are credited against each change.</span>
 </footer>
 
