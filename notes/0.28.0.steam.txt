@@ -9,9 +9,7 @@ Tim
 [*]Everyone is drawn with the new detailed characters, in the world, the inventory, portraits and dialogue. If you'd rather have the original sprites, turn off Detailed characters in Settings, Gameplay, Character and HUD.
 [*]Sleepers lie on their beds under a blanket with their head on the pillow, and bedrolls lie flat in 2.5D and first person.
 [*]People sit in chairs, tread water and stroke when they swim, face the float when they fish and kneel at a lock they're picking.
-[*]Mining, chopping and digging happen on planted feet, a bow is drawn to the jaw before it looses, and an unarmed punch keeps the other fist up to guard. Weapons and tools keep their shape all the way through a swing.
-[*]Sailors in a skiff, riders, and townsfolk who've been hit or have fallen use the detailed characters too, where they flicked back to the old sprite before.
-[*]On the title menu the figures move properly. The New Game traveller walks east and every few strides jogs, sneaks, hops, forages or turns to greet you, the Fortress miner swings at a proper pace with sparks off the rock, and the Play with Friends pair hop inside their box.
+[*]The figures on the title menu are the new characters too. The New Game traveller walks east and every few strides jogs, sneaks, hops, forages or turns to greet you.
 [/list]
 
 [b]Character creation[/b]
