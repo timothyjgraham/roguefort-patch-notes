@@ -2,8 +2,6 @@ Hey everyone,
 
 Thanks again to the playtest team for testing 0.27.0 and for all the reports, videos and saves. This is a big one. Everyone in the world has a new, more detailed look, and you can finally choose your hair. Fortress has been rebuilt for Early Access, so a new colony starts somewhere with water and the colony goals walk you from your first well through to Frost and beyond. There's also a long list of fixes from your reports.
 
-The credits screen now has a Design Contributions section for DanekJovax, NalathniDragon, RubberyChicken and SamV, whose ideas are all through the game. Thank you.
-
 Tim
 
 [b]New characters[/b]
@@ -167,7 +165,7 @@ Tim
 [*]The forge's recipes fold into groups like Weapons and armour, Tools and fishing, and Ammunition, with how many of each you can make. (danekjovaxutc5)
 [*]Tame shows which bait it will use and your chance of success. (nalathnidragon)
 [*]A hand of Wheels of War takes some time to play, and a cellarer you've beaten will sit down for a friendly hand. (.knifee)
-[*]New community art for the raft, the waterskin, the culture and the six kinds of wood.
+[*]New community art for the raft, the waterskin, the culture and the six kinds of wood. (arkhaven)
 [*]Take some takes the amount it shows, not the whole stack. (tthfry)
 [*]Amount prompts move one at a time with the arrow keys, not two.
 [*]Changing the pack's category filter no longer leaves the item card describing something you can't see.
