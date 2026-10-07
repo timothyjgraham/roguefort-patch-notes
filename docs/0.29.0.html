@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Roguefort 0.26.0 — Patch Notes</title>
-<meta name="description" content="Roguefort 0.26.0 patch notes. 79 changes across 13 sections.">
+<title>Roguefort 0.29.0 — Patch Notes</title>
+<meta name="description" content="Roguefort 0.29.0 patch notes. 77 changes across 11 sections.">
 <meta name="theme-color" content="#111D35">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -475,13 +475,13 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
          srcset="assets/roguefort-wordmark.png 1x, assets/roguefort-wordmark@2x.png 2x"
          width="526" height="166" alt="Roguefort">
     <p class="plaque">
-      <span class="plaque-k">Patch notes</span><span class="plaque-v">0.26.0</span><span class="plaque-t">Playtest</span>
+      <span class="plaque-k">Patch notes</span><span class="plaque-v">0.29.0</span><span class="plaque-t">Playtest</span>
     </p>
-    <h1 class="card"><span class="vh">Roguefort 0.26.0 patch notes: </span>Comfort and Moonlight</h1>
+    <h1 class="card"><span class="vh">Roguefort 0.29.0 patch notes: </span>Fight Back and Dig Deeper</h1>
     <p class="mast-meta">
-      <span>1 October 2026</span>
-      <span><b>79</b> changes</span>
-      <span><b>13</b> sections</span>
+      <span>7 October 2026</span>
+      <span><b>77</b> changes</span>
+      <span><b>11</b> sections</span>
       <span>press <kbd>/</kbd> to filter</span>
     </p>
   </div>
@@ -502,7 +502,7 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
   <div class="bar-in">
     <a class="bar-mark" href="#top">Roguefort</a>
     <span class="bar-here" id="here" aria-live="off"></span>
-    <nav class="vers" aria-label="Versions"><a class="ver" href="0.29.0.html">0.29.0</a><a class="ver" href="0.28.0.html">0.28.0</a><a class="ver" href="0.27.0.html">0.27.0</a><a class="ver on" href="0.26.0.html" aria-current="page">0.26.0</a><a class="ver ver-all" href="index.html">All (15)</a></nav>
+    <nav class="vers" aria-label="Versions"><a class="ver on" href="0.29.0.html" aria-current="page">0.29.0</a><a class="ver" href="0.28.0.html">0.28.0</a><a class="ver" href="0.27.0.html">0.27.0</a><a class="ver" href="0.26.0.html">0.26.0</a><a class="ver ver-all" href="index.html">All (15)</a></nav>
     <div class="find">
       <input id="q" type="search" placeholder="/ filter changes" aria-label="Filter changes" autocomplete="off">
     </div>
@@ -514,113 +514,109 @@ main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
     <nav class="toc" aria-label="Sections">
       <div class="toc-h">
         <h2>Contents</h2>
-        <span><b id="live-total">79</b> changes in <b id="live-secs">13</b> sections</span>
+        <span><b id="live-total">77</b> changes in <b id="live-secs">11</b> sections</span>
       </div>
-      <ul><li><a class="idx" href="#comfort-and-performance" data-idx="comfort-and-performance"><span class="idx-name">Comfort and performance</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="comfort-and-performance">9</span></a></li>
-<li><a class="idx" href="#night-and-light" data-idx="night-and-light"><span class="idx-name">Night and light</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="night-and-light">3</span></a></li>
-<li><a class="idx" href="#towns-and-the-people-in-them" data-idx="towns-and-the-people-in-them"><span class="idx-name">Towns and the people in them</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="towns-and-the-people-in-them">11</span></a></li>
-<li><a class="idx" href="#rest-and-travel" data-idx="rest-and-travel"><span class="idx-name">Rest and travel</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="rest-and-travel">3</span></a></li>
-<li><a class="idx" href="#swimming-and-the-sea" data-idx="swimming-and-the-sea"><span class="idx-name">Swimming and the sea</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="swimming-and-the-sea">8</span></a></li>
-<li><a class="idx" href="#sensing-hidden-things" data-idx="sensing-hidden-things"><span class="idx-name">Sensing hidden things</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="sensing-hidden-things">3</span></a></li>
-<li><a class="idx" href="#combat-and-magic" data-idx="combat-and-magic"><span class="idx-name">Combat and magic</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="combat-and-magic">15</span></a></li>
-<li><a class="idx" href="#homestead" data-idx="homestead"><span class="idx-name">Homestead</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="homestead">5</span></a></li>
-<li><a class="idx" href="#fortress" data-idx="fortress"><span class="idx-name">Fortress</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fortress">6</span></a></li>
-<li><a class="idx" href="#keyboard-and-controller" data-idx="keyboard-and-controller"><span class="idx-name">Keyboard and controller</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="keyboard-and-controller">3</span></a></li>
-<li><a class="idx" href="#interface" data-idx="interface"><span class="idx-name">Interface</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="interface">10</span></a></li>
-<li><a class="idx idx-caveat" href="#known-issues" data-idx="known-issues"><span class="idx-name">Known issues</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="known-issues">2</span></a></li>
-<li><a class="idx" href="#credits" data-idx="credits"><span class="idx-name">Credits</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="credits">1</span></a></li></ul>
+      <ul><li><a class="idx" href="#fortress-fighting" data-idx="fortress-fighting"><span class="idx-name">Fortress fighting</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fortress-fighting">9</span></a></li>
+<li><a class="idx" href="#fortress-hunting-and-the-herd" data-idx="fortress-hunting-and-the-herd"><span class="idx-name">Fortress hunting and the herd</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fortress-hunting-and-the-herd">9</span></a></li>
+<li><a class="idx" href="#fortress-underground" data-idx="fortress-underground"><span class="idx-name">Fortress underground</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fortress-underground">9</span></a></li>
+<li><a class="idx" href="#fortress-stockpiles-rail-and-carts" data-idx="fortress-stockpiles-rail-and-carts"><span class="idx-name">Fortress stockpiles, rail and carts</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fortress-stockpiles-rail-and-carts">7</span></a></li>
+<li><a class="idx" href="#fortress-building-and-rooms" data-idx="fortress-building-and-rooms"><span class="idx-name">Fortress building and rooms</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fortress-building-and-rooms">8</span></a></li>
+<li><a class="idx" href="#fortress-medical" data-idx="fortress-medical"><span class="idx-name">Fortress medical</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fortress-medical">5</span></a></li>
+<li><a class="idx" href="#fortress-time-and-weather" data-idx="fortress-time-and-weather"><span class="idx-name">Fortress time and weather</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fortress-time-and-weather">5</span></a></li>
+<li><a class="idx" href="#fortress-orders-goals-and-alerts" data-idx="fortress-orders-goals-and-alerts"><span class="idx-name">Fortress orders, goals and alerts</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fortress-orders-goals-and-alerts">11</span></a></li>
+<li><a class="idx" href="#fortress-on-steam-deck" data-idx="fortress-on-steam-deck"><span class="idx-name">Fortress on Steam Deck</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="fortress-on-steam-deck">7</span></a></li>
+<li><a class="idx" href="#co-op" data-idx="co-op"><span class="idx-name">Co-op</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="co-op">1</span></a></li>
+<li><a class="idx" href="#art" data-idx="art"><span class="idx-name">Art</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="art">6</span></a></li></ul>
       <div class="toc-end"></div>
     </nav>
     <div id="doc">
-      <section class="sec sec-intro"><p class="lead">Hey everyone,</p><p class="lead">It&#x27;s been some long nights and long days and I&#x27;m very sleepy but very excited to bring the latest patch ahead of the Early Access launch, which is now only 2 weeks away.</p><p class="lead">A big thank you to everyone who tested, reported and talked things through over the last couple of days, especially SamV, NalathniDragon, Danek, knifee and Tres. Here&#x27;s what&#x27;s new:</p><ul class="lead-list"><li>A new Comfort page in Settings, with a Sensory-friendly mode that turns everything down at once.</li><li>Darker nights that follow the moon, with a slider if you like them brighter.</li><li>Safer towns. Wild animals stay out, and fences and clutter stay off the paths.</li><li>Swimming, plus pike and eels in the lakes near home.</li><li>Spectre Blue and the other sensing cheeses work now.</li><li>Rind Cultists cast spells and Ravenkin Slingers throw stones.</li></ul><p class="lead">All of it comes to your existing saves.</p><p class="lead">Tim</p></section>
-<section class="sec" id="comfort-and-performance" data-sec="comfort-and-performance"><h2>Comfort and performance<span class="sec-n">9</span></h2><ul class="changes"><li class="change">There&#x27;s a new Comfort page in Settings, with separate controls for flashes, on-screen weather, water, background motion, camera motion and interface motion. Each one goes all the way down to Still, where things stop moving but stay on screen.<span class="credits"><span class="who">samv123</span></span></li>
-<li class="change">Sensory-friendly mode turns every Comfort setting to its quietest in one go, and any setting it overrides is marked so you know why it changed.<span class="credits"><span class="who">samv123</span></span></li>
-<li class="change">Minimal visual effects now also softens flashes, lightens the weather, stills the water and slows background motion.<span class="credits"><span class="who">samv123</span></span></li>
-<li class="change">Bright flashes like lightning are capped at three a second or so, whatever your settings.</li>
-<li class="change">When you start your first new save, the game asks whether you&#x27;d like the screen Full, Calm or Still. You can change it any time in Comfort.<span class="credits"><span class="who">samv123</span></span></li>
-<li class="change">Your first morning in a new game is always storm-free.</li>
-<li class="change">Low-power mode in Display caps the game at 30 frames a second and draws less while you stand still. Handy on a Steam Deck or laptop.</li>
-<li class="change">The game drops to about 10 frames a second behind menus and while it&#x27;s in the background.</li>
-<li class="change">You can cap the frame rate at 30 or 60 in Display, or leave it matching your screen.</li></ul></section>
-<section class="sec" id="night-and-light" data-sec="night-and-light"><h2>Night and light<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Nights are darker and follow the moon. A new moon is properly dark and a full moon lights the ground, and your light, lit windows, fires and torches still show the way.<span class="credits"><span class="who">palpablebrush26</span></span></li>
-<li class="change">If you liked the old nights, the new Night brightness slider in Display takes you back. At the top it matches how nights looked before.<span class="credits"><span class="who">palpablebrush26</span><span class="who">danekjovaxutc5</span></span></li>
-<li class="change">Rooms your Cave Bat maps are readable now. They were drawing almost black.<span class="credits"><span class="who">danekjovaxutc5</span></span></li></ul></section>
-<section class="sec" id="towns-and-the-people-in-them" data-sec="towns-and-the-people-in-them"><h2>Towns and the people in them<span class="sec-n">11</span></h2><ul class="changes"><li class="change">Wild animals stay out of towns and villages unless they&#x27;re chasing you. Deer, wolves, boars and bandits don&#x27;t spawn inside settlements any more, and anything that wanders to the edge turns back.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
-<li class="change">Village tutors run from wolves now, and go back to their posts once it&#x27;s safe.</li>
-<li class="change">Fences, hedges and stumps don&#x27;t leave you squeezing diagonally through gaps to get around town.</li>
-<li class="change">Yards still look lived in, but the clutter stays off streets, doors and gates.<span class="credits"><span class="who">samv123</span></span></li>
-<li class="change">Every townsperson has Ask the way on their first menu. It lists the services in that town, who runs each one and which way to go, and can walk you there or mark it on your map. Tutors answer it too.<span class="credits"><span class="who">samv123</span><span class="who">.knifee</span></span></li>
-<li class="change">Every town has a scholar who identifies anything for 25 gold. Smiths can look over arms and armour, village shopkeepers will have a go as a last resort, and the scholar in the Old Mouth identifies items too.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">nalathnidragon</span></span></li>
-<li class="change">Shipwrights are on the signposts, and general stores hang their sign where you&#x27;ll see it.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">samv123</span></span></li>
-<li class="change">Villagers coming home in the evening actually walk home, instead of popping up a few tiles from you.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
-<li class="change">Auto-travel, click-to-walk and auto-explore go around people&#x27;s homes, not through them. If your destination is inside one, you stop at the door.<span class="credits"><span class="who">.knifee</span><span class="who">samv123</span></span></li>
-<li class="change">Roofs keep their colour as you walk around a building, and doors on the far side of a house stay visible.<span class="credits"><span class="who">nalathnidragon</span><span class="who">aj01657</span></span></li>
-<li class="change">Roofs vary now. Farms are thatched or shingled, and guildhalls, shrines and inns are slate.<span class="credits"><span class="who">danekjovaxutc5</span></span></li></ul></section>
-<section class="sec" id="rest-and-travel" data-sec="rest-and-travel"><h2>Rest and travel<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Rest and Recover by a campfire waits until your Manna is full as well as your health, and Shift+W recovers Manna in the tutorial.<span class="credits"><span class="who">nalathnidragon</span><span class="who">samv123</span></span></li>
-<li class="change">If you&#x27;re shut in, monsters walking past your window won&#x27;t wake you any more. Anything that can actually reach you still will.<span class="credits"><span class="who">.knifee</span><span class="who">samv123</span><span class="who">danekjovaxutc5</span></span></li>
-<li class="change">Holding a movement key stops you the moment a new hostile appears. Press again to keep going.<span class="credits"><span class="who">nalathnidragon</span></span></li></ul></section>
-<section class="sec" id="swimming-and-the-sea" data-sec="swimming-and-the-sea"><h2>Swimming and the sea<span class="sec-n">8</span></h2><ul class="changes"><li class="change">You can swim in deep water at half speed. Swim out and Dive in are in the water menu, and you can jump off a ship or climb back aboard. There&#x27;s no drowning.</li>
-<li class="change">Each stroke has a 1 in 10 chance of an unlocked item floating out of your pack and drifting ashore, so lock anything you can&#x27;t lose. Keys, books, recipes, maps and story items never float.</li>
-<li class="change">Lakes near home have pike and river eels. Eels hide underwater, so watch for bubbles and a ring on the surface.</li>
-<li class="change">You can swim through dungeon pools too.</li>
-<li class="change">Galleons and bigger ships have about three times the hull they did (a galleon is 450 now), and hammerheads, serpents and eels leave them alone. Boats in existing saves get the extra hull too.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">.knifee</span></span></li>
-<li class="change">You can patch your own hull from the self or helm menu with planks and nails, up to three quarters of its strength.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
-<li class="change">Dying at sea or on a ship&#x27;s deck wakes you on dry land now, not in the ocean.<span class="credits"><span class="who">.knifee</span></span></li>
-<li class="change">In first person and 2.5D, your boat doesn&#x27;t jump a tile under you with every step any more.</li></ul></section>
-<section class="sec" id="sensing-hidden-things" data-sec="sensing-hidden-things"><h2>Sensing hidden things<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Spectre Blue, Truffle Camembert, Veilcap Camembert, Wraithpress Blue and Witchcap Stilton work now. After eating one you sense hidden things within 8 tiles. Secret doors open, hidden pressure plates show up, eels underwater appear and buried caches get a map pin. The Phantom Tongue prize and a grown Crystalline Serpent do it too.<span class="credits"><span class="who">samv123</span><span class="who">nalathnidragon</span></span></li>
-<li class="change">A Forest Fox can sniff out hidden pressure plates within 4 tiles.</li>
-<li class="change">Keen Eyes and a couple of other effects I&#x27;m still finishing have clearer descriptions.</li></ul></section>
-<section class="sec" id="combat-and-magic" data-sec="combat-and-magic"><h2>Combat and magic<span class="sec-n">15</span></h2><ul class="changes"><li class="change">Deep-Frozen counts as Frozen for every combo.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Brittle Rind&#x27;s card shows its real +100%, and the stronger Aged it applies is called Aged+.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Combos are numbered in the Codex, so you can see which one wins when a status could feed two. The aiming preview only shows combos that will actually fire.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Hover over an enemy to see its statuses and how many turns each has left. Keyboard, controller and first-person players get the same card.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Braziers, burning ground, lava and lingering clouds hit your Rinded ward first, like any other attack.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Belt spells glow gold when they&#x27;d continue a sequence you know, and the card tells you which one. You can turn the glow and the log hints off in Gameplay.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Right-click a spell recipe in the cheese press, or press Inspect, to see the spell it makes.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Heart herbs on the Affineur&#x27;s bench show their element.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Casting at rabbits and hens doesn&#x27;t train your spells any more.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Roquelle always starts with the Smoked Gouda Fog recipe in the pack.<span class="credits"><span class="who">samv123</span></span></li>
-<li class="change">Upgrades that say &quot;2 turns longer&quot; now add exactly 2 turns. On Fine and better wheels that&#x27;s slightly less than before.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Level-up offers never show two perks that do the same thing.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Rooted Bloom now heals 4 a turn out of combat, so the rarer perk finally beats Lattice Bloom.<span class="credits"><span class="who">nalathnidragon</span><span class="who">danekjovaxutc5</span></span></li>
-<li class="change">Rind Cultists are spellcasters now. They mark a red square under you that goes off two turns later, so keep moving.<span class="credits"><span class="who">.knifee</span><span class="who">arkhaven</span></span></li>
-<li class="change">Ravenkin Slingers throw stones from range on the plains and in forests by day, away from the starting area.<span class="credits"><span class="who">.knifee</span><span class="who">arkhaven</span></span></li></ul></section>
-<section class="sec" id="homestead" data-sec="homestead"><h2>Homestead<span class="sec-n">5</span></h2><ul class="changes"><li class="change">Workers don&#x27;t pile onto one tile any more, and a stacked crew in an old save spreads out when you load it.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Right-click a tile with several workers on it and you can pick each one by name.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">The Crew Roster shows where each worker is and what they&#x27;re doing, with a Find button that walks you to them. Hungry workers tell you when there&#x27;s no food in reach.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Saw Felled Trees Into Planks (Settings, Loot) turns logs into planks as you fell trees. It&#x27;s off by default.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Harvest Area in the Tools menu lets you mark a rectangle, then works you through it felling trees, breaking rocks and picking bushes. It stops if you get hurt or a hostile shows up.<span class="credits"><span class="who">nalathnidragon</span></span></li></ul></section>
-<section class="sec" id="fortress" data-sec="fortress"><h2>Fortress<span class="sec-n">6</span></h2><ul class="changes"><li class="change">The view doesn&#x27;t get stuck past the edge of the map any more, including after a go-to button.<span class="credits"><span class="who">trespiratesque</span><span class="who">aj01657</span></span></li>
-<li class="change">The colony menu opens again, and fits on smaller windows.<span class="credits"><span class="who">trespiratesque</span></span></li>
-<li class="change">New colonists arrive even if nobody has a bed yet, and sleep rough like everyone else.<span class="credits"><span class="who">trespiratesque</span></span></li>
-<li class="change">Embarking somewhere short of trees or grazing warns you first and sends extra wood and food.<span class="credits"><span class="who">trespiratesque</span></span></li>
-<li class="change">Favor strengths now puts disliked jobs on Backup, as it says it does, and the labor screen shows what each settler likes and dislikes.<span class="credits"><span class="who">trespiratesque</span></span></li>
-<li class="change">Goat milk is called Goat milk in the stockpile lists.<span class="credits"><span class="who">trespiratesque</span></span></li></ul></section>
-<section class="sec" id="keyboard-and-controller" data-sec="keyboard-and-controller"><h2>Keyboard and controller<span class="sec-n">3</span></h2><ul class="changes"><li class="change">Shift+O, Shift+W and Shift+H hide and show the Seed Pouch, Wheel Belt and Tool Roll. On a controller it&#x27;s in the item menu.<span class="credits"><span class="who">samv123</span></span></li>
-<li class="change">In the Spell Belt window, F and C open Affinage Arts and the Codex, and Page Up and Page Down work in the Codex straight away.<span class="credits"><span class="who">samv123</span></span></li>
-<li class="change">Ctrl+1 to Ctrl+8 open a belt spell&#x27;s card, and the same key or Escape closes it.<span class="credits"><span class="who">samv123</span></span></li></ul></section>
-<section class="sec" id="interface" data-sec="interface"><h2>Interface<span class="sec-n">10</span></h2><ul class="changes"><li class="change">The Self-damage and Spare townsfolk boxes say what&#x27;s currently set, so they&#x27;re easier to read.<span class="credits"><span class="who">.knifee</span><span class="who">nalathnidragon</span><span class="who">samv123</span></span></li>
-<li class="change">&quot;Moderate&quot; water is now called Unclean, and Drink warns that it may make you sick.<span class="credits"><span class="who">samv123</span></span></li>
-<li class="change">The Evasion bar in character creation shows your real dodge chance.<span class="credits"><span class="who">rubberychicken</span></span></li>
-<li class="change">You can export any save from the Load Game screen without opening it.<span class="credits"><span class="who">trespiratesque</span><span class="who">arkhaven</span></span></li>
-<li class="change">You can release several stabled companions at once, and a new Gameplay setting lets freed cage animals go instead of joining you.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
-<li class="change">The empty corner of the inventory now shows your mount, pack animal and ships.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
-<li class="change">The Drillmaster&#x27;s first lesson starts on the training dummies.<span class="credits"><span class="who">.knifee</span></span></li>
-<li class="change">The cheese cave tells you when it&#x27;s skipping a locked or retained wheel.<span class="credits"><span class="who">nalathnidragon</span></span></li>
-<li class="change">Taking a book off someone else&#x27;s shelf asks you first, once per visit.<span class="credits"><span class="who">danekjovaxutc5</span></span></li>
-<li class="change">Riftstones say they&#x27;re recharging once per visit, not on every step. Sleeping workers stay out of the detailed log, and worker backstories don&#x27;t repeat themselves.<span class="credits"><span class="who">danekjovaxutc5</span><span class="who">nalathnidragon</span></span></li></ul></section>
-<section class="sec caveat" id="known-issues" data-sec="known-issues"><h2>Known issues<span class="sec-n">2</span></h2><ul class="changes"><li class="change">Workers don&#x27;t use Harvest Area yet. It&#x27;s your tool for now.</li>
-<li class="change">In co-op, the belt&#x27;s sequence glow only shows for the host.</li></ul></section>
-<section class="sec" id="credits" data-sec="credits"><h2>Credits<span class="sec-n">1</span></h2><ul class="changes"><li class="change">Reports, saves, suggestions and playtest feedback: .knifee, aj01657, arkhaven, danekjovaxutc5, nalathnidragon, palpablebrush26, rubberychicken, samv123 and trespiratesque.</li></ul></section>
+      <section class="sec sec-intro"><p class="lead">Hey everyone,</p><p class="lead">Thanks to the playtest team for all the Fortress feedback on 0.28.0. This one is nearly all Fortress. Settlers can fight back and be drafted, there&#x27;s wild game to hunt, the underground is a different place on every level with things worth finding in it, stockpiles are proper named things, and you can lay rail and push mine carts. Fortress has also had a full pass on the Steam Deck. Most of this reaches colonies you begin with Start your colony in 0.29.0, and an older colony keeps the rules it was founded with.</p><p class="lead">Tim</p></section>
+<section class="sec" id="fortress-fighting" data-sec="fortress-fighting"><h2>Fortress fighting<span class="sec-n">9</span></h2><ul class="changes"><li class="change">Settlers answer an attack in their own way. Each settler&#x27;s card has Fight back, Flee or Ignore, and you can change it whenever you like.</li>
+<li class="change">You can draft a settler from their card or with R. A drafted settler stops work and holds, goes where you send them and attacks whatever you set them on, and Undraft sends them back to work.</li>
+<li class="change">Raid letters offer Draft everyone, so a colony with no squads can still answer it in one press.</li>
+<li class="change">Drafted settlers can attack anything alive. Click wild game or a creature by its lair and it&#x27;s an Attack order, the same as clicking a raider.</li>
+<li class="change">Early raids are real fights now. Raiders are much tougher and hit harder than they did, and a raiding party breaks and runs once half of it is down.</li>
+<li class="change">When a raid leaves, the letter and the log say what it took, whether the thief got away or fell, and where any dropped goods are lying.</li>
+<li class="change">Boars charging your settlers are called animal attacks and never a raid. Every word about a hostile follows what it actually is.</li>
+<li class="change">Animals can&#x27;t break a wall, a fence or a braced gate. Raiders and a siege&#x27;s soldiers can, and the log names who did it.</li>
+<li class="change">Raiders and deep creatures find their way round the end of a wall instead of standing there for good with a settler in sight.</li></ul></section>
+<section class="sec" id="fortress-hunting-and-the-herd" data-sec="fortress-hunting-and-the-herd"><h2>Fortress hunting and the herd<span class="sec-n">9</span></h2><ul class="changes"><li class="change">Herds of wild game roam a new colony&#x27;s land. Give a Hunt order and a hunter brings one down for meat.</li>
+<li class="change">Meat rots, so there&#x27;s a butcher&#x27;s table to cut it, a kitchen to cook it and a drying rack to keep it.</li>
+<li class="change">Every animal that dies leaves its carcass where it fell, whether it was game, one of your herd or something that came to attack.</li>
+<li class="change">Predators go for the herd animals they can reach. A shut pen keeps them out, and they can&#x27;t open a door or a gate.</li>
+<li class="change">Herd animals run from whatever is biting them, towards the pen or the nearest settler. Each one&#x27;s card tells you what is hunting it.</li>
+<li class="change">Your first goat grazes round the camp from day one, walks to grass and goes through a door to its shelter. Grazing used to wait for a pen.</li>
+<li class="change">Hungry herd animals get an alert that says why, and the herd gets a too-hot warning to go with the freezing one.</li>
+<li class="change">When a herd animal dies you get one plain sentence, the same one in the log, the herd&#x27;s record and on its card.</li>
+<li class="change">Hungry settlers eat the best food first, meals before forage and raw meat last.</li></ul></section>
+<section class="sec" id="fortress-underground" data-sec="fortress-underground"><h2>Fortress underground<span class="sec-n">9</span></h2><ul class="changes"><li class="change">Every level of the underground is a new place. Each band of depth has its own rock, caverns and character, and you&#x27;ll be told when a miner breaks into a cavern.</li>
+<li class="change">There are places worth finding down there. Ancient cheese caves, ruins that differ by biome and a dozen smaller finds, fourteen kinds in all, each with its own letter when you uncover it.</li>
+<li class="change">What the finds hold is drawn as racks, crates and strongboxes you can open, and half the fallen-in cellars have a cheesemaker&#x27;s journal by the door.</li>
+<li class="change">Waterfalls and lava falls run underground for good, from a spring or a vent down to a pool on the level below.</li>
+<li class="change">Chasms are drawn as holes onto the level beneath.</li>
+<li class="change">You&#x27;re warned when a new stair lands beside standing water or magma, before a stair further down lets it pour.</li>
+<li class="change">Settlers under the water at the foot of a flooded stair climb to air instead of drowning there, and a crew will swim a flooded stair to reach work, food, goods and bed when there&#x27;s no dry way round.</li>
+<li class="change">Mine is on the bar and the colony card. Mine is for rock and Dig is for soil, and the goals and lessons use the same two words.</li>
+<li class="change">Prospect names a seam that already shows farther off.</li></ul></section>
+<section class="sec" id="fortress-stockpiles-rail-and-carts" data-sec="fortress-stockpiles-rail-and-carts"><h2>Fortress stockpiles, rail and carts<span class="sec-n">7</span></h2><ul class="changes"><li class="change">Your goods arrive as stacks on the ground in a ready stockpile, and the first goal is to build a campfire.</li>
+<li class="change">Each stockpile is one thing with a name and one set of settings. Click any tile of it to select the whole stockpile, then name it, grow it, shrink it or delete it from its card.</li>
+<li class="change">Two stockpiles can be joined into one from either one&#x27;s settings.</li>
+<li class="change">Stockpile outlines stay off the map until you want them. They show with a stockpile tool in hand, with Show stockpiles on, or for the one you&#x27;ve selected or are pointing at. Shift+K flips Show stockpiles.</li>
+<li class="change">Workshops and orders list each stockpile once, where they used to have a row for every tile.</li>
+<li class="change">You can lay rail like a wall, and it runs up and down stairs. A hauler pushing a mine cart carries four times the load at twice the pace, and takes the cart whenever that&#x27;s quicker.</li>
+<li class="change">Rain and snow refill a pond up to its brim.</li></ul></section>
+<section class="sec" id="fortress-building-and-rooms" data-sec="fortress-building-and-rooms"><h2>Fortress building and rooms<span class="sec-n">8</span></h2><ul class="changes"><li class="change">Timber walls, fences, fence gates and a pen you mark out in one go are in Build from the first minute. The herd walks home to its pen.</li>
+<li class="change">Eleven new furnishings each do something. Settlers carry a meal to a table, and there are chairs, a bench, a shelf, a bedside table, a torch, a candle stand and four pieces that make a room nicer.</li>
+<li class="change">Rooms tell you how good they are. Its card says what the room is, how it rates, what that does for the people in it and which one or two additions would raise it.</li>
+<li class="change">Room cards also say in plain sentences whether it shelters anyone and whether its roof will hold.</li>
+<li class="change">Build shows what&#x27;s locked and what unlocks it, what a plan is short of and where each material comes from. The Build path walks you from a timber hut to mechanisms and rail, with a button on every open step.</li>
+<li class="change">Every room you plan gets a door a settler can reach, and the room and pen tools refuse a plan that would wall off your stockpile, well or beds.</li>
+<li class="change">Workshop cards list what it makes and what each thing is for, and the building cards have been rewritten to say what each building gives you.</li>
+<li class="change">Choosing a locked piece opens its card in Build, so you can see what it needs.</li></ul></section>
+<section class="sec" id="fortress-medical" data-sec="fortress-medical"><h2>Fortress medical<span class="sec-n">5</span></h2><ul class="changes"><li class="change">Hurt settlers rest in a bed, and a settler who&#x27;s down is carried to one. A medical bed comes first, then any free bed.</li>
+<li class="change">Any bed can be marked Use for patients, there&#x27;s a Medical bed in Build, and a room of them is an Infirmary.</li>
+<li class="change">Patient cards say what to do for them, and a bed&#x27;s card says who&#x27;s in it.</li>
+<li class="change">Medical beds are only marked when there&#x27;s one to spare, so one is never somebody&#x27;s only bed.</li>
+<li class="change">The log says a settler treated their own wound, where it used to name them as carer and patient at once.</li></ul></section>
+<section class="sec" id="fortress-time-and-weather" data-sec="fortress-time-and-weather"><h2>Fortress time and weather<span class="sec-n">5</span></h2><ul class="changes"><li class="change">New colonies run on a sixteen-minute day, with settlers acting many times in every hour on the clock. Work, walking and fights are paced to match, and the speed dial counts the same steps.</li>
+<li class="change">Colonies open in daylight, and the first day is always clear.</li>
+<li class="change">Whatever rain or snow your colony is having falls on the map, so calm water looks calm on a sunny day.</li>
+<li class="change">Heavy weather dims the map, and a hot spell or Frost shows beside the clock and as a warm or pale cast over the colony.</li>
+<li class="change">Fortress ground blends from one biome into the next instead of changing in straight squares, and the inspector names the ground you&#x27;re looking at.</li></ul></section>
+<section class="sec" id="fortress-orders-goals-and-alerts" data-sec="fortress-orders-goals-and-alerts"><h2>Fortress orders, goals and alerts<span class="sec-n">11</span></h2><ul class="changes"><li class="change">Cancel orders sits beside Mine on the bar. One box takes back every mark and plan inside it, and Demolish takes back marks too.</li>
+<li class="change">Right click steps back once, and with no tool in hand it lists what you can do with that tile.</li>
+<li class="change">The card that follows your cursor is a readout that says only what you can do there. It stands beside its tile, takes no clicks and never needs scrolling.</li>
+<li class="change">Goals whose plan is waiting on stone or timber put Mine or Fell trees in your hand at the nearest rock or tree.</li>
+<li class="change">When every forage bush in reach is behind trees, settlers fell a way through to it.</li>
+<li class="change">Each alert&#x27;s action has its own line under it, like Go to it, Read it or Open Farms, and Next Alert steps through every warning as well as the letters.</li>
+<li class="change">Water alerts tell you when your Water target is what&#x27;s running the colony short, and a new kitchen says why it isn&#x27;t cooking yet.</li>
+<li class="change">Marking an order while paused tells you once, on the tool card, that work starts when you resume.</li>
+<li class="change">Arrival supplies are listed on the opening screen, so you can see what your colony brings.</li>
+<li class="change">Tab from the map goes straight to a ready plan&#x27;s Build button, and the arrow keys walk the side panels and the founding screen in far fewer presses than Tab.</li>
+<li class="change">Big, deep colonies run at full 8x speed, and the game keeps up better on slower computers.</li></ul></section>
+<section class="sec" id="fortress-on-steam-deck" data-sec="fortress-on-steam-deck"><h2>Fortress on Steam Deck<span class="sec-n">7</span></h2><ul class="changes"><li class="change">The controller reaches everything in Fortress, and it keeps its place when a panel changes, a list reflows or a window closes.</li>
+<li class="change">Words and numbers on the colony map are large enough to read on the Deck&#x27;s screen, and the depth ruler shows &quot;-10&quot; whole.</li>
+<li class="change">Alerts, tables and the top bar fit at Large and Extra large text, and the Menu button stays inside the window.</li>
+<li class="change">Building cards and tips say Mark where they said Drag, so nobody with a controller is told to do something a controller can&#x27;t.</li>
+<li class="change">Importing a colony on a Deck picks from a list in the game instead of the system&#x27;s file picker.</li>
+<li class="change">Your colony is saved as the Deck goes to sleep.</li>
+<li class="change">Leaving a colony on its Paused menu draws the map at a slower rate, which is kinder to the battery.</li></ul></section>
+<section class="sec" id="co-op" data-sec="co-op"><h2>Co-op<span class="sec-n">1</span></h2><ul class="changes"><li class="change">Adventure co-op holds together better under lag and with three or four players.</li></ul></section>
+<section class="sec" id="art" data-sec="art"><h2>Art<span class="sec-n">6</span></h2><ul class="changes"><li class="change">Thirty creatures have new art, from the dungeon roster to raiders, wildlife, butterflies and two roaming bosses.</li>
+<li class="change">Thirty-three materials that had no picture of their own have one now, along with the Emmental Mend spell.</li>
+<li class="change">The six ships you can ride, from the skiff to the ship of the line, have new hulls.</li>
+<li class="change">Amelia&#x27;s great tree is drawn at its full size again.</li>
+<li class="change">The hunt has its own art, with a carcass for each animal, the butcher&#x27;s table, the drying rack and dried meat. The underground finds have theirs too.</li>
+<li class="change">The dead and the sleeping in Fortress are drawn at their true size and never turned on their side.</li></ul></section>
       <div class="empty hidden" id="empty"></div>
     </div>
   </div>
 </main>
 
-<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.25.0.html"><span class="pg-k">Previous release</span><span class="pg-v">Deeper Simulation and Improved UI</span><span class="pg-n">0.25.0</span></a><a class="pg pg-all" href="index.html">All releases</a><a class="pg pg-next" href="0.27.0.html"><span class="pg-k">Next release</span><span class="pg-v">Fortress Mode Fixes and Fonty Goodness</span><span class="pg-n">0.27.0</span></a></nav>
+<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.28.0.html"><span class="pg-k">Previous release</span><span class="pg-v">Here&#x27;s Lookin&#x27; At You, Affineur</span><span class="pg-n">0.28.0</span></a><a class="pg pg-all" href="index.html">All releases</a></nav>
 
 <footer class="foot">
-  <span>Roguefort 0.26.0 &middot; 1 October 2026</span>
+  <span>Roguefort 0.29.0 &middot; 7 October 2026</span>
   <span>Community reporters are credited against each change.</span>
 </footer>
 
