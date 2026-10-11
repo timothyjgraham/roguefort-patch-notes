@@ -1,6 +1,6 @@
 Hey everyone,
 
-Thanks to the playtesters who jumped straight into Survival mode: The Wilds. This is a quick follow-up that fixes what turned up on the first night and makes camp life read a lot more clearly.
+This is a quick follow-up patch that fixes a few issues that I didn't get to before the Survival mode - The Wilds - first went out. Thanks everyone.
 
 Tim
 
