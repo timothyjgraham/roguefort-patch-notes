@@ -1,0 +1,62 @@
+Hey everyone,
+
+Thanks to the playtesters who jumped straight into Survival mode: The Wilds. This is a quick follow-up that fixes what turned up on the first night and makes camp life read a lot more clearly.
+
+Tim
+
+[b]Survival mode: The Wilds, hammocks[/b]
+[list]
+[*]Hanging a hammock needs no cord.
+[*]Hammocks hang between two trees that stand in a straight line with two clear tiles between them, and they're two tiles long.
+[*]You can hang one from either of those two tiles or from any tile beside them, and the game picks the nearest spot for you.
+[*]Opening Shelter and rest while you carry a hammock marks every place it can go in green, and the marks stay for your next twenty turns.
+[*]When there's nowhere in reach, the task tells you the rule and points you at the nearest spot you've seen.
+[*]Sleeping on either tile keeps the cold ground off you. One repair mends the whole hammock and one Recover packs it up.
+[*]Cut down either tree and the hammock drops back into your pack.
+[*]You can't build on a tile where a hammock, a snare or a gill net is set. The game says what's there and to recover it first.
+[/list]
+
+[b]Survival mode: The Wilds, fibre and cord[/b]
+[list]
+[*]Cord is twisted from fibre now, and fibre is something you gather. Twisting three cord takes three fibre and can be done anywhere on land.
+[*]Reeds, tall grass and bushes can be stripped for fibre by hand. With a knife, multi-tool, hatchet or axe you can also cut fibre from a tree's inner bark, and the tree isn't harmed.
+[*]Stripping takes one turn. Reeds and bushes give three fibre, tall grass and bark give two.
+[*]Cut reeds and grass grow back in a day, a stripped bush in two and a tree's bark in three. A bush keeps its berries.
+[*]You can strip from the tile's menu, with Gather, or with Interact, and Help has a new Fibre and cord section.
+[/list]
+
+[b]Survival mode: The Wilds, everything you place says what it is[/b]
+[list]
+[*]Hover or Look at a hammock, gill net, snare, tarp roof, debris shelter, bough bed, fire or ice hole and you get its name, its condition and what to do next.
+[*]Gill nets and snares say when they were set, what they hold, when the catch spoils and when they can next catch. A net under winter ice says it's frozen over.
+[*]Fires say whether they're lit and about how long the fuel will last in this weather.
+[*]Food left on the ground shows how long it keeps, and worn gear you put down shows its condition.
+[*]Camp work you stopped part way shows on its tile with the time left.
+[*]Reeds, grass, bushes and trees say what fibre they give, or when they'll grow back.
+[*]Look mode shows the same card on a gamepad in 2D, 2.5D and first person.
+[/list]
+
+[b]Survival mode: The Wilds, camp work[/b]
+[list]
+[*]Camp work's first line says which tile it's working on, such as your gill net to the south.
+[*]Jobs you can't start say what's missing, how many you hold and where it comes from.
+[*]Finished jobs make a sound and say what you now have. A failed fire, a greyed-out job you press and Abandon work all answer too.
+[*]An animal coming close pauses your job and keeps its supplies. It used to destroy them, a tarp or a net included.
+[*]Back on a Camp work page always returns to the groups.
+[*]Sleep lists your bedding, the ground under you, your rain cover and your fire before you lie down, and waking early says which need woke you.
+[*]Lighting a fire says how long a new one burns, and a fire that's stacked full says when it can take more fuel.
+[*]A pan fries your last cut, tape mends when you have no cord, and a blanket isn't used up on a shelter that doesn't need it.
+[*]A debris shelter can't be built over a tarp you've pitched, and a worn roof says what mends it.
+[*]Willow, oak and the other woods split into fuel like a plank does.
+[*]Demolish no longer pays out wood for a fire you lit.
+[*]You can leave a line in the water on automatic wait while you're hungry.
+[/list]
+
+[b]Survival mode: The Wilds, controls and words[/b]
+[list]
+[*]Nets, snares, beds and fires can be opened by name with Interact on a keyboard or a gamepad. A net that wasn't the first water tile round, and any snare, used to need the mouse.
+[*]On a Steam Deck or gamepad the pack no longer prints keyboard keys over its rows.
+[*]The gill net's card and the warning for a kit with no ferro rod say what the rules do.
+[*]Things you make or gather at camp have proper cards.
+[*]You're called Castaway unless you choose a name, and the end of a run says Run ended.
+[/list]
