@@ -1,0 +1,246 @@
+Hey everyone,
+
+Thanks to the playtesters and community for all the Fortress feedback on 0.29.0 and 0.30.0, and for another big round of Adventure reports. This is a large update for both modes. Fortress settlers have life stories and natures of their own, a colony has sound for the first time, and there are timber floors, cave-ins, a visible caravan and a lot of fixes to the first hour. Adventure gets fixes to quests, travel, trading and creatures that never gave up the chase. There's also a first look at a new way to play called The Wilds. As usual, everyone is credited with their reports and suggestions below.
+
+Tim
+
+[b]Settler life stories[/b]
+[list]
+[*]Every settler in a colony keeps a record of what has happened to them, who saw it and what caused it. You'll find it on the new Life tab, where Why takes you back through the chain of events behind a mood.
+[*]Settlers have natures, two each from a list of 21, and each nature changes one thing about how that settler takes the world.
+[*]People form their own regard for each other from what they live through together, and they talk to each other through the day.
+[*]Witnessing a death or a bad injury leaves a mark on whoever saw it.
+[*]You have three new orders. Keep apart separates two settlers, Sit with sends a friend to someone who is grieving, and Hold a wake gathers the colony for one of the dead.
+[*]Two warnings tell you when a Volatile settler is close to turning on someone, and when a friend could be asked to comfort someone.
+[*]Each recruit's two natures show on the founding screen. A reroll changes them, a kept recruit keeps theirs, and one button explains what every trait in the party means.
+[/list]
+
+[b]The Wilds[/b]
+[list]
+[*]The Wilds is a new row on the title menu. You're shipwrecked with ten items of your choosing and have to last through the seasons.
+[*]Hunger, thirst, cold, illness and tiredness all matter here, and the item cards and the Character sheet say what each one is costing you.
+[*]Camp work such as building, crafting and drying food takes time and moves forward in steps you can see.
+[*]Rain, salt water, winter ice and the fuel under your fire all have to be planned around. A fire under a real roof keeps its fuel dry.
+[*]Runs in The Wilds keep their own save slots and their own records. Nothing here changes an Adventure save, and there is no levelling or perks on a Wilds run.
+[/list]
+
+[b]Fortress: sound[/b]
+[list]
+[*]Colonies have sound. You'll hear work, footsteps, doors, fights, deaths, weather and the ambience of the place, and it's mixed by how far in you're zoomed.
+[*]Fortress settings open on a Sound box with Master, Sound effects, Music, Ambience and Mute.
+[*]Settings in Adventure have a Master Volume above the three volume sliders, and the window opens with it in view.
+[*]Cave-ins have a sound of their own, heard once at the hole.
+[/list]
+
+[b]Fortress: care, rescue and trances[/b]
+[list]
+[*]Healed patients get out of bed, and the card says how long a recovery has left. A settler at full health could lie on a medical bed for good.
+[*]Anyone who can't walk is carried to a bed by whoever is free, and their card has a Rescue button.
+[*]Settlers with no business on a medical bed stay off it at every hour, and nobody without a bed lies down to sleep on furniture.
+[*]A trance says what it's waiting for. The card lists each good with a Make button, names the workshop that makes it, and the trance ends mildly after five days. (trespiratesque)
+[*]Trances send one alert when they end, and the letter fits its card. (trespiratesque)
+[*]Opened letters take the height their words need, so a long one is never cut short.
+[*]Care is described in the game's own words now, "Treatment by Mira Vale" and "Turn on Medical work".
+[*]Fed animals mend by themselves in a new colony when they have food, water and a safe place. Tending is still six times as fast.
+[/list]
+
+[b]Fortress: building and plans[/b]
+[list]
+[*]Timber floors are in. You can lay a floor in planks of any wood the colony has felled, and choose the wood for timber walls too.
+[*]Planned rooms can take a floor and a wood in the same drag, and Timber or Stone sits right above Build.
+[*]Marked plans carry their own Build and Cancel bar on the map and read as not yet ordered, so a plan is never lost silently.
+[*]Keep puts a plan away for later with nothing ordered. Its tile builds it, changes it or erases it. (trespiratesque)
+[*]Stations, beds and doors are placed one to a press, and the plan's bar says how many buildings Build will make. (trespiratesque)
+[*]Walls, rooms and pens that would shut a settler in are refused, and the message says who. Anyone standing on a wall as it goes up steps off to the side that leads home.
+[*]Rooms drawn against another room on the surface always get a door of their own.
+[*]Cancelling a shaft from its top tile cancels the stairs under it. (danekjovaxutc5)
+[*]Roofs standing over dug ground say which level is open under them and offer to plan a support there. (danekjovaxutc5)
+[*]Taking something down gives back whole goods, and no stock readout shows half of one. (danekjovaxutc5)
+[*]You can choose a whole plot of gardens at once and set the crop for all of them from one card.
+[*]Dragging the mouse keeps the box and the tool until you let go. (danekjovaxutc5)
+[*]Number boxes in Fortress keep their own limits, so the browser's "Please enter a valid value" bubble is gone.
+[*]Campfire and kitchen cards warn that timber floors burn.
+[/list]
+
+[b]Fortress: cave-ins and water[/b]
+[list]
+[*]When a ceiling fails, what stood on it falls to the level below. Goods and buildings break, and settlers and animals are hurt.
+[*]A warning names what will fall before the ceiling goes. Afterwards you mend the hole one order at a time by clearing the rubble, building a support and laying a floor.
+[*]Goods buried in rubble wait there until it's cleared, and their tile says "Under the rubble".
+[*]Settlers caught in a flooding cavern swim to the stair and climb out. One drowned beside a stair she couldn't use.
+[*]Idle settlers leave a level that is flooding, and a settler who is cut off will swim through flood water to food, a bed or the stair.
+[*]Water under a wall puts the roof it holds on a 12-hour watch, the same warning a dig gives.
+[*]Goals lead you round rock whose dig would flood the colony or bring a roof down.
+[*]The Water below letter says what was found and on which level, and takes you there.
+[*]Water tiles answer whether they can be filled in. They can't, a Drainage sump dries the tiles beside one, and water fed from past the map's edge never drains. (danekjovaxutc5)
+[*]Whoever draws water carries it to a stockpile in a new colony.
+[*]Founding sites all describe water and soil in the same words. (trespiratesque)
+[/list]
+
+[b]Fortress: light[/b]
+[list]
+[*]Fires light the ground around them at night. They used to lay an orange glow over the dark.
+[*]Garden beds and goods lying flat cast no shadow, which removes the square block of shadow beside a garden.
+[*]Clouds over a colony show as shadows only.
+[/list]
+
+[b]Fortress: fighting and animals[/b]
+[list]
+[*]Drafted settlers each take a tile of their own beside a hostile. They had been stacking on one.
+[*]Two squads sent to one place get a tile each.
+[*]Settlers can strike a hostile standing in a doorway or on rubble, and it can strike back.
+[*]Tiles shared by several people show a count, a hostile is drawn over the settlers it stands with, and picking again takes the next one there. A further pick reaches the goods underneath.
+[*]Lone thieves are called thieves. The raid letter says what one took, and the first-fight lesson teaches Draft everyone with a button that does it. (danekjovaxutc5)
+[*]Animals walk into the pen they belong to, and live as they did around the camp until the pen is built.
+[*]Pens say what they're for when you choose the Pen tool. (trespiratesque)
+[*]Visiting caravans stand on the map as a trader and a pack mule, with a card that carries Trade. (danekjovaxutc5)
+[*]Sleepers lie in their beds when 3D characters are off. (danekjovaxutc5, datsheeptho)
+[*]Settler cards say what they're carrying and where to change it, and Choose arms opens the Armoury with that settler chosen. (danekjovaxutc5)
+[*]Militia duty is explained where you set it and has its own Help topic.
+[/list]
+
+[b]Fortress: goals, lessons and Help[/b]
+[list]
+[*]Every colony goal says how to do it by hand, and Place it for me can place a well, kitchen, garden, stockpile, bed, smelter or forge. (danekjovaxutc5)
+[*]Shift+G presses the top goal's button from anywhere.
+[*]Goals waiting on timber or stone give you one button, "Fell 7 trees" or "Mine 2 rock tiles", that orders what's missing.
+[*]Colonies short of food are sent to plant a garden before they build a roof. One test colony had starved by day 13.
+[*]New gardens are sown with the colony's crop as soon as they're built, in a new colony.
+[*]Gardens grow faster on rich soil and slower on poor soil in a new colony, and every card reads the same pace. (trespiratesque)
+[*]Hidden goals leave a "Colony goals hidden" line with a Show goals button. (danekjovaxutc5)
+[*]The goals card scrolls by wheel, keys and the pad's right stick, with a mark when more lies below. (aj01657)
+[*]Goals point at the building that stands, never at a spare plan of it. (trespiratesque)
+[*]The sleeping room goal outlines the room it suggests.
+[*]Lessons that are ready show ahead of older letters.
+[*]Help's topics fold under five headings, and it says that the game pauses when its window loses focus.
+[/list]
+
+[b]Fortress: stock, stations and trade[/b]
+[list]
+[*]All goods is a new button on the top bar. It opens a searchable list of everything the colony holds and where it's kept. (samv123, danekjovaxutc5)
+[*]Stockpile cards lead with what the stockpile stores and one button to change it, and each has Show stockpiles.
+[*]Stations take orders from their own card. Each thing a station makes has Order a batch, and a standing order shows how far along it is. (samv123)
+[*]Priorities you choose for a well's or kitchen's batch stay chosen. (trespiratesque)
+[*]Goods are drawn as what they are. Ingots take their metal's colour, coal is black lumps and masonry is a carved block. (danekjovaxutc5)
+[*]Trading shows the colony's gold and the visitor's beside Buy and Sell, and the reason a trade is unavailable sits beside its button.
+[*]Hauls show where their goods are now and where they're going, and the hauler's card names the load. (trespiratesque)
+[*]Temperatures read in Celsius or Fahrenheit, your choice in Fortress settings.
+[*]The colony record is written in plain words, with births as dates and goods by name.
+[/list]
+
+[b]Fortress: the map, keys and speed[/b]
+[list]
+[*]Mouse movement, selection and dragging on the colony map answer at once. (rubberychicken)
+[*]Holding WASD or the arrows pans from the first frame, and the wheel zooms about the pointer. (rubberychicken)
+[*]One finger drags the map with Inspect in hand, two fingers drag it and a pinch zooms.
+[*]Space pauses and 1 to 4 set the speed wherever the keyboard happens to be. (trespiratesque)
+[*]A border round the map shows when the colony is paused.
+[*]Page Up and Page Down step one level, and the depth ruler lists every opened level. The bigger jump moved to Shift with the same keys.
+[*]Saving happens every five minutes by default, at a quiet moment, and never freezes a drag or a pan. You can choose from 10 seconds to 10 minutes.
+[*]Steam Decks draw the colony at 30 frames a second by default, and Frame rate in the colony's Settings can match the display.
+[*]Stockpile drags answer at once on a big colony.
+[*]Arrow keys and Tab reach every field on the New colony screen. (samv123)
+[*]The top bar keeps Menu on screen at any window size, and the supply counts tuck away before Hot and Frost do.
+[*]Wrapped tab rows keep each tab in its own box, so a click lands on the tab under it.
+[*]Night hours are shaded on the work schedule.
+[*]Extra large text fits every Fortress panel, and the top bar's icons are drawn at twice their size there. (rubberychicken)
+[*]Tips in a colony use your typeface and text size, and a keyboard or pad tip never covers the next button.
+[/list]
+
+[b]Adventure: quests and work[/b]
+[list]
+[*]Village jobs are listed once on the notice board. One job had been posted by twelve people, and taking it silenced them all. (samv123)
+[*]Empty notice boards say why they're empty.
+[*]Every quest pays experience when you hand it in. Cheese commissions, war cheese lessons and several story finales paid none. (danekjovaxutc5)
+[*]The quest log and the quest tracker show how many of a quest's goods are already in your pack. (danekjovaxutc5)
+[*]Quests from a settlement no Guild holds quote no reputation, because they never paid any.
+[*]Cities no Guild holds have work to offer.
+[*]Accepting several quests in quick succession as a co-op host keeps all of them.
+[/list]
+
+[b]Adventure: creatures and stealth[/b]
+[list]
+[*]Creatures you've struck can lose you. They hunt while they can sense you, go to where they last knew you were, and give up when the search ends. They used to know your exact tile through walls, forever. (danekjovaxutc5)
+[*]Hiding works on a creature that has lost you.
+[*]The stealth window says SEARCHING, with a "?" over the creature's head, when it's looking for you.
+[*]Smoked Gouda Fog deals no damage, so it doesn't mark what it clouds as struck by you.
+[*]Bands moving into old cleared delves are spread across a few seasons. An old save could print twelve of those lines at once.
+[/list]
+
+[b]Adventure: towns, travel and building[/b]
+[list]
+[*]Travel stops walking you back into the town you're leaving. (danekjovaxutc5)
+[*]Thymerock and every harbour town and city has a shipwright, and the signposts name them. (danekjovaxutc5)
+[*]Every town and city keeps a herder at the stable, so you can buy a mount in a city.
+[*]Smiths sell nails, five on the shelf at 3g.
+[*]The Old Mouth's Dockside Shipwright can be seen at his post. A dock lantern was drawn over him.
+[*]Yewstead's north road runs into town. It stopped in the trees at the city's edge.
+[*]Demolishing a cheap build such as a fence, gate or floor gives a piece back, and the Demolish tool says what you'll get. (danekjovaxutc5)
+[*]Furniture you built in a town comes down for free. (arkhaven)
+[*]Build mode's zone colour matches what a click will do for Plant Tree and the ground tools. (arkhaven)
+[*]Furnishings show their health as two numbers, and the demolish brush names a cliff it can't take down. (arkhaven)
+[*]Empty farm plots take a dropped item, so a harvest with a full pack lands inside the fence.
+[/list]
+
+[b]Adventure: trading, items and interface[/b]
+[list]
+[*]The Sell tab has the Inventory's category filter, by mouse, by Left and Right, and by [ and ]. (danekjovaxutc5)
+[*]Rows you can't sell, LOCAL or stolen, are dimmed in the Sell list with the reason on the name line.
+[*]Prices you're short of read "NEED 127g", and a manna gain floats as "+2". (danekjovaxutc5)
+[*]Co-op trade lists scroll, where their rows had squeezed down to slivers. (thesquirrel_74982)
+[*]Labelled chests, shelves and wardrobes show their slots when you point at them, as in "Flora (18/20)". (danekjovaxutc5)
+[*]The planting menu shows the seeds you hold beside each seed. (danekjovaxutc5)
+[*]War Cheese rows in the Cheese Press open the wheel's card when you point at them. (danekjovaxutc5)
+[*]The Forge's Cheesemaking tab is sorted by name.
+[*]Buffs on the Status tab and the HUD have names, "Damage +4" and "Burn Resistance".
+[*]Character creation shows an item's stats under keyboard focus, and Up and Down move between Worn, Belt and Pack. (samv123)
+[*]Shift is a switch for the spell card that Ctrl+1 to Ctrl+8 opens, so you don't have to hold it. (samv123)
+[*]The Post Office has a Copy button beside your postal address.
+[*]Your family going hungry shows as a warning banner that names who went hungry and where.
+[*]A repeat glimpse of a legendary beast shows as a banner.
+[*]Banner lines start under the region name and the NIGHT warning.
+[*]The Iron Beetle's card says what Living Shield does.
+[*]The Crystal Monument names the delve it marked and which way it lies.
+[*]Zooming out in 2D stops at 1,600 tiles on a desktop, where the farthest notch halved the frame rate.
+[*]Item, spell and creature icons in the interface are plain images now, which takes away a slowdown that grew over a long session.
+[*]Credits have a Supporters band at the top.
+[/list]
+
+[b]Steam Deck and controller[/b]
+[list]
+[*]Level-up cards fit the screen whole on a Steam Deck. The guild, upgrade and perk cards had been cut off at the bottom. The same goes for a desktop window and for 1024x640.
+[*]One press of A on a pad stops acting twice after a long frame. (tthfry)
+[*]The War Cheese primer fits a Steam Deck with Continue on screen.
+[*]The Companions panel keeps its order buttons on screen on a Deck.
+[*]Character creation keeps BEGIN on screen at 1024x640 with Large text.
+[*]The Character sheet, How to Play, the Fishing Journal and the Notice Board fit a 1024x640 screen.
+[*]The pets display keeps its stance badge clear of the key hint.
+[/list]
+
+[b]Sight and light in Adventure[/b]
+[list]
+[*]Lamps and campfires light the ground around them at night in 2D.
+[*]Dropped items lie flat in the shade and throw no standing shadow.
+[*]Anything standing or lying on lava is drawn.
+[*]Crops stand up on their plots in 2.5D and first person, and reed beds stand in 2.5D as they do in first person.
+[*]Stars overhead in first person stay as points.
+[/list]
+
+[b]Vampires[/b]
+[list]
+[*]A defeated vampire rises at nightfall. They lie insensible until dusk, the sun can't burn them and their thirst doesn't grow while they wait. (love_love63)
+[*]Fresh Blood drops from six kills in ten, up from three. (love_love63)
+[/list]
+
+[b]One spelling[/b]
+[list]
+[*]Labour and armour are spelled the Australian way in both modes. Old saves read the new spelling and nothing in them changes.
+[/list]
+
+[b]Known issues[/b]
+[list]
+[*]Travel Here through a city can still step into a building and back out on the way.
+[*]Topping up a part-full waterskin, and a floor under a campfire or chest built on grass, are both still to come.
+[*]Nothing in this build has been checked on a real Steam Deck. The Deck fixes were measured at the Deck's screen size on a desktop.
+[*]New-colony rules such as soil pace, carried water, sown gardens and mending animals apply to colonies you begin in 0.31.0. An older colony keeps the rules it was founded with.
+[/list]
