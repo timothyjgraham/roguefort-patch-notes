@@ -1,6 +1,6 @@
 Hey everyone,
 
-Thanks to the playtesters and community for all the Fortress feedback on 0.29.0 and 0.30.0, and for another big round of Adventure reports. This is a large update for both modes. Fortress settlers have life stories and natures of their own, a colony has sound for the first time, and there are timber floors, cave-ins, a visible caravan and a lot of fixes to the first hour. Adventure gets fixes to quests, travel, trading and creatures that never gave up the chase. There's also a first look at a new way to play called The Wilds. As usual, everyone is credited with their reports and suggestions below.
+Thanks to the playtesters and community for all the Fortress feedback on 0.29.0 and 0.30.0, and for another big round of Adventure reports. This is a large update for both modes. Fortress settlers have life stories and natures of their own, a colony has sound for the first time, and there are timber floors, cave-ins, a visible caravan and a lot of fixes to the first hour. Adventure gets fixes to quests, travel, trading and creatures that never gave up the chase. And Survival mode is here at last. It's called The Wilds, I've been working on it and promising it for a long time, and I'm really glad to finally get it into your hands and see how it goes. As usual, everyone is credited with their reports and suggestions below.
 
 Tim
 
@@ -15,13 +15,13 @@ Tim
 [*]Each recruit's two natures show on the founding screen. A reroll changes them, a kept recruit keeps theirs, and one button explains what every trait in the party means.
 [/list]
 
-[b]The Wilds[/b]
+[b]Survival mode: The Wilds[/b]
 [list]
-[*]The Wilds is a new row on the title menu. You're shipwrecked with ten items of your choosing and have to last through the seasons.
+[*]Survival mode has arrived, and it's called The Wilds. You'll find it as a new row on the title menu. You're shipwrecked with ten items of your choosing and have to last through the seasons.
 [*]Hunger, thirst, cold, illness and tiredness all matter here, and the item cards and the Character sheet say what each one is costing you.
 [*]Camp work such as building, crafting and drying food takes time and moves forward in steps you can see.
 [*]Rain, salt water, winter ice and the fuel under your fire all have to be planned around. A fire under a real roof keeps its fuel dry.
-[*]Runs in The Wilds keep their own save slots and their own records. Nothing here changes an Adventure save, and there is no levelling or perks on a Wilds run.
+[*]Survival runs keep their own save slots and their own records. Nothing here changes an Adventure save, and there is no levelling or perks on a run in The Wilds.
 [/list]
 
 [b]Fortress: sound[/b]
@@ -235,12 +235,4 @@ Tim
 [b]One spelling[/b]
 [list]
 [*]Labour and armour are spelled the Australian way in both modes. Old saves read the new spelling and nothing in them changes.
-[/list]
-
-[b]Known issues[/b]
-[list]
-[*]Travel Here through a city can still step into a building and back out on the way.
-[*]Topping up a part-full waterskin, and a floor under a campfire or chest built on grass, are both still to come.
-[*]Nothing in this build has been checked on a real Steam Deck. The Deck fixes were measured at the Deck's screen size on a desktop.
-[*]New-colony rules such as soil pace, carried water, sown gardens and mending animals apply to colonies you begin in 0.31.0. An older colony keeps the rules it was founded with.
 [/list]
