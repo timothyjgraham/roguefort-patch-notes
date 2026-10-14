@@ -4,6 +4,15 @@ Thank you so much for such a big first day of Early Access. You found a lot of b
 
 Tim
 
+[b]Cloud saves[/b]
+[list]
+[*]Steam Cloud saves now work across Windows, Mac and Steam Deck. This was a change on Steam's side, so it already works, update or not.
+[*]Quit the game once on each machine you play on so everything comes together. A Deck that's asleep with the game open hasn't uploaded anything, so quit to the home screen first.
+[*]Worlds from a Mac or Deck cross over straight away. An older world from a Windows PC shows up elsewhere after you next open and save it on the PC.
+[*]If you've played on two systems, Steam may show a Cloud Conflict window once when you press Play. Pick the machine you play on most. Your worlds and colonies are safe whichever you pick, and your settings and your run in The Wilds come from that side.
+[*]The Wilds keeps one run per account, so if you started a run on two machines, only the one on the side you pick is kept.
+[/list]
+
 [b]The main quest and your Guild[/b]
 [list]
 [*]If you saved and quit before reaching your start village and then continued, the main quest could send you to another Guild's leader in a different capital. It sends you to your own leader again, and a quest already pointing the wrong way puts itself right on your next step. (jungcodex)
@@ -72,6 +81,5 @@ Tim
 [b]Known issues[/b]
 [list]
 [*]On some Windows 11 PCs, Smart App Control blocks the game from starting with error 0x11C7. The Windows build isn't code signed yet. I'm getting a certificate sorted and will update everyone when it's done.
-[*]Steam Cloud keeps saves from Windows, Mac and Linux separately, so a Steam Deck save doesn't show up on a PC. I'm fixing that in Steam's settings. Until then you can move a world by hand with Settings > Backup > Export Save on one machine and Import Save on the other. Importing replaces the world you last played on that machine.
 [*]Some players find 2.5D slow, especially in towns, while 2D and first person run fine. I'm looking into it. In the meantime Low-power mode, a lower quality preset or a frame rate limit under Settings > Display can help.
 [/list]
