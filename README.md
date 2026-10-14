@@ -62,3 +62,13 @@ It is all one template string in `build.py`. Placeholders are `{{name}}`, not
 
 Served from the `main` branch, `/docs` folder (Settings → Pages). The generated
 files are committed, so there's no build workflow to maintain.
+
+## Editing by hand
+
+    python3 edit.py [version]
+
+Opens a local editor at http://localhost:8765: the Markdown on the left, the
+real page on the right. Save (Cmd+S) writes `notes/<version>.md` and rebuilds
+the page and the Steam text. Done tells you to hand back to Claude, who reads
+`git diff`, commits, and pushes only when told to publish. Copy Steam text puts
+`notes/<version>.steam.txt` on the clipboard for a Steam announcement.
