@@ -1,0 +1,77 @@
+Hey everyone,
+
+Thank you so much for such a big first day of Early Access. You found a lot of bugs, and you told me about them on Discord and the Steam forum. This first hotfix fixes the worst of them. Your saved games carry straight over. Thank you so much again!
+
+Tim
+
+[b]The main quest and your Guild[/b]
+[list]
+[*]If you saved and quit before reaching your start village and then continued, the main quest could send you to another Guild's leader in a different capital. It sends you to your own leader again, and a quest already pointing the wrong way puts itself right on your next step. (jungcodex)
+[*]Nobody in a settlement mentioned a Guild's tradition ceremony unless it was already on offer, so an Honored player had no way to find out who opens it. A Guild's people now tell you who keeps the ceremony and where to find them, and the keeper says why it isn't open to you yet. (DocBrain)
+[*]The locked tradition card says there is one keeper in each settlement. It used to list five trades as if any of them could hold the ceremony.
+[*]A keeper who has been exiled from their settlement stops holding its ceremony, so somebody who still lives there can offer it instead.
+[/list]
+
+[b]Combat, companions and vampires[/b]
+[list]
+[*]Vampires were burning in sunlight under every roof in the overworld, including houses they built themselves. Any roof keeps the sun off now. (love_love63)
+[*]Your own Curd Golem, or any summon fighting on your side, was counted as an enemy close by, which stopped you crouching and stopped a vampire turning into a bat. Only real enemies block either one now. (avocado8716)
+[*]Travelling fast along a road or holding a diagonal could draw your companion twice, once on the tile it had just left. (avocado8716)
+[*]Crystalline Archers, and every other enemy that shoots, could keep backing off behind a door or a corner where they couldn't see you, then step back out and repeat it, so they hardly ever fired. They stand their ground at a doorway and shoot now. Watch out, because one that has nowhere to back off will swing at you up close. (trespiratesque)
+[*]The companion roster's "full" line starts its second sentence with a capital letter.
+[/list]
+
+[b]The pack, chests and building[/b]
+[list]
+[*]If you used a cheese from your pack with "Eat and drink automatically" switched on, it went back into your pack and you kept the heal, so you had a cheese that never ran out. Delicious, but not intended. It's used up properly now. (hariel)
+[*]A chest wouldn't take more of an item when its stack there was Protected, so Auto-stow, Stash mats and clicking the pack row all failed on a full chest. The chest takes more now and the stack stays Protected. (bancheis)
+[*]Dragging a stack onto another stack of the same item merges them. Keyboard and controller players can use the new Merge Stacks option in the item menu. (danekjovaxutc5)
+[*]In the Community Chest, a long donor name hid how long an item had left. The name wraps onto another line and the time always shows. (bancheis)
+[*]Laying a floor on the tile you're standing on could replace the bed, chair, lamp or door you were standing on, and the materials went with it. The game tells you that piece is in the way instead. (deadcatbf)
+[*]Hovering your quiver counts every arrow you carry, in the quiver and in the pack. It used to say "You have 2" with 18 loaded.
+[/list]
+
+[b]Clearer cards and lessons[/b]
+[list]
+[*]Last Bite's card says what it does: bonus weapon damage against the foe in sight with the fewest HP, even at full health if it's the only one.
+[*]Ironhide Salve, Mighty Marrow and Heartwood Tonic tell you to give them from the Companion Panel, under Supplements.
+[*]The Old Mouth scholar's Identify shows greyed out with its reason when no Guild counts you as Friendly. Before, pressing it just closed the menu.
+[*]If you're building up a charge like Brine and none of your perks use it, the charge meter, the Character panel and the perk's own card tell you so.
+[*]Bard's Spirits says it came from hearing a bard play.
+[*]The Reeve's lesson names who has work and where. In a village where nobody has any, it finishes on its own instead of leaving you stuck. (danekjovaxutc5)
+[*]If you continued a game during the Send-Off with your camp by the coast, the "Drink from the stream" lesson could point at the sea, and you couldn't finish it. It points at fresh water now.
+[*]Continuing a Brinehold game during the Send-Off gave you 30 extra crossbow bolts. Your bolts come with the rest of your kit when the Send-Off ends, the same as when you play it in one go.
+[*]Help > FAQ has the full Early Access FAQ from the website, with sixteen new answers including co-op and the road to 1.0.
+[/list]
+
+[b]Controllers, menus and performance[/b]
+[list]
+[*]The Companion Panel had ten buttons you could only press with a mouse, among them the Supplements, Stay, Come here, Stable and Rename. Press G, or L3 on a controller, to move a highlight onto a pet's buttons, walk it with the arrows and press Enter or A.
+[*]On Linux with Steam Input set to the Nintendo button layout, pressing A on the class screen counted as A and B together, so you couldn't pick a class. It counts once now. (anhalter438)
+[*]Lighting your first fire in 2.5D or first person could freeze the game for up to most of a second. The game gets that work done ahead of time now, a little at a time while you're not doing anything. (juh9870)
+[*]A long dungeon name in the bar at the top could push it out across the middle of the screen. It wraps beside the minimap now and keeps clear of the Customize HUD padlock. (avocado8716)
+[*]If the game makes no sound on Linux, the bug report you export from the Pause menu now records what it can see of your sound setup, so we can find out why. (juh9870)
+[/list]
+
+[b]Names[/b]
+[list]
+[*]Names are checked against a profanity filter when you create a character and when you change your name in Settings. A name it refuses shows Not allowed in the name box, and the Roll button never suggests one.
+[*]In the Old Mouth, other players' names that the filter refuses show as Traveller plus their player tag. That also covers names saved before this update.
+[/list]
+
+[b]Survival mode: The Wilds[/b]
+[list]
+[*]A book's extra max health was lost when you saved and continued a run. It stays now. (hariel)
+[*]Berries and other food said they quench thirst, and they don't. Their cards give the hunger they restore and nothing else. (hariel)
+[*]The wolf pup's Befriend option said you could tame it, but you can't do that in a Wilds run. It says so now. (hariel)
+[*]A canteen, pot or bowl filled from Camp work kept the name "Empty Canteen" even when it was full. (palpablebrush26)
+[*]Auto-eat and the empty quick slot kept choosing spoiled food and then refusing to eat it, so your hunger stayed stuck. They skip spoiled food now. (palpablebrush26)
+[*]A carcass that has spoiled is called Spoiled carcass. (palpablebrush26)
+[/list]
+
+[b]Known issues[/b]
+[list]
+[*]On some Windows 11 PCs, Smart App Control blocks the game from starting with error 0x11C7. The Windows build isn't code signed yet. I'm getting a certificate sorted and will update everyone when it's done.
+[*]Steam Cloud keeps saves from Windows, Mac and Linux separately, so a Steam Deck save doesn't show up on a PC. I'm fixing that in Steam's settings. Until then you can move a world by hand with Settings > Backup > Export Save on one machine and Import Save on the other. Importing replaces the world you last played on that machine.
+[*]Some players find 2.5D slow, especially in towns, while 2D and first person run fine. I'm looking into it. In the meantime Low-power mode, a lower quality preset or a frame rate limit under Settings > Display can help.
+[/list]
