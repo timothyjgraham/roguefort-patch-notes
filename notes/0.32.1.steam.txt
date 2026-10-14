@@ -1,85 +1,89 @@
-Hey everyone,
+Hello Affineurs old and new,
 
-Thank you so much for such a big first day of Early Access. You found a lot of bugs, and you told me about them on Discord and the Steam forum. This first hotfix fixes the worst of them. Your saved games carry straight over. Thank you so much again!
+It's the first day of Roguefort! Thank you so much for the support, the amazing and quite touching reviews, and of course the bug reports and suggestions across both Discord and the Steam forums (and in a couple of cases via email).
+
+This is a hotfix patch that fixes quite a few bugs and polishes out a few areas of the game at the same time. You can always rest assured that any changes I make to the game from update to update will never affect your save games, and if it does I will always give plenty of notice and offer ways to ensure you are minimally affected. There have been people playing the same save files since the alpha days when it was an itch.io project, so I take this sort of thing pretty seriously :-)
+
+Anyway, thanks for playing and being part of the community. What a 24 hours it has been. Thank you.
 
 Tim
 
-[b]Cloud saves[/b]
+[b]Steam Cloud saves[/b]
 [list]
-[*]Steam Cloud saves now work across Windows, Mac and Steam Deck. This was a change on Steam's side, so it already works, update or not.
-[*]Quit the game once on each machine you play on so everything comes together. A Deck that's asleep with the game open hasn't uploaded anything, so quit to the home screen first.
-[*]Worlds from a Mac or Deck cross over straight away. An older world from a Windows PC shows up elsewhere after you next open and save it on the PC.
-[*]If you've played on two systems, Steam may show a Cloud Conflict window once when you press Play. Pick the machine you play on most. Your worlds and colonies are safe whichever you pick, and your settings and your run in The Wilds come from that side.
-[*]The Wilds keeps one run per account, so if you started a run on two machines, only the one on the side you pick is kept.
+[*]Steam Cloud is now working across Windows, Mac and Steam Deck. This was a change on Steam's side, so you don't need to download this patch for it to work, but I guess if you are reading this then it's probably a moot point.
+[*]Please quit the game once on each machine you play on so Steam can sync everything. If you're on Deck, putting it to sleep with the game still open won't upload your save, so quit back to the home screen first.
+[*]Worlds from a Mac or Deck will carry across straight away. For an older Windows world, you'll need to open and save it once on the PC before it appears on your other devices.
+[*]If you've been playing on two systems, you might get a Steam Cloud Conflict window the next time you press Play. Choose the machine you play on most. Your worlds and colonies are safe whichever you choose, but your settings and current run in The Wilds will come from that machine.
+[*]The Wilds only keeps one run per account, so if you've started separate runs on two machines, you can only keep one of them.
 [/list]
 
-[b]The main quest and your Guild[/b]
+[b]The main quest and Guild traditions[/b]
 [list]
-[*]If you saved and quit before reaching your start village and then continued, the main quest could send you to another Guild's leader in a different capital. It sends you to your own leader again, and a quest already pointing the wrong way puts itself right on your next step. (jungcodex)
-[*]Nobody in a settlement mentioned a Guild's tradition ceremony unless it was already on offer, so an Honored player had no way to find out who opens it. A Guild's people now tell you who keeps the ceremony and where to find them, and the keeper says why it isn't open to you yet. (DocBrain)
-[*]The locked tradition card says there is one keeper in each settlement. It used to list five trades as if any of them could hold the ceremony.
-[*]A keeper who has been exiled from their settlement stops holding its ceremony, so somebody who still lives there can offer it instead.
+[*]Fixed the main quest sending you to another Guild's leader in a different capital if you'd saved and quit before reaching your starting village. If this has already happened in your game, the quest will correct itself when you next take a step. (jungcodex)
+[*]I've made it easier to find out about Guild tradition ceremonies. Previously nobody would mention them until the ceremony was available, which wasn't much help if you were Honored and trying to work out who to speak to. People in the settlement will now tell you who the keeper is and where to find them, and the keeper will explain why you can't take part yet. (DocBrain)
+[*]The locked tradition card now explains that there's one keeper in each settlement. The old wording listed five trades and made it sound as though any of them could perform the ceremony.
+[*]An exiled keeper will no longer offer their old settlement's ceremony. Someone who still lives there can take over instead.
 [/list]
 
-[b]Combat, companions and vampires[/b]
+[b]Combat and companions[/b]
 [list]
-[*]Vampires were burning in sunlight under every roof in the overworld, including houses they built themselves. Any roof keeps the sun off now. (love_love63)
-[*]Your own Curd Golem, or any summon fighting on your side, was counted as an enemy close by, which stopped you crouching and stopped a vampire turning into a bat. Only real enemies block either one now. (avocado8716)
-[*]Travelling fast along a road or holding a diagonal could draw your companion twice, once on the tile it had just left. (avocado8716)
-[*]Crystalline Archers, and every other enemy that shoots, could keep backing off behind a door or a corner where they couldn't see you, then step back out and repeat it, so they hardly ever fired. They stand their ground at a doorway and shoot now. Watch out, because one that has nowhere to back off will swing at you up close. (trespiratesque)
-[*]The companion roster's "full" line starts its second sentence with a capital letter.
+[*]Fixed vampires taking sun damage under roofs in the overworld (including houses you'd built yourself). Any roof will now protect you from the sun. (love_love63)
+[*]Your own Curd Golem and other friendly summons were being counted as nearby enemies, preventing you from crouching or turning into a bat as a vampire. I've fixed that check so it only counts actual enemies. (avocado8716)
+[*]Fixed companions sometimes appearing twice when travelling quickly along roads or holding a diagonal direction. One copy was being left on the tile they'd just moved from. (avocado8716)
+[*]Ranged enemies such as Crystalline Archers were spending so much time backing around corners and through doors that they barely got a shot off. They'll now hold their position and shoot if retreating would take you out of sight. They can also attack in melee if you're up close and they have nowhere to retreat. (trespiratesque)
+[*]Fixed a missing capital letter in the message shown when your companion roster is full.
 [/list]
 
-[b]The pack, chests and building[/b]
+[b]Inventory, chests and building[/b]
 [list]
-[*]If you used a cheese from your pack with "Eat and drink automatically" switched on, it went back into your pack and you kept the heal, so you had a cheese that never ran out. Delicious, but not intended. It's used up properly now. (hariel)
-[*]A chest wouldn't take more of an item when its stack there was Protected, so Auto-stow, Stash mats and clicking the pack row all failed on a full chest. The chest takes more now and the stack stays Protected. (bancheis)
-[*]Dragging a stack onto another stack of the same item merges them. Keyboard and controller players can use the new Merge Stacks option in the item menu. (danekjovaxutc5)
-[*]In the Community Chest, a long donor name hid how long an item had left. The name wraps onto another line and the time always shows. (bancheis)
-[*]Laying a floor on the tile you're standing on could replace the bed, chair, lamp or door you were standing on, and the materials went with it. The game tells you that piece is in the way instead. (deadcatbf)
-[*]Hovering your quiver counts every arrow you carry, in the quiver and in the pack. It used to say "You have 2" with 18 loaded.
+[*]Fixed an issue where eating cheese from your pack with "Eat and drink automatically" enabled gave you the healing but put the cheese back in your inventory. You could keep eating the same piece indefinitely, which wasn't quite what I intended. (hariel)
+[*]You can now add items to a Protected stack in a full chest using Auto-stow, Stash mats or by clicking the item in your pack. The stack will stay Protected. (bancheis)
+[*]You can merge stacks by dragging one onto another stack of the same item. I've also added Merge Stacks to the item menu for keyboard and controller players. (danekjovaxutc5)
+[*]Long donor names in the Community Chest will wrap onto another line so you can still see how much time an item has left. (bancheis)
+[*]Trying to lay a floor under yourself could replace a bed, chair, lamp or door on the same tile, losing the materials in the process. This is fixed, and you'll get a message explaining what's in the way instead. (deadcatbf)
+[*]The quiver tooltip now counts arrows in both your pack and your quiver. Previously it could tell you that you had 2 arrows when there were another 18 already loaded.
 [/list]
 
-[b]Clearer cards and lessons[/b]
+[b]Tooltips, tutorials and help[/b]
 [list]
-[*]Last Bite's card says what it does: bonus weapon damage against the foe in sight with the fewest HP, even at full health if it's the only one.
-[*]Ironhide Salve, Mighty Marrow and Heartwood Tonic tell you to give them from the Companion Panel, under Supplements.
-[*]The Old Mouth scholar's Identify shows greyed out with its reason when no Guild counts you as Friendly. Before, pressing it just closed the menu.
-[*]If you're building up a charge like Brine and none of your perks use it, the charge meter, the Character panel and the perk's own card tell you so.
-[*]Bard's Spirits says it came from hearing a bard play.
-[*]The Reeve's lesson names who has work and where. In a village where nobody has any, it finishes on its own instead of leaving you stuck. (danekjovaxutc5)
-[*]If you continued a game during the Send-Off with your camp by the coast, the "Drink from the stream" lesson could point at the sea, and you couldn't finish it. It points at fresh water now.
-[*]Continuing a Brinehold game during the Send-Off gave you 30 extra crossbow bolts. Your bolts come with the rest of your kit when the Send-Off ends, the same as when you play it in one go.
-[*]Help > FAQ has the full Early Access FAQ from the website, with sixteen new answers including co-op and the road to 1.0.
+[*]Clarified Last Bite's description. It gives bonus weapon damage against the enemy in sight with the lowest HP. If there's only one enemy, it still applies even if they're at full health.
+[*]Ironhide Salve, Mighty Marrow and Heartwood Tonic now explain where to use them, in the Companion Panel under Supplements.
+[*]The Old Mouth scholar's Identify option will be greyed out with an explanation if you aren't Friendly with any Guild. Previously you could select it and the menu would just close.
+[*]If you're building up a charge such as Brine without any perks that use it, this is now explained on the charge meter, in the Character panel and on the perk's card.
+[*]Bard's Spirits now explains that the effect comes from listening to a bard play.
+[*]The Reeve's lesson now tells you who has work available and where to find them. If nobody in the village has any work, the lesson will complete on its own so you aren't stuck trying to find a job that doesn't exist. (danekjovaxutc5)
+[*]If you saved during the Send-Off near the coast, the "Drink from the stream" lesson could send you to the sea when you continued. It now points to fresh water so you can finish the lesson.
+[*]Loading a Brinehold save during the Send-Off was giving you an extra 30 crossbow bolts. You'll now receive them with the rest of your kit at the end, as you would if you played through without stopping.
+[*]Added the full Early Access FAQ from the website to Help > FAQ. There are sixteen new answers, including co-op and plans for 1.0.
 [/list]
 
 [b]Controllers, menus and performance[/b]
 [list]
-[*]The Companion Panel had ten buttons you could only press with a mouse, among them the Supplements, Stay, Come here, Stable and Rename. Press G, or L3 on a controller, to move a highlight onto a pet's buttons, walk it with the arrows and press Enter or A.
-[*]On Linux with Steam Input set to the Nintendo button layout, pressing A on the class screen counted as A and B together, so you couldn't pick a class. It counts once now. (anhalter438)
-[*]Lighting your first fire in 2.5D or first person could freeze the game for up to most of a second. The game gets that work done ahead of time now, a little at a time while you're not doing anything. (juh9870)
-[*]A long dungeon name in the bar at the top could push it out across the middle of the screen. It wraps beside the minimap now and keeps clear of the Customize HUD padlock. (avocado8716)
-[*]If the game makes no sound on Linux, the bug report you export from the Pause menu now records what it can see of your sound setup, so we can find out why. (juh9870)
+[*]I've added keyboard and controller access to ten buttons in the Companion Panel that previously needed a mouse, including Supplements, Stay, Come here, Stable and Rename. Press G or L3 to highlight your pet's buttons, then move with the arrows and select with Enter or A.
+[*]Fixed an issue on Linux where Steam Input's Nintendo button layout made A register as both A and B on the class selection screen, preventing you from choosing a class. (anhalter438)
+[*]Lighting your first fire in 2.5D or first person could briefly freeze the game, sometimes for almost a second. I've moved that work ahead of time and spread it out while the game is idle. (juh9870)
+[*]Long dungeon names will wrap beside the minimap instead of stretching across the middle of the screen. They also stay clear of the Customize HUD padlock. (avocado8716)
+[*]If you're getting no sound on Linux, the bug report exported from the Pause menu now includes more information about your sound setup. This should give me more to go on when investigating it. (juh9870)
 [/list]
 
-[b]Names[/b]
+[b]Character names[/b]
 [list]
-[*]Names are checked against a profanity filter when you create a character and when you change your name in Settings. A name it refuses shows Not allowed in the name box, and the Roll button never suggests one.
-[*]In the Old Mouth, other players' names that the filter refuses show as Traveller plus their player tag. That also covers names saved before this update.
+[*]Character names are now checked against a profanity filter, both when creating a character and when renaming one in Settings. You'll see "Not allowed" in the name box if a name is rejected, and the Roll button's suggestions are checked too.
+[*]In the Old Mouth, other players' names that don't pass the filter will appear as Traveller followed by their player tag. This also applies to names saved before this update.
 [/list]
 
 [b]Survival mode: The Wilds[/b]
 [list]
-[*]A book's extra max health was lost when you saved and continued a run. It stays now. (hariel)
-[*]Berries and other food said they quench thirst, and they don't. Their cards give the hunger they restore and nothing else. (hariel)
-[*]The wolf pup's Befriend option said you could tame it, but you can't do that in a Wilds run. It says so now. (hariel)
-[*]A canteen, pot or bowl filled from Camp work kept the name "Empty Canteen" even when it was full. (palpablebrush26)
-[*]Auto-eat and the empty quick slot kept choosing spoiled food and then refusing to eat it, so your hunger stayed stuck. They skip spoiled food now. (palpablebrush26)
-[*]A carcass that has spoiled is called Spoiled carcass. (palpablebrush26)
+[*]Fixed the extra maximum health from books being lost when you saved and continued a run. (hariel)
+[*]Corrected food descriptions that claimed berries and other food would quench your thirst. They don't restore thirst in The Wilds, so the cards now just show how much hunger they restore. (hariel)
+[*]The wolf pup's Befriend option now explains that you can't tame it during a Wilds run. The old wording suggested you could. (hariel)
+[*]Fixed canteens, pots and bowls keeping their empty names after being filled through Camp work. (palpablebrush26)
+[*]Auto-eat and the empty quick slot will now skip spoiled food. They were repeatedly choosing it and then refusing to eat it, so you could stay hungry even with other food available. (palpablebrush26)
+[*]Spoiled carcasses are now labelled "Spoiled carcass". (palpablebrush26)
 [/list]
 
 [b]Known issues[/b]
 [list]
-[*]On some Windows 11 PCs, Smart App Control blocks the game from starting with error 0x11C7. The Windows build isn't code signed yet. I'm getting a certificate sorted and will update everyone when it's done.
-[*]Some players find 2.5D slow, especially in towns, while 2D and first person run fine. I'm looking into it. In the meantime Low-power mode, a lower quality preset or a frame rate limit under Settings > Display can help.
+[*]Smart App Control is preventing the game from launching on some Windows 11 PCs, with error 0x11C7. The Windows build isn't code signed yet. I'm getting a certificate sorted and will let everyone know when that's done.
+[*]I'm still looking into reports of 2.5D running slowly, particularly in towns, while 2D and first person run fine. In the meantime, Low-power mode, a lower quality preset or a frame rate limit in Settings > Display can help. UPDATE - just before I was about to send these notes, I received some incredible analysis from community member "zawmbie" who has identified the main causes of the lag in 2.5D mode. Thanks zawmbie! I will get that into the next patch.
 [/list]
