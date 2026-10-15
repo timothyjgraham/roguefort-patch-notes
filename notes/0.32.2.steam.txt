@@ -1,0 +1,86 @@
+Hello Affineurs,
+
+It's day 2 of the Roguefort Early Access and it's also... my birthday! But there's no time to waste as I've been up all night working hard.
+
+This is an update that specifically addresses player feedback, and I hope that it helps improve the player experience on a number of fronts. A few headlines here and then all the detail below.
+
+First up, thanks to community member zawmbie for the 2.5D analysis and to Vitowns and everyone who reported the issues with 2.5D and 3D. The fixes are in and I hope they will help boost performance on the 2.5D view mode especially, for that Diablo-esque feeling.
+
+Thanks also a number of people who reported the Linux startup and rendering issues. Hopefully there will be some improvements on that front too, and I will continue to work tirelessly until it runs perfectly on all distributions and, ideally, devices/rigs.
+
+I've also done some improvements/fixes to co-op and the big news (you heard it here first) is that I'm currently wiring up the ability to host your own servers, while also looking to get dedicated online servers set up. So the co-op play will be running smoothly very soon and thanks for your patience.
+
+The last highlight is around gendered pronouns in the game. A few community members expressed that they weren't so keen on pronouns being shown in the game, as it felt ideological. I said this in the forums, but I'll say it again, this game is 100% about player freedom of choice and customisation. The whole reason pronouns are in the game was because during playtesting, the *lack* of them meant that players couldn't make informed choices about how they interacted with NPCs (e.g., getting married to an NPC and raising a family). So pronouns were introduced because that seemed like a pretty reasonable thing in a game with a social simulation this complex. A consequence of this is that every NPC thereby had their pronoun displayed, and yes it is quite visible, but it is intentionally that way so that players can be free to interact with NPCs however they would like, without the game telling you what you should do or making you guess. So, I've added a new setting, which enables pronouns to be turned off when interacting with NPCs. Dialogue isn't changed - if you are interacting with a woman, it's not going to stop saying "She wants to do X" or whatever. But it also won't be putting pronouns up front and center every time, if that's how you'd prefer it.
+
+Thanks again for playing and for being part of this rapidly growing community - see you in The Old Mouth for a pint or two.
+
+Tim
+
+[b]2.5D performance[/b]
+[list]
+[*]Walking through a town in 2.5D should stutter far less. Community member zawmbie did a super job with the analysis and found the two main causes, which if you really wanna know is that every new animation frame for a townsperson re-sent a whole page of sprite art to the graphics card, and every figure's pose was worked out again on every frame. Both are fixed. (zawmbie, Vitowns)
+[*]While I was in there I found two more things. Each step past a house rebuilt the faded doors and windows from scratch, and every roof in view was rebuilt on every step through a town. Roofs now only rebuild when that building changes, in 2.5D and first person.
+[*]Nothing looks different. Every one of these changes draws exactly the same picture as before.
+[/list]
+
+[b]Linux[/b]
+[list]
+[*]The game should now start and draw properly on Wayland desktops. It was running as a native Wayland window, where the graphics path failed in three different ways: the game not starting, a black 2D view, or a window that never appeared. It now runs through XWayland when it can. (MagicBurrito, ColorYak, Chryseus, Crassius Curio, spli.t, wachtelhorst)
+[*]If you prefer native Wayland, launching with ROGUEFORT_NATIVE_WAYLAND=1 brings it back.
+[*]The game's log now says which window system it ran under and what your sound server reports for the game, which will help me with the reports of no sound on Linux. (juh9870)
+[/list]
+
+[b]Windows[/b]
+[list]
+[*]I'm still working on the extra "Roguefort" windows that pile up in Alt+Tab. In the meantime, you can add --no-steam-overlay to the game's launch options in Steam, which keeps Alt+Tab clean for some players. The game's log now also records what the window goes through, so a log from you will tell me a lot. (Saphy.Exc, avocado8716, trespiratesque)
+[/list]
+
+[b]Co-op[/b]
+[list]
+[*]A guest's crops now grow, picked plants grow back, and a guest keeps what they harvest. (.knifee)
+[*]A guest can search dungeon barrels and is told what they found. (.knifee)
+[*]A guest now sees a Rind Cultist's blast marker, the cloud a lingering spell leaves and a dragon's burning ground. (.knifee)
+[*]Almost everything in the right-click menu now works for a guest: shrines, bathing, searching bones, digging, moonwells, wyrm nests, wonder sites, rifts, traps, driftwood, drying racks, the bard, feeding and charming people, buying a round, cheese tastings, stockpiles, workers and cottage beds.
+[*]A guest cured of vampirism now stays cured on their own screen too.
+[/list]
+
+[b]Fixes[/b]
+[list]
+[*]Picking a lock at night no longer wakes the household. Sleeping people were being counted as witnesses even on a clean pick, and a door you picked at night locked itself again straight away. (shoppingcart)
+[*]Looking at something while the message log was scrolled back could crash the game, which is what happened when clicking the minimap after the tutorial. Fixed. (abazios)
+[*]Fixed the stove using up a cooked meal from your quick slot when it made a cheese dish. (mandawan)
+[*]Fixed training dummies and your own summons hurting your hired soldiers. (bancheis)
+[*]Fixed yellow wedges flickering on the ground when looking down in first person. (juh9870, Chryseus)
+[*]Milk left in a chest now turns into Spoiled Milk, the same as it does in your pack. (danekjovaxutc5)
+[*]Fixed attacks with F, a click or a bow hitting the people and chests in the Old Mouth. (danekjovaxutc5)
+[*]Stash mats now leaves the scythe, beast whistle and milk bucket in your pack, and the scythe looks like a scythe instead of a bow. (juh9870)
+[*]The level-up animation plays once, where you are standing. (jojoknob)
+[*]The Herder's goat now starts on grass with two bales of hay, and she tells you what she eats and where to get more hay. Fewer goats starved. (juh9870)
+[*]Back on the new game screens now takes you to the previous screen instead of the main menu, and the character you made is still there when you come back. (Deadly Piranha Poodle)
+[*]The Ruined Archway in 2D is now a stone arch over a dark stairwell. It used to look like a chair. (treyfowler)
+[/list]
+
+[b]Settings, menus and help[/b]
+[list]
+[*]Added Show pronoun tags to Settings > Gameplay. Turn it off and the "· she/her" tag beside a name disappears everywhere it shows. What people say is unchanged. (\\F.A.B.// Lucius, Dunkler, Nightshade)
+[*]Spread word, Introduce and Help mend a feud now list everyone you have met, across pages, instead of only the first six or eight. (proteinpauly)
+[*]When a town won't let you build, the reason now shows on screen. Before, it went to the log behind the build window where you couldn't read it. (juh9870)
+[*]Hiding the interface now tells you which key brings it back, and holding the key no longer flicks it on and off. (deadcatbf)
+[*]"Half the settlement is your handiwork" is only said once your buildings actually cover half the town. (juh9870)
+[*]Searching the Controls for "talk" now finds Interact. (juh9870)
+[*]The top section of the Cook window is now labelled Raw Food. (juh9870)
+[*]Guild upgrade cards say how far they stack, so Steelgrip reads "Stacks to 2" and Executioner "Stacks to 4". (juh9870)
+[*]Set cards now say their bonuses add together, and the Wyrmscale 5-piece card shows its thorns. Your stats were already right, the card just hid a number. (danekjovaxutc5)
+[*]The Cheesewright now tells you she doesn't sell wheels and that an affineur at an aging cellar does. She no longer mentions a cellar in a village that hasn't got one. (jacobshaker)
+[/list]
+
+[b]Older and smaller machines[/b]
+[list]
+[*]Sleeping through the night is about four times faster on a slow PC. (NalathniDragon)
+[*]Drawing the sea in 2D is cheaper, which helps on handhelds and older machines. (_peanutbutler, avocado8716)
+[/list]
+
+[b]Known issues[/b]
+[list]
+[*]Smart App Control is still stopping the game from starting on some Windows 11 PCs, with error 0x11C7. The Windows build isn't code signed yet. I'm getting a certificate sorted.
+[/list]
