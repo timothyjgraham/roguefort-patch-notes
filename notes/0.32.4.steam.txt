@@ -1,0 +1,92 @@
+Hello Affineurs,
+
+I'm delighted and humbled that almost 2000 people (!) have supported the game in EA since it launched 3 days ago. Thank you for making it possible to continue developing this into the project it seems we are all hoping it will become.
+
+This patch is the first volume in a very long series of patches where it's less about new content or features and more (or pretty much all) about polishing the game and fixing bugs.
+
+As you'll see from the notes below, most of this is from your own reports and comments across Discord and Steam. So I just want to say thank you! And also to keep an eye out in the patch notes for your name, as I try to ensure everyone is credited. (If I ever get something wrong or miss someone or you just don't want to be mentioned, just let me know and I'll fix it right away).
+
+I'm also loving to see the screenshots on the Community Hub - please keep them coming.
+
+Over the coming week I'll continue to work night and day to reply to people, keep track of all the suggestions and reports, and keep the update cadence sustainable but humming along. Sorry if I haven't replied to you yet - I will get there as soon as I can.
+
+I've also been doing work on the co-op netcode at the same time as progressing the bug fixes and polish, and I am incredibly grateful to the community members who've been playtesting co-op play in the experimental branch. More on that in the next patch, all going well. I'm also having some fun developing a creative art marketplace in The Old Mouth, where players can showcase their artistic work in the game, and potentially even put stuff up for sale (as copies or originals, and maybe even as blueprints...). More on that soon.
+
+I think that's about it for now. Have a lovely weekend and thanks for playing.
+
+Tim
+
+[b]Saves and lost goods[/b]
+[list]
+[*]Two chests in a player's house turned into Maple Seed and Maple Wood after a reload. An item lying under the spot where a chest was built got put back over the chest on load. That can't happen now, and a chest already lost this way comes back with its goods the next time you load. If it happened to you (and yes I mean you Klaisen!), don't build anything on those tiles before you load into 0.32.4. Or you probably can but try not to, to be on the safe side. (Klaisen)
+[*]Fixed a Fortress colony that couldn't be saved with "forge and armoury register damaged". The forge card, Production and the Build menu could queue an arms and armour order with no piece chosen. Those buttons now take you to the Forge tab under Military, and an order with no piece is cleared when you save or load. (greysonwhy, IronPlated)
+[*]Purging Rind could burn the wrong item, like a cheese on your belt, because equipping the cursed piece shuffled your pack. It now always burns the right one and also in co-op too. (agentkobayashi)
+[*]Using a Purging Rind on a cursed item now puts it back the way it was before the curse. Its penalty and its Bargain bonus both come off. Gear you purged before this update gets the same treatment when you load. (bancheis)
+[/list]
+
+[b]Co-op[/b]
+[list]
+[*]When the whole party got wiped a guest's gear was deleted and, weirdly, only the host got a pile of their old stuff to walk back to. Typical... Now every fallen player now leaves their own pile, only its owner can pick it up, and the guest's defeat screen shows what actually happened. (.shexara)
+[/list]
+
+[b]Quests and people[/b]
+[list]
+[*]The notice board now offers Turn In on supply orders, so the Fresh Curds you bought actually count. (enwehr)
+[*]A finished board contract no longer locks you out of Talk with the person who gave it. They take it off you. (bobinhedgeorge)
+[*]The War Cheese lesson about kills with spells now tells you when it's done, and a kill with rot counts. (corestar)
+[*]Fixed Talk and Ask the way showing twice on a tutor. A Caravan Hand was standing hidden underneath them. (danekjovaxutc5)
+[*]You could go over the companion limit while one of your companions was knocked out. Fixed, and the text now says livestock don't count. (bobinhedgeorge)
+[*]When you clear a dungeon with creatures you've seen still shut behind bars, the clear now says "Something is still shut in behind the bars".
+[*]Fixed the Floor Cleared card getting stuck or not showing and its headline running off the screen on smaller windows.
+[/list]
+
+[b]Food, cheese and items[/b]
+[list]
+[*]Somehow there were two different items and both of them were called Wild Honey. I thought I was getting deja vu. The food is now Honeycomb, and Wild Honey can be eaten too, for 18 hunger. Nobody eats it automatically, so you have to press Eat. (bancheis)
+[*]Pistachio Curd and eleven other quick wheels were never known by any character. Every character now starts knowing all twelve. (danekjovaxutc5)
+[*]A cursed item now shows [CURSED] in your pack and on the Sell list once you've identified it.
+[*]The cheese cave tells you when it's empty.
+[*]Shops show how many of an item are left. (bancheis)
+[*]Chests with the default label show how many things are inside. (danekjovaxutc5)
+[*]Swapping tools could leave your pack one over its limit and so could some trades but this is fixed now.
+[/list]
+
+[b]Building and your homestead[/b]
+[list]
+[*]You can now lay floor under a piece you've already built. Doors, gates, walls and fences still have to come up first. (love_love63)
+[*]Fixed moving a piece when you're at the 30 piece limit, and losing ownership of your floor when a piece was moved off it. In co-op, a guest's build zone is now worked out from the guest's own home fire. (urughak)
+[*]Crops killed by frost now show dead stalks, so they stop looking sown. (urughak)
+[*]You can place a stockpile over a chest. (bancheis)
+[*]The haystack no longer looks like a squash - not sure what was going on there but either way it's sorted.
+[/list]
+
+[b]New games[/b]
+[list]
+[*]The starter dungeon that the rumour points you to can now always be walked to on a new game. Before, some starts on the main continent and many on The Crossing were boxed in by forest. Existing saves aren't changed.
+[/list]
+
+[b]Controls and Steam Deck[/b]
+[list]
+[*]On a docked Steam Deck with a keyboard, the button prompts now switch to keys once the pad has been quiet for a few seconds. (Bob)
+[*]Holding WASD and turning no longer stalls for a moment at each new direction. Turning mid-walk went from about a second to almost nothing. (Steam review)
+[*]Turning the 2.5D camera no longer moves you around in menus. (dazawmbie)
+[*]Fixed a prompt reading "L2 or L2", and the L2 and D-pad prompts at the tutorial stream. (_peanutbutler)
+[*]Keys you rebind now show correctly on the build bar and in window titles. (treyfowler)
+[*]Phase Step could still hit things from where you blinked out of. Fixed. (avocado8716)
+[/list]
+
+[b]Help and tooltips[/b]
+[list]
+[*]Spell tooltips on the spell wheel list what each spell needs. (trespiratesque)
+[*]Upgrade cards now explain their status words, like Rinded, Curdled and Frozen, instead of assuming the player found them out another way. (Steam review)
+[*]The fishing rod hint says it comes with your tools. (bossman62)
+[*]Help has a new Glossary tab with the game's terms in one place.
+[*]The tutorial shows less text at once. The tutorial mentor's lines go to the message log, and only your next task pops up on screen, for example.
+[*]The level-up window waits until you've closed whatever window or conversation you're in.
+[*]When you start a new game, the Wayfarer card says again that if you die you wake somewhere else, and one line under the three cards says hunger and thirst can be switched off in Settings, except in Hardcore. (yah3699)
+[/list]
+
+[b]Known issues[/b]
+[list]
+[*]Smart App Control is still stopping the game from starting on some Windows 11 PCs, with error 0x11C7. The Windows build isn't code signed yet. I'm getting a certificate sorted.
+[/list]
