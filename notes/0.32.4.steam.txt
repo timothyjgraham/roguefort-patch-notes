@@ -12,7 +12,9 @@ Over the coming week I'll continue to work night and day to reply to people, kee
 
 I've also been doing work on the co-op netcode at the same time as progressing the bug fixes and polish, and I am incredibly grateful to the community members who've been playtesting co-op play in the experimental branch. More on that in the next patch, all going well. I'm also having some fun developing a creative art marketplace in The Old Mouth, where players can showcase their artistic work in the game, and potentially even put stuff up for sale (as copies or originals, and maybe even as blueprints...). More on that soon.
 
-I think that's about it for now. Have a lovely weekend and thanks for playing.
+I want to cap off by reassuring that my focus is 100% on developing the best game possible, and giving everything I can back for the faith you placed in me by supporting this game in Early Access.
+
+Thanks again for playing and being part of this project.
 
 Tim
 
