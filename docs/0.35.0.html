@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roguefort 0.35.0 — Clarity</title>
+<meta name="description" content="Roguefort 0.35.0 patch notes. 70 changes across 11 sections.">
+<meta name="theme-color" content="#111D35">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&family=DM+Mono:wght@400;500&family=Grenze+Gotisch:wght@500;700&display=swap" rel="stylesheet">
+<style>
+
+/* ------------------------------------------------------------------
+   Palette sampled from the Steam capsules. Strict PICO-8 index:
+   the whole capsule is 26-47 unique colours, so nothing here is
+   invented or nudged. Sky is the dominant colour of the art (22-32%
+   of every capsule); yellow is under 2% and belongs to the wordmark.
+   Warm colours fail contrast on cream, so they are structure only --
+   markers, rules, keylines, offsets -- never letterforms on paper.
+   ------------------------------------------------------------------ */
+:root {
+  --sky:    #29ADFF;   /* Cantal Sky   - dominant field */
+  --deep:   #065AB5;   /* deep sea / upper sky band     */
+  --mid:    #1D2B53;   /* bridges night to deep in the ramp */
+  --night:  #111D35;   /* Deep Night   - text, substrate*/
+  --cream:  #FFF1E8;   /* Curd Cream   - the paper      */
+  --crust:  #49333B;   /* the cliff. unlisted in the kit*/
+  --ember:  #FF6C24;   /* Ember Rock   - accent         */
+  --rind:   #FFA300;   /* Rind Orange  - 1px rim-light  */
+  --cellar: #742F29;   /* Cellar Brown - muted text     */
+  --ink:    #271F1B;   /* Ink Black    - hard outline   */
+  --yellow: #FFEC27;   /* Roguefort Yellow - wordmark   */
+
+  --disp: "Grenze Gotisch", "Palatino Linotype", Georgia, serif;
+  --body: Bitter, Georgia, "Times New Roman", serif;
+  --mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --wrap: 1040px;
+  --pad: 56px;
+  --barh: 54px;
+}
+
+/* Dot-lattice dither. The art ramps every colour transition with a
+   1px dot on a 2px lattice, not with a blend. conic-gradient at a
+   quarter turn gives exactly that, with hard axis-aligned edges. */
+.dot { background-image: conic-gradient(currentColor 25%, #0000 0); background-size: 2px 2px; }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--barh) + 16px); }
+body {
+  margin: 0;
+  background: var(--sky);
+  color: var(--night);
+  font-family: var(--body);
+  font-size: 16.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+/* The art has no curves anywhere. Neither does this page. */
+* { border-radius: 0 !important; }
+
+.skip {
+  position: absolute; left: 8px; top: -60px; z-index: 90;
+  background: var(--night); color: var(--cream); padding: 10px 14px;
+  font-family: var(--mono); font-size: 13px; text-decoration: none;
+  border: 2px solid var(--rind);
+}
+.skip:focus { top: 8px; }
+
+/* ================= masthead ================= */
+.mast {
+  position: relative; overflow: hidden;
+  background: var(--night);
+  padding: 46px 0 0;
+}
+.mast-in {
+  position: relative; z-index: 3;
+  max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad) 52px;
+}
+.wordmark {
+  display: block; width: 100%; max-width: 370px; height: auto;
+  image-rendering: pixelated;              /* press kit: nearest-neighbour only */
+}
+/* Build plaque: says what the document is and which build it covers.
+   Left-aligned and cellular rather than a lone big numeral -- the
+   version reads loud because its cell is filled, not because it is huge. */
+.plaque {
+  display: inline-flex; flex-wrap: wrap; margin: 24px 0 0;
+  font-family: var(--mono); font-size: 15px; line-height: 1;
+  border: 2px solid var(--rind); box-shadow: 4px 4px 0 var(--deep);
+}
+.plaque span { padding: 11px 15px; display: block; }
+.plaque-k { color: var(--cream); }
+.plaque-v { background: var(--rind); color: var(--night); font-weight: 500; }
+.plaque-t { color: var(--cream); border-left: 2px solid var(--rind); }
+
+/* Visually hidden, still announced. The h1's visible text is the update
+   name; screen readers get the full "Roguefort 0.19.0 patch notes" first. */
+.vh {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+/* --- the signature: the update name as an extruded pixel title card.
+   Borrows the wordmark's construction -- yellow face, ink outline,
+   brown extrusion falling down-right, zero blur -- at the light 500
+   cut, which is condensed and sharp like the real logo rather than
+   fat. A short two-step extrusion; a long one reads as cartoon 3D.
+   Offsets are in em so the construction scales with the type. Used
+   ONLY here; spending it on 25 section headings would waste it. --- */
+.card {
+  font-family: var(--disp); font-weight: 500;
+  font-size: clamp(40px, 9.5vw, 104px); line-height: 1.06;
+  margin: 26px 0 0; padding: 0 0 .12em;
+  color: var(--yellow);
+  letter-spacing: .005em;
+  text-shadow:
+    .02em 0 0 var(--ink), -.02em 0 0 var(--ink),
+    0 .02em 0 var(--ink), 0 -.02em 0 var(--ink),
+    .02em .02em 0 var(--ink), -.02em .02em 0 var(--ink),
+    .02em -.02em 0 var(--ink), -.02em -.02em 0 var(--ink),
+    .032em .032em 0 var(--cellar), .044em .044em 0 var(--cellar),
+    .056em .056em 0 var(--ink);
+}
+.mast-meta {
+  position: relative; margin: 30px 0 0;
+  font-family: var(--mono); font-size: 13.5px; color: var(--cream);
+  display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: baseline;
+}
+.mast-meta b { color: var(--rind); font-weight: 500; }
+.mast-meta kbd {
+  font-family: var(--mono); font-size: 12px; color: var(--night);
+  background: var(--cream); padding: 1px 6px; border: 1px solid var(--cream);
+  box-shadow: 2px 2px 0 var(--deep);
+}
+
+/* Dither ramp, night -> deep -> sky. Density comes from the lattice
+   itself -- a quarter dot (25%) and a checker (50%) -- rather than from
+   masked rows, which read as scanlines instead of as a screen. */
+.ramp { position: relative; z-index: 3; }
+.ramp b {
+  display: block; height: 11px;
+  background-image: conic-gradient(currentColor 25%, #0000 0);
+  background-size: 2px 2px;
+}
+.ramp b.k {
+  background-image: conic-gradient(currentColor 25%, #0000 0),
+                    conic-gradient(currentColor 25%, #0000 0);
+  background-size: 2px 2px, 2px 2px;
+  background-position: 0 0, 1px 1px;
+}
+.r1 { background-color: var(--night); color: var(--mid); }
+.r2 { background-color: var(--night); color: var(--mid); }
+.r3 { background-color: var(--mid);   color: var(--deep); }
+.r4 { background-color: var(--mid);   color: var(--deep); }
+.r5 { background-color: var(--deep);  color: var(--sky); }
+.r6 { background-color: var(--deep);  color: var(--sky); }
+.r7 { background-color: var(--sky);   color: var(--deep); }
+.r8 { background-color: var(--sky);   color: var(--deep); }
+
+/* blueprint construction marks -- only here, where the art puts them */
+.marks { position: absolute; inset: 0 0 auto; height: 320px; z-index: 2; width: 100%; height: 100%; pointer-events: none; }
+
+.ridge { display: block; width: 100%; height: 54px; background: var(--sky); }
+
+/* ================= sticky bar ================= */
+.bar {
+  position: sticky; top: 0; z-index: 40;
+  background: var(--night);
+  border-bottom: 2px solid var(--ink);
+}
+.rail { height: 3px; background: var(--rind); width: 0; }
+.bar-in {
+  max-width: var(--wrap); margin: 0 auto;
+  padding: 9px var(--pad); min-height: var(--barh);
+  display: flex; align-items: center; gap: 14px;
+}
+.bar-mark {
+  font-family: var(--disp); font-weight: 700; font-size: 21px;
+  color: var(--yellow); text-decoration: none; flex: none; line-height: 1;
+}
+.bar-here {
+  font-family: var(--mono); font-size: 12.5px; color: var(--cream);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  min-width: 0; flex: 1 1 auto;
+}
+.bar-here::before { content: "\25B8"; color: var(--rind); margin-right: 8px; }
+.bar-here:empty::before { content: none; }
+.vers { display: flex; flex-wrap: wrap; gap: 5px; flex: 0 1 auto; min-width: 0; }
+.ver {
+  font-family: var(--mono); font-size: 12px; line-height: 1;
+  padding: 6px 8px; text-decoration: none;
+  color: var(--cream); border: 1px solid var(--deep);
+}
+.ver:hover { border-color: var(--rind); }
+.ver.on { color: var(--night); background: var(--rind); border-color: var(--rind); }
+.find { flex: none; }
+.find input {
+  font-family: var(--mono); font-size: 13px;
+  width: 210px; padding: 7px 10px;
+  color: var(--night); background: var(--cream);
+  border: 1px solid var(--cream); box-shadow: 3px 3px 0 var(--deep);
+}
+.find input::placeholder { color: var(--cellar); opacity: 1; }
+.find input:focus { box-shadow: 3px 3px 0 var(--rind); }
+
+/* ================= the cream plate ================= */
+main { max-width: var(--wrap); margin: 0 auto; padding: 0 0 64px; }
+.plate {
+  background: var(--cream);
+  border-left: 2px solid var(--ink); border-right: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--deep);
+  padding: 0 var(--pad) 60px;
+}
+
+/* ---- contents: one ruled plate, not a grid of cards ---- */
+.toc { padding: 44px 0 40px; }
+.toc-h {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16px; margin: 0 0 4px;
+  border-bottom: 2px solid var(--night); padding-bottom: 10px;
+}
+.toc-h h2 { font-family: var(--disp); font-weight: 700; font-size: 26px; margin: 0; line-height: 1; }
+.toc-h span { font-family: var(--mono); font-size: 12.5px; color: var(--cellar); }
+.toc ul {
+  list-style: none; margin: 14px 0 0; padding: 0;
+  columns: 3; column-gap: 40px;
+}
+.toc li { break-inside: avoid; margin: 0 0 1px; }
+.idx {
+  display: flex; align-items: baseline; gap: 6px;
+  text-decoration: none; color: var(--night);
+  font-size: 14px; line-height: 1.45; padding: 2px 4px 2px 0;
+}
+.idx-name { flex: 0 1 auto; }
+.idx-dots {
+  flex: 1 1 auto; min-width: 8px; height: 1px; align-self: center;
+  color: var(--cellar); opacity: .55;
+  background-image: conic-gradient(currentColor 25%, #0000 0);
+  background-size: 2px 2px;
+}
+.idx-n { font-family: var(--mono); font-size: 12px; color: var(--cellar); flex: none; }
+.idx:hover { color: var(--cellar); }
+.idx:hover .idx-name { text-decoration: underline; }
+.idx.on { background: var(--night); color: var(--cream); padding-left: 4px; }
+.idx.on .idx-n { color: var(--rind); }
+.idx.on .idx-dots { color: var(--sky); opacity: .8; }
+.idx-caveat .idx-n { color: var(--cellar); }
+.toc-end { border-top: 2px solid var(--night); margin-top: 16px; }
+
+/* ---- sections ---- */
+.sec { margin: 0 0 52px; scroll-margin-top: calc(var(--barh) + 16px); }
+.sec h2 {
+  position: relative;
+  font-family: var(--disp); font-weight: 700;
+  font-size: clamp(25px, 3.6vw, 34px); line-height: 1.12;
+  margin: 0 0 30px; padding-bottom: 12px; max-width: 68ch;
+  border-bottom: 2px solid var(--night);
+  display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
+}
+/* dither rule, in place of a plain hairline */
+.sec h2::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -9px; height: 5px;
+  color: var(--ember);
+  background-image: conic-gradient(currentColor 25%, #0000 0);
+  background-size: 2px 2px;
+}
+.sec-n {
+  font-family: var(--mono); font-size: 13px; font-weight: 400;
+  color: var(--cellar); flex: none;
+}
+.sec-n::before { content: "\27E6"; }
+.sec-n::after  { content: "\27E7"; }
+
+/* Prose above a section's bullets: the lore opening, the release summary. */
+.lead {
+  max-width: 68ch; margin: 0 0 22px;
+  font-size: clamp(16px, 1.5vw, 18px); line-height: 1.62;
+}
+.lead:last-child { margin-bottom: 0; }
+.sec-intro { margin-bottom: 44px; }
+.lead-list { max-width: 68ch; margin: 0 0 18px; padding: 0 0 0 22px; }
+.lead-list li { margin: 0 0 8px; }
+
+.changes { list-style: none; margin: 0; padding: 0; max-width: 68ch; }
+.change {
+  position: relative; padding: 0 0 14px 26px; margin: 0 0 14px;
+  border-bottom: 1px solid rgba(73,51,59,.22);
+}
+.change:last-child { border-bottom: 0; }
+.change::before {
+  content: ""; position: absolute; left: 0; top: .52em;
+  width: 7px; height: 7px; background: var(--ember);
+}
+.tag { font-family: var(--mono); font-size: .84em; color: var(--cellar); }
+
+/* credit chips: cream face, hard outline, hard rim-light offset. 200+
+   of these, so they stay quiet but sit at 10.4:1 on the plate. */
+.credits { display: inline; }
+.who {
+  font-family: var(--mono); font-size: 11.5px; line-height: 1.5;
+  color: var(--crust); background: var(--cream);
+  border: 1px solid var(--crust); box-shadow: 2px 2px 0 var(--rind);
+  padding: 0 6px; margin: 0 2px 0 8px;
+  display: inline-block; vertical-align: 1px; white-space: nowrap;
+}
+.who-note {
+  font-family: var(--mono); font-size: 11.5px; color: var(--cellar);
+  margin-left: 8px;
+}
+
+/* ---- known issues: a different material, not a different colour ---- */
+.sec.caveat {
+  background-color: var(--night);
+  background-image: conic-gradient(rgba(6,90,181,.45) 25%, #0000 0);
+  background-size: 2px 2px;
+  color: var(--cream);
+  margin: 64px calc(var(--pad) * -1) -60px;
+  padding: 38px var(--pad) 60px;
+  border-top: 2px solid var(--ink);
+}
+.caveat h2 { color: var(--cream); border-bottom-color: var(--rind); }
+.caveat h2::after { color: var(--rind); }
+.caveat .sec-n { color: var(--rind); }
+.caveat .change { border-bottom-color: rgba(255,241,232,.18); }
+.caveat .change::before { background: none; border: 2px solid var(--rind); }
+.caveat .tag { color: var(--sky); }
+.caveat .who {
+  color: var(--cream); background: var(--night);
+  border-color: var(--rind); box-shadow: 2px 2px 0 var(--deep);
+}
+.caveat .who-note { color: var(--sky); }
+
+/* ---- filter states ---- */
+.hidden { display: none !important; }
+.empty {
+  border: 2px solid var(--night); box-shadow: 5px 5px 0 var(--ember);
+  padding: 30px; margin: 30px 0 10px; font-size: 15.5px; max-width: 68ch;
+}
+.empty b { font-family: var(--mono); font-weight: 500; }
+
+/* ---- index: featured release + the register ---- */
+.cta { margin: 26px 0 0; }
+.cta a {
+  display: inline-block; font-family: var(--mono); font-size: 15px; line-height: 1;
+  background: var(--cream); color: var(--night); text-decoration: none;
+  padding: 14px 18px; border: 2px solid var(--cream); box-shadow: 5px 5px 0 var(--rind);
+}
+.cta a:hover { box-shadow: 5px 5px 0 var(--ember); }
+
+.reg { list-style: none; margin: 14px 0 0; padding: 0; }
+.reg li { border-bottom: 1px solid rgba(73,51,59,.22); }
+.reg li:last-child { border-bottom: 0; }
+.reg a {
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 15px 6px; text-decoration: none; color: var(--night);
+}
+.reg a:hover { background: var(--night); color: var(--cream); }
+.reg-name { font-family: var(--disp); font-weight: 500; font-size: 23px; line-height: 1.15; flex: 0 1 auto; }
+.reg-dots {
+  flex: 1 1 auto; min-width: 12px; height: 1px; align-self: center;
+  color: var(--cellar); opacity: .5;
+  background-image: conic-gradient(currentColor 25%, #0000 0); background-size: 2px 2px;
+}
+.reg-meta { font-family: var(--mono); font-size: 12.5px; color: var(--cellar); flex: none; }
+.reg-meta b { color: var(--night); font-weight: 500; }
+.reg-new {
+  font-family: var(--mono); font-size: 11px; color: var(--night);
+  background: var(--rind); padding: 2px 7px; margin-left: 10px;
+}
+.reg a:hover .reg-meta { color: var(--sky); }
+.reg a:hover .reg-meta b { color: var(--cream); }
+.reg a:hover .reg-dots { color: var(--sky); opacity: .8; }
+
+/* ---- release page: prev / next ---- */
+.pager {
+  max-width: var(--wrap); margin: 0 auto; padding: 34px var(--pad) 0;
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: stretch;
+}
+.pg {
+  flex: 1 1 220px; text-decoration: none; padding: 14px 16px;
+  background: var(--cream); color: var(--night);
+  border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--deep);
+}
+.pg:hover { box-shadow: 4px 4px 0 var(--rind); }
+.pg-k { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--cellar); margin-bottom: 5px; }
+.pg-v { display: block; font-family: var(--disp); font-weight: 500; font-size: 21px; line-height: 1.1; }
+.pg-n { display: block; font-family: var(--mono); font-size: 12px; color: var(--cellar); margin-top: 3px; }
+.pg-next { text-align: right; }
+.pg-all { flex: 0 1 auto; display: flex; align-items: center; font-family: var(--mono); font-size: 13px; }
+
+.foot {
+  max-width: var(--wrap); margin: 0 auto; padding: 26px var(--pad) 70px;
+  font-family: var(--mono); font-size: 12.5px; color: var(--night);
+  display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: space-between;
+}
+.foot a { color: var(--night); text-underline-offset: 3px; }
+
+/* ================= responsive ================= */
+@media (max-width: 900px) { .toc ul { columns: 2; } }
+@media (max-width: 760px) {
+  :root { --pad: 26px; }
+  .toc ul { columns: 2; }
+  .mast { padding-top: 30px; }
+  .bar-in { flex-wrap: wrap; gap: 9px 12px; }
+  .bar-here { order: 5; flex: 1 1 100%; }
+  .find { flex: 1 1 100%; }
+  .find input { width: 100%; }
+  .plaque { font-size: 14px; }
+  .plaque span { padding: 10px 12px; }
+  .plate { border-left: 0; border-right: 0; box-shadow: none; }
+  .sec.caveat { margin-left: calc(var(--pad) * -1); margin-right: calc(var(--pad) * -1); }
+}
+@media (max-width: 460px) {
+  :root { --pad: 16px; }
+  .reg a { flex-wrap: wrap; gap: 4px 10px; }
+  .reg-dots { display: none; }
+  .reg-name { flex: 1 1 100%; font-size: 21px; }
+  .pg-next { text-align: left; }
+  body { font-size: 16px; }
+  .toc ul { columns: 1; }
+  .wordmark { max-width: 250px; }
+  .plaque { font-size: 12.5px; }
+  .plaque span { padding: 9px 10px; }
+  .ramp b { height: 8px; }
+  .mast { padding-top: 24px; }
+  .ridge { height: 34px; }
+  .change { padding-left: 20px; }
+  .foot { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+:focus-visible {
+  outline: 3px solid var(--ember);
+  outline-offset: 2px;
+}
+.bar :focus-visible, .mast :focus-visible { outline-color: var(--rind); }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#doc">Skip to the changes</a>
+
+<header class="mast">
+  <svg class="marks" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
+    <defs>
+      <path id="spk" d="M0,-11 L2.5,-2.5 L11,0 L2.5,2.5 L0,11 L-2.5,2.5 L-11,0 L-2.5,-2.5 Z"/>
+    </defs>
+    <g stroke="#FFF1E8" stroke-opacity=".13" stroke-width="1" fill="none" shape-rendering="crispEdges">
+      <path d="M150 0 V70 M150 104 V190"/>
+      <path d="M470 0 V44 M470 82 V150 M470 186 V240"/>
+      <path d="M860 0 V96 M860 130 V210"/>
+      <path d="M1060 0 V58 M1060 92 V164"/>
+      <path d="M40 118 H96 M132 118 H286 M508 118 H642 M900 118 H1030"/>
+      <path d="M60 300 H210 M250 300 H430 M745 300 H902"/>
+      <path d="M140 58 H160 M150 48 V68"/>
+      <path d="M850 176 H870 M860 166 V186"/>
+      <path d="M60 40 H92 M60 40 V72"/>
+      <path d="M1140 216 H1108 M1140 216 V184"/>
+    </g>
+    <g fill="#FFF1E8" fill-opacity=".34" shape-rendering="crispEdges">
+      <use href="#spk" transform="translate(330,86)"/>
+      <use href="#spk" transform="translate(712,52) scale(.7)"/>
+      <use href="#spk" transform="translate(988,150)"/>
+      <use href="#spk" transform="translate(232,214) scale(.6)"/>
+    </g>
+  </svg>
+  <div class="mast-in">
+    <img class="wordmark" src="assets/roguefort-wordmark.png"
+         srcset="assets/roguefort-wordmark.png 1x, assets/roguefort-wordmark@2x.png 2x"
+         width="526" height="166" alt="Roguefort">
+    <p class="plaque">
+      <span class="plaque-k">Patch notes</span><span class="plaque-v">0.35.0</span><span class="plaque-t">Early Access</span>
+    </p>
+    <h1 class="card"><span class="vh">Roguefort 0.35.0 patch notes: </span>Clarity</h1>
+    <p class="mast-meta">
+      <span>30 October 2026</span>
+      <span><b>70</b> changes</span>
+      <span><b>11</b> sections</span>
+      <span>press <kbd>/</kbd> to filter</span>
+    </p>
+  </div>
+  <div class="ramp" aria-hidden="true">
+    <b class="r1"></b><b class="r2 k"></b><b class="r3"></b><b class="r4 k"></b><b class="r5"></b><b class="r6 k"></b><b class="r7 k"></b><b class="r8"></b>
+  </div>
+  <svg class="ridge" viewBox="0 0 1200 54" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path fill="#49333B" d="M0,54 V22 H74 V10 H158 V30 H242 V16 H340 V34 H424 V20 H524 V38 H604 V24 H704 V12 H792 V32 H880 V18 H978 V36 H1068 V22 H1142 V32 H1200 V54 Z"/>
+    <path fill="none" stroke="#FFA300" stroke-width="3" vector-effect="non-scaling-stroke"
+          d="M0,25 H74 V13 H158 V33 H242 V19 H340 V37 H424 V23 H524 V41 H604 V27 H704 V15 H792 V35 H880 V21 H978 V39 H1068 V25 H1142 V35 H1200"/>
+    <path fill="none" stroke="#271F1B" stroke-width="3" vector-effect="non-scaling-stroke"
+          d="M0,22 H74 V10 H158 V30 H242 V16 H340 V34 H424 V20 H524 V38 H604 V24 H704 V12 H792 V32 H880 V18 H978 V36 H1068 V22 H1142 V32 H1200"/>
+  </svg>
+</header>
+
+<div class="bar">
+  <div class="rail" id="rail"></div>
+  <div class="bar-in">
+    <a class="bar-mark" href="#top">Roguefort</a>
+    <span class="bar-here" id="here" aria-live="off"></span>
+    <nav class="vers" aria-label="Versions"><a class="ver on" href="0.35.0.html" aria-current="page">0.35.0</a><a class="ver" href="0.34.2.html">0.34.2</a><a class="ver" href="0.34.0.html">0.34.0</a><a class="ver" href="0.33.0.html">0.33.0</a><a class="ver ver-all" href="index.html">All (28)</a></nav>
+    <div class="find">
+      <input id="q" type="search" placeholder="/ filter changes" aria-label="Filter changes" autocomplete="off">
+    </div>
+  </div>
+</div>
+
+<main id="top">
+  <div class="plate">
+    <nav class="toc" aria-label="Sections">
+      <div class="toc-h">
+        <h2>Contents</h2>
+        <span><b id="live-total">70</b> changes in <b id="live-secs">11</b> sections</span>
+      </div>
+      <ul><li><a class="idx" href="#clearer-words" data-idx="clearer-words"><span class="idx-name">Clearer words</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="clearer-words">4</span></a></li>
+<li><a class="idx" href="#edit-hud" data-idx="edit-hud"><span class="idx-name">Edit HUD</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="edit-hud">7</span></a></li>
+<li><a class="idx" href="#settings-and-controls" data-idx="settings-and-controls"><span class="idx-name">Settings and controls</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="settings-and-controls">6</span></a></li>
+<li><a class="idx" href="#first-time-tips" data-idx="first-time-tips"><span class="idx-name">First time tips</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="first-time-tips">5</span></a></li>
+<li><a class="idx" href="#cards-spells-and-traders" data-idx="cards-spells-and-traders"><span class="idx-name">Cards, spells and traders</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="cards-spells-and-traders">6</span></a></li>
+<li><a class="idx" href="#the-world-map" data-idx="the-world-map"><span class="idx-name">The world map</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="the-world-map">7</span></a></li>
+<li><a class="idx" href="#controllers-keys-and-first-person" data-idx="controllers-keys-and-first-person"><span class="idx-name">Controllers, keys and first person</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="controllers-keys-and-first-person">7</span></a></li>
+<li><a class="idx" href="#screen-reader" data-idx="screen-reader"><span class="idx-name">Screen reader</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="screen-reader">3</span></a></li>
+<li><a class="idx" href="#companions-and-travel" data-idx="companions-and-travel"><span class="idx-name">Companions and travel</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="companions-and-travel">6</span></a></li>
+<li><a class="idx" href="#towns-building-and-the-notebook" data-idx="towns-building-and-the-notebook"><span class="idx-name">Towns, building and the Notebook</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="towns-building-and-the-notebook">7</span></a></li>
+<li><a class="idx" href="#quests-and-fixes" data-idx="quests-and-fixes"><span class="idx-name">Quests and fixes</span><span class="idx-dots" aria-hidden="true"></span><span class="idx-n" data-count="quests-and-fixes">12</span></a></li></ul>
+      <div class="toc-end"></div>
+    </nav>
+    <div id="doc">
+      <section class="sec sec-intro"><p class="lead">Hey everyone,</p><p class="lead">It&#x27;s been a long week. I don&#x27;t have much left in me for these patch notes, so they&#x27;re a bit bare bones sorry. I have spent all my dev time this week improving the UI and removing flavour from the in-game text to make it clearer. I hope it helps. Thanks everyone who has given support and constructive feedback. The reality is that I&#x27;m one man doing all this. I have a full time job and a young family and the game has been out in Early Access for 2 weeks now. I try my best and I hope the game brings you some joy.</p><p class="lead">Have a nice weekend,</p><p class="lead">Tim</p></section>
+<section class="sec" id="clearer-words" data-sec="clearer-words"><h2>Clearer words<span class="sec-n">4</span></h2><ul class="changes"><li class="change">I&#x27;ve reworded text across the game to make it easier to read - a lot of flavoursome language has been reworded just to focus on mechanics and information. When I set out to write the text in the game I envisioned it could be something Tolkienesque, specifically the Silmarillion in tone. Since I&#x27;m not much of writer, I&#x27;ve shelved that for now because it hasn&#x27;t worked out and has caused a lot of problems. If I can find someone who can actually write well and employ them, I&#x27;ll do that later on. For now, I&#x27;m just going to keep rewriting stuff as I go through it, so that it&#x27;s at least clear even if it&#x27;s not as interesting maybe.</li>
+<li class="change">Character creation is also easier to read and some of the UI boxes have changes to help them be clearer</li>
+<li class="change">Did a bunch of search and replacing to make sure terminology in the game is always consistent. Various parts of the world used to call things differently because it&#x27;s not a monoculture on Cantal, but now they just use the same terms, and so does the game UI.</li>
+<li class="change">When you walk into the village, the main story&#x27;s first stage now completes whereas before it waited for you to stand near one spot, which could be a river or some other unexpected/weird spot.</li></ul></section>
+<section class="sec" id="edit-hud" data-sec="edit-hud"><h2>Edit HUD<span class="sec-n">7</span></h2><ul class="changes"><li class="change">The Edit HUD bar has three layouts at the top: Minimal, Standard and Full. If you made your own layout, the Custom button brings it back.<span class="credits"><span class="who">nokturnal</span></span></li>
+<li class="change">Edit HUD is now in the pause menu and in Settings, as well as behind the padlock at the top left.<span class="credits"><span class="who">nokturnal</span></span></li>
+<li class="change">You can move and resize panels in Edit HUD with a keyboard or controller too</li>
+<li class="change">If you hide a panel with its red x, the Hidden UI elements always bring it bac even when the bar is tucked away.<span class="credits"><span class="who">nokturnal</span></span></li>
+<li class="change">Your cursor&#x27;s name card sits beneath the HUD panels now so it stops covering the quest tracker. A new setting turns it off - &quot;Show the name under the cursor&quot;<span class="credits"><span class="who">nokturnal</span></span></li>
+<li class="change">The Tab and ? UI elements under the log used to walk your character when you clicked them. Both are real buttons now.<span class="credits"><span class="who">nokturnal</span></span></li>
+<li class="change">The hint strip stays on one line and off your character&#x27;s tile, the log shows whole lines, and hover cards keep clear of the HUD panels.</li></ul></section>
+<section class="sec" id="settings-and-controls" data-sec="settings-and-controls"><h2>Settings and controls<span class="sec-n">6</span></h2><ul class="changes"><li class="change">Settings has a search box at the top. You can a word to find a setting on any tab and go straight to it.</li>
+<li class="change">Each row in Settings fits on one line. A pane beside the list explains the row you&#x27;re on and shows its default</li>
+<li class="change">Controls are grouped by where they work, such as Moving, Spells and Building. Use Show to see one group at a time.</li>
+<li class="change">You can search the Controls by key just like Shift+F. Or select Press a key, then press any key or controller button to see what it does.<span class="credits"><span class="who">nokturnal</span></span></li>
+<li class="change">A new Conflicts view lists the controls that share a key or button in the same place</li>
+<li class="change">When Controls asks you to press a button for a control, Escape now cancels that instead of closing Settings.</li></ul></section>
+<section class="sec" id="first-time-tips" data-sec="first-time-tips"><h2>First time tips<span class="sec-n">5</span></h2><ul class="changes"><li class="change">The first time you encounter a a new part of the game, a one line note with &quot;learn more&quot; now appears at the top left. It replaces the card that used to pop up over play. A note waits if you&#x27;re in a fight or have a window open.<span class="credits"><span class="who">.knifee</span></span></li>
+<li class="change">The cards behind Learn more are much shorter. The Lessons panel keeps every one you&#x27;ve seen, so you can read it again.</li>
+<li class="change">On first-time cards and war cheese cards, words from the Glossary are marked in orange. Point at one, or step through them with the arrow keys or D-pad, to read what it means in one sentence.<span class="credits"><span class="who">nokturnal</span><span class="who">Keyo</span></span></li>
+<li class="change">Notes you haven&#x27;t read are still there after Save and Quit, and in co-op each guest gets their own ones</li>
+<li class="change">If travel keeps stopping for hostiles, a tip tells you, and Learn more takes you straight to &quot;Stop travelling when threatened&quot; in Settings.<span class="credits"><span class="who-note">Break it down Bob</span></span></li></ul></section>
+<section class="sec" id="cards-spells-and-traders" data-sec="cards-spells-and-traders"><h2>Cards, spells and traders<span class="sec-n">6</span></h2><ul class="changes"><li class="change">Every war cheese has a plain line under its name that says what it does, on its card on the belt and in the Spell Belt window. The names haven&#x27;t changed.<span class="credits"><span class="who">nokturnal</span><span class="who">Keyo</span></span></li>
+<li class="change">Item cards in the pack, chests and the forge show a short summary first. More (? on a keyboard, View on a controller) opens the whole card. On a Steam Deck a long card used to run off the screen.</li>
+<li class="change">Stat UI elements on the character sheet open their breakdown with the same More.</li>
+<li class="change">Traders now show a list with a detail pane beside it. Each row has a name, one fact and a price. The pane shows the item&#x27;s card and what buying it would change, like how much gold you&#x27;ll have left.</li>
+<li class="change">Cursed pieces show both halves of their pact on the summary: what the curse took and what it gave you.</li>
+<li class="change">If a perk gives you a charge that none of your perks uses yet such as Ember, it now says what happens next i.e. &quot;None of your perks uses Ember yet. Level-ups now favour perks that do.&quot;<span class="credits"><span class="who">Vomgnar</span></span></li></ul></section>
+<section class="sec" id="the-world-map" data-sec="the-world-map"><h2>The world map<span class="sec-n">7</span></h2><ul class="changes"><li class="change">Roads are back on the world map, drawn over the fog as clear lines so it&#x27;s yellow for main roads, peach for tracks and dots for paths. For terrain you haven&#x27;t explored yet a road shows as a dotted hint (palpablebrush26)</li>
+<li class="change">Clearing one dungeon no longer dims the whole map.<span class="credits"><span class="who">palpablebrush26</span></span></li>
+<li class="change">The Factions and Biomes filters show their regions on the world map again.<span class="credits"><span class="who">sleepysva</span></span></li>
+<li class="change">Every kind of tile now shows on the world map, including your mine, barns, comet craters and houses. The map updates when you build something or the world changes.<span class="credits"><span class="who">madness5520</span></span></li>
+<li class="change">On slower machines and very large screens, the map opens much faster. If a machine can&#x27;t keep up, the map draws at half scale, still in whole pixels.<span class="credits"><span class="who">kendacity</span></span></li>
+<li class="change">An ending you commit to at the Undermaw shows on the world map, as it did on the old map</li>
+<li class="change">With a keyboard or controller, you can now pick a single biome or guild in the map&#x27;s legend. Press J (View on a controller) to move into the legend.</li></ul></section>
+<section class="sec" id="controllers-keys-and-first-person" data-sec="controllers-keys-and-first-person"><h2>Controllers, keys and first person<span class="sec-n">7</span></h2><ul class="changes"><li class="change">In first person on a controller, swap weapons with L2+RB and switch to your harvest tool with L2+LB. RB and LB work the hotbar in first person, so before there was no way to do either.</li>
+<li class="change">In first person, the Interact key now opens the same menu as a right-click, so you can Fish, Tame and Enter the Rift from the keyboard. On a controller, Plan a build opens the same build wheel as in 2D.</li>
+<li class="change">When the look cursor is up, Confirm walks you to the tile under it. You can send your character a long way with a keyboard or controller, the way a click does.</li>
+<li class="change">You can sort your pack with a keyboard or controller too. Press Up from the first row to reach the Type, Rar, Val and Name buttons.</li>
+<li class="change">When you hold L2, the legend lists only what works in the view you&#x27;re in. If you play with a controller, prompts show controller buttons.</li>
+<li class="change">If you rebind a key, the toolbar, its tips and How to Play show your key instead of the default.</li>
+<li class="change">The Cheese Vat, Cheese Press, Cheese Cave and Germinator now have the Use row their hint mentions, from right-click, the Interact key and a controller.</li></ul></section>
+<section class="sec" id="screen-reader" data-sec="screen-reader"><h2>Screen reader<span class="sec-n">3</span></h2><ul class="changes"><li class="change">In Settings, the screen reader reads each row&#x27;s name and then its one-line summary. also, it reads the tab&#x27;s name when you change tabs.</li>
+<li class="change">In the Controls, the screen reader reads the row you&#x27;re on with its key and button, and tells you how many controls a search found.</li>
+<li class="change">The screen reader reads first-time notes when they appear on screen. It reads a marked Glossary word with its meaning when you move onto it.</li></ul></section>
+<section class="sec" id="companions-and-travel" data-sec="companions-and-travel"><h2>Companions and travel<span class="sec-n">6</span></h2><ul class="changes"><li class="change">A pet standing on a pressure plate, the ship&#x27;s wheel, the Old Mouth&#x27;s stairs, a raid arch or a victory stone now steps aside when you bump it, so you can use the tile. Before, you and the pet swapped places.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">Summons, pets, ballistae and traps now fight a patrol that has turned on you. Curd Golems used to just stand there.<span class="credits"><span class="who">valdrrak</span></span></li>
+<li class="change">Hired soldiers now come with you when you travel by waystone, Waywheel, wyvern, riftstone, faerie ring or Wayfarer&#x27;s Whey, as pets and herds already did.<span class="credits"><span class="who">bancheis</span></span></li>
+<li class="change">When you travel by waystone, Waywheel, wyvern or riftstone, the ship you were steering now comes along as one ship in your pack. Before it could be doubled or lost.<span class="credits"><span class="who">pcspiker</span></span></li>
+<li class="change">Press Alt+C to pet the nearest companion. For other devices/input it&#x27;s in the Panels menu.<span class="credits"><span class="who">raider-363</span></span></li>
+<li class="change">Co-op guests can now ping any spot on the world map. A guest can show the host the X from a treasure map even on unexplored ground.<span class="credits"><span class="who">warrat106</span></span></li></ul></section>
+<section class="sec" id="towns-building-and-the-notebook" data-sec="towns-building-and-the-notebook"><h2>Towns, building and the Notebook<span class="sec-n">7</span></h2><ul class="changes"><li class="change">The Mine&#x27;s build card shows what one, two and three mines pay, what your current mines pay right now and what adding one more would add. Keyboard and controller players now see build cards too.<span class="credits"><span class="who">blackbird806</span></span></li>
+<li class="change">Demolish can now also demolish a Tree Farm, and the trees stay standing.<span class="credits"><span class="who">madness5520</span></span></li>
+<li class="change">The Crew Roster now says why a crop tender is idle. Either their chest has no seeds, or no farm plot is within reach of the chest.<span class="credits"><span class="who">gobeers</span><span class="who">Grumolch</span></span></li>
+<li class="change">Clicking a cottage door to place a hired worker now puts them beside the door, not in it.<span class="credits"><span class="who">Grumolch</span></span></li>
+<li class="change">On the notice board, the cottage row now says what&#x27;s missing. Its Fund It button stays greyed out, and its tip says why.<span class="credits"><span class="who">fredc</span></span></li>
+<li class="change">Journal and Notes is now in the pause menu, with the same name in the Panels menu and the Controls (chewer, SGM)</li>
+<li class="change">for people who couldn&#x27;t find their notebook in the game, the Cheese Press and a few places other now tell you it&#x27;s a page on the affineur&#x27;s bench.<span class="credits"><span class="who">Vomgnar</span></span></li></ul></section>
+<section class="sec" id="quests-and-fixes" data-sec="quests-and-fixes"><h2>Quests and fixes<span class="sec-n">12</span></h2><ul class="changes"><li class="change">If you abandon the main story&#x27;s second stage, you can now get it back. Before, it was getting lost for good. I&#x27;m sorry about that in particular, if it caused you problems in the game</li>
+<li class="change">Caseine&#x27;s quest now takes any war cheese you&#x27;ve made. It used to take only one from the Rot family.</li>
+<li class="change">After you beat a dungeon&#x27;s boss the dungeon keeps its other monsters when you save and quit the game. They used to vanish when the the game loaded back in.<span class="credits"><span class="who">pcspiker</span></span></li>
+<li class="change">A road caravan&#x27;s merchant now stays with their mule and caravan hand. Before, the merchant could vanish and leave the other two stranded.<span class="credits"><span class="who">trespiratesque</span></span></li>
+<li class="change">The Tres Piratesque achievement now counts a cache dug from a map you&#x27;ve since dropped, sold or destroyed.<span class="credits"><span class="who">pcspiker</span></span></li>
+<li class="change">The gold count on the top bar now goes past 9.9m, so it can read 10m, 123m or 1.2b.<span class="credits"><span class="who">__hariel__</span></span></li>
+<li class="change">The Wild tab in your bestiary now lists every creature it counts, including dungeon creatures, bosses and raiders.<span class="credits"><span class="who">ghraemdal</span></span></li>
+<li class="change">When you pick Fish beside your boat, you now cast into the deep sea, the same as pressing F.<span class="credits"><span class="who">4pt</span></span></li>
+<li class="change">In co-op, a player knocked to 0 HP by a dart plate now goes down and can be revived. So does a vampire burnt by a shrine or garlic. They used to stand frozen at 0 HP.<span class="credits"><span class="who">C0deRen</span></span></li>
+<li class="change">If a waystone in an old save has lost its owner, bump it to make it yours.</li>
+<li class="change">RIND WARS now draws its crossed swords as a pixel icon because an ascii fallback char was causing rendering issues before</li>
+<li class="change">Pointing at the spell belt&#x27;s mastery strip now shows its tip, and a count of one reads &quot;1 tile&quot;, not &quot;1 tiles&quot;.</li></ul></section>
+      <div class="empty hidden" id="empty"></div>
+    </div>
+  </div>
+</main>
+
+<nav class="pager" aria-label="Other releases"><a class="pg pg-prev" href="0.34.2.html"><span class="pg-k">Previous release</span><span class="pg-v">Polishin&#x27; and Fixin&#x27; Vol. 4</span><span class="pg-n">0.34.2</span></a><a class="pg pg-all" href="index.html">All releases</a></nav>
+
+<footer class="foot">
+  <span>Roguefort 0.35.0 &middot; 30 October 2026</span>
+  <span>Community reporters are credited against each change.</span>
+</footer>
+
+<script>
+(function () {
+  var q = document.getElementById('q');
+  var empty = document.getElementById('empty');
+  var rail = document.getElementById('rail');
+  var here = document.getElementById('here');
+  var liveTotal = document.getElementById('live-total');
+  var liveSecs = document.getElementById('live-secs');
+  var secs = [].slice.call(document.querySelectorAll('.sec'));
+  var idx = [].slice.call(document.querySelectorAll('.idx'));
+
+  var items = [];
+  secs.forEach(function (s) {
+    [].slice.call(s.querySelectorAll('.change')).forEach(function (li) {
+      items.push({ el: li, sec: s, text: li.textContent.toLowerCase() });
+    });
+  });
+
+  function countEl(id) { return document.querySelector('[data-count="' + id + '"]'); }
+
+  function filter() {
+    var term = q.value.trim().toLowerCase();
+    var shown = 0;
+    secs.forEach(function (s) { s._n = 0; });
+    items.forEach(function (it) {
+      var hit = !term || it.text.indexOf(term) !== -1;
+      it.el.classList.toggle('hidden', !hit);
+      if (hit) { it.sec._n++; shown++; }
+    });
+    secs.forEach(function (s) {
+      s.classList.toggle('hidden', s._n === 0);
+      var id = s.dataset.sec;
+      countEl(id).textContent = s._n;
+      document.querySelector('[data-idx="' + id + '"]').parentElement
+        .classList.toggle('hidden', s._n === 0);
+      s.querySelector('.sec-n').textContent = s._n;
+    });
+    liveTotal.textContent = shown;
+    liveSecs.textContent = secs.filter(function (s) { return s._n > 0; }).length;
+    if (shown === 0) {
+      empty.textContent = '';
+      empty.appendChild(document.createTextNode('Nothing matches '));
+      var b = document.createElement('b');
+      b.textContent = q.value;
+      empty.appendChild(b);
+      empty.appendChild(document.createTextNode('. Try a shorter word, like mount, save or road.'));
+      empty.classList.remove('hidden');
+    } else {
+      empty.classList.add('hidden');
+    }
+    onScroll();
+  }
+
+  q.addEventListener('input', filter);
+  q.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { q.value = ''; filter(); q.blur(); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+  });
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      rail.style.width = (h > 0 ? Math.min(1, window.scrollY / h) * 100 : 0) + '%';
+      var top = window.scrollY + 120, cur = null, curName = '';
+      secs.forEach(function (s) {
+        if (!s.classList.contains('hidden') && s.offsetTop <= top) {
+          cur = s.dataset.sec;
+          curName = s.querySelector('h2').firstChild.textContent;
+        }
+      });
+      idx.forEach(function (a) { a.classList.toggle('on', a.dataset.idx === cur); });
+      here.textContent = curName;
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>
